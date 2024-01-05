@@ -6,8 +6,8 @@ using UnityEngine.AI;
 
 public class NormalCat : MonoBehaviour
 {
-    private int distraction; //How distracted the cat is currently
-    private int distractionThreshold; //The amount of distraction it takes to fully distract the cat
+    private int distraction = 0; //How distracted the cat is currently
+    private int distractionThreshold = 50; //The amount of distraction it takes to fully distract the cat
     private bool isDistracted = false; // If the cat has been defeated or not.
     private Vector3 destination; //Where the cat is moving to
     //Rigidbody rb;//The RigidBody component
@@ -17,8 +17,7 @@ public class NormalCat : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        destination= GameObject.FindGameObjectWithTag("Goal").transform.position;
-        agent.SetDestination(destination);
+        
     }
 
     // Update is called once per frame
@@ -28,7 +27,8 @@ public class NormalCat : MonoBehaviour
         {
             Distracted();
         }
-        
+        destination = GameObject.FindGameObjectWithTag("Goal").transform.position;
+        agent.SetDestination(destination);
     }
     private void Distracted()
     {
