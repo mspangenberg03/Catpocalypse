@@ -13,12 +13,18 @@ public class CatSpawner : MonoBehaviour
     [SerializeField] private GameObject normalCat;
     private Image button;
     private TextMeshProUGUI text;
+
+
+    private void Awake()
+    {
+        button = GetComponent<Image>();
+        text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         //StartCoroutine(Spawner());
-        button = GetComponent<Image>();
-        text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -29,9 +35,7 @@ public class CatSpawner : MonoBehaviour
         {
             button.enabled = true;
             text.enabled = true;
-        }
-        
-        
+        }                
     }
     public void NextWave()
     {

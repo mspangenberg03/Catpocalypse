@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,10 @@ using UnityEngine.AI;
 
 public class NormalCat : MonoBehaviour
 {
+    // This event is static so we don't need to subscribe the money manager to every cat instance's OnCatDied event.
+    public static event EventHandler OnCatDied;
+
+
     private int distraction = 0; //How distracted the cat is currently
     private int distractionThreshold = 50; //The amount of distraction it takes to fully distract the cat
     private bool isDistracted = false; // If the cat has been defeated or not.
@@ -39,6 +44,9 @@ public class NormalCat : MonoBehaviour
     public void DistractCat(int distractionValue)
     {
         distraction += distractionValue;
+
+        if (distractionValue >= distractionThreshold)
+            KillCat();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,12 +54,21 @@ public class NormalCat : MonoBehaviour
         
         if (other.gameObject.tag == "CatSpawnPoint" && isDistracted)
         {
-            Destroy(gameObject);
+            KillCat();
         }
         if(other.gameObject.tag == "Goal")
         {
             //TODO: Health
-            Destroy(gameObject);
+            KillCat();
         }
+    }
+
+
+    private void KillCat()
+    {
+        // Fire the OnCatDied event.
+        OnCatDied?.Invoke(this, EventArgs.Empty);
+
+        Destroy(gameObject);
     }
 }

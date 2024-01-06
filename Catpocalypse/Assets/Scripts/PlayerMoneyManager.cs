@@ -16,9 +16,13 @@ public class PlayerMoneyManager : MonoBehaviour
     private void Start()
     {
         HUD.UpdatePlayerMoneyDisplay(_Money);
+
+
+        // All cat types should be able to subsribe this same handler to their OnCatDied events.
+        // That function below calls another that checks the cat type.
+        NormalCat.OnCatDied += OnCatDied;
+
     }
-
-
 
     /// <summary>
     /// This function is used to spend money.
@@ -31,7 +35,7 @@ public class PlayerMoneyManager : MonoBehaviour
     /// </remarks>
     /// <param name="amount">The amount to deduct from the player's money.</param>
     /// <returns>False if funds are not sufficient, or true otherwise.</returns>
-    public bool SpendCash(float amount)
+    public bool SpendMoney(float amount)
     {
         if (amount > _Money)
             return false;
