@@ -16,6 +16,12 @@ public class Tower : MonoBehaviour
     protected Vector2 targetDirection;
     protected List<NormalCat> targets;
     protected NormalCat currentTarget;
+    protected TowerBase baseOfTower;
+
+    public void Start()
+    {
+        //Instantiate();
+    }
 
     // Update is called once per frame
     void Update()
@@ -51,6 +57,12 @@ public class Tower : MonoBehaviour
                 currentTarget = null;
             }
         }
+    }
+
+    public void OnDestroy()
+    {
+        this.gameObject.SetActive(false);
+        Destroy(this);
     }
 
 

@@ -5,9 +5,7 @@ using UnityEngine;
 public class TowerBase : MonoBehaviour
 {
     [SerializeField]
-    public bool usable;
-    [SerializeField]
-    public GameObject tower;
+    public bool usable;    
     [SerializeField]
     public GameObject towerSelectorUI;
     [SerializeField]
@@ -19,20 +17,21 @@ public class TowerBase : MonoBehaviour
 
     private bool hasTower;
     private bool hoveredOver;
+    private Tower tower;
 
-    private void OnMouseEnter()
+    void OnMouseEnter()
     {
        hoveredOver = true;
        this.gameObject.GetComponent<Renderer>().material= towerHovered;
     }
 
-    private void OnMouseExit()
+    void OnMouseExit()
     {
         hoveredOver = false;
         this.gameObject.GetComponent<Renderer>().material = towerNotHovered;
     }
 
-    private void OnMouseUpAsButton()
+    void OnMouseUpAsButton()
     {
         if(hoveredOver && enabled && !hasTower)
         {
@@ -41,6 +40,23 @@ public class TowerBase : MonoBehaviour
         {
             towerDestroyerUI.SetActive(true);
         }
+    }
+
+    public void BuildTower(int towerToBuild)
+    {
+        switch (towerToBuild)
+        {
+            default:
+                tower = new LaserPointerTower(this);
+                break;
+        };
+
+    }
+
+    public void DestroyTower(Tower towerToDestroy)
+    {
+        tower = null;
+        Destroy(towerToDestroy, 1);
     }
 
 }

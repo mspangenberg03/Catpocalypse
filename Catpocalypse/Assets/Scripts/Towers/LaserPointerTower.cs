@@ -8,7 +8,14 @@ public class LaserPointerTower : Tower
     public GameObject laser;
     [SerializeField]
     public int numOfLasers;
+    [SerializeField]
+    public GameObject laserPointerPrefab;
 
+    public LaserPointerTower(TowerBase build)
+    {
+        baseOfTower = build;
+        Instantiate(laserPointerPrefab, build.transform);
+    }
 
     // Update is called once per frame
     void Update()
