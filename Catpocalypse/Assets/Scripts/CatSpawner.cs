@@ -31,6 +31,7 @@ public class CatSpawner : MonoBehaviour
         {
             catsInWave += 2;
             StartCoroutine(Spawner());
+            HUD.UpdateWaveNumberDisplay(waveCount);
         }
     }
     IEnumerator Spawner()
