@@ -13,7 +13,8 @@ public class LaserPointerTower : Tower
     // Update is called once per frame
     void Update()
     {
-        if(currentTarget != null {
+        if (currentTarget != null )
+        {
 
         }
     }
