@@ -7,33 +7,37 @@ using UnityEngine.AI;
 public class NormalCat : MonoBehaviour
 {
     private int distraction = 0; //How distracted the cat is currently
-    private int distractionThreshold = 50; //The amount of distraction it takes to fully distract the cat
+    private int distractionThreshold = 10; //The amount of distraction it takes to fully distract the cat
     private bool isDistracted = false; // If the cat has been defeated or not.
     private Vector3 destination; //Where the cat is moving to
-    //Rigidbody rb;//The RigidBody component
-    private NavMeshAgent agent;
+    private NavMeshAgent agent; //The NavMeshAgent of the cat
     // Start is called before the first frame update
     
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        
+        //Makes the cat move to the goal
+        destination = GameObject.FindGameObjectWithTag("Goal").transform.position;
+        agent.SetDestination(destination);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (distraction >= distractionThreshold && isDistracted == false)
+        //If the distraction bar is fill and the cat was not already defeated
+        if (distraction >= distractionThreshold && isDistracted == false) 
         {
             Distracted();
         }
-        destination = GameObject.FindGameObjectWithTag("Goal").transform.position;
-        agent.SetDestination(destination);
+        
     }
     private void Distracted()
     {
         isDistracted = true;
-        
+        //Makes the cat move back to the spawn point
+        destination = GameObject.FindGameObjectWithTag("CatSpawnPoint").transform.position;
+        agent.SetDestination(destination);
     }
     //I am intending this function to be called from either the tower or the projectile that the tower fires
     public void DistractCat(int distractionValue)
@@ -50,7 +54,6 @@ public class NormalCat : MonoBehaviour
         }
         if(other.gameObject.tag == "Goal")
         {
-            //TODO: Health
             Destroy(gameObject);
         }
     }
