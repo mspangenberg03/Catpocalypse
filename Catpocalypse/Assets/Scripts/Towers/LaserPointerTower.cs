@@ -15,7 +15,9 @@ public class LaserPointerTower : Tower
     {
         if (currentTarget != null )
         {
-
+            laser.SetActive( true );
+            laser.transform.LookAt(currentTarget.transform.position);
+            laser.transform.localScale = new Vector3 (laser.transform.position.x, laser.transform.position.y, Vector3.Distance(currentTarget.transform.position, this.transform.position));
         }
     }
 }
