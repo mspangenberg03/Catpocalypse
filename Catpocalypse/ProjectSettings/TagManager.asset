@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CatSpawnPoint
   - Goal
+  - Cat
   layers:
   - Default
   - TransparentFX
