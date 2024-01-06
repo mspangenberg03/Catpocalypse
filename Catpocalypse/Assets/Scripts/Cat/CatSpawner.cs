@@ -44,7 +44,6 @@ public class CatSpawner : MonoBehaviour
         {
             catsInWave += 2;
             StartCoroutine(Spawner());
-            HUD.UpdateWaveNumberDisplay(waveCount);
         }
         button.enabled = false;
         text.enabled = false;
