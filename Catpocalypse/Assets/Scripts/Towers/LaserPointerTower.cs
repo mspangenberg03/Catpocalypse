@@ -5,16 +5,17 @@ using UnityEngine;
 public class LaserPointerTower : Tower
 {
     [SerializeField]
-    public GameObject laser;
+    private GameObject laser;
     [SerializeField]
-    public int numOfLasers;
+    private int numOfLasers;
     [SerializeField]
-    public GameObject laserPointerPrefab;
+    private GameObject laserPointerTower;
 
-    public LaserPointerTower(TowerBase build)
+    public void Awake()
     {
-        baseOfTower = build;
-        Instantiate(laserPointerPrefab, build.transform);
+        laserPointerTower = this.gameObject;
+        laserPointerTower.transform.position = new Vector3(0f, 0f, 0f);
+
     }
 
     // Update is called once per frame
@@ -22,9 +23,15 @@ public class LaserPointerTower : Tower
     {
         if (currentTarget != null )
         {
-            laser.SetActive( true );
-            laser.transform.LookAt(currentTarget.transform.position);
-            laser.transform.localScale = new Vector3 (laser.transform.position.x, laser.transform.position.y, Vector3.Distance(currentTarget.transform.position, this.transform.position));
+            if(currentTarget.CompareTag("cat") ){
+                //currentTarget.GetComponent<NormalCat>.DistractCat(50);
+            }
+            //laser.SetActive(true);
+            //laser.transform.LookAt(currentTarget.transform.position);
+            //laser.transform.localScale = new Vector3 (laser.transform.position.x, laser.transform.position.y, Vector3.Distance(currentTarget.transform.position, this.transform.position));
+        } else
+        {
+            //laser.SetActive(false);
         }
     }
 }

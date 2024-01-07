@@ -119,8 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usable: 0
-  tower: {fileID: 0}
   towerSelectorUI: {fileID: 0}
   towerDestroyerUI: {fileID: 0}
   towerHovered: {fileID: 2100000, guid: 9e5d08001e24f7c4d9aa051980dbf44a, type: 2}
   towerNotHovered: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  laserPointerPrefab: {fileID: 9139953423556229519, guid: 2fe4444f0a169c74a86f5b0d148cf994, type: 3}

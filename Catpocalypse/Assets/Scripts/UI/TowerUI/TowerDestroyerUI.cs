@@ -5,21 +5,24 @@ using UnityEngine;
 public class TowerDestroyerUI : MonoBehaviour
 {
     [SerializeField]
-    public GameObject destroyTowerUI;
+    private GameObject destroyTowerUI;
+
+    private TowerBase currentSelectedBase;
 
     public void Start()
     {
         this.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetCurrentSelectedBase(TowerBase current)
     {
-        
+        currentSelectedBase = current;
     }
 
     public void OnDestroySelect(Tower tower)
     {
         tower.OnDestroy();
+        currentSelectedBase = null;
+        this.gameObject.SetActive(false);
     }
 }
