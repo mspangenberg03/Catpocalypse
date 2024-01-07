@@ -8,23 +8,20 @@ public class CatSpawner : MonoBehaviour
 {
     [SerializeField, Tooltip("One possible spawn point for cats")]
     private Transform spawnPoint1;
+
+    [SerializeField] private GameObject normalCat;
+    [SerializeField] private Button startWaveButton;
+
+
     private int waveCount = 0;
     private int catsInWave = 5;
-    [SerializeField] private GameObject normalCat;
-    private Image button;
-    private TextMeshProUGUI text;
 
-
-    private void Awake()
-    {
-        button = GetComponent<Image>();
-        text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-    }
 
     // Start is called before the first frame update
     void Start()
     {
         //StartCoroutine(Spawner());
+        Debug.Log("Button: " + startWaveButton.enabled);
     }
 
     // Update is called once per frame
@@ -33,12 +30,12 @@ public class CatSpawner : MonoBehaviour
         GameObject[] cats = GameObject.FindGameObjectsWithTag("Cat");
         if (cats.Length == 0)
         {
-            button.enabled = true;
-            text.enabled = true;
+            startWaveButton.enabled = true;
         }                
     }
-    public void NextWave()
+    public void StartNextWave()
     {
+        Debug.Log("$^#$%&#$%&%$");
         waveCount++;
         if(waveCount == 1)
         {
@@ -49,8 +46,7 @@ public class CatSpawner : MonoBehaviour
             catsInWave += 2;
             StartCoroutine(Spawner());
         }
-        button.enabled = false;
-        text.enabled = false;
+        startWaveButton.enabled = false;
     }
     IEnumerator Spawner()
     {
