@@ -59,9 +59,9 @@ public class HUD : MonoBehaviour
         _Instance.WaveNumberLabel.text = $"Wave {waveNumber}";
     }
 
-    public static void UpdatePlayerMoneyDisplay(int playerMoney)
+    public static void UpdatePlayerMoneyDisplay(float playerMoney)
     {
-        _Instance.PlayerMoneyLabel.text = $"${playerMoney}";
+        _Instance.PlayerMoneyLabel.text = $"${playerMoney:N2}";
     }
 
 

@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CatSpawner : MonoBehaviour
 {
     [SerializeField, Tooltip("One possible spawn point for cats")]
     private Transform spawnPoint1;
+
+    [SerializeField] private GameObject normalCat;
+    [SerializeField] private Button startWaveButton;
+
+
     private int waveCount = 0;
     private int catsInWave = 5;
-    [SerializeField] private GameObject normalCat;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +26,13 @@ public class CatSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        GameObject[] cats = GameObject.FindGameObjectsWithTag("Cat");
+        if (cats.Length == 0)
+        {
+            startWaveButton.enabled = true;
+        }                
     }
-    public void NextWave()
+    public void StartNextWave()
     {
         waveCount++;
         if(waveCount == 1)
@@ -32,6 +44,7 @@ public class CatSpawner : MonoBehaviour
             catsInWave += 2;
             StartCoroutine(Spawner());
         }
+        startWaveButton.enabled = false;
     }
     IEnumerator Spawner()
     {
