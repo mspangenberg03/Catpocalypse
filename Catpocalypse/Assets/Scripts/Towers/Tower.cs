@@ -2,26 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEditor;
 
 public class Tower : MonoBehaviour
 {
 
     [SerializeField]
-    public int buildCost;
+    private int buildCost;
     [SerializeField]
-    public int refundAmount;
+    private int refundAmount;
     [SerializeField]
-    public SphereCollider range;
+    private SphereCollider range;
     
     protected Vector2 targetDirection;
+    [SerializeField]
     protected List<NormalCat> targets;
+    [SerializeField]
     protected NormalCat currentTarget;
     protected TowerBase baseOfTower;
-
-    public void Start()
-    {
-        //Instantiate();
-    }
 
     // Update is called once per frame
     void Update()
@@ -29,32 +27,29 @@ public class Tower : MonoBehaviour
         if (currentTarget == null && targets.Count > 0)
         {
             currentTarget = targets.First();
-            targets.Remove(currentTarget);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        GameObject collider = collision.collider.gameObject;
         if (collider.tag.Equals("Cat"))
         {
-            NormalCat cat = collider.GetComponent<NormalCat>();
+
+            NormalCat cat = (NormalCat) PrefabUtility.GetCorrespondingObjectFromSource(collider.gameObject);
             targets.Add(cat);
         }
     }
 
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collider)
     {
-
-        GameObject collider = collision.collider.gameObject;
         if (collider.tag.Equals("Cat"))
         {
-            NormalCat cat = collider.GetComponent<NormalCat>();
+            NormalCat cat = (NormalCat)PrefabUtility.GetPrefabInstanceHandle(collider.gameObject);
             targets.Remove(cat);
-            if(currentTarget == cat)
+            if(currentTarget.Equals(collider))
             {
-                currentTarget = null;
+                currentTarget = targets.First();
             }
         }
     }
