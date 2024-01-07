@@ -21,17 +21,15 @@ public class LaserPointerTower : Tower
     // Update is called once per frame
     void Update()
     {
-        if (currentTarget != null )
+        if (targets.Count > 0 )
         {
-            if(currentTarget.CompareTag("cat") ){
-                //currentTarget.GetComponent<NormalCat>.DistractCat(50);
-            }
-            //laser.SetActive(true);
-            //laser.transform.LookAt(currentTarget.transform.position);
-            //laser.transform.localScale = new Vector3 (laser.transform.position.x, laser.transform.position.y, Vector3.Distance(currentTarget.transform.position, this.transform.position));
+            
+            laser.SetActive(true);
+            laser.transform.LookAt(targets[0].transform.position);
+            laser.transform.localScale = new Vector3 (laser.transform.position.x, laser.transform.position.y, Vector3.Distance(targets[0].transform.position, this.transform.position));
         } else
         {
-            //laser.SetActive(false);
+            laser.SetActive(false);
         }
     }
 }

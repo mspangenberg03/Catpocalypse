@@ -22,7 +22,6 @@ public class NormalCat : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        
     }
 
     // Update is called once per frame
@@ -51,7 +50,6 @@ public class NormalCat : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
         if (other.gameObject.tag == "CatSpawnPoint" && isDistracted)
         {
             KillCat();
@@ -68,7 +66,6 @@ public class NormalCat : MonoBehaviour
     {
         // Fire the OnCatDied event.
         OnCatDied?.Invoke(this, EventArgs.Empty);
-
         Destroy(gameObject);
     }
 }

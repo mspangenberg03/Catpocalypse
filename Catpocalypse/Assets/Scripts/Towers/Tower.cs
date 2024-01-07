@@ -8,25 +8,29 @@ public class Tower : MonoBehaviour
 {
 
     [SerializeField]
-    private int buildCost;
+    protected int buildCost;
     [SerializeField]
-    private int refundAmount;
+    protected int refundAmount;
     [SerializeField]
-    private SphereCollider range;
-    
+    protected SphereCollider range;
+    [SerializeField]
+    protected int distractValue;
+    [SerializeField]
+    protected int numberOfTargets;
+
     protected Vector2 targetDirection;
     [SerializeField]
-    protected List<NormalCat> targets;
+    protected List<GameObject> targetableCats;
     [SerializeField]
-    protected NormalCat currentTarget;
+    protected List<GameObject> targets;
     protected TowerBase baseOfTower;
 
     // Update is called once per frame
     void Update()
     {
-        if (currentTarget == null && targets.Count > 0)
+        if (targets.Count < numberOfTargets && targetableCats.Count > 0)
         {
-            currentTarget = targets.First();
+            targets.Add(targetableCats.First());
         }
     }
 
@@ -34,9 +38,7 @@ public class Tower : MonoBehaviour
     {
         if (collider.tag.Equals("Cat"))
         {
-
-            NormalCat cat = (NormalCat) PrefabUtility.GetCorrespondingObjectFromSource(collider.gameObject);
-            targets.Add(cat);
+            targets.Add(collider.gameObject);
         }
     }
 
@@ -45,12 +47,9 @@ public class Tower : MonoBehaviour
     {
         if (collider.tag.Equals("Cat"))
         {
-            NormalCat cat = (NormalCat)PrefabUtility.GetPrefabInstanceHandle(collider.gameObject);
-            targets.Remove(cat);
-            if(currentTarget.Equals(collider))
-            {
-                currentTarget = targets.First();
-            }
+            targets.Remove(collider.gameObject);
+            targets[0] = targets.First();
+           
         }
     }
 
