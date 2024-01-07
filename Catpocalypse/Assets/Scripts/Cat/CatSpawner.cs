@@ -21,7 +21,6 @@ public class CatSpawner : MonoBehaviour
     void Start()
     {
         //StartCoroutine(Spawner());
-        Debug.Log("Button: " + startWaveButton.enabled);
     }
 
     // Update is called once per frame
@@ -35,7 +34,6 @@ public class CatSpawner : MonoBehaviour
     }
     public void StartNextWave()
     {
-        Debug.Log("$^#$%&#$%&%$");
         waveCount++;
         if(waveCount == 1)
         {
