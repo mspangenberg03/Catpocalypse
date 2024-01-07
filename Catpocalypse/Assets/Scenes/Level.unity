@@ -1927,6 +1927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57b291273e92e44f8776966d86f0432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 1528691241}
 --- !u!1 &1210443998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,6 +2429,7 @@ MonoBehaviour:
   spawnPoint1: {fileID: 597612419}
   normalCat: {fileID: 8801225462822087186, guid: 81bdec16b3dc8ef49b5c310d0ff23050, type: 3}
   startWaveButton: {fileID: 1908564806}
+  healthManager: {fileID: 1172394860}
 --- !u!4 &1528691242
 Transform:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class CatSpawner : MonoBehaviour
 
     [SerializeField] private GameObject normalCat;
     [SerializeField] private Button startWaveButton;
-
+    [SerializeField] private PlayerHealthManager healthManager;
 
     private int waveCount = 0;
     private int catsInWave = 5;
@@ -27,7 +27,7 @@ public class CatSpawner : MonoBehaviour
     void Update()
     {
         GameObject[] cats = GameObject.FindGameObjectsWithTag("Cat");
-        if (cats.Length == 0)
+        if (cats.Length == 0 && healthManager.GetPlayerOutOfHealth() != true)
         {
             startWaveButton.enabled = true;
         }                
@@ -43,8 +43,13 @@ public class CatSpawner : MonoBehaviour
         {
             catsInWave += 2;
             StartCoroutine(Spawner());
+            HUD.UpdateWaveNumberDisplay(waveCount);
         }
         startWaveButton.enabled = false;
+    }
+    public void StopSpawner()
+    {
+        StopCoroutine(Spawner());
     }
     IEnumerator Spawner()
     {
