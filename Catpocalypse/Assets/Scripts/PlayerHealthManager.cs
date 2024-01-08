@@ -27,15 +27,12 @@ public class PlayerHealthManager : MonoBehaviour
             playerOutOfHealth = true;
         }
     }
-    private void OnTriggerEnter(Collider other)
+    public void TakeDamage(float damage)
     {
-        if(other.gameObject.layer == 3) //If the object is in the Cat layer
-        {
-            health -= 1;
-            HUD.UpdatePlayerHealthDisplay(health,maxHealth);
-            
-        }
+        health -= damage;
+        HUD.UpdatePlayerHealthDisplay(health, maxHealth);
     }
+    
     public bool GetPlayerOutOfHealth()
     {
         return playerOutOfHealth;

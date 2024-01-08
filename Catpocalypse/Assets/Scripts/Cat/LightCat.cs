@@ -17,10 +17,13 @@ public class LightCat : MonoBehaviour
     private NavMeshAgent agent;
     // Start is called before the first frame update
 
+    private float damageToPlayer = 1f; //How much health the cat takes from the player
+
+    private PlayerHealthManager healthManager;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
+        healthManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerHealthManager>();
     }
 
     // Update is called once per frame
@@ -56,7 +59,7 @@ public class LightCat : MonoBehaviour
         }
         if (other.gameObject.tag == "Goal")
         {
-            //TODO: Health
+            healthManager.TakeDamage(damageToPlayer);
             KillCat();
         }
     }
