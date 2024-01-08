@@ -32,7 +32,8 @@ public class CatBase : MonoBehaviour
     private NavMeshAgent agent;
 
     protected PlayerHealthManager healthManager;
-    
+
+    protected float _DistanceFromNextWayPoint = 0f;
     protected WayPoint _NextWayPoint;
 
 
@@ -57,10 +58,9 @@ public class CatBase : MonoBehaviour
 
         if (_NextWayPoint != null)
         {
-            float distanceFromNextWayPoint = Vector3.Distance(transform.position, _NextWayPoint.transform.position);
+            _DistanceFromNextWayPoint = Vector3.Distance(transform.position, _NextWayPoint.transform.position);
 
-            if (distanceFromNextWayPoint <= _WayPointArrivedDistance && 
-                agent.pathStatus == NavMeshPathStatus.PathComplete)
+            if (HasReachedDestination())
             {
                 GetNextWaypoint();
 
@@ -69,6 +69,10 @@ public class CatBase : MonoBehaviour
                 if (_NextWayPoint != null)
                     agent.SetDestination(_NextWayPoint.transform.position);
             }
+        }
+        else
+        {
+            _DistanceFromNextWayPoint = 0f;
         }
     }
     protected void Distracted()
@@ -141,6 +145,12 @@ public class CatBase : MonoBehaviour
 
 
         _NextWayPoint = nearestWayPoint;
+    }
+
+    public bool HasReachedDestination()
+    {
+        return _DistanceFromNextWayPoint <= _WayPointArrivedDistance &&
+               agent.pathStatus == NavMeshPathStatus.PathComplete;
     }
 
 }
