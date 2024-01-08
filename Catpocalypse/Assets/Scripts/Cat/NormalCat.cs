@@ -17,11 +17,17 @@ public class NormalCat : MonoBehaviour
     private Vector3 destination; //Where the cat is moving to
     //Rigidbody rb;//The RigidBody component
     private NavMeshAgent agent;
+    private float damageToPlayer = 2f; //How much health the cat takes from the player
+
+    private PlayerHealthManager healthManager;
+    //private PlayerHealthManager healthManager;
     // Start is called before the first frame update
     
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        healthManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerHealthManager>();
+        
     }
 
     // Update is called once per frame
@@ -50,13 +56,14 @@ public class NormalCat : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.tag == "CatSpawnPoint" && isDistracted)
         {
             KillCat();
         }
         if(other.gameObject.tag == "Goal")
         {
-            //TODO: Health
+            healthManager.TakeDamage(damageToPlayer);
             KillCat();
         }
     }
@@ -66,6 +73,7 @@ public class NormalCat : MonoBehaviour
     {
         // Fire the OnCatDied event.
         OnCatDied?.Invoke(this, EventArgs.Empty);
+
         Destroy(gameObject);
     }
 }
