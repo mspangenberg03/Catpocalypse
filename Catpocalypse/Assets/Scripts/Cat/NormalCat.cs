@@ -5,11 +5,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class NormalCat : MonoBehaviour
+public class NormalCat : CatBase
 {
-    // This event is static so we don't need to subscribe the money manager to every cat instance's OnCatDied event.
-    public static event EventHandler OnCatDied;
 
+<<<<<<< HEAD
 
     private int distraction = 0; //How distracted the cat is currently
     private int distractionThreshold = 50; //The amount of distraction it takes to fully distract the cat
@@ -76,4 +75,6 @@ public class NormalCat : MonoBehaviour
 
         Destroy(this.gameObject);
     }
+=======
+>>>>>>> main
 }
