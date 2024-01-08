@@ -8,20 +8,15 @@ public class TowerBase : MonoBehaviour
     
     public bool usable;  
     
+    public TowerSelectorUI towerSelectorUI;
+    public TowerDestroyerUI towerDestroyerUI;
+    public Material towerHovered;
+    public Material towerNotHovered;
     [SerializeField]
-    private TowerSelectorUI towerSelectorUI;
-    [SerializeField]
-    private TowerDestroyerUI towerDestroyerUI;
-    [SerializeField]
-    private Material towerHovered;
-    [SerializeField]
-    private Material towerNotHovered;
-    [SerializeField]
-    private GameObject laserPointerPrefab;
-
-    private bool hasTower;
-    private bool hoveredOver;
-    private GameObject tower;
+    private GameObject towerSpawn;
+    public bool hasTower;
+    public bool hoveredOver;
+    public GameObject tower;
 
     private void Awake()
     {
@@ -44,16 +39,19 @@ public class TowerBase : MonoBehaviour
 
     void OnMouseUpAsButton()
     {
-        Debug.Log("I have been selected");
-        if(hoveredOver && enabled && hasTower)
+
+        if(enabled)
         {
-            Debug.Log("Why am I not on yet?");
-            towerDestroyerUI.gameObject.SetActive(true);
-            towerDestroyerUI.SetCurrentSelectedBase(null);
-        } else if (hoveredOver && enabled)
-        {
-            towerSelectorUI.gameObject.SetActive(true);
-            towerSelectorUI.SetCurrentSelectedBase(this);
+            if(hoveredOver){
+                if(!hasTower){
+                    towerSelectorUI.gameObject.SetActive(true);
+                    towerSelectorUI.SetCurrentSelectedSpawn(towerSpawn);
+                } else {
+                    towerDestroyerUI.gameObject.SetActive(true);
+                    towerDestroyerUI.SetCurrentSelectedBase(this);
+                }
+            }
+            
         }
     }
 
@@ -62,16 +60,15 @@ public class TowerBase : MonoBehaviour
         switch (towerToBuild)
         {
 
-            case 2:
-                tower = Instantiate(laserPointerPrefab, this.transform);
-                this.hasTower = true;
-                break;
+            //case 2:
+              //  tower = Instantiate(laserPointerPrefab, this.transform);
+                //this.hasTower = true;
+                //break;
 
             default:
                 Debug.Log("I am born");
-                tower = Instantiate(laserPointerPrefab, this.transform);
-                //Ensures the tower spawns on the TowerBase
-                tower.gameObject.transform.position = this.gameObject.transform.position;
+
+                towerSpawn.GetComponent<TowerSpawn>().BuildTower(0); ;
                 this.hasTower = true;
                 break;
         };

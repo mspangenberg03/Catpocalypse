@@ -124,7 +124,12 @@ MonoBehaviour:
   buildCost: 0
   refundAmount: 0
   range: {fileID: 8044491661289398269}
+  distractValue: 0
+  numberOfTargets: 0
+  targets: []
+  baseOfTower: {fileID: 0}
   laser: {fileID: 5513968051566747971, guid: b91d010c08c2b284bb79cc19087d05df, type: 3}
+  lasers: []
   numOfLasers: 1
   laserPointerTower: {fileID: 9139953423556229519}
 --- !u!135 &8044491661289398269
@@ -146,5 +151,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 10
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

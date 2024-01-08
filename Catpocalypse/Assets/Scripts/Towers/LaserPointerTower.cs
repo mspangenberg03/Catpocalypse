@@ -7,6 +7,8 @@ public class LaserPointerTower : Tower
     [SerializeField]
     private GameObject laser;
     [SerializeField]
+    private List<GameObject> lasers;
+    [SerializeField]
     private int numOfLasers;
     [SerializeField]
     private GameObject laserPointerTower;
@@ -14,22 +16,51 @@ public class LaserPointerTower : Tower
     public void Awake()
     {
         laserPointerTower = this.gameObject;
-        laserPointerTower.transform.position = new Vector3(0f, 0f, 0f);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (targets.Count > 0 )
+        if(lasers.Count < numOfLasers)
         {
-            
-            laser.SetActive(true);
-            laser.transform.LookAt(targets[0].transform.position);
-            laser.transform.localScale = new Vector3 (laser.transform.position.x, laser.transform.position.y, Vector3.Distance(targets[0].transform.position, this.transform.position));
-        } else
+            StartCoroutine(SpawnLasers());
+        }
+        StartCoroutine(LaserControl());
+    }
+
+    public GameObject buildLaserPointerTower(TowerBase towerBase)
+    {
+        GameObject tower = Instantiate(laserPointerTower, towerBase.gameObject.transform);
+        //Ensures the tower spawns on the TowerBase
+        tower.gameObject.transform.position = towerBase.gameObject.transform.position;
+        return tower;
+    }
+
+    IEnumerator LaserControl()
+    {
+        for( int i = 0; i < numOfLasers; i++)
         {
-            laser.SetActive(false);
+            if(i <= targets.Count && targets.Count != 0)
+            {
+                lasers[i].SetActive(true);
+                lasers[i].transform.LookAt(targets[i].transform);
+                lasers[i].transform.localScale = new Vector3(laser.transform.position.x, laser.transform.position.y, Vector3.Distance(targets[i].transform.position, this.transform.position));
+            } else if(i > targets.Count)
+            {
+                lasers[i].SetActive(false);
+            }
+        }
+        yield return new WaitForEndOfFrame();
+    }
+    IEnumerator SpawnLasers()
+    {
+        for (int i = lasers.Count; i < numOfLasers; i++)
+        {
+
+            lasers.Add(Instantiate(laser, this.gameObject.transform));
+            lasers[i].transform.position = this.transform.position;
+            yield return new WaitForSeconds(2f);
         }
     }
 }

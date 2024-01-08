@@ -20,17 +20,37 @@ public class Tower : MonoBehaviour
 
     protected Vector2 targetDirection;
     [SerializeField]
-    protected List<GameObject> targetableCats;
-    [SerializeField]
     protected List<GameObject> targets;
+    [SerializeField]
     protected TowerBase baseOfTower;
 
-    // Update is called once per frame
-    void Update()
+    public void Start()
     {
-        if (targets.Count < numberOfTargets && targetableCats.Count > 0)
+        baseOfTower = this.gameObject.GetComponentInParent<TowerBase>();
+    }
+
+    void OnMouseEnter()
+    {
+       baseOfTower.hoveredOver = true;
+       baseOfTower.gameObject.GetComponent<Renderer>().material= baseOfTower.towerHovered;
+    }
+
+    void OnMouseExit()
+    {
+        baseOfTower.hoveredOver = false;
+        baseOfTower.gameObject.GetComponent<Renderer>().material = baseOfTower.towerNotHovered;
+    }
+
+    void OnMouseUpAsButton()
+    {
+
+        if(enabled)
         {
-            targets.Add(targetableCats.First());
+            if(baseOfTower.hoveredOver){
+                baseOfTower.towerDestroyerUI.gameObject.SetActive(true);
+                baseOfTower.towerDestroyerUI.SetCurrentSelectedBase(baseOfTower);
+            }
+            
         }
     }
 
@@ -48,14 +68,16 @@ public class Tower : MonoBehaviour
         if (collider.tag.Equals("Cat"))
         {
             targets.Remove(collider.gameObject);
-            targets[0] = targets.First();
+            if(targets.Count > 0) {
+                targets[0] = targets.First();
+            }
+            
            
         }
     }
 
     public void OnDestroy()
     {
-        this.gameObject.SetActive(false);
         Destroy(this);
     }
 

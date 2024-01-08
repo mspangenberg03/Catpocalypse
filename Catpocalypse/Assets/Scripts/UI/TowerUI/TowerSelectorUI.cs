@@ -11,18 +11,19 @@ public class TowerSelectorUI : MonoBehaviour
     [SerializeField]
     private Button laserPointerBtn;
 
-    private TowerBase currentSelectedBase;
+    private GameObject towerSpawner;
 
 
-    public void Awake()
+
+    public void Start()
     {
         this.gameObject.SetActive(false);
         laserPointerBtn.onClick.AddListener(OnLaserPointerSelect);
     }
 
-    public void SetCurrentSelectedBase(TowerBase current)
+    public void SetCurrentSelectedSpawn(GameObject current)
     {
-        currentSelectedBase = current;
+        towerSpawner = current;
     }
 
     public void OnLaserPointerSelect()
@@ -33,7 +34,7 @@ public class TowerSelectorUI : MonoBehaviour
 
     private void OnBuildSelect(int selection)
     {
-        currentSelectedBase.BuildTower(selection);
+        towerSpawner.GetComponent<TowerSpawn>().BuildTower(selection);
         this.gameObject.SetActive(false);
     }
 }

@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerDestroyerUI : MonoBehaviour
 {
     [SerializeField]
     private GameObject destroyTowerUI;
+    [SerializeField]
+    private Button laserPointerBtn;
 
     private TowerBase currentSelectedBase;
 
     public void Start()
     {
         this.gameObject.SetActive(false);
+        laserPointerBtn.onClick.AddListener(OnDestroySelect);
     }
 
     public void SetCurrentSelectedBase(TowerBase current)
@@ -19,9 +23,9 @@ public class TowerDestroyerUI : MonoBehaviour
         currentSelectedBase = current;
     }
 
-    public void OnDestroySelect(Tower tower)
+    public void OnDestroySelect()
     {
-        tower.OnDestroy();
+        currentSelectedBase.DestroyTower();
         currentSelectedBase = null;
         this.gameObject.SetActive(false);
     }
