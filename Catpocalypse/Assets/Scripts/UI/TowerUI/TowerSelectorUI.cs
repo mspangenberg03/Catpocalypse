@@ -17,7 +17,10 @@ public class TowerSelectorUI : MonoBehaviour
 
     public void Start()
     {
-        this.gameObject.SetActive(false);
+        if(Time.time < 0.5)
+        {
+            this.gameObject.SetActive(false);
+        }
         laserPointerBtn.onClick.AddListener(OnLaserPointerSelect);
     }
 

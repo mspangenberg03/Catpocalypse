@@ -124,7 +124,7 @@ MonoBehaviour:
   buildCost: 0
   refundAmount: 0
   range: {fileID: 8044491661289398269}
-  distractValue: 0
+  distractValue: 20
   numberOfTargets: 0
   targets: []
   baseOfTower: {fileID: 0}

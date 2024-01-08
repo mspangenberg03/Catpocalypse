@@ -29,31 +29,6 @@ public class Tower : MonoBehaviour
         baseOfTower = this.gameObject.GetComponentInParent<TowerBase>();
     }
 
-    void OnMouseEnter()
-    {
-       baseOfTower.hoveredOver = true;
-       baseOfTower.gameObject.GetComponent<Renderer>().material= baseOfTower.towerHovered;
-    }
-
-    void OnMouseExit()
-    {
-        baseOfTower.hoveredOver = false;
-        baseOfTower.gameObject.GetComponent<Renderer>().material = baseOfTower.towerNotHovered;
-    }
-
-    void OnMouseUpAsButton()
-    {
-
-        if(enabled)
-        {
-            if(baseOfTower.hoveredOver){
-                baseOfTower.towerDestroyerUI.gameObject.SetActive(true);
-                baseOfTower.towerDestroyerUI.SetCurrentSelectedBase(baseOfTower);
-            }
-            
-        }
-    }
-
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.tag.Equals("Cat"))

@@ -14,7 +14,11 @@ public class TowerDestroyerUI : MonoBehaviour
 
     public void Start()
     {
-        this.gameObject.SetActive(false);
+        if (Time.time < 0.5)
+        {
+            
+            this.gameObject.SetActive(false);
+        }
         laserPointerBtn.onClick.AddListener(OnDestroySelect);
     }
 
@@ -26,7 +30,6 @@ public class TowerDestroyerUI : MonoBehaviour
     public void OnDestroySelect()
     {
         currentSelectedBase.DestroyTower();
-        currentSelectedBase = null;
         this.gameObject.SetActive(false);
     }
 }

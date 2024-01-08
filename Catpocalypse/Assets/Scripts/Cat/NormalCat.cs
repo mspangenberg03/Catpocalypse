@@ -74,6 +74,6 @@ public class NormalCat : MonoBehaviour
         // Fire the OnCatDied event.
         OnCatDied?.Invoke(this, EventArgs.Empty);
 
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }

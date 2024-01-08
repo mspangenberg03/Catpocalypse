@@ -8,6 +8,8 @@ TagManager:
   - Goal
   - Cat
   - Laser
+  - TowerSelector
+  - TowerDestroyer
   layers:
   - Default
   - TransparentFX

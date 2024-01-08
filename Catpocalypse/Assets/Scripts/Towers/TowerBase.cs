@@ -8,8 +8,8 @@ public class TowerBase : MonoBehaviour
     
     public bool usable;  
     
-    public TowerSelectorUI towerSelectorUI;
-    public TowerDestroyerUI towerDestroyerUI;
+    public GameObject towerSelectorUI;
+    public GameObject towerDestroyerUI;
     public Material towerHovered;
     public Material towerNotHovered;
     [SerializeField]
@@ -45,10 +45,10 @@ public class TowerBase : MonoBehaviour
             if(hoveredOver){
                 if(!hasTower){
                     towerSelectorUI.gameObject.SetActive(true);
-                    towerSelectorUI.SetCurrentSelectedSpawn(towerSpawn);
+                    towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
                 } else {
                     towerDestroyerUI.gameObject.SetActive(true);
-                    towerDestroyerUI.SetCurrentSelectedBase(this);
+                    towerDestroyerUI.gameObject.GetComponent<TowerDestroyerUI>().SetCurrentSelectedBase(this);
                 }
             }
             
@@ -60,13 +60,7 @@ public class TowerBase : MonoBehaviour
         switch (towerToBuild)
         {
 
-            //case 2:
-              //  tower = Instantiate(laserPointerPrefab, this.transform);
-                //this.hasTower = true;
-                //break;
-
             default:
-                Debug.Log("I am born");
 
                 towerSpawn.GetComponent<TowerSpawn>().BuildTower(0); ;
                 this.hasTower = true;
@@ -78,7 +72,7 @@ public class TowerBase : MonoBehaviour
     public void DestroyTower()
     {
         this.hasTower = false;
-        Destroy(tower, 1);
+        Destroy(tower);
         tower = null;
 
     }

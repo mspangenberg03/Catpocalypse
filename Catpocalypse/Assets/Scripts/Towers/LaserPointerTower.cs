@@ -36,16 +36,27 @@ public class LaserPointerTower : Tower
         tower.gameObject.transform.position = towerBase.gameObject.transform.position;
         return tower;
     }
+    
 
     IEnumerator LaserControl()
     {
         for( int i = 0; i < numOfLasers; i++)
         {
+            if(targets.Count == 0)
+            {
+                lasers[i].SetActive(false);
+                yield return new WaitForEndOfFrame();
+            }
             if(i <= targets.Count && targets.Count != 0)
             {
-                lasers[i].SetActive(true);
-                lasers[i].transform.LookAt(targets[i].transform);
-                lasers[i].transform.localScale = new Vector3(laser.transform.position.x, laser.transform.position.y, Vector3.Distance(targets[i].transform.position, this.transform.position));
+                if(targets[i] != null)
+                {
+                    lasers[i].SetActive(true);
+                    lasers[i].transform.LookAt(targets[i].transform);
+                    targets[i].GetComponent<NormalCat>().DistractCat(this.distractValue);
+                    lasers[i].transform.localScale = new Vector3(laser.transform.position.x, laser.transform.position.y, Vector3.Distance(targets[i].transform.position, this.transform.position));
+                }
+                  
             } else if(i > targets.Count)
             {
                 lasers[i].SetActive(false);
@@ -60,7 +71,7 @@ public class LaserPointerTower : Tower
 
             lasers.Add(Instantiate(laser, this.gameObject.transform));
             lasers[i].transform.position = this.transform.position;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForEndOfFrame();
         }
     }
 }
