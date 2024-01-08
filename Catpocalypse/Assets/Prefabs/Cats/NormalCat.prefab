@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7496647864260841163}
   - component: {fileID: 6728770436289980193}
   - component: {fileID: 1396169140101980544}
-  - component: {fileID: 7041275438494867842}
   - component: {fileID: 3900370069553660581}
+  - component: {fileID: 7041275438494867842}
   m_Layer: 3
   m_Name: NormalCat
   m_TagString: Cat
@@ -130,18 +130,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7041275438494867842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8801225462822087186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95262d0fa6078244bad456b816c8597c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &3900370069553660581
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,3 +157,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7041275438494867842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801225462822087186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95262d0fa6078244bad456b816c8597c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distractionThreshold: 50
+  damageToPlayer: 2
+  _WayPointArrivedDistance: 2
