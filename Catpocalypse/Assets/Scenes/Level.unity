@@ -2426,7 +2426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint1: {fileID: 597612419}
-  normalCat: {fileID: 8801225462822087186, guid: 81bdec16b3dc8ef49b5c310d0ff23050, type: 3}
+  normalCat: {fileID: 2874771900686890139, guid: 9929934472c5eed4f8dfc964b60de407, type: 3}
   startWaveButton: {fileID: 1908564806}
 --- !u!4 &1528691242
 Transform:
