@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1357
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -243,8 +243,8 @@ MonoBehaviour:
     y: 771
     width: 2033
     height: 536
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
@@ -413,9 +413,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: cc5e0000
-      m_LastClickedID: 24268
-      m_ExpandedIDs: fefaffff
+      m_SelectedIDs: 64bdffff
+      m_LastClickedID: -17052
+      m_ExpandedIDs: ecceffff78daffffcedfffff82f7ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -834,9 +834,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.2576673, y: 1.9451172, z: 0.025840282}
+    m_Target: {x: -4.984955, y: 10.207279, z: -33.777115}
     speed: 2
-    m_Value: {x: 2.2576673, y: 1.9451172, z: 0.025840282}
+    m_Value: {x: -4.984955, y: 10.207279, z: -33.777115}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -882,13 +882,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.14172187, y: 0.63276595, z: -0.11927357, w: -0.75186056}
+    m_Target: {x: -0.33243233, y: 0.4643381, z: -0.19348478, w: -0.79779685}
     speed: 2
-    m_Value: {x: -0.141722, y: 0.6327665, z: -0.11927367, w: -0.7518612}
+    m_Value: {x: -0.33242616, y: 0.46432945, z: -0.19348119, w: -0.797782}
   m_Size:
-    m_Target: 0.8660254
+    m_Target: 18.519447
     speed: 2
-    m_Value: 0.8660254
+    m_Value: 18.519447
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -992,7 +992,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Camera
+    - Assets/Prefabs/Navigation
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1000,16 +1000,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Camera
+  - Assets/Prefabs/Navigation
   m_LastFoldersGridSize: -1
   m_LastProjectPath: F:\GameDev Projects\P1OC\Catpocalypse\Catpocalypse
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0c600000
-    m_LastClickedID: 24588
-    m_ExpandedIDs: 00000000c05f0000c25f0000c45f0000c65f0000
+    m_SelectedIDs: a4600000
+    m_LastClickedID: 24740
+    m_ExpandedIDs: 000000007460000076600000786000007a60000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1037,7 +1037,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c05f0000c25f0000c45f0000c65f0000
+    m_ExpandedIDs: 000000007460000076600000786000007a600000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1062,9 +1062,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 68f2ffff
-    m_LastClickedInstanceID: -3480
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: c6beffff
+    m_LastClickedInstanceID: -16698
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300003a62000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1167,7 +1167,7 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 24268
+  m_LastInspectedObjectInstanceID: -17052
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
