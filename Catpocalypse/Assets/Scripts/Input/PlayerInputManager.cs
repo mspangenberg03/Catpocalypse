@@ -9,6 +9,7 @@ public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager Instance;
 
+    public GameObject pauseMenuPanel;
 
     private InputAction _PanCameraAction;
     private PlayerInput _PlayerInputComponent;
@@ -38,6 +39,10 @@ public class PlayerInputManager : MonoBehaviour
     void Update()
     {
         UpdateInputValues();
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PressedPause();
+        }
     }
 
     /// <summary>
@@ -70,4 +75,10 @@ public class PlayerInputManager : MonoBehaviour
     // ====================================================================================================
     
     public static Vector2 PanCamera { get; private set; }
+
+    public void PressedPause()
+    {
+        Time.timeScale = 0;
+        pauseMenuPanel.gameObject.SetActive(true);
+    }
 }

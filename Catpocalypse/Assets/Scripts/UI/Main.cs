@@ -7,7 +7,7 @@ public class Main_Menu : MonoBehaviour
     public void OnPlayButton()
     {
         
-      SceneManager.LoadScene("Game");
+      SceneManager.LoadScene("Level1");
     }
 
     // Opens options

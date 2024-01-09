@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1448190831577929225}
   - component: {fileID: 8985271498630517990}
   - component: {fileID: 8044491661289398269}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LaserPointerTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,11 +121,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcefb1ddc11a08d42b2c8bc20b5614bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildCost: 0
-  refundAmount: 0
+  buildCost: 100
+  refundAmount: 50
   range: {fileID: 8044491661289398269}
-  laser: {fileID: 0}
-  numOfLasers: 0
+  distractValue: 1
+  numberOfTargets: 0
+  targets: []
+  laserPrefab: {fileID: 5513968051566747971, guid: b91d010c08c2b284bb79cc19087d05df, type: 3}
+  lasers: []
+  numOfLasers: 1
+  laserPointerTower: {fileID: 9139953423556229519}
 --- !u!135 &8044491661289398269
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -141,9 +146,9 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 6
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

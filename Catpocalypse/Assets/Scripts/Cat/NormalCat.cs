@@ -8,4 +8,5 @@ using UnityEngine.AI;
 public class NormalCat : CatBase
 {
 
+
 }

@@ -1,46 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerBase : MonoBehaviour
 {
+    
+    public bool usable;  
+    
+    public GameObject towerSelectorUI;
+    public GameObject towerDestroyerUI;
+    public Material towerHovered;
+    public Material towerNotHovered;
     [SerializeField]
-    public bool usable;
-    [SerializeField]
+    private GameObject towerSpawn;
+    public bool hasTower;
+    public bool hoveredOver;
     public GameObject tower;
     [SerializeField]
-    public GameObject towerSelectorUI;
-    [SerializeField]
-    public GameObject towerDestroyerUI;
-    [SerializeField]
-    public Material towerHovered;
-    [SerializeField]
-    public Material towerNotHovered;
+    public LayerMask layer;
 
-    private bool hasTower;
-    private bool hoveredOver;
+    private void Awake()
+    {
+        hasTower = false;
+        hoveredOver = false;
+        tower = null;
+    }
 
-    private void OnMouseEnter()
+    void OnMouseEnter()
     {
        hoveredOver = true;
        this.gameObject.GetComponent<Renderer>().material= towerHovered;
     }
 
-    private void OnMouseExit()
+    void OnMouseExit()
     {
         hoveredOver = false;
         this.gameObject.GetComponent<Renderer>().material = towerNotHovered;
     }
 
-    private void OnMouseUpAsButton()
+    void OnMouseUpAsButton()
     {
-        if(hoveredOver && enabled && !hasTower)
+
+        if(enabled)
         {
-            towerSelectorUI.SetActive(true);
-        } else if (hoveredOver && enabled && hasTower)
-        {
-            towerDestroyerUI.SetActive(true);
+            if(hoveredOver){
+                if(!hasTower){
+                    if(towerSelectorUI.gameObject.activeSelf)
+                    {
+                        towerSelectorUI.gameObject.SetActive(false);
+                    } else
+                    {
+                        towerSelectorUI.gameObject.SetActive(true);
+                        towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
+                    }
+                    
+                } else {
+                    if (towerDestroyerUI.gameObject.activeSelf)
+                    {
+                        towerDestroyerUI.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        towerDestroyerUI.gameObject.SetActive(true);
+                        towerDestroyerUI.gameObject.GetComponent<TowerDestroyerUI>().SetCurrentSelectedBase(this);
+                    }
+                    
+                }
+            }
+            
         }
+    }
+
+    public void BuildTower(int towerToBuild)
+    {
+        switch (towerToBuild)
+        {
+
+            default:
+
+                towerSpawn.GetComponent<TowerSpawn>().BuildTower(0); ;
+                this.hasTower = true;
+                break;
+        };
+
+    }
+
+    public void DestroyTower()
+    {
+        this.hasTower = false;
+        Destroy(tower);
+        tower = null;
+
     }
 
 }

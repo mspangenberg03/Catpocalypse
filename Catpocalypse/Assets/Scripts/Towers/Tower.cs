@@ -2,55 +2,72 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEditor;
 
 public class Tower : MonoBehaviour
 {
 
     [SerializeField]
-    public int buildCost;
+    protected int buildCost;
     [SerializeField]
-    public int refundAmount;
+    protected int refundAmount;
     [SerializeField]
-    public SphereCollider range;
-    
-    protected Vector2 targetDirection;
-    protected List<NormalCat> targets;
-    protected NormalCat currentTarget;
+    protected SphereCollider range;
+    [SerializeField]
+    protected int distractValue;
+    [SerializeField]
+    protected int numberOfTargets;
 
-    // Update is called once per frame
-    void Update()
+    protected Vector3 targetDirection;
+    public List<GameObject> targets;
+
+    private void OnTriggerEnter(Collider collider)
     {
-        if (currentTarget == null && targets.Count > 0)
+        if (collider.tag.Equals("Cat"))
         {
-            currentTarget = targets.First();
-            targets.Remove(currentTarget);
+            targets.Add(collider.gameObject);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnMouseEnter()
     {
-        GameObject collider = collision.collider.gameObject;
-        if (collider.tag.Equals("Cat"))
+        this.gameObject.GetComponentInParent<TowerBase>().hoveredOver = true;
+        this.gameObject.GetComponent<Renderer>().material = this.gameObject.GetComponentInParent<TowerBase>().towerHovered;
+    }
+
+    void OnMouseExit()
+    {
+        this.gameObject.GetComponentInParent<TowerBase>().hoveredOver = false;
+        this.gameObject.GetComponent<Renderer>().material = this.gameObject.GetComponentInParent<TowerBase>().towerNotHovered;
+    }
+
+    void OnMouseUpAsButton()
+    {
+
+        if (enabled)
         {
-            NormalCat cat = collider.GetComponent<NormalCat>();
-            targets.Add(cat);
+            
+
         }
     }
 
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collider)
     {
-
-        GameObject collider = collision.collider.gameObject;
         if (collider.tag.Equals("Cat"))
         {
-            NormalCat cat = collider.GetComponent<NormalCat>();
-            targets.Remove(cat);
-            if(currentTarget == cat)
-            {
-                currentTarget = null;
+            targets.Remove(collider.gameObject);
+            if(targets.Count > 0) {
+                targets[0] = targets.First();
             }
+            
+           
         }
+    }
+
+    public void OnDestroy()
+    {
+        Destroy(this);
     }
 
 

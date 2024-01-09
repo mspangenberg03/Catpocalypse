@@ -7,6 +7,9 @@ TagManager:
   - CatSpawnPoint
   - Goal
   - Cat
+  - Laser
+  - TowerSelector
+  - TowerDestroyer
   layers:
   - Default
   - TransparentFX

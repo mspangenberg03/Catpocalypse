@@ -20,11 +20,12 @@ public class CatBase : MonoBehaviour
     [SerializeField] protected int distractionThreshold = 50; //The amount of distraction it takes to fully distract the cat
     [Min(0f)]
     [SerializeField] protected float damageToPlayer = 2f; //How much health the cat takes from the player
-    
+
     [Min(0f)]
     [Tooltip("This sets how close the cat must get to the next WayPoint to consider itself to have arrived there. This causes it to then target the next WayPoint (or a randomly selected one if the current WayPoint has multiple next points set in the Inspector.")]
     [SerializeField] protected float _WayPointArrivedDistance = 2f;
 
+    [SerializeField] protected int distractReward = 50;
 
     protected int distraction = 0; //How distracted the cat is currently
     protected bool isDistracted = false; // If the cat has been defeated or not.
@@ -35,7 +36,6 @@ public class CatBase : MonoBehaviour
 
     protected float _DistanceFromNextWayPoint = 0f;
     protected WayPoint _NextWayPoint;
-
 
     // Start is called before the first frame update
     void Start()
@@ -77,20 +77,22 @@ public class CatBase : MonoBehaviour
     }
     protected void Distracted()
     {
-        isDistracted = true;        
+        isDistracted = true;
     }
     //I am intending this function to be called from either the tower or the projectile that the tower fires
-    public void DistractCat(int distractionValue)
+    public void DistractCat(int distractionValue, Tower targetingTower)
     {
         distraction += distractionValue;
-
-        if (distractionValue >= distractionThreshold)
+        if (this.distraction >= this.distractionThreshold)
+        {
+            targetingTower.targets.Remove(this.gameObject);
             KillCat();
+        }
     }
 
     protected void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Goal"))
+        if (other.gameObject.CompareTag("Goal"))
         {
             healthManager.TakeDamage(damageToPlayer);
             KillCat();
