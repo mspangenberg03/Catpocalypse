@@ -11,6 +11,9 @@ public class TowerSelectorUI : MonoBehaviour
     [SerializeField]
     private Button laserPointerBtn;
 
+    [SerializeField]
+    private Button scratchPostBtn;
+
     private GameObject towerSpawner;
 
 
@@ -22,6 +25,7 @@ public class TowerSelectorUI : MonoBehaviour
             this.gameObject.SetActive(false);
         }
         laserPointerBtn.onClick.AddListener(OnLaserPointerSelect);
+        scratchPostBtn.onClick.AddListener(OnScratchingPostSelect);
     }
 
     public void SetCurrentSelectedSpawn(GameObject current)
@@ -32,6 +36,10 @@ public class TowerSelectorUI : MonoBehaviour
     public void OnLaserPointerSelect()
     {
         OnBuildSelect(0);
+    }
+    public void OnScratchingPostSelect()
+    {
+        OnBuildSelect(1);
     }
 
 

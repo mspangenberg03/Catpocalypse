@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserPointerTowerPrefab: {fileID: 9139953423556229519, guid: 2fe4444f0a169c74a86f5b0d148cf994, type: 3}
+  scratchPostTowerPrefab: {fileID: 3121967798339870383, guid: 61481af7c67bdbd49988fa84de31034d, type: 3}
