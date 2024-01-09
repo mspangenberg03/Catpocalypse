@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PlayerMoneyManager : MonoBehaviour
 {
-    [SerializeField] private float _Money = 0f;
+    [SerializeField] private float _Money = 200f;
 
     [Header("Money Earning Amounts")]
     [SerializeField] private float _NormalCatPayAmount;
@@ -59,14 +61,10 @@ public class PlayerMoneyManager : MonoBehaviour
 
         if (deadCat is NormalCat)
             pay = _NormalCatPayAmount;
-
-        // The below is commented out since those classes don't exist yet.
-        /*
         else if (deadCat is LightCat)
             pay = _LightCatPayAmount;
         else if (deadCat is HeavyCat)
             pay = _HeavyCatPayAmount;
-        */
 
 
         return pay;

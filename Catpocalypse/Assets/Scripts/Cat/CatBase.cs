@@ -25,6 +25,7 @@ public class CatBase : MonoBehaviour
     [Tooltip("This sets how close the cat must get to the next WayPoint to consider itself to have arrived there. This causes it to then target the next WayPoint (or a randomly selected one if the current WayPoint has multiple next points set in the Inspector.")]
     [SerializeField] protected float _WayPointArrivedDistance = 2f;
 
+    [SerializeField] protected int distractReward = 50;
 
     protected int distraction = 0; //How distracted the cat is currently
     protected bool isDistracted = false; // If the cat has been defeated or not.

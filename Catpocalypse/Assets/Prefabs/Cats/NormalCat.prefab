@@ -172,4 +172,4 @@ MonoBehaviour:
   distractionThreshold: 750
   damageToPlayer: 2
   _WayPointArrivedDistance: 2
-  distraction: 0
+  distractReward: 35

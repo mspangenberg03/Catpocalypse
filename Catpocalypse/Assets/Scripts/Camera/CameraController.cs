@@ -23,6 +23,7 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
+        _CameraTargetObject.gameObject.SetActive(true);
         _VirtualCamera = GetComponent<CinemachineVirtualCamera>();
 
         InitCamera();

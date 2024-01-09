@@ -52,8 +52,8 @@ public class LaserPointerTower : Tower
                     }
                     // Changes the laser's length and targets the cat with it
                     Vector3[] linepositions = new Vector3[2];
-                    linepositions[0] = this.GetComponentInParent<TowerBase>().gameObject.transform.position;
-                    linepositions[1] = targets[i].GetComponentInParent<CatSpawner>().GetComponentInChildren<Transform>().position;
+                    linepositions[0] = this.gameObject.transform.position;
+                    linepositions[1] = targets[i].transform.position;
                     lasers[i].GetComponent<LineRenderer>().SetPositions(linepositions);
                     lasers[i].transform.LookAt(targets[i].transform, this.transform.rotation.eulerAngles);
                     targets[i].GetComponent<CatBase>().DistractCat(this.distractValue, this);
