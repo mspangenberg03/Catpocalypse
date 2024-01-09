@@ -18,22 +18,36 @@ public class Tower : MonoBehaviour
     [SerializeField]
     protected int numberOfTargets;
 
-    protected Vector2 targetDirection;
-    [SerializeField]
-    protected List<GameObject> targets;
-    [SerializeField]
-    protected TowerBase baseOfTower;
-
-    public void Start()
-    {
-        baseOfTower = this.gameObject.GetComponentInParent<TowerBase>();
-    }
+    protected Vector3 targetDirection;
+    public List<GameObject> targets;
 
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.tag.Equals("Cat"))
         {
             targets.Add(collider.gameObject);
+        }
+    }
+
+    void OnMouseEnter()
+    {
+        this.gameObject.GetComponentInParent<TowerBase>().hoveredOver = true;
+        this.gameObject.GetComponent<Renderer>().material = this.gameObject.GetComponentInParent<TowerBase>().towerHovered;
+    }
+
+    void OnMouseExit()
+    {
+        this.gameObject.GetComponentInParent<TowerBase>().hoveredOver = false;
+        this.gameObject.GetComponent<Renderer>().material = this.gameObject.GetComponentInParent<TowerBase>().towerNotHovered;
+    }
+
+    void OnMouseUpAsButton()
+    {
+
+        if (enabled)
+        {
+            
+
         }
     }
 

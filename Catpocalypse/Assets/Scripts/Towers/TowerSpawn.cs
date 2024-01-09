@@ -33,6 +33,7 @@ public class TowerSpawn : MonoBehaviour
         {
             towerBase.tower = Instantiate(laserPointerTowerPrefab, this.transform);
             towerBase.tower.transform.position = this.transform.position;
+            towerBase.hasTower = true;
         }
 
         yield return new WaitForSeconds(2f);

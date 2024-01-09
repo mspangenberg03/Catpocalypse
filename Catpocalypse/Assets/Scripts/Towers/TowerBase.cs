@@ -17,6 +17,8 @@ public class TowerBase : MonoBehaviour
     public bool hasTower;
     public bool hoveredOver;
     public GameObject tower;
+    [SerializeField]
+    public LayerMask layer;
 
     private void Awake()
     {
@@ -44,11 +46,26 @@ public class TowerBase : MonoBehaviour
         {
             if(hoveredOver){
                 if(!hasTower){
-                    towerSelectorUI.gameObject.SetActive(true);
-                    towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
+                    if(towerSelectorUI.gameObject.activeSelf)
+                    {
+                        towerSelectorUI.gameObject.SetActive(false);
+                    } else
+                    {
+                        towerSelectorUI.gameObject.SetActive(true);
+                        towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
+                    }
+                    
                 } else {
-                    towerDestroyerUI.gameObject.SetActive(true);
-                    towerDestroyerUI.gameObject.GetComponent<TowerDestroyerUI>().SetCurrentSelectedBase(this);
+                    if (towerDestroyerUI.gameObject.activeSelf)
+                    {
+                        towerDestroyerUI.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        towerDestroyerUI.gameObject.SetActive(true);
+                        towerDestroyerUI.gameObject.GetComponent<TowerDestroyerUI>().SetCurrentSelectedBase(this);
+                    }
+                    
                 }
             }
             

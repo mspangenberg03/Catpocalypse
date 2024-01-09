@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3016272517056207873}
   - component: {fileID: 3308034828480017000}
   - component: {fileID: 1182513441486452027}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TowerBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,4 +123,10 @@ MonoBehaviour:
   towerDestroyerUI: {fileID: 0}
   towerHovered: {fileID: 2100000, guid: 9e5d08001e24f7c4d9aa051980dbf44a, type: 2}
   towerNotHovered: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  laserPointerPrefab: {fileID: 9139953423556229519, guid: 2fe4444f0a169c74a86f5b0d148cf994, type: 3}
+  towerSpawn: {fileID: 0}
+  hasTower: 0
+  hoveredOver: 0
+  tower: {fileID: 0}
+  layer:
+    serializedVersion: 2
+    m_Bits: 0

@@ -25,8 +25,7 @@ public class CatBase : MonoBehaviour
     [Tooltip("This sets how close the cat must get to the next WayPoint to consider itself to have arrived there. This causes it to then target the next WayPoint (or a randomly selected one if the current WayPoint has multiple next points set in the Inspector.")]
     [SerializeField] protected float _WayPointArrivedDistance = 2f;
 
-
-    protected int distraction = 0; //How distracted the cat is currently
+    [SerializeField] protected int distraction = 0; //How distracted the cat is currently
     protected bool isDistracted = false; // If the cat has been defeated or not.
     //Rigidbody rb;//The RigidBody component
     private NavMeshAgent agent;
@@ -80,11 +79,14 @@ public class CatBase : MonoBehaviour
         isDistracted = true;        
     }
     //I am intending this function to be called from either the tower or the projectile that the tower fires
-    public void DistractCat(int distractionValue)
+    public void DistractCat(int distractionValue, Tower targetingTower)
     {
         distraction += distractionValue;
+        Debug.Log(distraction);
 
-        if (distractionValue >= distractionThreshold)
+        if (distraction >= distractionThreshold)
+            Debug.Log(distraction);
+            targetingTower.targets.Remove(this.gameObject);
             KillCat();
     }
 
