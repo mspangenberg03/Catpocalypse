@@ -127,7 +127,7 @@ MonoBehaviour:
   distractValue: 1
   numberOfTargets: 0
   targets: []
-  laserPrefab: {fileID: 4261816297302079937, guid: 06c00603451d4d443b0edfe788585f9d, type: 3}
+  laserPrefab: {fileID: 5513968051566747971, guid: b91d010c08c2b284bb79cc19087d05df, type: 3}
   lasers: []
   numOfLasers: 1
   laserPointerTower: {fileID: 9139953423556229519}

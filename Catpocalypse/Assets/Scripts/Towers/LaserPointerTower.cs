@@ -51,10 +51,12 @@ public class LaserPointerTower : Tower
                         lasers[i].gameObject.GetComponent<AudioSource>().Play();
                     }
                     // Changes the laser's length and targets the cat with it
-                    lasers[i].transform.localScale = new Vector3( 1, Vector3.Distance(targets[i].transform.position, lasers[i].transform.position), 1);
-                    lasers[i].transform.LookAt(targets[i].transform);
-                    lasers[i].transform.localRotation =  new Quaternion(lasers[i].transform.localRotation.x + 45, lasers[i].transform.localRotation.y, lasers[i].transform.localRotation.z, 0);
-                    //targets[i].GetComponent<CatBase>().DistractCat(this.distractValue, this);
+                    Vector3[] linepositions = new Vector3[2];
+                    linepositions[0] = this.GetComponentInParent<TowerBase>().gameObject.transform.position;
+                    linepositions[1] = targets[i].GetComponentInParent<CatSpawner>().GetComponentInChildren<Transform>().position;
+                    lasers[i].GetComponent<LineRenderer>().SetPositions(linepositions);
+                    lasers[i].transform.LookAt(targets[i].transform, this.transform.rotation.eulerAngles);
+                    targets[i].GetComponent<CatBase>().DistractCat(this.distractValue, this);
                 }
                   
             //Deactivates any extra unused lasers

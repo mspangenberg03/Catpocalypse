@@ -30,6 +30,8 @@ public class CatBase : MonoBehaviour
     //Rigidbody rb;//The RigidBody component
     private NavMeshAgent agent;
 
+    private bool _Occupied = false; //Whether the cat can be distracted by another tower or not
+
     protected PlayerHealthManager healthManager;
 
     protected float _DistanceFromNextWayPoint = 0f;
@@ -82,12 +84,17 @@ public class CatBase : MonoBehaviour
     public void DistractCat(int distractionValue, Tower targetingTower)
     {
         distraction += distractionValue;
-        Debug.Log(distraction);
-
-        if (distraction >= distractionThreshold)
-            Debug.Log(distraction);
+        if (this.distraction >= this.distractionThreshold)
+        {
+            Debug.Log(distraction + "+" + distractionThreshold);
             targetingTower.targets.Remove(this.gameObject);
             KillCat();
+        }
+    }
+
+    public bool isCatOccupied()
+    {
+        return _Occupied;
     }
 
     protected void OnTriggerEnter(Collider other)
