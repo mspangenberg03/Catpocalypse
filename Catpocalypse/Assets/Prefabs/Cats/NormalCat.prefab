@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7496006675604943200}
   - component: {fileID: 9562073794196867}
   - component: {fileID: 7496647864260841163}
-  - component: {fileID: 6728770436289980193}
   - component: {fileID: 1396169140101980544}
   - component: {fileID: 3900370069553660581}
   - component: {fileID: 7041275438494867842}
+  - component: {fileID: 3686105432465951876}
   m_Layer: 3
   m_Name: NormalCat
   m_TagString: Cat
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8801225462822087186}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2432090755550338912, guid: c9c886208294a4f47b0c32acf79fc8f5, type: 3}
 --- !u!23 &7496647864260841163
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 51b578759686d49418f3d29bef22614e, type: 2}
+  - {fileID: 2100000, guid: 1e706102ca3507e47ae9719723ae21d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,27 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6728770436289980193
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8801225462822087186}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &1396169140101980544
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -169,7 +148,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95262d0fa6078244bad456b816c8597c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CutenessValue: 5
   distractionThreshold: 750
   damageToPlayer: 2
   _WayPointArrivedDistance: 2
   distractReward: 35
+--- !u!64 &3686105432465951876
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801225462822087186}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: c9c886208294a4f47b0c32acf79fc8f5, type: 3}

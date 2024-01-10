@@ -3921,6 +3921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57b291273e92e44f8776966d86f0432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 10
   spawner: {fileID: 1528691241}
 --- !u!114 &1172394861
 MonoBehaviour:
@@ -3934,6 +3935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c2c0b85b0a4df46b68210fdeac693d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxCuteness: 100
 --- !u!114 &1172394862
 MonoBehaviour:
   m_ObjectHideFlags: 0
