@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +7,18 @@ public class TowerSelectorUI : MonoBehaviour
 {
     [SerializeField]
     private GameObject buildTowerUI;
+
+
+    [Header("Button References")]
     [SerializeField]
-    private Button laserPointerBtn;
+    private Button laserPointerTowerBtn;
+    [SerializeField]
+    private Button scratchingPostTowerBtn;
+    [SerializeField]
+    private Button cucumberThrowerTowerBtn;
+    [SerializeField]
+    private Button stringWaverTowerBtn;
+
 
     private GameObject towerSpawner;
 
@@ -21,7 +30,7 @@ public class TowerSelectorUI : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
-        laserPointerBtn.onClick.AddListener(OnLaserPointerSelect);
+        laserPointerTowerBtn.onClick.AddListener(OnLaserPointerTowerSelect);
     }
 
     public void SetCurrentSelectedSpawn(GameObject current)
@@ -29,11 +38,25 @@ public class TowerSelectorUI : MonoBehaviour
         towerSpawner = current;
     }
 
-    public void OnLaserPointerSelect()
+    public void OnLaserPointerTowerSelect()
     {
         OnBuildSelect(0);
     }
 
+    public void OnScratchingPostTowerSelect()
+    {
+        OnBuildSelect(1);
+    }
+
+    public void OnCucumberThrowerTowerSelect()
+    {
+        OnBuildSelect(2);
+    }
+
+    public void OnStringWaverTowerSelect()
+    {
+        OnBuildSelect(3);
+    }
 
     private void OnBuildSelect(int selection)
     {
