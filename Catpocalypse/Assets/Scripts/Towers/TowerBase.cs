@@ -12,6 +12,7 @@ public class TowerBase : MonoBehaviour
     public GameObject towerDestroyerUI;
     public Material towerHovered;
     public Material towerNotHovered;
+    public Material towerSelected;
     [SerializeField]
     private GameObject towerSpawn;
     public bool hasTower;
@@ -19,6 +20,9 @@ public class TowerBase : MonoBehaviour
     public GameObject tower;
     [SerializeField]
     public LayerMask layer;
+
+    private bool IsSelected = false;
+
 
     private void Awake()
     {
@@ -30,19 +34,27 @@ public class TowerBase : MonoBehaviour
     void OnMouseEnter()
     {
        hoveredOver = true;
-       this.gameObject.GetComponent<Renderer>().material= towerHovered;
+
+        // Don't set the hover color if the tower is selected.
+        if (!IsSelected)
+            gameObject.GetComponent<Renderer>().material= towerHovered;
     }
 
     void OnMouseExit()
     {
         hoveredOver = false;
-        this.gameObject.GetComponent<Renderer>().material = towerNotHovered;
+        
+        // Don't restore normal material unless the tower is not selected.
+        if (!IsSelected)
+            gameObject.GetComponent<Renderer>().material = towerNotHovered;
     }
 
     void OnMouseUpAsButton()
     {
+        gameObject.GetComponent<Renderer>().material = towerSelected;
+        IsSelected = true;
 
-        if(enabled)
+        if (enabled)
         {
             if(hoveredOver){
                 if(!hasTower){
@@ -74,6 +86,8 @@ public class TowerBase : MonoBehaviour
 
     public void BuildTower(int towerToBuild)
     {
+        gameObject.GetComponent<Renderer>().material = towerNotHovered;
+
         switch (towerToBuild)
         {
             case 0:
@@ -101,4 +115,9 @@ public class TowerBase : MonoBehaviour
 
     }
 
+    public void Deselect()
+    {
+        IsSelected = false;
+        gameObject.GetComponent<Renderer>().material = towerNotHovered;
+    }
 }
