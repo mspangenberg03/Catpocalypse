@@ -76,12 +76,19 @@ public class TowerBase : MonoBehaviour
     {
         switch (towerToBuild)
         {
-
-            default:
-
+            case 0:
                 towerSpawn.GetComponent<TowerSpawn>().BuildTower(0); ;
                 this.hasTower = true;
                 break;
+            case 1:
+                towerSpawn.GetComponent<TowerSpawn>().BuildTower(1); ;
+                this.hasTower = true;
+                break;
+            //default:
+
+            //    towerSpawn.GetComponent<TowerSpawn>().BuildTower(0); ;
+            //    this.hasTower = true;
+            //    break;
         };
 
     }
