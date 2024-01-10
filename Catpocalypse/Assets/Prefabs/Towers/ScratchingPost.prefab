@@ -104,8 +104,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7.6070557
-  m_Center: {x: 0, y: 0, z: 0.14045334}
+  m_Radius: 5.01477
+  m_Center: {x: 0.07855368, y: 0, z: 0.14045334}
 --- !u!114 &5689062600961418666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +121,6 @@ MonoBehaviour:
   buildCost: 0
   refundAmount: 0
   range: {fileID: 0}
-  distractValue: 0
-  numberOfTargets: 0
+  distractValue: 391
+  numberOfTargets: 282
   targets: []
