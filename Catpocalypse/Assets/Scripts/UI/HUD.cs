@@ -19,6 +19,10 @@ public class HUD : MonoBehaviour
 
     [SerializeField] private Image _PlayerHealthBar;
     [SerializeField] private TextMeshProUGUI _PlayerHealthBarLabel;
+
+    [SerializeField] private Image _CutenessBar;
+    [SerializeField] private TextMeshProUGUI _CutenessBarLabel;
+
     [SerializeField] private TextMeshProUGUI _WaveNumberLabel;
     [SerializeField] private TextMeshProUGUI _PlayerMoneyLabel;
     
@@ -54,6 +58,12 @@ public class HUD : MonoBehaviour
         _Instance.PlayerHealthBarLabel.text = $"{currentHP} of {maxHP} HP";
     }
 
+    public static void UpdateCutenessDisplay(float currentCuteness, float maxCuteness)
+    {
+        _Instance.CutenessBar.fillAmount = Mathf.Clamp01(currentCuteness / maxCuteness);
+        _Instance.CutenessBarLabel.text = $"{currentCuteness} / {maxCuteness} Cuteness";
+    }
+
     public static void UpdateWaveNumberDisplay(int waveNumber)
     {
         _Instance.WaveNumberLabel.text = $"Wave {waveNumber}";
@@ -68,6 +78,11 @@ public class HUD : MonoBehaviour
 
     public Image PlayerHealthBar { get { return _PlayerHealthBar; } }
     public TextMeshProUGUI PlayerHealthBarLabel { get { return _PlayerHealthBarLabel; } }
+
+    public Image CutenessBar { get { return _CutenessBar; } }
+    public TextMeshProUGUI CutenessBarLabel { get { return _CutenessBarLabel; } }
+
+
     public TextMeshProUGUI WaveNumberLabel { get { return _WaveNumberLabel; } }
     public TextMeshProUGUI PlayerMoneyLabel { get { return _PlayerMoneyLabel; } }
 

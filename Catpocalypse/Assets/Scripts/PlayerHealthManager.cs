@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    private float maxHealth = 10f;
-    private float health = 10f;
+    [SerializeField] private float maxHealth = 10f;
+
+    private float health;
     [SerializeField] private CatSpawner spawner;
     private bool playerOutOfHealth = false;
     
     private void Start()
     {
-        
+        health = maxHealth;
         HUD.UpdatePlayerHealthDisplay(health, maxHealth);
     }
     private void Update()

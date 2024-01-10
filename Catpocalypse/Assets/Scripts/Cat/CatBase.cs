@@ -159,4 +159,7 @@ public class CatBase : MonoBehaviour
                agent.pathStatus == NavMeshPathStatus.PathComplete;
     }
 
+
+
+    public int Cuteness { get { return _CutenessValue; } }
 }

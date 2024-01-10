@@ -15,6 +15,8 @@ public class CatSpawner : MonoBehaviour
     [SerializeField] private GameObject lightCat;
     [SerializeField] private Button startWaveButton;
     [SerializeField] private PlayerHealthManager healthManager;
+    [SerializeField] private PlayerCutenessManager cutenessManager;
+
     private List<GameObject> catsToSpawn;
 
     private int waveCount = 0;
@@ -59,13 +61,18 @@ public class CatSpawner : MonoBehaviour
         StopCoroutine(Spawner());
     }
     IEnumerator Spawner()
-    {
-        
+    {        
         for (int i = 0; i < catsInWave; i++)
         {
             int index = Random.Range(0,3);
-            GameObject cat = catsToSpawn[index];
-            Instantiate(cat, spawnPoint1);
+            GameObject catPrefab = catsToSpawn[index];
+            
+            GameObject cat = Instantiate(catPrefab, spawnPoint1);
+            
+            CatBase catComponent = cat.GetComponent<CatBase>();
+            cutenessManager.AddCuteness(catComponent.Cuteness);
+
+
             yield return new WaitForSeconds(2f);
         }
         
