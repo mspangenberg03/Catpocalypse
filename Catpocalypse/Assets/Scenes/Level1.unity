@@ -1089,7 +1089,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785982842}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
@@ -1716,7 +1716,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785982842}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
@@ -4463,7 +4463,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785982842}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
@@ -8421,7 +8421,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785982842}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
@@ -8850,7 +8850,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785982842}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
@@ -9580,7 +9580,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785982842}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
@@ -11624,7 +11624,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785982842}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
@@ -12394,7 +12394,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785982842}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
@@ -19358,7 +19358,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1785982842}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
