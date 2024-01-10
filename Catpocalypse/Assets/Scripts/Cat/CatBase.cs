@@ -16,6 +16,10 @@ public class CatBase : MonoBehaviour
     public static event EventHandler OnCatDied;
 
 
+    [Tooltip("The cuteness value is how much this type of cat increases the cuteness meter.")]
+    [Min(0)]
+    [SerializeField] protected int _CutenessValue = 5;
+
     [Min(0)]
     [SerializeField] protected int distractionThreshold = 50; //The amount of distraction it takes to fully distract the cat
     [Min(0f)]
