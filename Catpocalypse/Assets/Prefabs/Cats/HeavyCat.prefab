@@ -169,7 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6466957bf6151c449aa8b6ccbb5ec4ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CutenessValue: 3
   distractionThreshold: 1000
   damageToPlayer: 3
   _WayPointArrivedDistance: 2
-  distraction: 0
+  distractReward: 50
