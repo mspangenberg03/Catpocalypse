@@ -121,6 +121,6 @@ MonoBehaviour:
   buildCost: 0
   refundAmount: 0
   range: {fileID: 0}
-  distractValue: 391
+  distractValue: 10
   numberOfTargets: 282
   targets: []
