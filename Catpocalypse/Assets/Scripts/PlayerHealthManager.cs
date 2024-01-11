@@ -19,13 +19,15 @@ public class PlayerHealthManager : MonoBehaviour
     {
         if(health <= 0 && playerOutOfHealth == false)
         {
-            spawner.StopSpawner();
+            WaveManager.Instance.StopAllSpawning();
             GameObject[] cats = GameObject.FindGameObjectsWithTag("Cat");
             foreach (GameObject cat in cats)
             {
                 Destroy(cat);
             }
             playerOutOfHealth = true;
+            
+            FindObjectOfType<DefeatScreen>()?.Show();
         }
     }
     public void TakeDamage(float damage)
@@ -38,4 +40,7 @@ public class PlayerHealthManager : MonoBehaviour
     {
         return playerOutOfHealth;
     }
+
+
+    public bool IsPlayerDead { get { return playerOutOfHealth; } }
 }

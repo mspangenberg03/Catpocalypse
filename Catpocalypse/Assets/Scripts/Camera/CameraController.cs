@@ -17,14 +17,17 @@ public class CameraController : MonoBehaviour
     [Tooltip("The movement speed of the camera in meters per second.")]
     [SerializeField] private float _CameraMoveSpeed = 5f;
 
-    [Tooltip("This property specifies which mouse button is used to drag the camera around.")]
-    [SerializeField] MouseButtons _DragMovementButton = MouseButtons.Right;
-
     // See the comments in the InitCamera() function below for more on this object.
     [SerializeField] private Transform _CameraTargetObject;
 
     [Tooltip("This specifies the max distance the camera can be from the origin on each axis. It prevents it from moving more than the specified distance from (0,0,0) on any axis.")]
-    [SerializeField] Vector3 _CameraMoveLimits = new Vector3(20, 20, 20);
+    [SerializeField] private Vector3 _CameraMoveLimits = new Vector3(20, 20, 20);
+
+    [Tooltip("This property specifies which mouse button is used to drag the camera around.")]
+    [SerializeField] private MouseButtons _DragMovementButton = MouseButtons.Right;
+
+    [Tooltip("This property specifies whether or not the mouse move amount is inverted before being used to move the camera.")]
+    [SerializeField] private bool _InvertMouseInputForDrags = true;
 
 
     [Header("Zoom Settings")]
@@ -81,7 +84,7 @@ public class CameraController : MonoBehaviour
             // Get the mouse move amount.
             Vector2 delta = Mouse.current.delta.value;
 
-            MoveCamera(delta);
+            MoveCamera(_InvertMouseInputForDrags ? -delta : delta);
         }
     }
 
