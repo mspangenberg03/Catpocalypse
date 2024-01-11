@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: c9c886208294a4f47b0c32acf79fc8f5
+guid: 74c2e7c7c7285a045bcb072793eda107
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Feet
+    second: {fileID: 2100000, guid: 602c981fcb4275c40a8768d001a809be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hat color 2.001
+    second: {fileID: 2100000, guid: bba16a1cf71aea543b9868bb9c1d70fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face
+    second: {fileID: 2100000, guid: b207877c924b9a64dbed2942ee17ba11, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

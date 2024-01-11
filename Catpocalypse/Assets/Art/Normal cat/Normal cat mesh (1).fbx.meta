@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 0e9b8227bce9eca4eb56e3f0f1af2a65
+guid: d7dc187c064e6c7489ad1f4b4c6d6e91
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Feet.001
+    second: {fileID: 2100000, guid: 602c981fcb4275c40a8768d001a809be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face.001
+    second: {fileID: 2100000, guid: 5bb6b4d08088e0b469949b2abeaf9639, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
