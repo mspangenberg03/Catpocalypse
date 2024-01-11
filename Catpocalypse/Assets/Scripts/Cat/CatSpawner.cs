@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+using Random = UnityEngine.Random;
+
 
 public class CatSpawner : MonoBehaviour
 {
@@ -21,6 +25,7 @@ public class CatSpawner : MonoBehaviour
 
     private int waveCount = 0;
     private int catsInWave = 5;
+    private int catsRemaining;
 
 
     // Start is called before the first frame update
@@ -43,6 +48,8 @@ public class CatSpawner : MonoBehaviour
     }
     public void StartNextWave()
     {
+        HUD.ShowWaveDisplay();
+
         waveCount++;
         if(waveCount == 1)
         {
@@ -52,16 +59,20 @@ public class CatSpawner : MonoBehaviour
         {
             catsInWave += 2;
             StartCoroutine(Spawner());
-            HUD.UpdateWaveNumberDisplay(waveCount);
         }
         startWaveButton.enabled = false;
     }
     public void StopSpawner()
     {
         StopCoroutine(Spawner());
+        HUD.HideWaveDisplay();
     }
     IEnumerator Spawner()
-    {        
+    {
+        CatBase.OnCatDied += OnCatDied;
+
+        catsRemaining = catsInWave;
+        
         for (int i = 0; i < catsInWave; i++)
         {
             int index = Random.Range(0,3);
@@ -70,12 +81,19 @@ public class CatSpawner : MonoBehaviour
             GameObject cat = Instantiate(catPrefab, spawnPoint1);
             
             CatBase catComponent = cat.GetComponent<CatBase>();
-            cutenessManager.AddCuteness(catComponent.Cuteness);
-
+            cutenessManager.AddCuteness(catComponent.Cuteness);            
 
             yield return new WaitForSeconds(2f);
         }
         
+    }
 
+    private void OnCatDied(object sender, EventArgs e)
+    {
+        catsRemaining--;
+        HUD.UpdateWaveInfoDisplay(catsInWave, catsRemaining);
+
+        if (catsRemaining < 1)
+            HUD.HideWaveDisplay();
     }
 }

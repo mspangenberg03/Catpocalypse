@@ -17,13 +17,20 @@ public class HUD : MonoBehaviour
     public static HUD _Instance;
 
 
+    [Header("Health Bar Refs")]
     [SerializeField] private Image _PlayerHealthBar;
     [SerializeField] private TextMeshProUGUI _PlayerHealthBarLabel;
 
+    [Header("Cuteness Bar Refs")]
     [SerializeField] private Image _CutenessBar;
     [SerializeField] private TextMeshProUGUI _CutenessBarLabel;
 
+    [Header("Wave Info Display Refs")]
+    [SerializeField] private Button _StartWaveButton;
     [SerializeField] private TextMeshProUGUI _WaveNumberLabel;
+    [SerializeField] private TextMeshProUGUI _CatsRemainingLabel;
+
+    [Header("Player Money Display Refs")]
     [SerializeField] private TextMeshProUGUI _PlayerMoneyLabel;
     
 
@@ -64,9 +71,10 @@ public class HUD : MonoBehaviour
         _Instance.CutenessBarLabel.text = $"{currentCuteness} / {maxCuteness} Cuteness";
     }
 
-    public static void UpdateWaveNumberDisplay(int waveNumber)
+    public static void UpdateWaveInfoDisplay(int waveNumber, int catsRemaining)
     {
         _Instance.WaveNumberLabel.text = $"Wave {waveNumber}";
+        _Instance.CatsRemainingLabel.text = $"Remaining Cats: {catsRemaining}";
     }
 
     public static void UpdatePlayerMoneyDisplay(float playerMoney)
@@ -74,6 +82,27 @@ public class HUD : MonoBehaviour
         _Instance.PlayerMoneyLabel.text = $"${playerMoney:N2}";
     }
 
+    public static void HideWaveDisplay()
+    {
+        _Instance.WaveNumberLabel.gameObject.SetActive(false);
+        _Instance.CatsRemainingLabel.gameObject.SetActive(false);
+        
+        // The button state should always be the opposite of the labels' state.
+        _Instance.StartWaveButton.gameObject.SetActive(true);
+    }
+
+    public static void ShowWaveDisplay()
+    {
+        // Clear the text labels, so the player won't potentially see an old value before it updates.
+        _Instance.WaveNumberLabel.text = "";
+        _Instance.CatsRemainingLabel.text = "";
+
+        _Instance.WaveNumberLabel.gameObject.SetActive(true);
+        _Instance.CatsRemainingLabel.gameObject.SetActive(true);
+
+        // The button state should always be the opposite of the labels' state.
+        _Instance._StartWaveButton.gameObject.SetActive(false);
+    }
 
 
     public Image PlayerHealthBar { get { return _PlayerHealthBar; } }
@@ -83,7 +112,10 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI CutenessBarLabel { get { return _CutenessBarLabel; } }
 
 
+    public Button StartWaveButton { get { return _StartWaveButton; } }
     public TextMeshProUGUI WaveNumberLabel { get { return _WaveNumberLabel; } }
+    public TextMeshProUGUI CatsRemainingLabel { get { return _CatsRemainingLabel; } }
+
     public TextMeshProUGUI PlayerMoneyLabel { get { return _PlayerMoneyLabel; } }
 
 }

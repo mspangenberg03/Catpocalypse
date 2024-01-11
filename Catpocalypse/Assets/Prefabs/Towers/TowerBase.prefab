@@ -123,6 +123,7 @@ MonoBehaviour:
   towerDestroyerUI: {fileID: 0}
   towerHovered: {fileID: 2100000, guid: 9e5d08001e24f7c4d9aa051980dbf44a, type: 2}
   towerNotHovered: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  towerSelected: {fileID: 2100000, guid: d13ae1e4a36dc29439d97e1e419b3fc7, type: 2}
   towerSpawn: {fileID: 0}
   hasTower: 0
   hoveredOver: 0
