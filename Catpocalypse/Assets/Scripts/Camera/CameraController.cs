@@ -1,23 +1,46 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 
 public class CameraController : MonoBehaviour
 {
+    public enum MouseButtons { Left, Middle, Right };
+
+
+    [Header("Camera Movement Settings")]
     [Tooltip("The movement speed of the camera in meters per second.")]
-    [SerializeField] float _CameraMoveSpeed = 5f;
+    [SerializeField] private float _CameraMoveSpeed = 5f;
+
+    [Tooltip("This property specifies which mouse button is used to drag the camera around.")]
+    [SerializeField] MouseButtons _DragMovementButton = MouseButtons.Right;
 
     // See the comments in the InitCamera() function below for more on this object.
-    [SerializeField] Transform _CameraTargetObject;
+    [SerializeField] private Transform _CameraTargetObject;
 
     [Tooltip("This specifies the max distance the camera can be from the origin on each axis. It prevents it from moving more than the specified distance from (0,0,0) on any axis.")]
     [SerializeField] Vector3 _CameraMoveLimits = new Vector3(20, 20, 20);
 
 
+    [Header("Zoom Settings")]
+    [Tooltip("The minimum zoom distance (in units/meters).")]
+    [SerializeField] private float _MinZoomDistance = 8f;
+    [Tooltip("The maximum zoom distance (in units/meters).")]
+    [SerializeField] private float _MaxZoomeDistance = 64f;
+    [Tooltip("How much (in units/meters) that the camera moves forward/back per mouse scroll wheel movement.")]
+    [SerializeField] private float _ZoomRate = 2f;
+    [Tooltip("Whether or not to invert the mouse scroll wheel input.")]
+    [SerializeField] private bool _InvertScrollwheelInput = true;
+
+
     private CinemachineVirtualCamera _VirtualCamera;
+    private float _ZoomDistance;
+    private float _DefaultZoomDistance;
 
 
 
@@ -38,15 +61,37 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Get the camera pan player input values as normalized values in the range of 0-1.
-        // We will use this along with the camera speed to calculate how much to move the target object.
-        Vector2 cameraMoveInput = PlayerInputManager.PanCamera;
+        // If the user moved the scroll wheel, then adjust zoom level.
+        if (Mouse.current.scroll.value != Vector2.zero)
+            AdjustZoomLevel(Mouse.current.scroll.value);
 
+        if (PlayerInputManager.PanCamera != Vector2.zero)
+            MoveCamera(PlayerInputManager.PanCamera);
+
+        HandleMouseDrags();
+    }
+
+
+    private void HandleMouseDrags()
+    {
+        if ((_DragMovementButton == MouseButtons.Left && Mouse.current.leftButton.isPressed) ||
+            (_DragMovementButton == MouseButtons.Middle && Mouse.current.middleButton.isPressed) ||
+            (_DragMovementButton == MouseButtons.Right && Mouse.current.rightButton.isPressed))
+        {
+            // Get the mouse move amount.
+            Vector2 delta = Mouse.current.delta.value;
+
+            MoveCamera(delta);
+        }
+    }
+
+    private void MoveCamera(Vector2 moveInput)
+    {
         // Calculate the move distance on both the X and Z axis. We just set Y to 0 so the camera
         // stays at the height it is at.
-        Vector3 moveDistance = new Vector3(cameraMoveInput.x * _CameraMoveSpeed, 0f, cameraMoveInput.y * _CameraMoveSpeed);
+        Vector3 moveDistance = new Vector3(moveInput.x * _CameraMoveSpeed, 0f, moveInput.y * _CameraMoveSpeed);
 
-        // We also multiply by Time.deltaTime so that the object will move the correct amount
+        // We also multiply by Time.deltaTime so that the camera will move the correct amount
         // regardless of the current frame rate.
         moveDistance *= Time.deltaTime;
 
@@ -66,6 +111,10 @@ public class CameraController : MonoBehaviour
 
         _VirtualCamera.LookAt = _CameraTargetObject;
         _VirtualCamera.Follow = _CameraTargetObject;
+
+
+        _ZoomDistance = Vector3.Distance(Vector3.zero, GetCameraOffset());
+        _DefaultZoomDistance = _ZoomDistance;
     }
 
     /// <summary>
@@ -80,4 +129,31 @@ public class CameraController : MonoBehaviour
                            Mathf.Clamp(position.y, -_CameraMoveLimits.y, _CameraMoveLimits.y),
                            Mathf.Clamp(position.z, -_CameraMoveLimits.z, _CameraMoveLimits.z));
     }
+
+    private Vector3 GetCameraOffset()
+    {
+        return _VirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
+    }
+
+    private void AdjustZoomLevel(Vector2 mouseScrollValue)
+    {
+        if (_InvertScrollwheelInput)
+            mouseScrollValue = -mouseScrollValue;
+
+
+        // Calculate change in camera zoom (distance from target).
+        float newDistance = _ZoomDistance + ((mouseScrollValue.y / 120) * _ZoomRate);
+        newDistance = Mathf.Clamp(newDistance, _MinZoomDistance, _MaxZoomeDistance);
+
+        // Calculate the scale needed to change the zoom to the appropriate level (it's just the new zoom distance calculated as a percentage of the current zoom distance).
+        float scale = newDistance / _ZoomDistance;
+
+
+        // Prevent the zoom distance from going outside the range specified in the inspector.
+        _ZoomDistance = newDistance;
+
+
+        _VirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset *= scale;
+    }
+
 }

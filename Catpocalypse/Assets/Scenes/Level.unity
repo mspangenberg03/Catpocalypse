@@ -4133,9 +4133,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085ee927fee6f59469b77849b72897fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _CameraMoveSpeed: 5
+  _CameraMoveSpeed: 12
+  _DragMovementButton: 2
   _CameraTargetObject: {fileID: 1222495213}
   _CameraMoveLimits: {x: 20, y: 20, z: 20}
+  _MinZoomDistance: 8
+  _MaxZoomeDistance: 64
+  _ZoomRate: 2
+  _InvertScrollwheelInput: 1
 --- !u!114 &1157299105
 MonoBehaviour:
   m_ObjectHideFlags: 0
