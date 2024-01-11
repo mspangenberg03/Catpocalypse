@@ -21,6 +21,8 @@ public class TowerSpawn : MonoBehaviour
     // Update is called once per frame
     public void BuildTower(int towerType)
     {
+        transform.parent.GetComponent<TowerBase>().Deselect();
+
         switch(towerType)
         {
             case 0:

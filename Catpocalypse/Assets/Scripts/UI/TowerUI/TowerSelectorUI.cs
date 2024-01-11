@@ -18,6 +18,10 @@ public class TowerSelectorUI : MonoBehaviour
     private Button cucumberThrowerTowerBtn;
     [SerializeField]
     private Button stringWaverTowerBtn;
+    [SerializeField]
+    private Button yarnBallTowerBtn;
+    [SerializeField]
+    private Button closeBtn;
 
 
     private GameObject towerSpawner;
@@ -28,13 +32,16 @@ public class TowerSelectorUI : MonoBehaviour
     {
         if(Time.time < 0.5)
         {
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
         laserPointerTowerBtn.onClick.AddListener(OnLaserPointerTowerSelect);
     }
 
     public void SetCurrentSelectedSpawn(GameObject current)
     {
+        // Deselect previous tower.
+
+
         towerSpawner = current;
     }
 
@@ -58,9 +65,22 @@ public class TowerSelectorUI : MonoBehaviour
         OnBuildSelect(3);
     }
 
+    public void OnYarnBallTowerSelect()
+    {
+        OnBuildSelect(4);
+    }
+
+    public void OnClose()
+    {
+        towerSpawner.transform.parent.GetComponent<TowerBase>().Deselect();
+
+        towerSpawner = null;
+        gameObject.SetActive(false);
+    }
+
     private void OnBuildSelect(int selection)
     {
         towerSpawner.GetComponent<TowerSpawn>().BuildTower(selection);
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
