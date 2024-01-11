@@ -6794,8 +6794,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint1: {fileID: 597612419}
-  normalCat: {fileID: 8801225462822087186, guid: 81bdec16b3dc8ef49b5c310d0ff23050, type: 3}
-  heavyCat: {fileID: 8801225462822087186, guid: ed8838a352deda94682085518b227f89, type: 3}
+  normalCat: {fileID: 1589074876568128993, guid: 572ce69c6cf5e804a91d52f0edc3c4c7, type: 3}
+  heavyCat: {fileID: 5758637314826502625, guid: b44e41471936f3248b4cdd4778258f38, type: 3}
   lightCat: {fileID: 2874771900686890139, guid: 9929934472c5eed4f8dfc964b60de407, type: 3}
   healthManager: {fileID: 1172394860}
   cutenessManager: {fileID: 1172394861}
