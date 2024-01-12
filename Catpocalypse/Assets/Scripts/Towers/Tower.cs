@@ -54,7 +54,7 @@ public class Tower : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
-        if (collider.tag.Equals("Cat"))
+        if (collider.CompareTag("Cat"))
         {
             targets.Remove(collider.gameObject);
             if(targets.Count > 0) {
