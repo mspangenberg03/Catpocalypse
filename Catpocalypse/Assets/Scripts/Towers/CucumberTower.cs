@@ -11,7 +11,7 @@ public class CucumberTower : Tower
     [SerializeField] GameObject cucumber;
     [SerializeField]
     private Transform spawn;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -47,12 +47,12 @@ public class CucumberTower : Tower
     {
         
         GameObject target = SelectTarget();
-        
+        //transform.LookAt(target.transform.position - transform.position); //= Quaternion.LookRotation(target.transform.position - transform.position);
         GameObject proj = Instantiate(cucumber, spawn);
-        Debug.Log(proj.transform.position);
-        proj.transform.SetParent(gameObject.transform,true);
         
-        proj.GetComponent<Cucumber>().Fire(target);
+        proj.transform.SetParent(gameObject.transform,true);
+        proj.gameObject.GetComponent<Cucumber>().target = target;
+        
 
         canFire = false;
         StartCoroutine(Reload());

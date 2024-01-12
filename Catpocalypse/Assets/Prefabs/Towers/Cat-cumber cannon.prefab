@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4897315555357107167}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.9, z: 0}
+  m_LocalPosition: {x: 0, y: 1.29, z: 3.46}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91,6 +91,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7504176792984377337, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7504176792984377337, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.34
+      objectReference: {fileID: 0}
     - target: {fileID: -6733177361254619370, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -107,6 +115,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 260
       objectReference: {fileID: 0}
+    - target: {fileID: -3416400609385885712, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -516098083770646512, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -119,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3316992658331686828, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3878553785276779773, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Name
       value: Cucumber
@@ -126,6 +142,10 @@ PrefabInstance:
     - target: {fileID: 3878553785276779773, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083501151425157549, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7396654156298469847, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Layer
@@ -208,7 +228,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 25
+  m_Radius: 57
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2115721319496029504
 MeshRenderer:

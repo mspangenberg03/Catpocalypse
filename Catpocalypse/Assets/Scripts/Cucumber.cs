@@ -6,16 +6,34 @@ public class Cucumber : MonoBehaviour
 {
     List<GameObject> cats = new List<GameObject>();
     Rigidbody rb;
-    float moveSpeed = .1f;
+    float moveSpeed = 10f;
+    public GameObject target;
+    private bool hasBeenCalced = false;
+    Vector3 direction;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        
     }
     private void Update()
     {
-        //Debug.Log(gameObject.transform.position);
+        if(target != null)
+        {
+            if (hasBeenCalced == false)
+            {
+                direction = (target.transform.position - gameObject.transform.position).normalized;
+                hasBeenCalced=true;
+            }
+            transform.Translate(direction*moveSpeed*Time.deltaTime);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Cat")
@@ -33,7 +51,7 @@ public class Cucumber : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Cat")
         {
             foreach(GameObject cat in cats)
             {
@@ -47,11 +65,5 @@ public class Cucumber : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void Fire(GameObject target)
-    {
-        Transform targetPos = target.transform;
-        Vector3 direction = (gameObject.transform.position - targetPos.position).normalized;
-        transform.Translate(direction * moveSpeed * Time.deltaTime);
-        
-    }
+    
 }
