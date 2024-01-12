@@ -8,24 +8,15 @@ public class Cucumber : MonoBehaviour
     
     float moveSpeed = 10f;
     public GameObject target;
-    private bool hasBeenCalced = false;
-    Vector3 direction;
+   
 
-    private void Start()
-    {
-        //rb = GetComponent<Rigidbody>();
-        
-    }
+    
     private void Update()
     {
         if(target != null)
         {
-            if (hasBeenCalced == false)
-            {
-                direction = (target.transform.position - gameObject.transform.position).normalized;
-                hasBeenCalced=true;
-            }
-            transform.Translate(direction*moveSpeed*Time.deltaTime);
+            
+            transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
             float xDist = Mathf.Pow((transform.position.x - target.transform.position.x), 2);
             float yDist = Mathf.Pow((transform.position.y - target.transform.position.y), 2);
             float distance = Mathf.Sqrt(xDist + yDist);

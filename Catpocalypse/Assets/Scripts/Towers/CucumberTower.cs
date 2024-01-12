@@ -47,7 +47,7 @@ public class CucumberTower : Tower
     {
         
         GameObject target = SelectTarget();
-        //transform.LookAt(target.transform.position); //= Quaternion.LookRotation(target.transform.position - transform.position);
+        transform.LookAt(target.transform.position); //= Quaternion.LookRotation(target.transform.position - transform.position);
         GameObject proj = Instantiate(cucumber, spawn);
         
         proj.transform.SetParent(gameObject.transform,true);
