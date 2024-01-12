@@ -4988,11 +4988,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085ee927fee6f59469b77849b72897fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CameraMouseDragMoveSpeed: 8
   _CameraMoveSpeed: 12
-  _DragMovementButton: 2
   _CameraTargetObject: {fileID: 1222495213}
   _CameraMoveLimits: {x: 20, y: 20, z: 20}
-  _MinZoomDistance: 8
+  _DragMovementButton: 2
+  _InvertMouseInputForDrags: 1
+  _CameraStartTarget: {fileID: 0}
+  _MinZoomDistance: 4
   _MaxZoomeDistance: 64
   _ZoomRate: 2
   _InvertScrollwheelInput: 1
@@ -5812,7 +5815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208426c70451e414c938e16f1d7aa683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWaveButton: {fileID: 1908564806}
+  _TotalWavesInLevel: 5
 --- !u!4 &1241258564
 Transform:
   m_ObjectHideFlags: 0
@@ -6794,10 +6797,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint1: {fileID: 597612419}
+  _CatsInFirstWave: 5
   normalCat: {fileID: 1589074876568128993, guid: 572ce69c6cf5e804a91d52f0edc3c4c7, type: 3}
   heavyCat: {fileID: 5758637314826502625, guid: b44e41471936f3248b4cdd4778258f38, type: 3}
-  lightCat: {fileID: 2874771900686890139, guid: 9929934472c5eed4f8dfc964b60de407, type: 3}
-  healthManager: {fileID: 1172394860}
+  lightCat: {fileID: 47135786943904743, guid: 6c70a668de344bd4a943e8a455565a8f, type: 3}
   cutenessManager: {fileID: 1172394861}
 --- !u!4 &1528691242
 Transform:

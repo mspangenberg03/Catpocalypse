@@ -257,6 +257,8 @@ MonoBehaviour:
   damageToPlayer: 3
   _WayPointArrivedDistance: 2
   distractReward: 50
+  _DistractednessMeterHeightAboveCat: 8
+  _DistractednessMeterPrefab: {fileID: 3512654570813597946, guid: e633f4d5486c0f542b4af3b4ecb326ae, type: 3}
 --- !u!64 &7767156934386349427
 MeshCollider:
   m_ObjectHideFlags: 0

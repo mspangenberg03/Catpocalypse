@@ -84,6 +84,10 @@ public class HUD : MonoBehaviour
 
     public static void HideWaveDisplay()
     {
+        if (_Instance == null)
+            return;
+
+
         _Instance.WaveNumberLabel.gameObject.SetActive(false);
         _Instance.CatsRemainingLabel.gameObject.SetActive(false);
         
@@ -93,6 +97,10 @@ public class HUD : MonoBehaviour
 
     public static void ShowWaveDisplay()
     {
+        if (_Instance == null)
+            return;
+
+
         // Clear the text labels, so the player won't potentially see an old value before it updates.
         _Instance.WaveNumberLabel.text = "";
         _Instance.CatsRemainingLabel.text = "";

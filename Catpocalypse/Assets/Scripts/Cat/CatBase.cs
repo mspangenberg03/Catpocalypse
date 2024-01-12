@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using TMPro;
 
 // This fixes the ambiguity between System.Random and UnityEngine.Random by
 // telling it to use the Unity one.
@@ -12,6 +14,10 @@ using Random = UnityEngine.Random;
 
 public class CatBase : MonoBehaviour
 {
+    public static bool ShowDistractednessBar = true;
+
+
+
     // This event is static so we don't need to subscribe the money manager to every cat instance's OnCatDied event.
     public static event EventHandler OnCatDied;
 
@@ -31,6 +37,12 @@ public class CatBase : MonoBehaviour
 
     [SerializeField] protected int distractReward = 50;
 
+    [Header("Distractedness Meter")]
+    [SerializeField] protected float _DistractednessMeterHeightAboveCat = 2f;
+    [SerializeField] protected GameObject _DistractednessMeterPrefab;
+
+
+
     protected int distraction = 0; //How distracted the cat is currently
     protected bool isDistracted = false; // If the cat has been defeated or not.
     //Rigidbody rb;//The RigidBody component
@@ -41,9 +53,16 @@ public class CatBase : MonoBehaviour
     protected float _DistanceFromNextWayPoint = 0f;
     protected WayPoint _NextWayPoint;
 
+    protected GameObject _DistractednessMeterGO;
+    protected Image _DistractednessMeterBarImage;
+    protected TextMeshPro _DistractednessMeterLabel;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        InitDistractednessMeter();
+
         agent = GetComponent<NavMeshAgent>();
         healthManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerHealthManager>();
 
@@ -78,7 +97,31 @@ public class CatBase : MonoBehaviour
         {
             _DistanceFromNextWayPoint = 0f;
         }
+
+
+        _DistractednessMeterGO.SetActive(ShowDistractednessBar);
     }
+
+    private void InitDistractednessMeter()
+    {
+        Transform distractednessMeter = Instantiate(_DistractednessMeterPrefab).transform;
+        _DistractednessMeterGO = distractednessMeter.gameObject;
+
+        distractednessMeter.SetParent(transform, true); // I'm parenting it this way rather than using the Instantiate() function above, because I need it to not inherit scale from the cat.
+        distractednessMeter.localPosition = new Vector3(0, _DistractednessMeterHeightAboveCat, 0);
+
+        _DistractednessMeterBarImage = distractednessMeter.Find("DistractednessBar").GetComponent<Image>();
+        _DistractednessMeterLabel = distractednessMeter.Find("DistractednessLabel").GetComponent<TextMeshPro>();
+
+        UpdateDistractednessMeter();
+    }
+
+    private void UpdateDistractednessMeter()
+    {        
+        _DistractednessMeterBarImage.fillAmount = (float) distraction / distractionThreshold;
+        _DistractednessMeterLabel.text = $"Distractedness: {distraction} of {distractionThreshold}";
+    }
+
     protected void Distracted()
     {
         isDistracted = true;
@@ -87,9 +130,11 @@ public class CatBase : MonoBehaviour
     public void DistractCat(int distractionValue, Tower targetingTower)
     {
         distraction += distractionValue;
+        UpdateDistractednessMeter();
+
         if (this.distraction >= this.distractionThreshold)
         {
-            targetingTower.targets.Remove(this.gameObject);
+            targetingTower.targets.Remove(this.gameObject);           
             KillCat();
         }
     }
@@ -108,7 +153,12 @@ public class CatBase : MonoBehaviour
     {
         // Fire the OnCatDied event.
         OnCatDied?.Invoke(this, EventArgs.Empty);
-        
+
+        // Destroy the cat's distractedness meter.
+        // NOTE: You have to get the gameObject. I ended at parent originally, and it gave me a wierd error that it couldn't remove RectTransform when it tried to destroy the meter.
+        Destroy(_DistractednessMeterBarImage.transform.parent.gameObject);
+
+        // Destroy the cat.
         Destroy(gameObject);
     }
 

@@ -14,8 +14,11 @@ public class CameraController : MonoBehaviour
 
 
     [Header("Camera Movement Settings")]
-    [Tooltip("The movement speed of the camera in meters per second.")]
-    [SerializeField] private float _CameraMoveSpeed = 5f;
+    [Tooltip("The movement speed of the camera when you click and drag.")]
+    [SerializeField] private float _CameraMouseDragMoveSpeed = 8f;
+
+    [Tooltip("The movement speed of the camera in meters per second when you pan using WASD, arrowkeys, or left stick on a gamepad.")]
+    [SerializeField] private float _CameraMoveSpeed = 10f;
 
     // See the comments in the InitCamera() function below for more on this object.
     [SerializeField] private Transform _CameraTargetObject;
@@ -29,10 +32,13 @@ public class CameraController : MonoBehaviour
     [Tooltip("This property specifies whether or not the mouse move amount is inverted before being used to move the camera.")]
     [SerializeField] private bool _InvertMouseInputForDrags = true;
 
+    [Tooltip("This specifies the object the camera will be focused on at the start of the level. If it is null, then it will start focused on (0,0,0).")]
+    [SerializeField] private GameObject _CameraStartTarget;
+
 
     [Header("Zoom Settings")]
     [Tooltip("The minimum zoom distance (in units/meters).")]
-    [SerializeField] private float _MinZoomDistance = 8f;
+    [SerializeField] private float _MinZoomDistance = 4f;
     [Tooltip("The maximum zoom distance (in units/meters).")]
     [SerializeField] private float _MaxZoomeDistance = 64f;
     [Tooltip("How much (in units/meters) that the camera moves forward/back per mouse scroll wheel movement.")]
@@ -52,6 +58,10 @@ public class CameraController : MonoBehaviour
         _CameraTargetObject.gameObject.SetActive(true);
         _VirtualCamera = GetComponent<CinemachineVirtualCamera>();
 
+        if (_CameraStartTarget != null)
+            _CameraTargetObject.transform.position = _CameraStartTarget.transform.position;
+
+
         InitCamera();
     }
 
@@ -69,7 +79,7 @@ public class CameraController : MonoBehaviour
             AdjustZoomLevel(Mouse.current.scroll.value);
 
         if (PlayerInputManager.PanCamera != Vector2.zero)
-            MoveCamera(PlayerInputManager.PanCamera);
+            MoveCamera(PlayerInputManager.PanCamera * _CameraMoveSpeed);
 
         HandleMouseDrags();
     }
@@ -84,7 +94,7 @@ public class CameraController : MonoBehaviour
             // Get the mouse move amount.
             Vector2 delta = Mouse.current.delta.value;
 
-            MoveCamera(_InvertMouseInputForDrags ? -delta : delta);
+            MoveCamera((_InvertMouseInputForDrags ? -delta : delta) * _CameraMouseDragMoveSpeed);
         }
     }
 
@@ -92,7 +102,7 @@ public class CameraController : MonoBehaviour
     {
         // Calculate the move distance on both the X and Z axis. We just set Y to 0 so the camera
         // stays at the height it is at.
-        Vector3 moveDistance = new Vector3(moveInput.x * _CameraMoveSpeed, 0f, moveInput.y * _CameraMoveSpeed);
+        Vector3 moveDistance = new Vector3(moveInput.x, 0f, moveInput.y);
 
         // We also multiply by Time.deltaTime so that the camera will move the correct amount
         // regardless of the current frame rate.
@@ -159,4 +169,5 @@ public class CameraController : MonoBehaviour
         _VirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset *= scale;
     }
 
+   
 }
