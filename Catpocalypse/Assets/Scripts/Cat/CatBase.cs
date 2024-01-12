@@ -57,10 +57,14 @@ public class CatBase : MonoBehaviour
     protected Image _DistractednessMeterBarImage;
     protected TextMeshPro _DistractednessMeterLabel;
 
+    public List<AudioClip> sounds = new List<AudioClip>();
+    private AudioSource audio;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         InitDistractednessMeter();
 
         agent = GetComponent<NavMeshAgent>();
@@ -153,7 +157,9 @@ public class CatBase : MonoBehaviour
     {
         // Fire the OnCatDied event.
         OnCatDied?.Invoke(this, EventArgs.Empty);
-
+        int index = Random.RandomRange(0, sounds.Count);
+        audio.clip = sounds[index];
+        audio.Play();
         // Destroy the cat's distractedness meter.
         // NOTE: You have to get the gameObject. I ended at parent originally, and it gave me a wierd error that it couldn't remove RectTransform when it tried to destroy the meter.
         Destroy(_DistractednessMeterBarImage.transform.parent.gameObject);
