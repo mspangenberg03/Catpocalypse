@@ -128,7 +128,7 @@ MonoBehaviour:
   numberOfTargets: 0
   targets: []
   laserPrefab: {fileID: 5513968051566747971, guid: b91d010c08c2b284bb79cc19087d05df, type: 3}
-  lasers: []
+  laserEndPointPrefab: {fileID: 6133470768189819576, guid: 2ebd2f586f92cd84b9cabdbdccc3eb68, type: 3}
   numOfLasers: 1
   laserPointerTower: {fileID: 9139953423556229519}
 --- !u!135 &8044491661289398269
