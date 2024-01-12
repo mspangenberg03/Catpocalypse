@@ -1881,6 +1881,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6242658981275408724, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
+      propertyPath: cucumberTowerPrefab
+      value: 
+      objectReference: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5289,8 +5293,8 @@ Transform:
   m_GameObject: {fileID: 439936114}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.55, y: 1.15, z: -18.78}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -32.55, y: 1.15, z: -13.9}
+  m_LocalScale: {x: 8.99, y: 1, z: 9.74}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5472,6 +5476,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6242658981275408724, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
+      propertyPath: cucumberTowerPrefab
+      value: 
+      objectReference: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5831,6 +5839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6242658981275408724, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
+      propertyPath: cucumberTowerPrefab
+      value: 
+      objectReference: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6031,7 +6043,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &501423755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6141,9 +6153,9 @@ RectTransform:
   - {fileID: 1674198238}
   m_Father: {fileID: 1785982843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1019.99994, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &501904799 stripped
@@ -7807,6 +7819,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6242658981275408724, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
+      propertyPath: cucumberTowerPrefab
+      value: 
+      objectReference: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9880,6 +9896,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6242658981275408724, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
+      propertyPath: cucumberTowerPrefab
+      value: 
+      objectReference: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10243,6 +10263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6242658981275408724, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
+      propertyPath: cucumberTowerPrefab
+      value: 
+      objectReference: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17866,6 +17890,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6242658981275408724, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
+      propertyPath: cucumberTowerPrefab
+      value: 
+      objectReference: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20655,6 +20683,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6242658981275408724, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
+      propertyPath: cucumberTowerPrefab
+      value: 
+      objectReference: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21313,6 +21345,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6242658981275408724, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
+      propertyPath: cucumberTowerPrefab
+      value: 
+      objectReference: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

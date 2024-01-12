@@ -69,6 +69,9 @@ public class Tower : MonoBehaviour
     {
         Destroy(this);
     }
-
+    public int GetDistractionValue()
+    {
+        return distractValue;
+    }
 
 }
