@@ -108,7 +108,7 @@ public class CatBase : MonoBehaviour
     {
         // Fire the OnCatDied event.
         OnCatDied?.Invoke(this, EventArgs.Empty);
-
+        
         Destroy(gameObject);
     }
 
