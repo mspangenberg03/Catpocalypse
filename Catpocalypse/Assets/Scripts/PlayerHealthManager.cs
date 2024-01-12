@@ -35,7 +35,7 @@ public class PlayerHealthManager : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        int index = Random.Range(0, sounds.Count);
+        int index = Random.Range(0, sounds.Count-1);
         audio.clip = sounds[index];
         audio.Play();
         health -= damage;

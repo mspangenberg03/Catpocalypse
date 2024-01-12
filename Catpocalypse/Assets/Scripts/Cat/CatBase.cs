@@ -10,7 +10,7 @@ using TMPro;
 // This fixes the ambiguity between System.Random and UnityEngine.Random by
 // telling it to use the Unity one.
 using Random = UnityEngine.Random;
-
+using UnityEngine.UIElements;
 
 public class CatBase : MonoBehaviour
 {
@@ -54,7 +54,7 @@ public class CatBase : MonoBehaviour
     protected WayPoint _NextWayPoint;
 
     protected GameObject _DistractednessMeterGO;
-    protected Image _DistractednessMeterBarImage;
+    protected UnityEngine.UI.Image _DistractednessMeterBarImage;
     protected TextMeshPro _DistractednessMeterLabel;
 
     public List<AudioClip> sounds = new List<AudioClip>();
@@ -114,7 +114,7 @@ public class CatBase : MonoBehaviour
         distractednessMeter.SetParent(transform, true); // I'm parenting it this way rather than using the Instantiate() function above, because I need it to not inherit scale from the cat.
         distractednessMeter.localPosition = new Vector3(0, _DistractednessMeterHeightAboveCat, 0);
 
-        _DistractednessMeterBarImage = distractednessMeter.Find("DistractednessBar").GetComponent<Image>();
+        _DistractednessMeterBarImage = distractednessMeter.Find("DistractednessBar").GetComponent<UnityEngine.UI.Image>();
         _DistractednessMeterLabel = distractednessMeter.Find("DistractednessLabel").GetComponent<TextMeshPro>();
 
         UpdateDistractednessMeter();
@@ -138,6 +138,10 @@ public class CatBase : MonoBehaviour
 
         if (this.distraction >= this.distractionThreshold)
         {
+            int index = Random.Range(0,sounds.Count-1);
+            
+            audio.clip = sounds[index];
+            audio.Play();
             targetingTower.targets.Remove(this.gameObject);           
             KillCat();
         }
@@ -157,9 +161,7 @@ public class CatBase : MonoBehaviour
     {
         // Fire the OnCatDied event.
         OnCatDied?.Invoke(this, EventArgs.Empty);
-        int index = Random.RandomRange(0, sounds.Count);
-        audio.clip = sounds[index];
-        audio.Play();
+        
         // Destroy the cat's distractedness meter.
         // NOTE: You have to get the gameObject. I ended at parent originally, and it gave me a wierd error that it couldn't remove RectTransform when it tried to destroy the meter.
         Destroy(_DistractednessMeterBarImage.transform.parent.gameObject);
