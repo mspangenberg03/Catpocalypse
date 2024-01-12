@@ -10,6 +10,7 @@ TagManager:
   - Laser
   - TowerSelector
   - TowerDestroyer
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Cat
   - Water
   - UI
-  - 
+  - Tower
   - 
   - 
   - 
