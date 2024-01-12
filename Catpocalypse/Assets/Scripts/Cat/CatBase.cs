@@ -133,17 +133,17 @@ public class CatBase : MonoBehaviour
     //I am intending this function to be called from either the tower or the projectile that the tower fires
     public void DistractCat(int distractionValue, Tower targetingTower)
     {
+        
         distraction += distractionValue;
         UpdateDistractednessMeter();
 
         if (this.distraction >= this.distractionThreshold)
         {
-            int index = Random.Range(0,sounds.Count-1);
-            
-            audio.clip = sounds[index];
-            audio.Play();
+
+            StartCoroutine(Sound());
+
             targetingTower.targets.Remove(this.gameObject);           
-            KillCat();
+            //KillCat();
         }
     }
 
@@ -159,6 +159,7 @@ public class CatBase : MonoBehaviour
 
     protected void KillCat()
     {
+        
         // Fire the OnCatDied event.
         OnCatDied?.Invoke(this, EventArgs.Empty);
         
@@ -220,4 +221,14 @@ public class CatBase : MonoBehaviour
 
 
     public int Cuteness { get { return _CutenessValue; } }
+    IEnumerator Sound()
+    {
+        agent.speed = 0;
+        int index = Random.Range(0, sounds.Count - 1);
+
+        audio.clip = sounds[index];
+        audio.Play();
+        yield return new WaitForSeconds(1f);
+        KillCat();
+    }
 }
