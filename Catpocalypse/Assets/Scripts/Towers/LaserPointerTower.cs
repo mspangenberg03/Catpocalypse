@@ -113,8 +113,6 @@ public class LaserPointerTower : Tower
     {
         Vector3 targetPoint = targets[index].transform.position;
 
-        //targetPoint.y = target.transform.position.y;
-
 
         // Get the forward vector for the target and multiply by the distance we want to aim in front of the target.
         Vector3 forward = targets[index].transform.forward.normalized;
