@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cucumber : MonoBehaviour
 {
     List<GameObject> cats = new List<GameObject>();
-    Rigidbody rb;
+    
     float moveSpeed = 10f;
     public GameObject target;
     private bool hasBeenCalced = false;
@@ -13,7 +13,7 @@ public class Cucumber : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         
     }
     private void Update()
@@ -26,6 +26,15 @@ public class Cucumber : MonoBehaviour
                 hasBeenCalced=true;
             }
             transform.Translate(direction*moveSpeed*Time.deltaTime);
+            float xDist = Mathf.Pow((transform.position.x - target.transform.position.x), 2);
+            float yDist = Mathf.Pow((transform.position.y - target.transform.position.y), 2);
+            float distance = Mathf.Sqrt(xDist + yDist);
+            
+            if(distance < 2)
+            {
+                Distract();
+                
+            }
         }
         else
         {
@@ -48,21 +57,24 @@ public class Cucumber : MonoBehaviour
             cats.Remove(other.gameObject);
         }
     }
+    private void Distract()
+    {
+        foreach (GameObject cat in cats)
+        {
+            if (cat != null)
+            {
+                cat.GetComponent<CatBase>().DistractCat(gameObject.GetComponentInParent<Tower>().GetDistractionValue(), gameObject.transform.parent.GetComponent<Tower>());
 
+            }
+
+        }
+        Destroy(gameObject);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Cat")
         {
-            foreach(GameObject cat in cats)
-            {
-                if (cat != null)
-                {
-                    cat.GetComponent<CatBase>().DistractCat(gameObject.GetComponentInParent<Tower>().GetDistractionValue(), gameObject.transform.parent.GetComponent<Tower>());
-                    
-                }
-                
-            }
-            Destroy(gameObject);
+            Distract();
         }
     }
     
