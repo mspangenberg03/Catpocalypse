@@ -39,6 +39,14 @@ public class WaveManager : MonoBehaviour
         HUD.HideWaveDisplay();
     }
 
+    private void Update()
+    {
+        if (!_WaveInProgress && WaveCount == _TotalWavesInLevel)
+        {
+            HUD.RevealVictory();
+        }
+    }
+
     public void StartNextWave()
     {
         // Don't try to start a wave if one is already in progress.
@@ -105,5 +113,6 @@ public class WaveManager : MonoBehaviour
 
     public int WaveCount { get { return _WaveCount; } }
     public bool IsWaveInProgress { get { return _WaveInProgress; } }
+
 }
 

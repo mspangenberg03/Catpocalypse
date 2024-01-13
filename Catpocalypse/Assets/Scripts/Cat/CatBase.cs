@@ -232,7 +232,7 @@ public class CatBase : MonoBehaviour
 
         catAudio.clip = purrs[index];
         catAudio.Play();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         KillCat();
     }
 }
