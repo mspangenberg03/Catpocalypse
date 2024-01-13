@@ -30,6 +30,8 @@ public class LaserPointerTower : Tower
     private List<GameObject> laserEndPoints; // The list of instantiated end point effects for the lasers.
     private List<float> laserSweepTimers; // Holds the elapsed time for each laser. This is used to make the laser sweep back and forth.
 
+    [SerializeField]
+    Transform laserSpawn;
 
     public void Awake()
     {
@@ -156,8 +158,8 @@ public class LaserPointerTower : Tower
     {
         for (int i = lasers.Count; i < numOfLasers; i++)
         {
-
-            lasers.Add(Instantiate(laserPrefab, gameObject.transform));
+            
+            lasers.Add(Instantiate(laserPrefab, laserSpawn));
             lasers[i].gameObject.GetComponent<AudioSource>().Stop();
 
             laserEndPoints.Add(Instantiate(laserEndPointPrefab));
