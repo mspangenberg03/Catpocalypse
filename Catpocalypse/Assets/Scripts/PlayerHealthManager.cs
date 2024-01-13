@@ -10,9 +10,12 @@ public class PlayerHealthManager : MonoBehaviour
     [SerializeField] private CatSpawner spawner;
     private bool playerOutOfHealth = false;
     
+    public List<AudioClip> sounds = new List<AudioClip>();
+    private AudioSource audio;
     private void Start()
     {
         health = maxHealth;
+        audio = GetComponent<AudioSource>();
         HUD.UpdatePlayerHealthDisplay(health, maxHealth);
     }
     private void Update()
@@ -32,6 +35,9 @@ public class PlayerHealthManager : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        int index = Random.Range(0, sounds.Count-1);
+        audio.clip = sounds[index];
+        audio.Play();
         health -= damage;
         HUD.UpdatePlayerHealthDisplay(health, maxHealth);
     }

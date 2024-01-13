@@ -10,7 +10,7 @@ using TMPro;
 // This fixes the ambiguity between System.Random and UnityEngine.Random by
 // telling it to use the Unity one.
 using Random = UnityEngine.Random;
-
+using UnityEngine.UIElements;
 
 public class CatBase : MonoBehaviour
 {
@@ -54,15 +54,24 @@ public class CatBase : MonoBehaviour
     protected WayPoint _NextWayPoint;
 
     protected GameObject _DistractednessMeterGO;
-    protected Image _DistractednessMeterBarImage;
+    protected UnityEngine.UI.Image _DistractednessMeterBarImage;
     protected TextMeshPro _DistractednessMeterLabel;
+
+    public List<AudioClip> sounds = new List<AudioClip>();
+    private AudioSource audio;
+
+    public List<AudioClip> purrs = new List<AudioClip>();
 
 
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         InitDistractednessMeter();
+        int index = Random.Range(0, sounds.Count - 1);
 
+        audio.clip = sounds[index];
+        audio.Play();
         agent = GetComponent<NavMeshAgent>();
         healthManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerHealthManager>();
 
@@ -110,7 +119,7 @@ public class CatBase : MonoBehaviour
         distractednessMeter.SetParent(transform, true); // I'm parenting it this way rather than using the Instantiate() function above, because I need it to not inherit scale from the cat.
         distractednessMeter.localPosition = new Vector3(0, _DistractednessMeterHeightAboveCat, 0);
 
-        _DistractednessMeterBarImage = distractednessMeter.Find("DistractednessBar").GetComponent<Image>();
+        _DistractednessMeterBarImage = distractednessMeter.Find("DistractednessBar").GetComponent<UnityEngine.UI.Image>();
         _DistractednessMeterLabel = distractednessMeter.Find("DistractednessLabel").GetComponent<TextMeshPro>();
 
         UpdateDistractednessMeter();
@@ -129,13 +138,17 @@ public class CatBase : MonoBehaviour
     //I am intending this function to be called from either the tower or the projectile that the tower fires
     public void DistractCat(int distractionValue, Tower targetingTower)
     {
+        
         distraction += distractionValue;
         UpdateDistractednessMeter();
 
         if (this.distraction >= this.distractionThreshold)
         {
+
+            StartCoroutine(Sound());
+
             targetingTower.targets.Remove(this.gameObject);           
-            KillCat();
+            //KillCat();
         }
     }
 
@@ -151,9 +164,10 @@ public class CatBase : MonoBehaviour
 
     protected void KillCat()
     {
+        
         // Fire the OnCatDied event.
         OnCatDied?.Invoke(this, EventArgs.Empty);
-
+        
         // Destroy the cat's distractedness meter.
         // NOTE: You have to get the gameObject. I ended at parent originally, and it gave me a wierd error that it couldn't remove RectTransform when it tried to destroy the meter.
         Destroy(_DistractednessMeterBarImage.transform.parent.gameObject);
@@ -212,4 +226,14 @@ public class CatBase : MonoBehaviour
 
 
     public int Cuteness { get { return _CutenessValue; } }
+    IEnumerator Sound()
+    {
+        agent.speed = 0;
+        int index = Random.Range(0, purrs.Count - 1);
+
+        audio.clip = purrs[index];
+        audio.Play();
+        yield return new WaitForSeconds(1f);
+        KillCat();
+    }
 }
