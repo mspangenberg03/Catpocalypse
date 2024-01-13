@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StringWaverTower : Tower
 {
-    private int distractionInterval = 1;
+    private int distractionInterval = 2;
     // Start is called before the first frame update
     void Start()
     {
