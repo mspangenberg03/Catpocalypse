@@ -8,18 +8,19 @@ public class TowerDestroyerUI : MonoBehaviour
     [SerializeField]
     private GameObject destroyTowerUI;
     [SerializeField]
-    private Button laserPointerBtn;
+    private Button destroyBtn;
+    [SerializeField]
+    private PlayerMoneyManager playerMoneyManager;
 
     private TowerBase currentSelectedBase;
 
     public void Start()
     {
-        if (Time.time < 0.5)
+        if (Time.time < 1)
         {
             
             this.gameObject.SetActive(false);
         }
-        laserPointerBtn.onClick.AddListener(OnDestroySelect);
     }
 
     public void SetCurrentSelectedBase(TowerBase current)
@@ -30,6 +31,7 @@ public class TowerDestroyerUI : MonoBehaviour
     public void OnDestroySelect()
     {
         currentSelectedBase.DestroyTower();
+        playerMoneyManager.SpendMoney((-1) * currentSelectedBase.refundVal);
         this.gameObject.SetActive(false);
     }
 }

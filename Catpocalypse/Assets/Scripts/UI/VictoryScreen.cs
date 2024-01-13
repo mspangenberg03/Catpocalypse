@@ -19,7 +19,7 @@ public class VictoryScreen : MonoBehaviour
 
     public void OnNextLevelClicked()
     {
-
+        SceneManager.LoadScene("Level1");
     }
 
     public void OnMainMenuClicked()

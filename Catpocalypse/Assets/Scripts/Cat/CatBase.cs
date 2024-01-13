@@ -58,7 +58,7 @@ public class CatBase : MonoBehaviour
     protected TextMeshPro _DistractednessMeterLabel;
 
     public List<AudioClip> sounds = new List<AudioClip>();
-    private AudioSource audio;
+    private AudioSource catAudio;
 
     public List<AudioClip> purrs = new List<AudioClip>();
 
@@ -66,12 +66,12 @@ public class CatBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        catAudio = GetComponent<AudioSource>();
         InitDistractednessMeter();
         int index = Random.Range(0, sounds.Count - 1);
 
-        audio.clip = sounds[index];
-        audio.Play();
+        catAudio.clip = sounds[index];
+        catAudio.Play();
         agent = GetComponent<NavMeshAgent>();
         healthManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerHealthManager>();
 
@@ -230,9 +230,9 @@ public class CatBase : MonoBehaviour
         agent.speed = 0;
         int index = Random.Range(0, purrs.Count - 1);
 
-        audio.clip = purrs[index];
-        audio.Play();
-        yield return new WaitForSeconds(1f);
+        catAudio.clip = purrs[index];
+        catAudio.Play();
+        yield return new WaitForSeconds(0.5f);
         KillCat();
     }
 }

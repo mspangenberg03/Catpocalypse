@@ -32,6 +32,9 @@ public class HUD : MonoBehaviour
 
     [Header("Player Money Display Refs")]
     [SerializeField] private TextMeshProUGUI _PlayerMoneyLabel;
+
+    [Header("Victory Screen Panel")]
+    [SerializeField] private GameObject _VictoryScreen;
     
 
 
@@ -110,6 +113,16 @@ public class HUD : MonoBehaviour
 
         // The button state should always be the opposite of the labels' state.
         _Instance._StartWaveButton.gameObject.SetActive(false);
+    }
+
+    public static void RevealVictory()
+    {
+        _Instance._StartWaveButton.gameObject.SetActive(false);
+        _Instance.WaveNumberLabel.gameObject.SetActive(false);
+        _Instance.CatsRemainingLabel.gameObject.SetActive(false);
+
+        _Instance._VictoryScreen.SetActive(true);
+
     }
 
 

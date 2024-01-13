@@ -40,8 +40,9 @@ public class PlayerMoneyManager : MonoBehaviour
     public bool SpendMoney(float amount)
     {
         if (amount > _Money)
+        {
             return false;
-
+        }
 
         _Money -= amount;
         HUD.UpdatePlayerMoneyDisplay(_Money);
