@@ -63,14 +63,12 @@ public class Cucumber : MonoBehaviour
     }
     private void Distract()
     {
-        foreach (GameObject cat in cats)
-        {
-            if (cat != null)
-            {
-                cat.GetComponent<CatBase>().DistractCat(parentTower.GetDistractionValue(), parentTower);
-            }
+        
+            
+        target.GetComponent<CatBase>().DistractCat(parentTower.GetDistractionValue(), parentTower);
+            
 
-        }
+        
         Destroy(gameObject);
     }
     private void OnCollisionEnter(Collision collision)
