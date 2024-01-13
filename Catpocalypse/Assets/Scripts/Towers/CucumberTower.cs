@@ -211,19 +211,23 @@ public class CucumberTower : Tower
         float smallestDistance = float.MaxValue;
         foreach(GameObject cat in targets)
         {
-            float distance = Vector3.Distance(transform.position, cat.transform.position);
-            if(distance < smallestDistance)
+            if(cat != null)
             {
-                smallestDistance = distance;
-                target = cat;
+                float distance = Vector3.Distance(transform.position, cat.transform.position);
+                if (distance < smallestDistance)
+                {
+                    smallestDistance = distance;
+                    target = cat;
+                }
             }
         }
 
 
         // This null check prevents an exception being thrown below when we call CalculateTargetPoint().
         if (target == null)
+        {
             return null;
-
+        }
 
         // Find the point that is the specififed distance ahead of the target.
         _TargetPoint = CalculateTargetPoint(target);
