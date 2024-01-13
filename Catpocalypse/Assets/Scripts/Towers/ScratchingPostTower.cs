@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class ScratchingPostTower : Tower
 {
     
-    private float speedDebuff = 2f;
+    private float speedDebuff = 1.8f;
 
     private void Start()
     {
