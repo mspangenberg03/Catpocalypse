@@ -35,6 +35,7 @@ public class WaveManager : MonoBehaviour
         Instance = this;
 
         CatBase.OnCatDied += OnCatDied;
+        CatBase.OnCatReachGoal += OnCatReachGoal;
 
         HUD.HideWaveDisplay();
     }
@@ -80,6 +81,21 @@ public class WaveManager : MonoBehaviour
     }
 
     public void OnCatDied(object Sender, EventArgs e)
+    {
+        _CatsRemainingInWave--;
+
+        HUD.UpdateWaveInfoDisplay(_TotalCatsInWave, _CatsRemainingInWave);
+
+        if (_CatsRemainingInWave < 1)
+        {
+            HUD.HideWaveDisplay();
+            _WaveInProgress = false;
+
+            if (_WaveCount >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
+                FindObjectOfType<VictoryScreen>()?.Show();
+        }
+    }
+    public void OnCatReachGoal(object Sender, EventArgs e)
     {
         _CatsRemainingInWave--;
 

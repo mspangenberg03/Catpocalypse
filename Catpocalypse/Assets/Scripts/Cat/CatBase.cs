@@ -20,6 +20,7 @@ public class CatBase : MonoBehaviour
 
     // This event is static so we don't need to subscribe the money manager to every cat instance's OnCatDied event.
     public static event EventHandler OnCatDied;
+    public static event EventHandler OnCatReachGoal;
 
 
     [Tooltip("The cuteness value is how much this type of cat increases the cuteness meter.")]
@@ -80,6 +81,7 @@ public class CatBase : MonoBehaviour
         // Find the closest WayPoint and start moving there.
         FindNearestWayPoint();
         agent.SetDestination(_NextWayPoint.transform.position);
+        
     }
 
     // Update is called once per frame
@@ -149,7 +151,7 @@ public class CatBase : MonoBehaviour
             StartCoroutine(Sound());
 
             targetingTower.targets.Remove(this.gameObject);           
-            //KillCat();
+            
         }
     }
 
@@ -158,23 +160,30 @@ public class CatBase : MonoBehaviour
         if (other.gameObject.CompareTag("Goal"))
         {
             healthManager.TakeDamage(damageToPlayer);
-            KillCat();
+            KillCat(1);
+            
         }
     }
 
 
-    protected void KillCat()
+    protected void KillCat(int type)
     {
+       
+        if(type == 1)
+        {
+            OnCatReachGoal?.Invoke(this, EventArgs.Empty);
+        }
+        else if(type == 2)
+        {
+            // Fire the OnCatDied event.
+            OnCatDied?.Invoke(this, EventArgs.Empty);
+        }
         
-        // Fire the OnCatDied event.
-        OnCatDied?.Invoke(this, EventArgs.Empty);
-        
-        // Destroy the cat's distractedness meter.
-        // NOTE: You have to get the gameObject. I ended at parent originally, and it gave me a wierd error that it couldn't remove RectTransform when it tried to destroy the meter.
         Destroy(_DistractednessMeterBarImage.transform.parent.gameObject);
 
         // Destroy the cat.
         Destroy(gameObject);
+
     }
 
     protected void GetNextWaypoint()
@@ -235,6 +244,6 @@ public class CatBase : MonoBehaviour
         catAudio.clip = purrs[index];
         catAudio.Play();
         yield return new WaitForSeconds(0.5f);
-        KillCat();
+        KillCat(2);
     }
 }
