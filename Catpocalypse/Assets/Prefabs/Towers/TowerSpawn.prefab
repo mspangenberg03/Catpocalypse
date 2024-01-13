@@ -47,3 +47,4 @@ MonoBehaviour:
   laserPointerTowerPrefab: {fileID: 9139953423556229519, guid: 2fe4444f0a169c74a86f5b0d148cf994, type: 3}
   scratchPostTowerPrefab: {fileID: 3121967798339870383, guid: 61481af7c67bdbd49988fa84de31034d, type: 3}
   cucumberTowerPrefab: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
+  stringWaverTowerPrefab: {fileID: 3941046664215720247, guid: 13ff93f3535b93f4ba2f1d6eec12b119, type: 3}

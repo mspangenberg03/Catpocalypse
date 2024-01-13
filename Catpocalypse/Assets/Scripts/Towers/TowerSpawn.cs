@@ -12,6 +12,9 @@ public class TowerSpawn : MonoBehaviour
     [SerializeField]
     private GameObject cucumberTowerPrefab;
 
+    [SerializeField]
+    private GameObject stringWaverTowerPrefab;
+
     private TowerBase towerBase;
 
 
@@ -36,6 +39,9 @@ public class TowerSpawn : MonoBehaviour
                 break;
             case 2:
                 StartCoroutine(SpawnCucumberPostTower());
+                break;
+            case 3:
+                StartCoroutine(SpawnStringWaverPostTower());
                 break;
                 //default:
                 //    StartCoroutine(SpawnLaserPointerTower());
@@ -70,6 +76,17 @@ public class TowerSpawn : MonoBehaviour
         if (towerBase.tower == null)
         {
             towerBase.tower = Instantiate(cucumberTowerPrefab, this.transform);
+            towerBase.tower.transform.position = this.transform.position;
+            towerBase.hasTower = true;
+        }
+
+        yield return new WaitForSeconds(2f);
+    }
+    IEnumerator SpawnStringWaverPostTower()
+    {
+        if (towerBase.tower == null)
+        {
+            towerBase.tower = Instantiate(stringWaverTowerPrefab, this.transform);
             towerBase.tower.transform.position = this.transform.position;
             towerBase.hasTower = true;
         }
