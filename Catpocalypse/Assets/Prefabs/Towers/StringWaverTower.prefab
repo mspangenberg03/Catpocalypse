@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6191303598416545698}
   - component: {fileID: 8589826843983843876}
   - component: {fileID: 1476210298979115628}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StringWaverTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
