@@ -20,6 +20,7 @@ public class TowerBase : MonoBehaviour
     public GameObject tower;
     [SerializeField]
     public LayerMask layer;
+    public float refundVal;
 
     private bool IsSelected = false;
 
@@ -29,6 +30,7 @@ public class TowerBase : MonoBehaviour
         hasTower = false;
         hoveredOver = false;
         tower = null;
+        refundVal = 0;
     }
 
     void OnMouseEnter()
@@ -82,29 +84,6 @@ public class TowerBase : MonoBehaviour
             }
             
         }
-    }
-
-    public void BuildTower(int towerToBuild)
-    {
-        gameObject.GetComponent<Renderer>().material = towerNotHovered;
-
-        switch (towerToBuild)
-        {
-            case 0:
-                towerSpawn.GetComponent<TowerSpawn>().BuildTower(0); ;
-                this.hasTower = true;
-                break;
-            case 1:
-                towerSpawn.GetComponent<TowerSpawn>().BuildTower(1); ;
-                this.hasTower = true;
-                break;
-            //default:
-
-            //    towerSpawn.GetComponent<TowerSpawn>().BuildTower(0); ;
-            //    this.hasTower = true;
-            //    break;
-        };
-
     }
 
     public void DestroyTower()

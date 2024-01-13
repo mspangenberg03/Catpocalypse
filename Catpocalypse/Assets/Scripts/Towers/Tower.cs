@@ -8,9 +8,9 @@ public class Tower : MonoBehaviour
 {
 
     [SerializeField]
-    protected int buildCost;
+    protected float buildCost;
     [SerializeField]
-    protected int refundAmount;
+    protected float refundAmount;
     [SerializeField]
     protected SphereCollider range;
     [SerializeField]
@@ -72,6 +72,16 @@ public class Tower : MonoBehaviour
     public int GetDistractionValue()
     {
         return distractValue;
+    }
+
+    public float GetBuildCost()
+    {
+        return buildCost;
+    }
+
+    public float GetRefundValue()
+    {
+        return refundAmount;
     }
 
 }

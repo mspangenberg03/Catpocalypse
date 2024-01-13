@@ -22,6 +22,10 @@ public class TowerSelectorUI : MonoBehaviour
     private Button yarnBallTowerBtn;
     [SerializeField]
     private Button closeBtn;
+    [SerializeField]
+    private GameObject notEnoughFundsScreen;
+    [SerializeField]
+    private PlayerMoneyManager playerMoneyManager;
 
 
     private GameObject towerSpawner;
@@ -30,7 +34,8 @@ public class TowerSelectorUI : MonoBehaviour
 
     public void Start()
     {
-        if(Time.time < 0.5)
+        notEnoughFundsScreen.SetActive(false);
+        if(Time.time < 1)
         {
             gameObject.SetActive(false);
         }
@@ -80,7 +85,20 @@ public class TowerSelectorUI : MonoBehaviour
 
     private void OnBuildSelect(int selection)
     {
-        towerSpawner.GetComponent<TowerSpawn>().BuildTower(selection);
-        gameObject.SetActive(false);
+        if(playerMoneyManager.SpendMoney(towerSpawner.GetComponent<TowerSpawn>().MoneyToSpend(selection))) {
+            towerSpawner.GetComponent<TowerSpawn>().BuildTower(selection);
+            gameObject.SetActive(false);
+        } else
+        {
+            StartCoroutine(RevealNotEnoughFundsScreen());
+        }
+        
+    }
+
+    private IEnumerator RevealNotEnoughFundsScreen()
+    {
+        notEnoughFundsScreen.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        notEnoughFundsScreen.SetActive(false);
     }
 }
