@@ -14,15 +14,24 @@ public class TowerDestroyerUI : MonoBehaviour
 
     private TowerBase currentSelectedBase;
 
+    public bool inUse;
+
     public void Start()
     {
         if (Time.time < 1)
         {
-            
+            inUse = false;
             this.gameObject.SetActive(false);
         }
     }
 
+    private void Update()
+    {
+        if(!inUse)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
     public void SetCurrentSelectedBase(TowerBase current)
     {
         currentSelectedBase = current;

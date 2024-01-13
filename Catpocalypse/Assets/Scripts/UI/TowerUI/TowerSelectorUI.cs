@@ -27,7 +27,7 @@ public class TowerSelectorUI : MonoBehaviour
     [SerializeField]
     private PlayerMoneyManager playerMoneyManager;
 
-
+    public bool inUse;
     private GameObject towerSpawner;
 
 
@@ -37,9 +37,18 @@ public class TowerSelectorUI : MonoBehaviour
         notEnoughFundsScreen.SetActive(false);
         if(Time.time < 1)
         {
+            inUse = false;
             gameObject.SetActive(false);
         }
         laserPointerTowerBtn.onClick.AddListener(OnLaserPointerTowerSelect);
+    }
+
+    public void Update()
+    {
+        if(!inUse)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     public void SetCurrentSelectedSpawn(GameObject current)
