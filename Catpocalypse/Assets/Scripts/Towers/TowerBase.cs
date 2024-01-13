@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,6 +67,7 @@ public class TowerBase : MonoBehaviour
                     } else
                     {
                         towerSelectorUI.gameObject.SetActive(true);
+                        towerSelectorUI.GetComponent<TowerSelectorUI>().inUse = true;
                         towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
                     }
                     
@@ -77,6 +79,7 @@ public class TowerBase : MonoBehaviour
                     else
                     {
                         towerDestroyerUI.gameObject.SetActive(true);
+                        towerDestroyerUI.GetComponent<TowerDestroyerUI>().inUse = true;
                         towerDestroyerUI.gameObject.GetComponent<TowerDestroyerUI>().SetCurrentSelectedBase(this);
                     }
                     
