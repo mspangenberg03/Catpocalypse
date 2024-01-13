@@ -4908,6 +4908,7 @@ MonoBehaviour:
   destroyTowerUI: {fileID: 597036389}
   destroyBtn: {fileID: 78409748}
   playerMoneyManager: {fileID: 1161630510}
+  inUse: 0
 --- !u!114 &597036392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5603,7 +5604,7 @@ PrefabInstance:
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: lightCat
       value: 
-      objectReference: {fileID: 47135786943904743, guid: 6c70a668de344bd4a943e8a455565a8f, type: 3}
+      objectReference: {fileID: 2247931869541265458, guid: 3ca6ad5e0d8d6ce409ff571221648ad3, type: 3}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: normalCat
       value: 
@@ -7354,6 +7355,7 @@ MonoBehaviour:
   closeBtn: {fileID: 1195805996}
   notEnoughFundsScreen: {fileID: 1321062542}
   playerMoneyManager: {fileID: 1161630510}
+  inUse: 0
 --- !u!114 &945753219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7968,7 +7970,7 @@ PrefabInstance:
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: lightCat
       value: 
-      objectReference: {fileID: 47135786943904743, guid: 6c70a668de344bd4a943e8a455565a8f, type: 3}
+      objectReference: {fileID: 2247931869541265458, guid: 3ca6ad5e0d8d6ce409ff571221648ad3, type: 3}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: normalCat
       value: 
