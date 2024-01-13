@@ -226,7 +226,7 @@ MonoBehaviour:
   buildCost: 100
   refundAmount: 50
   range: {fileID: 8621096765691456122}
-  distractValue: 500
+  distractValue: 250
   numberOfTargets: 0
   targets: []
   cucumberPrefab: {fileID: 6603149977634291862, guid: 356491f32b54d504ab168c5639033d23, type: 3}
