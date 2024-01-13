@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class Cucumber : MonoBehaviour
 {
+    [Tooltip("The cucumber will disapppear after this many seconds if it does not distract any cats.")]
+    [SerializeField] private float _MaxLifeTime = 5f;
+
+
     List<GameObject> cats = new List<GameObject>();
     
-    float moveSpeed = 10f;
     public GameObject target;
-   
+    public Tower parentTower;
 
-    
+
+    // If the cucumber does not distract a cat in this amount of time, it will disappear.
+    private float _SpawnTime;
+
+    void Awake()
+    {
+        _SpawnTime = Time.time;
+    }
+
     private void Update()
     {
         if(target != null)
         {
             
-            transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
-            float xDist = Mathf.Pow((transform.position.x - target.transform.position.x), 2);
-            float yDist = Mathf.Pow((transform.position.y - target.transform.position.y), 2);
-            float distance = Mathf.Sqrt(xDist + yDist);
+            float distance = Vector3.Distance(transform.position, target.transform.position);
             
             if(distance < 2)
             {
@@ -27,11 +35,16 @@ public class Cucumber : MonoBehaviour
                 
             }
         }
-        else
+        else if (target == null)
         {
             Destroy(gameObject);
         }
+     
         
+        if (Time.time - _SpawnTime >= _MaxLifeTime) 
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -54,8 +67,7 @@ public class Cucumber : MonoBehaviour
         {
             if (cat != null)
             {
-                cat.GetComponent<CatBase>().DistractCat(gameObject.GetComponentInParent<Tower>().GetDistractionValue(), gameObject.transform.parent.GetComponent<Tower>());
-
+                cat.GetComponent<CatBase>().DistractCat(parentTower.GetDistractionValue(), parentTower);
             }
 
         }

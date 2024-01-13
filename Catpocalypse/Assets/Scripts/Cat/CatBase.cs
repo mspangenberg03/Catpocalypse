@@ -132,9 +132,9 @@ public class CatBase : MonoBehaviour
         distraction += distractionValue;
         UpdateDistractednessMeter();
 
-        if (this.distraction >= this.distractionThreshold)
+        if (distraction >= distractionThreshold)
         {
-            targetingTower.targets.Remove(this.gameObject);           
+            targetingTower.targets.Remove(gameObject);           
             KillCat();
         }
     }

@@ -47,8 +47,8 @@ public class TowerSpawn : MonoBehaviour
     {
         if(towerBase.tower == null)
         {
-            towerBase.tower = Instantiate(laserPointerTowerPrefab, this.transform);
-            towerBase.tower.transform.position = this.transform.position;
+            towerBase.tower = Instantiate(laserPointerTowerPrefab, transform, true);
+            towerBase.tower.transform.position = transform.position;
             towerBase.hasTower = true;
         }
 
@@ -58,8 +58,8 @@ public class TowerSpawn : MonoBehaviour
     {
         if (towerBase.tower == null)
         {
-            towerBase.tower = Instantiate(scratchPostTowerPrefab, this.transform);
-            towerBase.tower.transform.position = this.transform.position;
+            towerBase.tower = Instantiate(scratchPostTowerPrefab, transform, true);
+            towerBase.tower.transform.position = transform.position;
             towerBase.hasTower = true;
         }
 
@@ -69,8 +69,8 @@ public class TowerSpawn : MonoBehaviour
     {
         if (towerBase.tower == null)
         {
-            towerBase.tower = Instantiate(cucumberTowerPrefab, this.transform);
-            towerBase.tower.transform.position = this.transform.position;
+            towerBase.tower = Instantiate(cucumberTowerPrefab, transform, true);
+            towerBase.tower.transform.position = transform.position;
             towerBase.hasTower = true;
         }
 
