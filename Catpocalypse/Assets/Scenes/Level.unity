@@ -5188,6 +5188,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   spawner: {fileID: 1528691241}
+  sounds:
+  - {fileID: 8300000, guid: 1e4d3cd9385dbe84daa524e74875f879, type: 3}
+  - {fileID: 8300000, guid: 69cba2555a9df8e4d895512dee1e28ee, type: 3}
+  - {fileID: 8300000, guid: fc565869740388b4ea1db761b8efb861, type: 3}
+  - {fileID: 8300000, guid: 9bf3e1981839abe44b7de5e99b0b8719, type: 3}
+  - {fileID: 8300000, guid: c29e8e7a83e5e5e448c51babfe028cf6, type: 3}
 --- !u!114 &1172394861
 MonoBehaviour:
   m_ObjectHideFlags: 0
