@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class ScratchingPostTower : Tower
 {
     
-    private float speedDebuff = 2f;
+    private float speedDebuff = 1.8f;
 
     private void Start()
     {
@@ -18,7 +18,12 @@ public class ScratchingPostTower : Tower
         if(other.gameObject.tag == "Cat")
         {
             targets.Add(other.gameObject);
-            other.gameObject.GetComponent<NavMeshAgent>().speed = other.gameObject.GetComponent<NavMeshAgent>().speed/speedDebuff;
+            if(other.gameObject.GetComponent<CatBase>().isSlowed == false)
+            {
+                other.gameObject.GetComponent<NavMeshAgent>().speed = other.gameObject.GetComponent<NavMeshAgent>().speed / speedDebuff;
+                other.gameObject.GetComponent<CatBase>().isSlowed = true;
+            }
+            
             StartCoroutine(DistractCats(other.gameObject));
         }
     }
@@ -28,6 +33,7 @@ public class ScratchingPostTower : Tower
         {
             targets.Remove(other.gameObject);
             other.gameObject.GetComponent<NavMeshAgent>().speed = other.gameObject.GetComponent<NavMeshAgent>().speed*speedDebuff;
+            other.gameObject.GetComponent<CatBase>().isSlowed = false;
         }
     }
     IEnumerator DistractCats(GameObject cat)

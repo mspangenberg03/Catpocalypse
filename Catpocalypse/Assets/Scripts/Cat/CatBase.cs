@@ -63,6 +63,8 @@ public class CatBase : MonoBehaviour
 
     public List<AudioClip> purrs = new List<AudioClip>();
 
+    public bool isSlowed;
+
 
     // Start is called before the first frame update
     void Start()
