@@ -4560,7 +4560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1085426210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4670,9 +4670,9 @@ RectTransform:
   - {fileID: 1426135803}
   m_Father: {fileID: 1409067347}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1019.99994, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1121504164
@@ -5188,6 +5188,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   spawner: {fileID: 1528691241}
+  sounds:
+  - {fileID: 8300000, guid: 1e4d3cd9385dbe84daa524e74875f879, type: 3}
+  - {fileID: 8300000, guid: 69cba2555a9df8e4d895512dee1e28ee, type: 3}
+  - {fileID: 8300000, guid: fc565869740388b4ea1db761b8efb861, type: 3}
+  - {fileID: 8300000, guid: 9bf3e1981839abe44b7de5e99b0b8719, type: 3}
+  - {fileID: 8300000, guid: c29e8e7a83e5e5e448c51babfe028cf6, type: 3}
 --- !u!114 &1172394861
 MonoBehaviour:
   m_ObjectHideFlags: 0
