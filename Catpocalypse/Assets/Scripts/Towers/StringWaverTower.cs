@@ -29,6 +29,7 @@ public class StringWaverTower : Tower
         if (other.gameObject.tag == "Cat")
         {
             targets.Remove(other.gameObject);
+            StopCoroutine(DistractCat(other.gameObject));
         }
     }
     IEnumerator DistractCat(GameObject cat)
