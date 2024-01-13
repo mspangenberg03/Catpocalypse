@@ -60,13 +60,18 @@ public class CatBase : MonoBehaviour
     public List<AudioClip> sounds = new List<AudioClip>();
     private AudioSource audio;
 
+    public List<AudioClip> purrs = new List<AudioClip>();
+
 
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
         InitDistractednessMeter();
+        int index = Random.Range(0, sounds.Count - 1);
 
+        audio.clip = sounds[index];
+        audio.Play();
         agent = GetComponent<NavMeshAgent>();
         healthManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerHealthManager>();
 
@@ -224,9 +229,9 @@ public class CatBase : MonoBehaviour
     IEnumerator Sound()
     {
         agent.speed = 0;
-        int index = Random.Range(0, sounds.Count - 1);
+        int index = Random.Range(0, purrs.Count - 1);
 
-        audio.clip = sounds[index];
+        audio.clip = purrs[index];
         audio.Play();
         yield return new WaitForSeconds(1f);
         KillCat();

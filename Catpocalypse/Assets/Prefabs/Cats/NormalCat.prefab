@@ -314,6 +314,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b4479bc7dbf982740a845b10be113393, type: 3}
   - {fileID: 8300000, guid: 737435aaf7f07cd4f84452e94be00bec, type: 3}
   - {fileID: 8300000, guid: 8814bea602f90614ea33b6a59f107dbd, type: 3}
+  purrs:
+  - {fileID: 8300000, guid: e343f0d076804dd4d93c00db1ede5593, type: 3}
+  - {fileID: 8300000, guid: 91dad0e183bd6ba44b1905c32d8eda27, type: 3}
+  - {fileID: 8300000, guid: de0bbdb12f6033b4f94f6b2ca673258f, type: 3}
+  - {fileID: 8300000, guid: 433cfe31a38e0fc45848d63431682a52, type: 3}
+  - {fileID: 8300000, guid: 4a509a1dfaef94049baed82d9945e377, type: 3}
+  - {fileID: 8300000, guid: 3cf17b0ffcb763e4d98c6fc7067a1280, type: 3}
+  - {fileID: 8300000, guid: f8f804323b1e7444db4cf3816c8ecce3, type: 3}
+  - {fileID: 8300000, guid: 63339e6695a3af24fbd3b1c1becf28fd, type: 3}
 --- !u!64 &5254691421844368040
 MeshCollider:
   m_ObjectHideFlags: 0
