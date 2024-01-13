@@ -124,7 +124,7 @@ MonoBehaviour:
   buildCost: 150
   refundAmount: 75
   range: {fileID: 1476210298979115628}
-  distractValue: 100
+  distractValue: 80
   numberOfTargets: 0
   targets: []
 --- !u!135 &1476210298979115628
