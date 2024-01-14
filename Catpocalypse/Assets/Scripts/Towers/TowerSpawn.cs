@@ -112,4 +112,17 @@ public class TowerSpawn : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
     }
+     IEnumerator SpawnYarnBallTower()
+ {
+         if (towerBase.tower == null)
+         {
+             towerBase.tower = Instantiate(yarnBallTowerPrefab, this.transform);
+             towerBase.refundVal = yarnBallTowerPrefab.GetComponent<YarnBallTower>().GetRefundValue();
+         towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x, this.transform.position.y + 1, towerBase.tower.transform.position.z);
+             towerBase.hasTower = true;
+         }
+
+         yield return new WaitForSeconds(2f);
+  
+ }
 }
