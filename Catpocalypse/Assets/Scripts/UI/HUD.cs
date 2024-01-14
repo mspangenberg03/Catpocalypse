@@ -77,7 +77,7 @@ public class HUD : MonoBehaviour
     public static void UpdateWaveInfoDisplay(int waveNumber, int catsRemaining)
     {
         Instance.WaveNumberLabel.text = $"{waveNumber}";
-        Instance.CatsRemainingLabel.text = $"Remaining Cats: {catsRemaining}";
+        Instance.CatsRemainingLabel.text = $"{catsRemaining}";
     }
 
     public static void UpdatePlayerMoneyDisplay(float playerMoney)
