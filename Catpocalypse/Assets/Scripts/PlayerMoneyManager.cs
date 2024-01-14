@@ -9,11 +9,6 @@ public class PlayerMoneyManager : MonoBehaviour
 {
     [SerializeField] private float _Money = 200f;
 
-    [Header("Money Earning Amounts")]
-    [SerializeField] private float _NormalCatPayAmount;
-    [SerializeField] private float _LightCatPayAmount;
-    [SerializeField] private float _HeavyCatPayAmount;
-
 
     private void Start()
     {
@@ -22,7 +17,7 @@ public class PlayerMoneyManager : MonoBehaviour
 
         // All cat types should be able to subsribe this same handler to their OnCatDied events.
         // That function below calls another that checks the cat type.
-        NormalCat.OnCatDied += OnCatDied;
+        CatBase.OnCatDied += OnCatDied;
 
     }
 
@@ -52,23 +47,8 @@ public class PlayerMoneyManager : MonoBehaviour
 
     private void OnCatDied(object sender, EventArgs e)
     {
-        _Money += GetPayAmount(sender);
+        _Money += (sender as CatBase).DistractionReward;
         HUD.UpdatePlayerMoneyDisplay(_Money);
     }
 
-    private float GetPayAmount(object deadCat)
-    {
-        float pay = 0f;
-
-        if (deadCat is NormalCat)
-            pay = _NormalCatPayAmount;
-        else if (deadCat is LightCat)
-            pay = _LightCatPayAmount;
-        else if (deadCat is HeavyCat)
-            pay = _HeavyCatPayAmount;
-
-
-        return pay;
-
-    }
 }
