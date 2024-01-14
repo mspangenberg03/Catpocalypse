@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8574672227803443362}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -516098083770646512, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Name
@@ -149,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3316992658331686828, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_LocalPosition.y
@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7396654156298469847, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8266381470857141138, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Layer
@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8461702492091297980, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -223,14 +223,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ceb7e5b6ba6c1b4bb55c5fc5dfe2644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildCost: 200
-  refundAmount: 100
+  buildCost: 100
+  refundAmount: 50
   range: {fileID: 8621096765691456122}
-  distractValue: 500
+  distractValue: 300
   numberOfTargets: 0
   targets: []
   cucumberPrefab: {fileID: 6603149977634291862, guid: 356491f32b54d504ab168c5639033d23, type: 3}
   spawn: {fileID: 8574672227803443362}
+  _DistanceInFrontOfTargetToAimFor: 5
+  _Gravity: 9.81
+  _LaunchAngle: 15
+  _AimSpeed: 30
+  _AimThreshold: 10
 --- !u!135 &8621096765691456122
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -250,7 +255,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 60
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2115721319496029504
 MeshRenderer:

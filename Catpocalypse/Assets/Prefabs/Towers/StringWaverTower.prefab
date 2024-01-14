@@ -105,7 +105,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
+  m_Radius: 10
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
@@ -124,7 +124,7 @@ MonoBehaviour:
   buildCost: 150
   refundAmount: 75
   range: {fileID: 1476210298979115628}
-  distractValue: 100
+  distractValue: 75
   numberOfTargets: 0
   targets: []
 --- !u!135 &1476210298979115628
@@ -146,5 +146,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 9.03
+  m_Radius: 1.5
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
