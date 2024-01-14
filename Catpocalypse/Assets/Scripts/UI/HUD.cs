@@ -65,7 +65,7 @@ public class HUD : MonoBehaviour
     public static void UpdatePlayerHealthDisplay(float currentHP, float maxHP)
     {
         Instance.PlayerHealthBar.fillAmount = Mathf.Clamp01(currentHP / maxHP);
-        Instance.PlayerHealthBarLabel.text = $"{currentHP} of {maxHP} HP";
+        Instance.PlayerHealthBarLabel.text = $"";
     }
 
     public static void UpdateCutenessDisplay(float currentCuteness, float maxCuteness)
