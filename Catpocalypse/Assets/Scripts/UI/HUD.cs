@@ -71,12 +71,12 @@ public class HUD : MonoBehaviour
     public static void UpdateCutenessDisplay(float currentCuteness, float maxCuteness)
     {
         Instance.CutenessBar.fillAmount = Mathf.Clamp01(currentCuteness / maxCuteness);
-        Instance.CutenessBarLabel.text = $"{currentCuteness} / {maxCuteness} Cuteness";
+        Instance.CutenessBarLabel.text = $"";
     }
 
     public static void UpdateWaveInfoDisplay(int waveNumber, int catsRemaining)
     {
-        Instance.WaveNumberLabel.text = $"Wave {waveNumber}";
+        Instance.WaveNumberLabel.text = $"{waveNumber}";
         Instance.CatsRemainingLabel.text = $"Remaining Cats: {catsRemaining}";
     }
 
