@@ -282,7 +282,7 @@ MonoBehaviour:
   distractionThreshold: 750
   damageToPlayer: 2
   _WayPointArrivedDistance: 4
-  distractReward: 25
+  distractReward: 8
   _DistractednessMeterHeightAboveCat: 8
   _DistractednessMeterPrefab: {fileID: 3512654570813597946, guid: e633f4d5486c0f542b4af3b4ecb326ae, type: 3}
   sounds:
@@ -323,6 +323,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3cf17b0ffcb763e4d98c6fc7067a1280, type: 3}
   - {fileID: 8300000, guid: f8f804323b1e7444db4cf3816c8ecce3, type: 3}
   - {fileID: 8300000, guid: 63339e6695a3af24fbd3b1c1becf28fd, type: 3}
+  isSlowed: 0
 --- !u!64 &5254691421844368040
 MeshCollider:
   m_ObjectHideFlags: 0
