@@ -171,7 +171,7 @@ public class CatBase : MonoBehaviour
         if (other.gameObject.CompareTag("Goal"))
         {
             healthManager.TakeDamage(damageToPlayer);
-            OnCatReachGoal?.Invoke(this, EventArgs.Empty);
+            
 
             KillCat(2);
         }
@@ -191,7 +191,7 @@ public class CatBase : MonoBehaviour
             // Fire the OnCatDied event.
             OnCatDied?.Invoke(this, EventArgs.Empty);
         }
-        else if (type == 2) 
+        else if(type == 2)  
         {
             OnCatReachGoal?.Invoke(this, EventArgs.Empty);
         }
