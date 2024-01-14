@@ -39,6 +39,8 @@ public class TowerSpawn : MonoBehaviour
                 return cucumberTowerPrefab.GetComponent<CucumberTower>().GetBuildCost();
             case 3:
                 return stringWaverTowerPrefab.GetComponent<StringWaverTower>().GetBuildCost();
+            case 4:
+                return yarnBallTowerPrefab.GetComponent<YarnBallTower>().GetBuildCost();
         }
         return 0;
     }
@@ -60,6 +62,9 @@ public class TowerSpawn : MonoBehaviour
                 break;
             case 3:
                 StartCoroutine(SpawnStringWaverPostTower());
+                break;
+            case 4:
+                StartCoroutine(SpawnYarnBallTower());
                 break;
                 //default:
                 //    StartCoroutine(SpawnLaserPointerTower());
