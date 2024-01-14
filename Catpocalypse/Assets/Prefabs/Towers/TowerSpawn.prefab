@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4004710163520278713}
-  - component: {fileID: 6242658981275408724}
+  - component: {fileID: 7469279766281948507}
   m_Layer: 0
   m_Name: TowerSpawn
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6242658981275408724
+--- !u!114 &7469279766281948507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,3 +48,4 @@ MonoBehaviour:
   scratchPostTowerPrefab: {fileID: 8008746575148010759, guid: e773ab17325c9a7428190c14e794b5d7, type: 3}
   cucumberTowerPrefab: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
   stringWaverTowerPrefab: {fileID: 3941046664215720247, guid: 13ff93f3535b93f4ba2f1d6eec12b119, type: 3}
+  yarnBallTowerPrefab: {fileID: 2419287133507878192, guid: d554a8649dfbd254b9a34f431289b329, type: 3}
