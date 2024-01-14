@@ -28,7 +28,7 @@ public class CatBase : MonoBehaviour
     [SerializeField] protected int _CutenessValue = 5;
 
     [Min(0)]
-    [SerializeField] protected int distractionThreshold = 50; //The amount of distraction it takes to fully distract the cat
+    [SerializeField] protected float distractionThreshold = 50; //The amount of distraction it takes to fully distract the cat
     [Min(0f)]
     [SerializeField] protected float damageToPlayer = 2f; //How much health the cat takes from the player
 
@@ -44,7 +44,7 @@ public class CatBase : MonoBehaviour
 
 
 
-    protected int distraction = 0; //How distracted the cat is currently
+    protected float distraction = 0; //How distracted the cat is currently
     protected bool isDistracted = false; // If the cat has been defeated or not.
     //Rigidbody rb;//The RigidBody component
     private NavMeshAgent agent;
@@ -65,8 +65,10 @@ public class CatBase : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Start()    
     {
+        IsDead = false;
+
         catAudio = GetComponent<AudioSource>();
         InitDistractednessMeter();
         int index = Random.Range(0, sounds.Count - 1);
@@ -138,9 +140,17 @@ public class CatBase : MonoBehaviour
         isDistracted = true;
     }
     //I am intending this function to be called from either the tower or the projectile that the tower fires
-    public void DistractCat(int distractionValue, Tower targetingTower)
+    public void DistractCat(float distractionValue, Tower targetingTower)
     {
-        
+
+        if (PlayerCutenessManager.Instance.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.CatsGetHarderToDistract)
+        {
+            float debuffPercent = PlayerCutenessManager.Instance.CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
+            distractionValue = distractionValue * debuffPercent;
+        }
+
+
+
         distraction += distractionValue;
         UpdateDistractednessMeter();
 
@@ -158,24 +168,25 @@ public class CatBase : MonoBehaviour
         if (other.gameObject.CompareTag("Goal"))
         {
             healthManager.TakeDamage(damageToPlayer);
-            KillCat(1);
-            
+            OnCatReachGoal?.Invoke(this, EventArgs.Empty);
+
+            KillCat();
         }
     }
 
 
-    protected void KillCat(int type)
+    protected void KillCat()
     {
-       
-        if(type == 1)
-        {
-            OnCatReachGoal?.Invoke(this, EventArgs.Empty);
-        }
-        else if(type == 2)
-        {
-            // Fire the OnCatDied event.
-            OnCatDied?.Invoke(this, EventArgs.Empty);
-        }
+        if (IsDead)
+            return;
+
+
+        // Prevents this function from running twice in rare cases, causing this cat's death to count as more than one.
+        IsDead = true;
+
+        // Fire the OnCatDied event.
+        OnCatDied?.Invoke(this, EventArgs.Empty);
+
         
         Destroy(_DistractednessMeterBarImage.transform.parent.gameObject);
 
@@ -242,6 +253,10 @@ public class CatBase : MonoBehaviour
         catAudio.clip = purrs[index];
         catAudio.Play();
         yield return new WaitForSeconds(0.5f);
-        KillCat(2);
+
+        KillCat();
     }
+
+
+    public bool IsDead { get; private set; }
 }
