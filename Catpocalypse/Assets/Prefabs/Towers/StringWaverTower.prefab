@@ -121,10 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0cf41aa99cae94f82f99caab95d40c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildCost: 150
-  refundAmount: 75
+  buildCost: 225
+  refundAmount: 183
   range: {fileID: 1476210298979115628}
-  distractValue: 75
+  distractValue: 29
   numberOfTargets: 0
   targets: []
 --- !u!135 &1476210298979115628
