@@ -15,6 +15,9 @@ public class TowerSpawn : MonoBehaviour
     [SerializeField]
     private GameObject stringWaverTowerPrefab;
 
+    [SerializeField]
+    private GameObject yarnBallTowerPrefab;
+
     private TowerBase towerBase;
 
 
