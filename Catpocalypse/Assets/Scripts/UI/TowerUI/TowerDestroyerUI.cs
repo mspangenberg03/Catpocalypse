@@ -43,4 +43,9 @@ public class TowerDestroyerUI : MonoBehaviour
         playerMoneyManager.SpendMoney((-1) * currentSelectedBase.refundVal);
         this.gameObject.SetActive(false);
     }
+
+    public void OnCloseClicked()
+    {
+        this.gameObject.SetActive(false);
+    }
 }

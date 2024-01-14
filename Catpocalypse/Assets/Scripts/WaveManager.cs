@@ -11,6 +11,11 @@ using UnityEngine.UI;
 /// </summary>
 public class WaveManager : MonoBehaviour
 {
+    public event EventHandler WaveEnded;
+    public event EventHandler LevelCleared;
+
+
+
     public static WaveManager Instance;
 
     [SerializeField] private int _TotalWavesInLevel = 5;
@@ -19,7 +24,7 @@ public class WaveManager : MonoBehaviour
     private int _TotalCatsInWave;
     private int _CatsRemainingInWave;
 
-    private int _WaveCount = 0;
+    private int _WaveNumber = 0;
     private bool _WaveInProgress = false;
 
 
@@ -44,6 +49,8 @@ public class WaveManager : MonoBehaviour
     {
         if (!_WaveInProgress && WaveCount == _TotalWavesInLevel)
         {
+            LevelCleared?.Invoke(this, EventArgs.Empty);
+
             HUD.RevealVictory();
         }
     }
@@ -54,9 +61,10 @@ public class WaveManager : MonoBehaviour
         if (IsWaveInProgress)
             return;
 
+
         _WaveInProgress = true;
 
-        _WaveCount++;
+        _WaveNumber++;
 
 
         FindAllSpawners();
@@ -69,7 +77,7 @@ public class WaveManager : MonoBehaviour
         CalculateTotalCatsInWave();
 
         HUD.ShowWaveDisplay();
-        HUD.UpdateWaveInfoDisplay(_WaveCount, _CatsRemainingInWave);
+        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
     }
 
     public void StopAllSpawning()
@@ -84,29 +92,29 @@ public class WaveManager : MonoBehaviour
     {
         _CatsRemainingInWave--;
 
-        HUD.UpdateWaveInfoDisplay(_TotalCatsInWave, _CatsRemainingInWave);
+        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
 
         if (_CatsRemainingInWave < 1)
         {
             HUD.HideWaveDisplay();
             _WaveInProgress = false;
 
-            if (_WaveCount >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
+            WaveEnded?.Invoke(this, EventArgs.Empty);
+
+            if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
                 FindObjectOfType<VictoryScreen>()?.Show();
         }
     }
     public void OnCatReachGoal(object Sender, EventArgs e)
     {
-        _CatsRemainingInWave--;
-
-        HUD.UpdateWaveInfoDisplay(_TotalCatsInWave, _CatsRemainingInWave);
+        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
 
         if (_CatsRemainingInWave < 1)
         {
             HUD.HideWaveDisplay();
             _WaveInProgress = false;
 
-            if (_WaveCount >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
+            if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
                 FindObjectOfType<VictoryScreen>()?.Show();
         }
     }
@@ -116,8 +124,11 @@ public class WaveManager : MonoBehaviour
         _TotalCatsInWave = 0;
         foreach (CatSpawner spawner in _CatSpawners)
         {
-            _TotalCatsInWave += spawner.CatsInWave;
+            //Debug.Log($"Spawner: {spawner.CatsInCurrentWave}");
+            _TotalCatsInWave += spawner.CatsInCurrentWave;
         }
+
+        //Debug.Log($"Total: {_TotalCatsInWave}");
 
         _CatsRemainingInWave = _TotalCatsInWave;
     }
@@ -127,7 +138,14 @@ public class WaveManager : MonoBehaviour
         _CatSpawners = FindObjectsByType<CatSpawner>(FindObjectsSortMode.None).ToList();
     }
 
-    public int WaveCount { get { return _WaveCount; } }
+
+    private void OnWaveEnded(object sender, EventArgs e)
+    {
+        
+    }
+
+
+    public int WaveCount { get { return _WaveNumber; } }
     public bool IsWaveInProgress { get { return _WaveInProgress; } }
 
 }

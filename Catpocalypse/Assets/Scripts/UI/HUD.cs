@@ -14,7 +14,7 @@ using TMPro;
 /// </summary>
 public class HUD : MonoBehaviour
 {
-    public static HUD _Instance;
+    public static HUD Instance;
 
 
     [Header("Health Bar Refs")]
@@ -41,14 +41,14 @@ public class HUD : MonoBehaviour
     private void Awake()
     {
         // If an instance has already been created, then log error message and destroy self.
-        if (_Instance != null)
+        if (Instance != null)
         {
             Debug.LogError("An instance of HUD already exists! So this one destroyed itself.");
             Destroy(gameObject);
         }
 
 
-        _Instance = this;
+        Instance = this;
     }
 
     private void Start()
@@ -64,64 +64,64 @@ public class HUD : MonoBehaviour
 
     public static void UpdatePlayerHealthDisplay(float currentHP, float maxHP)
     {
-        _Instance.PlayerHealthBar.fillAmount = Mathf.Clamp01(currentHP / maxHP);
-        _Instance.PlayerHealthBarLabel.text = $"{currentHP} of {maxHP} HP";
+        Instance.PlayerHealthBar.fillAmount = Mathf.Clamp01(currentHP / maxHP);
+        Instance.PlayerHealthBarLabel.text = $"{currentHP} of {maxHP} HP";
     }
 
     public static void UpdateCutenessDisplay(float currentCuteness, float maxCuteness)
     {
-        _Instance.CutenessBar.fillAmount = Mathf.Clamp01(currentCuteness / maxCuteness);
-        _Instance.CutenessBarLabel.text = $"{currentCuteness} / {maxCuteness} Cuteness";
+        Instance.CutenessBar.fillAmount = Mathf.Clamp01(currentCuteness / maxCuteness);
+        Instance.CutenessBarLabel.text = $"{currentCuteness} / {maxCuteness} Cuteness";
     }
 
     public static void UpdateWaveInfoDisplay(int waveNumber, int catsRemaining)
     {
-        _Instance.WaveNumberLabel.text = $"Wave {waveNumber}";
-        _Instance.CatsRemainingLabel.text = $"Remaining Cats: {catsRemaining}";
+        Instance.WaveNumberLabel.text = $"Wave {waveNumber}";
+        Instance.CatsRemainingLabel.text = $"Remaining Cats: {catsRemaining}";
     }
 
     public static void UpdatePlayerMoneyDisplay(float playerMoney)
     {
-        _Instance.PlayerMoneyLabel.text = $"${playerMoney:N2}";
+        Instance.PlayerMoneyLabel.text = $"${playerMoney:N2}";
     }
 
     public static void HideWaveDisplay()
     {
-        if (_Instance == null)
+        if (Instance == null)
             return;
 
 
-        _Instance.WaveNumberLabel.gameObject.SetActive(false);
-        _Instance.CatsRemainingLabel.gameObject.SetActive(false);
+        Instance.WaveNumberLabel.gameObject.SetActive(false);
+        Instance.CatsRemainingLabel.gameObject.SetActive(false);
         
         // The button state should always be the opposite of the labels' state.
-        _Instance.StartWaveButton.gameObject.SetActive(true);
+        Instance.StartWaveButton.gameObject.SetActive(true);
     }
 
     public static void ShowWaveDisplay()
     {
-        if (_Instance == null)
+        if (Instance == null)
             return;
 
 
         // Clear the text labels, so the player won't potentially see an old value before it updates.
-        _Instance.WaveNumberLabel.text = "";
-        _Instance.CatsRemainingLabel.text = "";
+        Instance.WaveNumberLabel.text = "";
+        Instance.CatsRemainingLabel.text = "";
 
-        _Instance.WaveNumberLabel.gameObject.SetActive(true);
-        _Instance.CatsRemainingLabel.gameObject.SetActive(true);
+        Instance.WaveNumberLabel.gameObject.SetActive(true);
+        Instance.CatsRemainingLabel.gameObject.SetActive(true);
 
         // The button state should always be the opposite of the labels' state.
-        _Instance._StartWaveButton.gameObject.SetActive(false);
+        Instance._StartWaveButton.gameObject.SetActive(false);
     }
 
     public static void RevealVictory()
     {
-        _Instance._StartWaveButton.gameObject.SetActive(false);
-        _Instance.WaveNumberLabel.gameObject.SetActive(false);
-        _Instance.CatsRemainingLabel.gameObject.SetActive(false);
+        Instance._StartWaveButton.gameObject.SetActive(false);
+        Instance.WaveNumberLabel.gameObject.SetActive(false);
+        Instance.CatsRemainingLabel.gameObject.SetActive(false);
 
-        _Instance._VictoryScreen.SetActive(true);
+        Instance._VictoryScreen.SetActive(true);
 
     }
 
