@@ -1,12 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class TowerBase : MonoBehaviour
 {
-    
+    public static TowerBase _SelectedTowerBase;
+
+    // This event fires when any tower base in the level gets selected.
+    public static event EventHandler OnAnyTowerBaseWasSelected;
+
+
     public bool usable;  
     
     public GameObject towerSelectorUI;
@@ -32,6 +39,8 @@ public class TowerBase : MonoBehaviour
         hoveredOver = false;
         tower = null;
         refundVal = 0;
+
+        OnAnyTowerBaseWasSelected += OnAnyTowerBaseSelected;
     }
 
     void OnMouseEnter()
@@ -56,6 +65,9 @@ public class TowerBase : MonoBehaviour
     {
         gameObject.GetComponent<Renderer>().material = towerSelected;
         IsSelected = true;
+        
+        _SelectedTowerBase = this;
+        OnAnyTowerBaseWasSelected?.Invoke(this, EventArgs.Empty);
 
         if (enabled)
         {
@@ -63,23 +75,24 @@ public class TowerBase : MonoBehaviour
                 if(!hasTower){
                     if(towerSelectorUI.gameObject.activeSelf)
                     {
-                        towerSelectorUI.gameObject.SetActive(false);
-                    } else
+                        towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
+                    }
+                    else
                     {
-                        towerSelectorUI.gameObject.SetActive(true);
-                        towerSelectorUI.GetComponent<TowerSelectorUI>().inUse = true;
+                        ShowTowerSelectorUI(true);
+                        ShowTowerDestroyerUI(false);
                         towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
                     }
                     
                 } else {
                     if (towerDestroyerUI.gameObject.activeSelf)
                     {
-                        towerDestroyerUI.gameObject.SetActive(false);
+                        towerDestroyerUI.gameObject.GetComponent<TowerDestroyerUI>().SetCurrentSelectedBase(this);
                     }
                     else
                     {
-                        towerDestroyerUI.gameObject.SetActive(true);
-                        towerDestroyerUI.GetComponent<TowerDestroyerUI>().inUse = true;
+                        ShowTowerDestroyerUI(true);
+                        ShowTowerSelectorUI(false);
                         towerDestroyerUI.gameObject.GetComponent<TowerDestroyerUI>().SetCurrentSelectedBase(this);
                     }
                     
@@ -87,6 +100,18 @@ public class TowerBase : MonoBehaviour
             }
             
         }
+    }
+
+    private void ShowTowerSelectorUI(bool state)
+    {
+        towerSelectorUI.gameObject.SetActive(state);
+        towerSelectorUI.GetComponent<TowerSelectorUI>().inUse = state;
+    }
+
+    private void ShowTowerDestroyerUI(bool state)
+    {
+        towerDestroyerUI.gameObject.SetActive(state);
+        towerDestroyerUI.GetComponent<TowerDestroyerUI>().inUse = state;
     }
 
     public void DestroyTower()
@@ -101,5 +126,14 @@ public class TowerBase : MonoBehaviour
     {
         IsSelected = false;
         gameObject.GetComponent<Renderer>().material = towerNotHovered;
+    }
+
+    public void OnAnyTowerBaseSelected(object towerBase, EventArgs e)
+    {
+        TowerBase selected = towerBase as TowerBase;
+
+        // If the tower clicked on was not this one, then deselect this one.
+        if (selected != this)
+            Deselect();
     }
 }

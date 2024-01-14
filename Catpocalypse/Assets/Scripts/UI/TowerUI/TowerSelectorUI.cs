@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
+
 
 public class TowerSelectorUI : MonoBehaviour
 {
@@ -26,36 +30,26 @@ public class TowerSelectorUI : MonoBehaviour
     private GameObject notEnoughFundsScreen;
     [SerializeField]
     private PlayerMoneyManager playerMoneyManager;
+    [SerializeField]
+    private TextMeshProUGUI cutenessMeterMaxedText;
+
 
     public bool inUse;
     private GameObject towerSpawner;
 
 
-
-    public void Start()
+    private void Awake()
     {
         notEnoughFundsScreen.SetActive(false);
-        if(Time.time < 1)
-        {
-            inUse = false;
-            gameObject.SetActive(false);
-        }
+
         laserPointerTowerBtn.onClick.AddListener(OnLaserPointerTowerSelect);
+
+        inUse = false;
     }
 
-    public void Update()
-    {
-        if(!inUse)
-        {
-            this.gameObject.SetActive(false);
-        }
-    }
 
     public void SetCurrentSelectedSpawn(GameObject current)
     {
-        // Deselect previous tower.
-
-
         towerSpawner = current;
     }
 
@@ -89,19 +83,36 @@ public class TowerSelectorUI : MonoBehaviour
         towerSpawner.transform.parent.GetComponent<TowerBase>().Deselect();
 
         towerSpawner = null;
-        gameObject.SetActive(false);
+
+        CloseUI();
     }
 
     private void OnBuildSelect(int selection)
     {
-        if(playerMoneyManager.SpendMoney(towerSpawner.GetComponent<TowerSpawn>().MoneyToSpend(selection))) {
-            towerSpawner.GetComponent<TowerSpawn>().BuildTower(selection);
-            gameObject.SetActive(false);
-        } else
+        //Debug.Log("Active: " + gameObject.activeSelf);
+        if(playerMoneyManager.SpendMoney(towerSpawner.GetComponent<TowerSpawn>().MoneyToSpend(selection))) 
         {
+            towerSpawner.GetComponent<TowerSpawn>().BuildTower(selection);
+            CloseUI();
+        } 
+        else
+        {
+            // I put this here to fix a bizarre glitch where occasionally I'm getting an error that the coroutine couldn't be started
+            // because the TowerSelectUI is not active. I cannot find any reason for that to be happening, so I did this instead.
+            if (gameObject.activeSelf == false)
+                gameObject.SetActive(true);
+
             StartCoroutine(RevealNotEnoughFundsScreen());
         }
         
+    }
+
+    private void CloseUI()
+    {
+        cutenessMeterMaxedText.gameObject.SetActive(false);
+        gameObject.SetActive(false);
+
+        inUse = false;
     }
 
     private IEnumerator RevealNotEnoughFundsScreen()
@@ -110,4 +121,5 @@ public class TowerSelectorUI : MonoBehaviour
         yield return new WaitForSeconds(1f);
         notEnoughFundsScreen.SetActive(false);
     }
+
 }

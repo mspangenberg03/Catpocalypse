@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
+using System.Runtime.CompilerServices;
+using System;
 
 public class Tower : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class Tower : MonoBehaviour
     [SerializeField]
     protected SphereCollider range;
     [SerializeField]
-    protected int distractValue;
+    protected float distractValue;
     [SerializeField]
     protected int numberOfTargets;
 
@@ -65,11 +67,16 @@ public class Tower : MonoBehaviour
         }
     }
 
+    private void OnCatDied(object sender, EventArgs e)
+    {
+        targets.Remove(sender as GameObject);
+    }
+
     public void OnDestroy()
     {
         Destroy(this);
     }
-    public int GetDistractionValue()
+    public float GetDistractionValue()
     {
         return distractValue;
     }

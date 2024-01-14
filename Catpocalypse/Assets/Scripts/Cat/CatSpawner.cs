@@ -24,13 +24,13 @@ public class CatSpawner : MonoBehaviour
     private List<GameObject> catsToSpawn;
 
 
-    private int catsInWave;
+    private int catsInCurrentWave;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        catsInWave = _CatsInFirstWave;
+        catsInCurrentWave = _CatsInFirstWave;
 
         catsToSpawn = new List<GameObject>();
         catsToSpawn.Add(normalCat);
@@ -46,7 +46,7 @@ public class CatSpawner : MonoBehaviour
         }
         else
         {
-            catsInWave += 2;
+            catsInCurrentWave += 2;
             StartCoroutine(Spawner());
         }
     }
@@ -56,7 +56,7 @@ public class CatSpawner : MonoBehaviour
     }
     IEnumerator Spawner()
     {
-        for (int i = 0; i < catsInWave; i++)
+        for (int i = 0; i < catsInCurrentWave; i++)
         {
             int index = Random.Range(0, 3);
             GameObject catPrefab = catsToSpawn[index];
@@ -72,5 +72,5 @@ public class CatSpawner : MonoBehaviour
     }
 
 
-    public int CatsInWave { get { return _CatsInFirstWave; } }
+    public int CatsInCurrentWave { get { return catsInCurrentWave; } }
 }
