@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7062164268718267898}
   - component: {fileID: 3834210270442281035}
   - component: {fileID: 7386727658262242970}
-  - component: {fileID: -3708166388650931759}
   - component: {fileID: 2129354472692616315}
+  - component: {fileID: 2157283926572133986}
   m_Layer: 2
   m_Name: YarnBallTower
   m_TagString: Untagged
@@ -109,30 +109,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-3708166388650931759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2419287133507878192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25b19a28add4ba94c9a4dcaad12b5b5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildCost: 400
-  refundAmount: 200
-  range: {fileID: 2129354472692616315}
-  distractValue: 600
-  numberOfTargets: 0
-  targets:
-  - {fileID: 7418905643246593257, guid: b9340d85bccd70e428dbe184dadfb4bb, type: 3}
-  - {fileID: 6487241590536661003, guid: cebe6559f5c49ba43b9b338e2d02b68f, type: 3}
-  yarnBallPrefab: {fileID: 7418905643246593257, guid: b9340d85bccd70e428dbe184dadfb4bb, type: 3}
-  throwPointPrefab: {fileID: 6487241590536661003, guid: cebe6559f5c49ba43b9b338e2d02b68f, type: 3}
-  throwForce: 10
-  throwRange: 5
 --- !u!135 &2129354472692616315
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +130,25 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &2157283926572133986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2419287133507878192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a50ae0e6fdb7294cb912fd7b3f656d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildCost: 200
+  refundAmount: 100
+  range: {fileID: 2129354472692616315}
+  distractValue: 500
+  numberOfTargets: 0
+  targets: []
+  yarnBallPrefab: {fileID: 7418905643246593257, guid: 543c1eeb918fd8a40b8e656f6691db55, type: 3}
+  throwPointPrefab: {fileID: 6487241590536661003, guid: 65a6a48719aa20248aa2a9a05f5b1519, type: 3}
+  throwForce: 10
+  throwRange: 5

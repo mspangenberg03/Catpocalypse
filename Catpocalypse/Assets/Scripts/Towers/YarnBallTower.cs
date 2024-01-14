@@ -77,6 +77,7 @@ public class YarnBallTower : Tower
             Transform throwPoint = throwPointObject.transform;
 
             GameObject projectile = Instantiate(yarnBallPrefab, throwPoint.position, throwPoint.rotation);
+            projectile.GetComponent<YarnBall>().parentTower = gameObject.GetComponent<Tower>();
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
             if (rb != null)
