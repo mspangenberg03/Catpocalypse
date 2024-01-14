@@ -107,6 +107,7 @@ public class WaveManager : MonoBehaviour
     }
     public void OnCatReachGoal(object Sender, EventArgs e)
     {
+        _CatsRemainingInWave--;
         HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
 
         if (_CatsRemainingInWave < 1)
