@@ -8468,6 +8468,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 74282c5711146a8448e6df0c6db4a79e, type: 3}
   - {fileID: 8300000, guid: 3dd04f8bb94523547979cff309295023, type: 3}
   - {fileID: 8300000, guid: 262481edf4d55284db99f37e8882f190, type: 3}
+  defeatPanel: {fileID: 1243144357}
 --- !u!54 &1161630512
 Rigidbody:
   m_ObjectHideFlags: 0
