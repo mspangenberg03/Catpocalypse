@@ -19,27 +19,11 @@ public class VictoryScreen : MonoBehaviour
 
     public void OnNextLevelClicked()
     {
-        GameObject[] bases = GameObject.FindGameObjectsWithTag("TowerBase");
-        foreach (GameObject tb in bases)
-        {
-            if (tb.GetComponent<TowerBase>().hasTower == true)
-            {
-                tb.GetComponent<TowerBase>().DestroyTower();
-            }
-        }
         SceneManager.LoadScene("Level1");
     }
 
     public void OnMainMenuClicked()
     {
-        GameObject[] bases = GameObject.FindGameObjectsWithTag("TowerBase");
-        foreach (GameObject tb in bases)
-        {
-            if (tb.GetComponent<TowerBase>().hasTower == true)
-            {
-                tb.GetComponent<TowerBase>().DestroyTower();
-            }
-        }
         SceneManager.LoadScene("MainMenu");
     }
 
