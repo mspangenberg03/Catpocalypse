@@ -91,8 +91,4 @@ public class Tower : MonoBehaviour
         return refundAmount;
     }
 
-
-
-    public float BuildCost { get { return buildCost; } }
-    public float DistractValue { get { return distractValue; } }
 }
