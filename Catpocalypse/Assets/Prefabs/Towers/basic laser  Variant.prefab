@@ -250,6 +250,7 @@ MonoBehaviour:
   laserEndPointPrefab: {fileID: 6133470768189819576, guid: 2ebd2f586f92cd84b9cabdbdccc3eb68, type: 3}
   numOfLasers: 1
   laserPointerTower: {fileID: 9139953423556229519, guid: 2fe4444f0a169c74a86f5b0d148cf994, type: 3}
+  laserSpawn: {fileID: 9041661084162585967}
   specialLaserPrefab: {fileID: 0}
 --- !u!135 &-6198939263383239204
 SphereCollider:
