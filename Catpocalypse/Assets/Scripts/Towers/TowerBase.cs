@@ -39,6 +39,7 @@ public class TowerBase : MonoBehaviour
         hoveredOver = false;
         tower = null;
         refundVal = 0;
+
         OnAnyTowerBaseWasSelected += OnAnyTowerBaseSelected;
     }
 
