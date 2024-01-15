@@ -90,6 +90,7 @@ public class LaserPointerTower : Tower
                         lasers[i].SetActive(true);
                         lasers[i].gameObject.GetComponent<AudioSource>().Play();
                         laserEndPoints[i].SetActive(true);
+                        laserSweepTimers[i] = 2f;
                     }
 
                     // Changes the laser's length and targets the cat with it
@@ -108,11 +109,18 @@ public class LaserPointerTower : Tower
                     lasers[i].GetComponent<LineRenderer>().SetPositions(linePositions);
                     targets[i].GetComponent<CatBase>().DistractCat(distractValue, this);
                 }
-                  
-            } 
+                else
+                {
+                    targets.Remove(targets[i]);
+                }
+               
 
+            }
+            
         }
+        
         yield return new WaitForSeconds(1f);
+
     }
 
     private void DeactivateLaser(int laserIndex)
@@ -182,4 +190,6 @@ public class LaserPointerTower : Tower
             yield return new WaitForSeconds(1f);
         }
     }
+    
+    
 }
