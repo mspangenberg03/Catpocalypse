@@ -6,7 +6,6 @@ public class TowerSpawn : MonoBehaviour
 {
     [SerializeField]
     private GameObject laserPointerTowerPrefab;
-
     [SerializeField]
     private GameObject scratchPostTowerPrefab;
 
