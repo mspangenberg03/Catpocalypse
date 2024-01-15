@@ -42,8 +42,6 @@ public class TowerSelectorUI : MonoBehaviour
     {
         notEnoughFundsScreen.SetActive(false);
 
-        laserPointerTowerBtn.onClick.AddListener(OnLaserPointerTowerSelect);
-
         inUse = false;
     }
 
