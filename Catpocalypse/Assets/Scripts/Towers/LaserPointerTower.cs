@@ -14,6 +14,9 @@ public class LaserPointerTower : Tower
     [SerializeField]
     private GameObject laserPointerTower; //
 
+    [SerializeField] 
+    private Transform laserSpawn; //The spawn point of the laser
+
     [Header("Laser End Point")]
     [Tooltip("The laser sweeps back and forth across the path, and this value sets how wide the laser's sweep is.")]
     [Min(0f)]
@@ -25,13 +28,25 @@ public class LaserPointerTower : Tower
     [Min(0f)]
     private float _DistanceInFrontOfTargetToAimFor = 2f;
 
+    [Header("Special Laser")]
+    [SerializeField]
+    private GameObject specialLaserPrefab; // The special laser prefab to be copied
+    [Tooltip("Sets how long in seconds the special laser will take to move the distracted cats to a new location")]
+    private float _SpecialLaserSweepTime;
+    [Tooltip("Designates the amount of cats the special laser can distract at any one time")]
+    private int _NumberOfDistractableCats;
+    private GameObject furthestWaypoint;
+
+
+
 
     private List<GameObject> lasers; // The list of instantiated lasers, both active and inactive
     private List<GameObject> laserEndPoints; // The list of instantiated end point effects for the lasers.
     private List<float> laserSweepTimers; // Holds the elapsed time for each laser. This is used to make the laser sweep back and forth.
 
-    [SerializeField]
-    Transform laserSpawn;
+    private GameObject specialLaser; // The special laser
+
+
 
     public void Awake()
     {
@@ -78,6 +93,7 @@ public class LaserPointerTower : Tower
                         lasers[i].SetActive(true);
                         lasers[i].gameObject.GetComponent<AudioSource>().Play();
                         laserEndPoints[i].SetActive(true);
+                        laserSweepTimers[i] = 2f;
                     }
 
                     // Changes the laser's length and targets the cat with it
@@ -96,11 +112,18 @@ public class LaserPointerTower : Tower
                     lasers[i].GetComponent<LineRenderer>().SetPositions(linePositions);
                     targets[i].GetComponent<CatBase>().DistractCat(distractValue, this);
                 }
-                  
-            } 
+                else
+                {
+                    targets.Remove(targets[i]);
+                }
+               
 
+            }
+            
         }
+        
         yield return new WaitForSeconds(1f);
+
     }
 
     private void DeactivateLaser(int laserIndex)
@@ -158,7 +181,7 @@ public class LaserPointerTower : Tower
     {
         for (int i = lasers.Count; i < numOfLasers; i++)
         {
-            
+
             lasers.Add(Instantiate(laserPrefab, laserSpawn));
             lasers[i].gameObject.GetComponent<AudioSource>().Stop();
 
@@ -170,4 +193,6 @@ public class LaserPointerTower : Tower
             yield return new WaitForSeconds(1f);
         }
     }
+    
+    
 }

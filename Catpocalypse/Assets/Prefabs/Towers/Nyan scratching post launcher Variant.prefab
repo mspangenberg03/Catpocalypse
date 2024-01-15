@@ -141,9 +141,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildCost: 175
-  refundAmount: 35
+  refundAmount: 140
   range: {fileID: 8975065090706773128}
-  distractValue: 10
+  distractValue: 8
   numberOfTargets: 282
   targets: []
 --- !u!23 &6451762848420790279

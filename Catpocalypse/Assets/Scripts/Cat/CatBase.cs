@@ -171,14 +171,14 @@ public class CatBase : MonoBehaviour
         if (other.gameObject.CompareTag("Goal"))
         {
             healthManager.TakeDamage(damageToPlayer);
-            OnCatReachGoal?.Invoke(this, EventArgs.Empty);
+            
 
-            KillCat();
+            KillCat(2);
         }
     }
 
 
-    protected void KillCat()
+    protected void KillCat(int type)
     {
         if (IsDead)
             return;
@@ -186,9 +186,15 @@ public class CatBase : MonoBehaviour
 
         // Prevents this function from running twice in rare cases, causing this cat's death to count as more than one.
         IsDead = true;
-
-        // Fire the OnCatDied event.
-        OnCatDied?.Invoke(this, EventArgs.Empty);
+        if(type == 1)
+        {
+            // Fire the OnCatDied event.
+            OnCatDied?.Invoke(this, EventArgs.Empty);
+        }
+        else if(type == 2)  
+        {
+            OnCatReachGoal?.Invoke(this, EventArgs.Empty);
+        }
 
         
         Destroy(_DistractednessMeterBarImage.transform.parent.gameObject);
@@ -257,7 +263,7 @@ public class CatBase : MonoBehaviour
         catAudio.Play();
         yield return new WaitForSeconds(0.5f);
 
-        KillCat();
+        KillCat(1);
     }
 
 
