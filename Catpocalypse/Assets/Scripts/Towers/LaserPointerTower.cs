@@ -64,11 +64,11 @@ public class LaserPointerTower : Tower
                 DeactivateLaser(i);
                 yield return new WaitForSeconds(1f);
             }
-            if (i >= targets.Count)
+            else if (i >= targets.Count)
             {
                 DeactivateLaser(i);
             }
-            if(i < targets.Count && targets.Count != 0)
+            else if(i < targets.Count && targets.Count != 0)
             {
                 // Checks for a null value in case a cat moves out of range
                 if(targets[i] != null)
@@ -97,14 +97,16 @@ public class LaserPointerTower : Tower
                     lasers[i].GetComponent<LineRenderer>().SetPositions(linePositions);
                     targets[i].GetComponent<CatBase>().DistractCat(distractValue, this);
                 }
-                
-            }
-            else
-            {
-                DeactivateLaser(i);
+                else
+                {
+                    targets.Remove(targets[i]);
+                }
+               
+
             }
             
         }
+        
         yield return new WaitForSeconds(1f);
 
     }
@@ -176,4 +178,6 @@ public class LaserPointerTower : Tower
             yield return new WaitForSeconds(1f);
         }
     }
+    
+    
 }
