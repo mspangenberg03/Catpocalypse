@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
+    public static GameObject instance;
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        if (instance != null)
+        {
+            Destroy(instance);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = gameObject;
+        }
+        
     }
 
     // Update is called once per frame
