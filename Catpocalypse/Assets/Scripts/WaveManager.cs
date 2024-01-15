@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,13 +15,11 @@ public class WaveManager : MonoBehaviour
     public event EventHandler LevelCleared;
 
 
+
     public static WaveManager Instance;
-
-
 
     [SerializeField] private int _TotalWavesInLevel = 5;
 
-    
     private List<CatSpawner> _CatSpawners;
     private int _TotalCatsInWave;
     private int _CatsRemainingInWave;
@@ -43,6 +40,7 @@ public class WaveManager : MonoBehaviour
         Instance = this;
 
         CatBase.OnCatDied += OnCatDied;
+        CatBase.OnCatReachGoal += OnCatReachGoal;
 
         HUD.HideWaveDisplay();
     }
@@ -102,23 +100,25 @@ public class WaveManager : MonoBehaviour
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
 
-            CheckIfPlayerBeatLevel();
+            if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
+                FindObjectOfType<VictoryScreen>()?.Show();
         }
     }
-
-    private bool CheckIfPlayerBeatLevel()
+    public void OnCatReachGoal(object Sender, EventArgs e)
     {
-        if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
+        _CatsRemainingInWave--;
+        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
+
+        if (_CatsRemainingInWave < 1)
         {
-            FindObjectOfType<VictoryScreen>()?.Show();
+            HUD.HideWaveDisplay();
+            _WaveInProgress = false;
 
-            LevelCleared?.Invoke(this, EventArgs.Empty);
+            WaveEnded?.Invoke(this, EventArgs.Empty);
 
-            return true;
+            if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
+                FindObjectOfType<VictoryScreen>()?.Show();
         }
-
-
-        return false;
     }
 
     private void CalculateTotalCatsInWave()
@@ -140,6 +140,11 @@ public class WaveManager : MonoBehaviour
         _CatSpawners = FindObjectsByType<CatSpawner>(FindObjectsSortMode.None).ToList();
     }
 
+
+    private void OnWaveEnded(object sender, EventArgs e)
+    {
+        
+    }
 
 
     public int WaveCount { get { return _WaveNumber; } }
