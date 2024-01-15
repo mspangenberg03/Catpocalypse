@@ -14,6 +14,9 @@ public class LaserPointerTower : Tower
     [SerializeField]
     private GameObject laserPointerTower; //
 
+    [SerializeField] 
+    private Transform laserSpawn; //The spawn point of the laser
+
     [Header("Laser End Point")]
     [Tooltip("The laser sweeps back and forth across the path, and this value sets how wide the laser's sweep is.")]
     [Min(0f)]
@@ -179,7 +182,7 @@ public class LaserPointerTower : Tower
         for (int i = lasers.Count; i < numOfLasers; i++)
         {
 
-            lasers.Add(Instantiate(laserPrefab, gameObject.transform));
+            lasers.Add(Instantiate(laserPrefab, laserSpawn));
             lasers[i].gameObject.GetComponent<AudioSource>().Stop();
 
             laserEndPoints.Add(Instantiate(laserEndPointPrefab));
