@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +16,13 @@ public class WaveManager : MonoBehaviour
     public event EventHandler LevelCleared;
 
 
-
     public static WaveManager Instance;
+
+
 
     [SerializeField] private int _TotalWavesInLevel = 5;
 
+    
     private List<CatSpawner> _CatSpawners;
     private int _TotalCatsInWave;
     private int _CatsRemainingInWave;
@@ -40,7 +43,6 @@ public class WaveManager : MonoBehaviour
         Instance = this;
 
         CatBase.OnCatDied += OnCatDied;
-        CatBase.OnCatReachGoal += OnCatReachGoal;
 
         HUD.HideWaveDisplay();
     }
@@ -101,22 +103,23 @@ public class WaveManager : MonoBehaviour
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
 
-            if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
-                FindObjectOfType<VictoryScreen>()?.Show();
+            CheckIfPlayerBeatLevel();
         }
     }
-    public void OnCatReachGoal(object Sender, EventArgs e)
+
+    private bool CheckIfPlayerBeatLevel()
     {
-        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
-
-        if (_CatsRemainingInWave < 1)
+        if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
         {
-            HUD.HideWaveDisplay();
-            _WaveInProgress = false;
+            FindObjectOfType<VictoryScreen>()?.Show();
 
-            if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
-                FindObjectOfType<VictoryScreen>()?.Show();
+            LevelCleared?.Invoke(this, EventArgs.Empty);
+
+            return true;
         }
+
+
+        return false;
     }
 
     private void CalculateTotalCatsInWave()
@@ -138,11 +141,6 @@ public class WaveManager : MonoBehaviour
         _CatSpawners = FindObjectsByType<CatSpawner>(FindObjectsSortMode.None).ToList();
     }
 
-
-    private void OnWaveEnded(object sender, EventArgs e)
-    {
-        
-    }
 
 
     public int WaveCount { get { return _WaveNumber; } }

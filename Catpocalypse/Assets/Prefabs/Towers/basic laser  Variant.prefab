@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcefb1ddc11a08d42b2c8bc20b5614bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildCost: 100
+  buildCost: 150
   refundAmount: 50
   range: {fileID: -6198939263383239204}
   distractValue: 1

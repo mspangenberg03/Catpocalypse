@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class TowerBase : MonoBehaviour
 {
-    public static TowerBase _SelectedTowerBase;
+    public static TowerBase SelectedTowerBase;
 
     // This event fires when any tower base in the level gets selected.
     public static event EventHandler OnAnyTowerBaseWasSelected;
@@ -66,7 +66,7 @@ public class TowerBase : MonoBehaviour
         gameObject.GetComponent<Renderer>().material = towerSelected;
         IsSelected = true;
         
-        _SelectedTowerBase = this;
+        SelectedTowerBase = this;
         OnAnyTowerBaseWasSelected?.Invoke(this, EventArgs.Empty);
 
         if (enabled)
