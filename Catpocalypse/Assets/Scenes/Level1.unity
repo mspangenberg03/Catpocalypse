@@ -5814,7 +5814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxCuteness: 100
-  cutenessMeterMaxedText: {fileID: 0}
+  cutenessMeterMaxedText: {fileID: 509112153}
   _CatsDistractionThresholdDebuffPercent: 0.5
 --- !u!114 &439936122
 MonoBehaviour:
