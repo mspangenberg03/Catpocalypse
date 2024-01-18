@@ -59,7 +59,8 @@ public class Tower : MonoBehaviour
         if (collider.CompareTag("Cat"))
         {
             targets.Remove(collider.gameObject);
-            if(targets.Count > 0) {
+            if(targets.Count > 0) 
+            {
                 targets[0] = targets.First();
             }
             
@@ -90,5 +91,10 @@ public class Tower : MonoBehaviour
     {
         return refundAmount;
     }
+
+
+
+    public float BuildCost { get { return buildCost; } }
+    public float DistractValue { get { return distractValue; } }
 
 }
