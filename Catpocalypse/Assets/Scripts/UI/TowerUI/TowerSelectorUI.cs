@@ -183,6 +183,8 @@ public class TowerSelectorUI : MonoBehaviour
 
     private void CloseUI()
     {
+        _TowerInfoPopupUI.gameObject.SetActive(false); // Close the tower info popup if it is currently displayed.
+
         cutenessMeterMaxedText.gameObject.SetActive(false);
         gameObject.SetActive(false);
 

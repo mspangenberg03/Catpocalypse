@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildCost: 200
-  refundAmount: 170
+  refundPercentage: 0.85
   range: {fileID: 2129354472692616315, guid: d554a8649dfbd254b9a34f431289b329, type: 3}
   distractValue: 500
   numberOfTargets: 0
