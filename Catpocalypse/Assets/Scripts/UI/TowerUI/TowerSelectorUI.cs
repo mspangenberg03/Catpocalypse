@@ -41,7 +41,7 @@ public class TowerSelectorUI : MonoBehaviour
     private void Awake()
     {
         notEnoughFundsScreen.SetActive(false);
-
+        
         inUse = false;
     }
 

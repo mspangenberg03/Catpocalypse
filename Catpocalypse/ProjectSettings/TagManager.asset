@@ -12,6 +12,7 @@ TagManager:
   - TowerDestroyer
   - Ground
   - TowerBase
+  - TowerManipulator
   layers:
   - Default
   - TransparentFX

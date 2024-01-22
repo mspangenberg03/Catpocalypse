@@ -31,7 +31,8 @@ public class TowerBase : MonoBehaviour
     public float refundVal;
 
     private bool IsSelected = false;
-
+    public static GameObject instance;
+    
 
     private void Awake()
     {
@@ -39,10 +40,15 @@ public class TowerBase : MonoBehaviour
         hoveredOver = false;
         tower = null;
         refundVal = 0;
-
+        
+        DontDestroyOnLoad(gameObject);
+        //towerSelectorUI = GameObject.FindGameObjectWithTag("TowerSelector");
         OnAnyTowerBaseWasSelected += OnAnyTowerBaseSelected;
     }
-
+    private void Start()
+    {
+        //towerSelectorUI = GameObject.FindGameObjectWithTag("TowerSelector");
+    }
     void OnMouseEnter()
     {
        hoveredOver = true;
@@ -133,7 +139,10 @@ public class TowerBase : MonoBehaviour
         TowerBase selected = towerBase as TowerBase;
 
         // If the tower clicked on was not this one, then deselect this one.
-        if (selected != this)
+        if (selected != this && towerBase != null)
+        {
             Deselect();
+        }
+            
     }
 }

@@ -8,9 +8,9 @@ public class BackToMain : MonoBehaviour
    public void OnMainMenuButton()
     {
         GameObject[] bases = GameObject.FindGameObjectsWithTag("TowerBase");
-        foreach(GameObject tb in bases)
+        foreach (GameObject tb in bases)
         {
-            if(tb.GetComponent<TowerBase>().hasTower == true)
+            if (tb.GetComponent<TowerBase>().hasTower == true)
             {
                 tb.GetComponent<TowerBase>().DestroyTower();
             }

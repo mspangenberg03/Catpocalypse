@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
     public static GameObject instance;
-    // Start is called before the first frame update
-    void Start()
+    public int basesInScene;
+    void Awake()
     {
-        if (instance != null)
+        GameObject[] bases = GameObject.FindGameObjectsWithTag("TowerBase");
+        int baseCount = bases.Count();
+        while(baseCount > basesInScene)
         {
-            Destroy(instance);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-            instance = gameObject;
+            GameObject towerBase = bases[baseCount - 1];
+            Destroy(towerBase);
+            bases = GameObject.FindGameObjectsWithTag("TowerBase");
+            baseCount = bases.Count();
         }
         
     }
