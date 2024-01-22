@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Yarn Ball Tower
+  m_text: '
 
 '
   m_isRightToLeft: 0
@@ -283,13 +283,14 @@ GameObject:
   - component: {fileID: 1521347358667468312}
   - component: {fileID: 2876803665240280106}
   - component: {fileID: 5975196450123017578}
+  - component: {fileID: 9134922607159164636}
   m_Layer: 5
   m_Name: TowerSelectorBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4509841520001507126
 RectTransform:
   m_ObjectHideFlags: 0
@@ -392,6 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildTowerUI: {fileID: 1533922874458918992}
+  _TowerInfoPopupUI: {fileID: 0}
   laserPointerTowerBtn: {fileID: 1694230466953151106}
   scratchingPostTowerBtn: {fileID: 8374352204112249897}
   cucumberThrowerTowerBtn: {fileID: 5334984675160409860}
@@ -402,6 +404,23 @@ MonoBehaviour:
   playerMoneyManager: {fileID: 0}
   cutenessMeterMaxedText: {fileID: 0}
   inUse: 0
+--- !u!114 &9134922607159164636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533922874458918992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01364a922c8701d40bb20a186e6c964a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPointerTowerPrefab: {fileID: 727204009191128378, guid: 0c6d2abd822c48344af75d65f4f444c9, type: 3}
+  scratchingPostTowerPrefab: {fileID: 8008746575148010759, guid: e773ab17325c9a7428190c14e794b5d7, type: 3}
+  cucumberTowerPrefab: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
+  stringWaverTowerPrefab: {fileID: 8043389372904318211, guid: 26fc2ecdaca6a2d48b8d900808be3691, type: 3}
+  yarnBallTowerPrefab: {fileID: 6053846418755319415, guid: b24ec43d900efa548b8861aaed8dc24a, type: 3}
 --- !u!1 &1651818031739323411
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,8 +497,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -496,13 +515,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 46.4
+  m_fontSizeBase: 46.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -684,6 +703,7 @@ GameObject:
   - component: {fileID: 3843030713217104264}
   - component: {fileID: 5342688712228786779}
   - component: {fileID: 5334984675160409860}
+  - component: {fileID: 4839997620192357034}
   m_Layer: 5
   m_Name: CucumberThrowerTowerBtn
   m_TagString: Untagged
@@ -706,9 +726,9 @@ RectTransform:
   - {fileID: 8750023599456852843}
   m_Father: {fileID: 4509841520001507126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3843030713217104264
@@ -805,6 +825,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4839997620192357034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2981293479221151330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f146db981a58469cf295f191849d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerType: 2
 --- !u!1 &2991201021366004947
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,10 +872,10 @@ RectTransform:
   - {fileID: 1043541077598696480}
   m_Father: {fileID: 4509841520001507126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1200, y: -75}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 178.6, y: 67.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1439220788785584805
 CanvasRenderer:
@@ -872,8 +905,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: fe0904a2f9eddbc4cac953cbd2eafd7d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1086,6 +1119,7 @@ GameObject:
   - component: {fileID: 1319164638472224803}
   - component: {fileID: 70275170861748922}
   - component: {fileID: 1694230466953151106}
+  - component: {fileID: 7531706449326724840}
   m_Layer: 5
   m_Name: LaserPointerTowerBtn
   m_TagString: Untagged
@@ -1108,9 +1142,9 @@ RectTransform:
   - {fileID: 8716883336049193890}
   m_Father: {fileID: 4509841520001507126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 720, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1319164638472224803
@@ -1207,6 +1241,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7531706449326724840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101567529833112147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f146db981a58469cf295f191849d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerType: 0
 --- !u!1 &5342457479019413733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,6 +1266,7 @@ GameObject:
   - component: {fileID: 6583000040587151901}
   - component: {fileID: 7348113425700141527}
   - component: {fileID: 8374352204112249897}
+  - component: {fileID: 8916105242589876896}
   m_Layer: 5
   m_Name: ScratchingPostTowerBtn
   m_TagString: Untagged
@@ -1241,9 +1289,9 @@ RectTransform:
   - {fileID: 6990570521402263780}
   m_Father: {fileID: 4509841520001507126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 840, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6583000040587151901
@@ -1340,6 +1388,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8916105242589876896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5342457479019413733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f146db981a58469cf295f191849d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerType: 1
 --- !u!1 &7059679136145105579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,6 +1413,7 @@ GameObject:
   - component: {fileID: 7417532787653959955}
   - component: {fileID: 5652711364904446924}
   - component: {fileID: 3506645275503972379}
+  - component: {fileID: 2890164681883893382}
   m_Layer: 5
   m_Name: StringWaverTowerBtn
   m_TagString: Untagged
@@ -1374,9 +1436,9 @@ RectTransform:
   - {fileID: 5982917185631787146}
   m_Father: {fileID: 4509841520001507126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1080, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7417532787653959955
@@ -1473,6 +1535,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2890164681883893382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7059679136145105579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f146db981a58469cf295f191849d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerType: 3
 --- !u!1 &7931110161546966873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1621,6 +1696,7 @@ GameObject:
   - component: {fileID: 2287377784879760073}
   - component: {fileID: 5530125057911031163}
   - component: {fileID: 6261496040394826349}
+  - component: {fileID: 4332806840030158217}
   m_Layer: 5
   m_Name: YarnBallTowerBtn
   m_TagString: Untagged
@@ -1643,9 +1719,9 @@ RectTransform:
   - {fileID: 9162937450700691909}
   m_Father: {fileID: 4509841520001507126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1140, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2287377784879760073
@@ -1742,3 +1818,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4332806840030158217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8674152792387774947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f146db981a58469cf295f191849d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerType: 4

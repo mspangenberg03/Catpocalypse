@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: 89379575}
   - component: {fileID: 89379574}
   - component: {fileID: 89379573}
+  - component: {fileID: 89379576}
   m_Layer: 5
   m_Name: YarnBallTowerBtn
   m_TagString: Untagged
@@ -521,6 +522,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89379571}
   m_CullTransparentMesh: 1
+--- !u!114 &89379576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89379571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f146db981a58469cf295f191849d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerType: 4
 --- !u!1 &135566101
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,6 +948,7 @@ RectTransform:
   m_Children:
   - {fileID: 1413049961}
   - {fileID: 1908564805}
+  - {fileID: 1386493931}
   - {fileID: 1409067347}
   - {fileID: 135566102}
   - {fileID: 1315858785}
@@ -2714,6 +2729,7 @@ GameObject:
   - component: {fileID: 527890160}
   - component: {fileID: 527890159}
   - component: {fileID: 527890158}
+  - component: {fileID: 527890161}
   m_Layer: 5
   m_Name: StringWaverTowerBtn
   m_TagString: Untagged
@@ -2835,6 +2851,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527890156}
   m_CullTransparentMesh: 1
+--- !u!114 &527890161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527890156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f146db981a58469cf295f191849d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerType: 3
 --- !u!1 &597612415
 GameObject:
   m_ObjectHideFlags: 0
@@ -2980,6 +3009,7 @@ GameObject:
   - component: {fileID: 678951882}
   - component: {fileID: 678951881}
   - component: {fileID: 678951880}
+  - component: {fileID: 678951883}
   m_Layer: 5
   m_Name: LaserPointerTowerBtn
   m_TagString: Untagged
@@ -3101,6 +3131,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678951878}
   m_CullTransparentMesh: 1
+--- !u!114 &678951883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678951878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f146db981a58469cf295f191849d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerType: 0
 --- !u!1 &694989979
 GameObject:
   m_ObjectHideFlags: 0
@@ -4961,6 +5004,7 @@ GameObject:
   - component: {fileID: 1085426212}
   - component: {fileID: 1085426211}
   - component: {fileID: 1085426210}
+  - component: {fileID: 1085426214}
   m_Layer: 5
   m_Name: CucumberThrowerTowerBtn
   m_TagString: Untagged
@@ -5082,6 +5126,19 @@ RectTransform:
   m_AnchoredPosition: {x: 1020, y: -75}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1085426214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085426209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f146db981a58469cf295f191849d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerType: 2
 --- !u!1 &1121504164
 GameObject:
   m_ObjectHideFlags: 0
@@ -5361,6 +5418,7 @@ GameObject:
   - component: {fileID: 1145114906}
   - component: {fileID: 1145114905}
   - component: {fileID: 1145114904}
+  - component: {fileID: 1145114908}
   m_Layer: 5
   m_Name: ScratchingPostTowerBtn
   m_TagString: Untagged
@@ -5482,6 +5540,19 @@ RectTransform:
   m_AnchoredPosition: {x: 900, y: -75}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1145114908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145114903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f146db981a58469cf295f191849d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerType: 1
 --- !u!1 &1157299102
 GameObject:
   m_ObjectHideFlags: 0
@@ -5734,6 +5805,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fc565869740388b4ea1db761b8efb861, type: 3}
   - {fileID: 8300000, guid: 9bf3e1981839abe44b7de5e99b0b8719, type: 3}
   - {fileID: 8300000, guid: c29e8e7a83e5e5e448c51babfe028cf6, type: 3}
+  defeatPanel: {fileID: 0}
 --- !u!114 &1172394861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5762,9 +5834,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Money: 200
-  _NormalCatPayAmount: 5
-  _LightCatPayAmount: 2
-  _HeavyCatPayAmount: 10
 --- !u!1 &1201431539
 GameObject:
   m_ObjectHideFlags: 0
@@ -6779,6 +6848,119 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4004710163520278713, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
   m_PrefabInstance: {fileID: 275192075}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1386493929
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 170588548}
+    m_Modifications:
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1270
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -370
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7152923514413941475, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+      propertyPath: m_Name
+      value: TowerInfoPopup
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+--- !u!114 &1386493930 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5841985580384689949, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+  m_PrefabInstance: {fileID: 1386493929}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ad5c983c36f4c4191acfd9764e18a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &1386493931 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2287369375792108447, guid: 28402dff37ca3fa458f99a94c04a34ad, type: 3}
+  m_PrefabInstance: {fileID: 1386493929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1388924961
 GameObject:
   m_ObjectHideFlags: 0
@@ -7001,6 +7183,7 @@ GameObject:
   - component: {fileID: 1409067348}
   - component: {fileID: 1409067351}
   - component: {fileID: 1409067350}
+  - component: {fileID: 1409067352}
   m_Layer: 5
   m_Name: TowerSelectorBar
   m_TagString: Untagged
@@ -7084,6 +7267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildTowerUI: {fileID: 1409067346}
+  _TowerInfoPopupUI: {fileID: 1386493930}
   laserPointerTowerBtn: {fileID: 678951880}
   scratchingPostTowerBtn: {fileID: 1145114904}
   cucumberThrowerTowerBtn: {fileID: 1085426210}
@@ -7120,6 +7304,23 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1409067352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409067346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01364a922c8701d40bb20a186e6c964a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPointerTowerPrefab: {fileID: 727204009191128378, guid: 0c6d2abd822c48344af75d65f4f444c9, type: 3}
+  scratchingPostTowerPrefab: {fileID: 8008746575148010759, guid: e773ab17325c9a7428190c14e794b5d7, type: 3}
+  cucumberTowerPrefab: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
+  stringWaverTowerPrefab: {fileID: 8043389372904318211, guid: 26fc2ecdaca6a2d48b8d900808be3691, type: 3}
+  yarnBallTowerPrefab: {fileID: 6053846418755319415, guid: b24ec43d900efa548b8861aaed8dc24a, type: 3}
 --- !u!1 &1413049960
 GameObject:
   m_ObjectHideFlags: 0

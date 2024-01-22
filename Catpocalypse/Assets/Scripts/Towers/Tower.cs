@@ -1,18 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
 using UnityEngine;
-using UnityEditor;
-using System.Runtime.CompilerServices;
-using System;
+
 
 public class Tower : MonoBehaviour
 {
 
     [SerializeField]
     protected float buildCost;
+    
+    [Tooltip("This is the percentage of the cost that is refunded when the player destroys the tower.")]
+    [Range(0f, 1f)]
     [SerializeField]
-    protected float refundAmount;
+    protected float refundPercentage = 0.85f;
+    
     [SerializeField]
     protected SphereCollider range;
     [SerializeField]
@@ -22,6 +26,8 @@ public class Tower : MonoBehaviour
 
     protected Vector3 targetDirection;
     public List<GameObject> targets;
+
+
 
     private void OnTriggerEnter(Collider collider)
     {
@@ -33,14 +39,14 @@ public class Tower : MonoBehaviour
 
     void OnMouseEnter()
     {
-        this.gameObject.GetComponentInParent<TowerBase>().hoveredOver = true;
-        this.gameObject.GetComponent<Renderer>().material = this.gameObject.GetComponentInParent<TowerBase>().towerHovered;
+        gameObject.GetComponentInParent<TowerBase>().hoveredOver = true;
+        gameObject.GetComponent<Renderer>().material = gameObject.GetComponentInParent<TowerBase>().towerHovered;
     }
 
     void OnMouseExit()
     {
-        this.gameObject.GetComponentInParent<TowerBase>().hoveredOver = false;
-        this.gameObject.GetComponent<Renderer>().material = this.gameObject.GetComponentInParent<TowerBase>().towerNotHovered;
+        gameObject.GetComponentInParent<TowerBase>().hoveredOver = false;
+        gameObject.GetComponent<Renderer>().material = gameObject.GetComponentInParent<TowerBase>().towerNotHovered;
     }
 
     void OnMouseUpAsButton()
@@ -59,7 +65,8 @@ public class Tower : MonoBehaviour
         if (collider.CompareTag("Cat"))
         {
             targets.Remove(collider.gameObject);
-            if(targets.Count > 0) {
+            if(targets.Count > 0) 
+            {
                 targets[0] = targets.First();
             }
             
@@ -86,9 +93,14 @@ public class Tower : MonoBehaviour
         return buildCost;
     }
 
-    public float GetRefundValue()
+    public float GetRefundPercentage()
     {
-        return refundAmount;
+        return refundPercentage;
     }
+
+
+
+    public float BuildCost { get { return buildCost; } }
+    public float DistractValue { get { return distractValue; } }
 
 }

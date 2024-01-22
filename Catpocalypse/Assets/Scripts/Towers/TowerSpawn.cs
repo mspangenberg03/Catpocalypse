@@ -77,7 +77,10 @@ public class TowerSpawn : MonoBehaviour
         if(towerBase.tower == null)
         {
             towerBase.tower = Instantiate(laserPointerTowerPrefab, transform, true);
-            towerBase.refundVal = laserPointerTowerPrefab.GetComponent<LaserPointerTower>().GetRefundValue();
+
+            LaserPointerTower laserPointerTower = laserPointerTowerPrefab.GetComponent<LaserPointerTower>();
+            towerBase.refundVal = laserPointerTower.BuildCost * laserPointerTower.GetRefundPercentage();
+
             towerBase.tower.transform.position = transform.position;
             towerBase.hasTower = true;
         }
@@ -89,7 +92,10 @@ public class TowerSpawn : MonoBehaviour
         if (towerBase.tower == null)
         {
             towerBase.tower = Instantiate(scratchPostTowerPrefab, transform, true);
-            towerBase.refundVal = scratchPostTowerPrefab.GetComponent<ScratchingPostTower>().GetRefundValue();
+
+            ScratchingPostTower scratchingPostTower = scratchPostTowerPrefab.GetComponent<ScratchingPostTower>();
+            towerBase.refundVal = scratchingPostTower.BuildCost * scratchingPostTower.GetRefundPercentage();
+
             towerBase.tower.transform.position = transform.position;
             towerBase.hasTower = true;
         }
@@ -101,7 +107,10 @@ public class TowerSpawn : MonoBehaviour
         if (towerBase.tower == null)
         {
             towerBase.tower = Instantiate(cucumberTowerPrefab, transform, true);
-            towerBase.refundVal = cucumberTowerPrefab.GetComponent<CucumberTower>().GetRefundValue();
+
+            CucumberTower cucumberTower = cucumberTowerPrefab.GetComponent<CucumberTower>();
+            towerBase.refundVal = cucumberTower.BuildCost * cucumberTower.GetRefundPercentage();
+
             towerBase.tower.transform.position = transform.position;
             towerBase.hasTower = true;
         }
@@ -112,25 +121,31 @@ public class TowerSpawn : MonoBehaviour
     {
         if (towerBase.tower == null)
         {
-            towerBase.tower = Instantiate(stringWaverTowerPrefab, this.transform);
-            towerBase.refundVal = stringWaverTowerPrefab.GetComponent<StringWaverTower>().GetRefundValue();
-            towerBase.tower.transform.position = this.transform.position;
+            towerBase.tower = Instantiate(stringWaverTowerPrefab, transform, true);
+
+            StringWaverTower stringWaverTower = stringWaverTowerPrefab.GetComponent<StringWaverTower>();
+            towerBase.refundVal = stringWaverTower.BuildCost * stringWaverTower.GetRefundPercentage();
+
+            towerBase.tower.transform.position = transform.position;
             towerBase.hasTower = true;
         }
 
         yield return new WaitForSeconds(2f);
     }
-     IEnumerator SpawnYarnBallTower()
- {
-         if (towerBase.tower == null)
-         {
-             towerBase.tower = Instantiate(yarnBallTowerPrefab, this.transform);
-             towerBase.refundVal = yarnBallTowerPrefab.GetComponent<YarnBallTower>().GetRefundValue();
-         towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x, this.transform.position.y + 1, towerBase.tower.transform.position.z);
-             towerBase.hasTower = true;
-         }
+    IEnumerator SpawnYarnBallTower()
+    {
+        if (towerBase.tower == null)
+        {
+            towerBase.tower = Instantiate(yarnBallTowerPrefab, transform, true);
 
-         yield return new WaitForSeconds(2f);
+            YarnBallTower yarnBallTower = yarnBallTowerPrefab.GetComponent<YarnBallTower>();
+            towerBase.refundVal = yarnBallTower.BuildCost * yarnBallTower.GetRefundPercentage();
+
+            towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x, transform.position.y + 1, towerBase.tower.transform.position.z);
+            towerBase.hasTower = true;
+        }
+
+        yield return new WaitForSeconds(2f);
   
- }
+    }
 }
