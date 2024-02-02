@@ -11,7 +11,7 @@ public class TowerManager : MonoBehaviour
         
         if (instance != null)
         {
-            Destroy(gameObject);
+            Destroy(instance);
         }
         else
         {

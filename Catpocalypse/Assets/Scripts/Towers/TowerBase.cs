@@ -42,7 +42,6 @@ public class TowerBase : MonoBehaviour
         tower = null;
         refundVal = 0;
         
-        //towerSelectorUI = GameObject.FindGameObjectWithTag("TowerSelector");
         OnAnyTowerBaseWasSelected += OnAnyTowerBaseSelected;
     }
     private void Start()
@@ -52,8 +51,12 @@ public class TowerBase : MonoBehaviour
     }
     private void Update()
     {
-        towerSelectorUI = FindObjectOfType<TowerSelectorUI>(true).gameObject;
-        towerDestroyerUI = FindObjectOfType<TowerDestroyerUI>(true).gameObject;
+        if(towerSelectorUI == null || towerDestroyerUI == null)
+        {
+            towerSelectorUI = FindObjectOfType<TowerSelectorUI>(true).gameObject;
+            towerDestroyerUI = FindObjectOfType<TowerDestroyerUI>(true).gameObject;
+        }
+        
     }
     void OnMouseEnter()
     {
