@@ -6,19 +6,19 @@ public class CanvasManager : MonoBehaviour
 {
     public static GameObject instance;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        //DontDestroyOnLoad(gameObject);
-        //if(instance != null)
-        //{
-        //    Destroy(instance);
-        //    instance = gameObject;
-
-        //}
-        //else
-        //{
-        //    DontDestroyOnLoad(instance);
-        //}
+       
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            //instance = gameObject;
+            
+        }
 
     }
 

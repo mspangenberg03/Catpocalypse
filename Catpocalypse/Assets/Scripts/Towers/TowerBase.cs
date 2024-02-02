@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -31,7 +32,7 @@ public class TowerBase : MonoBehaviour
     public float refundVal;
 
     private bool IsSelected = false;
-    public static GameObject instance;
+    //public static GameObject instance;
     
 
     private void Awake()
@@ -41,18 +42,22 @@ public class TowerBase : MonoBehaviour
         tower = null;
         refundVal = 0;
         
-        DontDestroyOnLoad(gameObject);
         //towerSelectorUI = GameObject.FindGameObjectWithTag("TowerSelector");
         OnAnyTowerBaseWasSelected += OnAnyTowerBaseSelected;
     }
     private void Start()
     {
-        //towerSelectorUI = GameObject.FindGameObjectWithTag("TowerSelector");
+        towerSelectorUI = FindObjectOfType<TowerSelectorUI>(true).gameObject;
+        
+    }
+    private void Update()
+    {
+        towerSelectorUI = FindObjectOfType<TowerSelectorUI>(true).gameObject;
+        towerDestroyerUI = FindObjectOfType<TowerDestroyerUI>(true).gameObject;
     }
     void OnMouseEnter()
     {
-       hoveredOver = true;
-
+        hoveredOver = true;
         // Don't set the hover color if the tower is selected.
         if (!IsSelected)
             gameObject.GetComponent<Renderer>().material= towerHovered;
@@ -79,7 +84,7 @@ public class TowerBase : MonoBehaviour
         {
             if(hoveredOver){
                 if(!hasTower){
-                    if(towerSelectorUI.gameObject.activeSelf)
+                    if (towerSelectorUI.gameObject.activeSelf)
                     {
                         towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
                     }
@@ -145,4 +150,6 @@ public class TowerBase : MonoBehaviour
         }
             
     }
+
+    
 }
