@@ -1,58 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ScratchingPostTower : Tower
 {
+
+    [Header("Targeting Settings")]
+
+    [Tooltip("The rate new scratching posts are launched in seconds")]
+    [SerializeField]
+    [Min(0f)]
+    private float _RateOfFire;
+
+    [Tooltip("The object the player sees when placing their target location")]
+    [SerializeField]
+    private GameObject _PlayerTarget;
+
+    [Header("Launcher Settings")]
+
+    [Tooltip("The ScratchingPost prefab to launch")]
+    [SerializeField]
+    private GameObject _ScratchPost;
+
+    [Tooltip("The time to wait between post destruction and launch")]
+    [Min(0f)]
+    [SerializeField]
+    private float _TimeBetweenLaunches;
+
+    public bool PostExists = false;
+
+    public void Update()
+    {
+        if(targets.Count <= 0)
+        {
+            return;
+        }
+        if (!PostExists)
+        {
+            PostExists = true;
+            StartCoroutine(LaunchPost());
+        }
+    }
+
     
-    private float speedDebuff = 1.8f;
 
-    private void Start()
+    private IEnumerator  LaunchPost()
     {
-        
+        yield return new WaitForSeconds(_TimeBetweenLaunches);
+        Instantiate(_ScratchPost, _PlayerTarget.transform.position, Quaternion.identity);
     }
-    //Slows the cat when it enters range
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Cat")
-        {
-            targets.Add(other.gameObject);
-            if(other.gameObject.GetComponent<CatBase>().isSlowed == false)
-            {
-                other.gameObject.GetComponent<NavMeshAgent>().speed = other.gameObject.GetComponent<NavMeshAgent>().speed / speedDebuff;
-                other.gameObject.GetComponent<CatBase>().isSlowed = true;
-            }
-            
-            StartCoroutine(DistractCats(other.gameObject));
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Cat")
-        {
-            targets.Remove(other.gameObject);
-            other.gameObject.GetComponent<NavMeshAgent>().speed = other.gameObject.GetComponent<NavMeshAgent>().speed*speedDebuff;
-            other.gameObject.GetComponent<CatBase>().isSlowed = false;
-        }
-    }
-    IEnumerator DistractCats(GameObject cat)
-    {
 
 
-        yield return new WaitForSeconds(1f);
-        if(cat != null && targets.Contains(cat))
-        {
-            cat.GetComponent<CatBase>().DistractCat(this.distractValue, this);
-            StartCoroutine(DistractCats(cat));
-        }
-        
-                
-                
-            
-            
-        
-        
-        
-    }
+
 }
