@@ -269,4 +269,12 @@ public class CatBase : MonoBehaviour
 
     public float DistractionReward { get { return distractReward; } }
     public bool IsDead { get; private set; }
+    public WayPoint NextWayPoint 
+    { 
+        get { return _NextWayPoint; } 
+        set
+        { 
+            _NextWayPoint = value; 
+        }
+    }
 }
