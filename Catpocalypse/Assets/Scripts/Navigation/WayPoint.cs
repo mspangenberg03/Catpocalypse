@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+
 
 public class WayPoint : MonoBehaviour
 {
@@ -25,7 +27,7 @@ public class WayPoint : MonoBehaviour
     {
         float arrowHeadLength = 0.5f;
         float arrowHeadWidth = 0.5f;
-        float verticalOffset = 0.5f;
+        float verticalOffset = 0.75f;   // Sets how much to offset the gizmmos vertically. This is used to make them appear a little bit above the ground in the editor.
 
 
         Vector3 wayPointGizmoPos = transform.position + Vector3.up * verticalOffset;

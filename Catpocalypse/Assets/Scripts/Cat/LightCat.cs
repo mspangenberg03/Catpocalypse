@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
+[LaserTowerCanTarget(true)]
 public class LightCat : CatBase
 {
 
