@@ -27,14 +27,86 @@ public class Tower : MonoBehaviour
     protected Vector3 targetDirection;
     public List<GameObject> targets;
 
+    // This property is currently only used by the laser pointer tower, but I put it
+    // here in Tower in case any other tower needs it later.
+    protected Type _TargetCatType = typeof(NormalCat);
 
+    protected SphereCollider _Collider;
+
+
+
+    private void OnEnable()
+    {
+        // This corrects the problem with our prefabs. For example, the laser tower
+        // has a scale of 500. It's collider has a radius of 6. This effectively means
+        // the true size of the collider is radius = 30,000. This adjusts the collider
+        // radius by simply dividing it by the gameObject's scale. It doesn't matter
+        // whether we use x, y, or z here since it is a sphere.
+        _Collider = GetComponent<SphereCollider>();
+        _Collider.radius = _Collider.radius / transform.localScale.x;
+    }
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag.Equals("Cat"))
+        if (collider.CompareTag("Cat"))
         {
-            targets.Add(collider.gameObject);
+            OnNewTargetEnteredRange(collider.gameObject);
         }
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        if (collider.CompareTag("Cat"))
+        {
+            OnTargetWentOutOfRange(collider.gameObject);
+
+            targets.Remove(collider.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// This function exists so that it can be overriden in subclasses. 
+    /// </summary>
+    /// <remarks>
+    /// The purpose of is function is to allow a given tower type to have its own filters on targets.
+    /// Specifically I added this function since the Laser Pointer Tower needs to only care about cats
+    /// of a certain type. So it overrides this function to insert it's own functionality.
+    /// 
+    /// NOTE: Here in the tower base class this function simply adds the target to the list,
+    ///       as the base class doesn't need to do any filtering of targets that are in range.
+    ///       This defines the default behavior for towers that do not override this function.
+    /// </remarks>
+    /// <param name="target">The target game object to verify and add to the list.</param>
+    protected virtual void OnNewTargetEnteredRange(GameObject target)
+    {
+        targets.Add(target);
+    }
+
+    /// <summary>
+    /// This function is just an event hander that subclasses can override to be notified when
+    /// a target moves out of range. So it's like NewTargetEnteredRange(), but the opposite.
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// NOTE: Subclasses DO NOT need to remove the target from targets.
+    ///       This class does that right after it calls this event handler.
+    ///       For example, laser tower has an ActiveTargets list, so it must remove
+    ///       said target from that list in its override of this method.
+    /// </remarks>
+    /// <param name="target"></param>
+    protected virtual void OnTargetWentOutOfRange(GameObject target)
+    {
+        Debug.Log("Out");
+    }
+
+    /// <summary>
+    /// This function is an event handler that subclasses can override to be
+    /// notified when a target has "died".
+    /// </summary>
+    /// <param name="target"></param>
+    protected virtual void OnTargetHasDied(GameObject target)
+    {
+
     }
 
     void OnMouseEnter()
@@ -59,23 +131,10 @@ public class Tower : MonoBehaviour
         }
     }
 
-
-    private void OnTriggerExit(Collider collider)
-    {
-        if (collider.CompareTag("Cat"))
-        {
-            targets.Remove(collider.gameObject);
-            if(targets.Count > 0) 
-            {
-                targets[0] = targets.First();
-            }
-            
-           
-        }
-    }
-
     private void OnCatDied(object sender, EventArgs e)
     {
+        OnTargetHasDied((GameObject) sender);
+
         targets.Remove(sender as GameObject);
     }
 
@@ -103,4 +162,18 @@ public class Tower : MonoBehaviour
     public float BuildCost { get { return buildCost; } }
     public float DistractValue { get { return distractValue; } }
 
+
+    public Type TargetCatType
+    {
+        get { return _TargetCatType; }
+        set 
+        {
+            if (!typeof(CatBase).IsAssignableFrom(value))
+            {
+                throw new Exception($"The passed in cat type is not a subclass of CatBase! The tower in question is \"{gameObject.name}\" of type {this.GetType()}");
+            }
+
+            _TargetCatType = value; 
+        }
+    }
 }
