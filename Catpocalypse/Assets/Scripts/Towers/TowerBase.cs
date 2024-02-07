@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Serialization;
+
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 
 
 public class TowerBase : MonoBehaviour
@@ -32,8 +33,8 @@ public class TowerBase : MonoBehaviour
     public float refundVal;
 
     private bool IsSelected = false;
-    //public static GameObject instance;
-    
+
+
 
     private void Awake()
     {
@@ -41,26 +42,19 @@ public class TowerBase : MonoBehaviour
         hoveredOver = false;
         tower = null;
         refundVal = 0;
-        
+
         OnAnyTowerBaseWasSelected += OnAnyTowerBaseSelected;
     }
-    private void Start()
-    {
-        towerSelectorUI = FindObjectOfType<TowerSelectorUI>(true).gameObject;
-        
-    }
-    private void Update()
-    {
-        if(towerSelectorUI == null || towerDestroyerUI == null)
-        {
-            towerSelectorUI = FindObjectOfType<TowerSelectorUI>(true).gameObject;
-            towerDestroyerUI = FindObjectOfType<TowerDestroyerUI>(true).gameObject;
-        }
-        
-    }
+
     void OnMouseEnter()
     {
+        // Check if the mouse is over a UI element. If so, then we should ignore the click.
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+
         hoveredOver = true;
+
         // Don't set the hover color if the tower is selected.
         if (!IsSelected)
             gameObject.GetComponent<Renderer>().material= towerHovered;
@@ -68,6 +62,13 @@ public class TowerBase : MonoBehaviour
 
     void OnMouseExit()
     {
+        // NOTE: I did not add the EventSystem check here like I did in OnMouseEnter() and OnMouseUpAsButton().
+        //       This is because we don't need it here. If we put it here, it will cause the issue that you 
+        //       could move the mouse off of the tower base, and it will then stay highlighted errouneously
+        //       if the mouse stays on a UI element while moving off of the tower base.
+
+
+
         hoveredOver = false;
         
         // Don't restore normal material unless the tower is not selected.
@@ -77,6 +78,11 @@ public class TowerBase : MonoBehaviour
 
     void OnMouseUpAsButton()
     {
+        // Check if the mouse is over a UI element. If so, then we should ignore the click.
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+
         gameObject.GetComponent<Renderer>().material = towerSelected;
         IsSelected = true;
         
@@ -87,7 +93,7 @@ public class TowerBase : MonoBehaviour
         {
             if(hoveredOver){
                 if(!hasTower){
-                    if (towerSelectorUI.gameObject.activeSelf)
+                    if(towerSelectorUI.gameObject.activeSelf)
                     {
                         towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
                     }
@@ -147,12 +153,9 @@ public class TowerBase : MonoBehaviour
         TowerBase selected = towerBase as TowerBase;
 
         // If the tower clicked on was not this one, then deselect this one.
-        if (selected != this && towerBase != null)
-        {
+        if (selected != this)
             Deselect();
-        }
-            
     }
 
-    
+
 }
