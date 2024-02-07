@@ -8,16 +8,18 @@ public class TowerManager : MonoBehaviour
     public static GameObject instance;
     void Awake()
     {
-        
+        //instance = gameObject;
         if (instance != null)
         {
-            Destroy(instance);
+            Destroy(instance.gameObject);
+            //instance = gameObject;
         }
         else
         {
             DontDestroyOnLoad(gameObject);
-            
+            instance = gameObject;
         }
+        //
     }
 
 }
