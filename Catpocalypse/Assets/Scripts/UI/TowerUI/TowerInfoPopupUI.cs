@@ -36,7 +36,7 @@ public class TowerInfoPopupUI : MonoBehaviour
     public void UpdatePopupUI(TowerInfo towerInfo)
     {
         //_Icon.sprite = towerInfo.Icon;
-        _TitleText.text = InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(TowerInfo.TowerTypes), towerInfo.TowerType)) + " Tower";
+        _TitleText.text = InsertSpacesBeforeCapitalLetters(towerInfo.DisplayName);
         _DescriptionText.text = towerInfo.Description;
         _CostText.text = $"${towerInfo.Cost}";
         _DamageText.text = InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(TowerInfo.Ratings), towerInfo.Damage));

@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb99adf0275315242b515b3dc136363f, type: 3}
-  m_Name: TowerInfo - Cucumber Tower
+  m_Name: TowerInfo - Yarn Ball Tower
   m_EditorClassIdentifier: 
-  TowerType: 2
-  Description: ' The standard tower, it launches cucumbers to scare the more cowardly
-    cats while the braver cats play with them!'
-  Cost: 100
-  Damage: 2
-  Range: 4
-  AOE_Range: 0
-  FireRate: 2
-  Special: Cheap
+  TowerType: 4
+  DisplayName: Yarn Ball Tower
+  Description: A tower that gathers strings of Yarn are made into YarnBalls and are
+    prepared to be thrown.
+  Cost: 150
+  Damage: 0
+  Range: 2
+  AOE_Range: 3
+  FireRate: 0
+  Special: ???

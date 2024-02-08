@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb99adf0275315242b515b3dc136363f, type: 3}
-  m_Name: TowerInfo - Laser Pointer Tower
+  m_Name: TowerInfo - String Waver Tower
   m_EditorClassIdentifier: 
-  TowerType: 0
-  Description: This tower's guiding laser lets you lead a type of cat to a chosen
-    direction in an intersection!
-  Cost: 150
-  Damage: 0
+  TowerType: 3
+  DisplayName: String Waver Tower
+  Description: This tower makes a hypnotic yarn ball and waves it around nearby cats
+    doing massive AOE distraction to them!
+  Cost: 225
+  Damage: 2
   Range: 3
-  AOE_Range: 0
-  FireRate: 4
-  Special: Can lead a type of cat to another lane/road!
+  AOE_Range: 4
+  FireRate: 1
+  Special: High AOE damage

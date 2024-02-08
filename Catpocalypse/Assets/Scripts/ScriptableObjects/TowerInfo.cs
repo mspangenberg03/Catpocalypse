@@ -38,6 +38,7 @@ public class TowerInfo : ScriptableObject
 
 
     public TowerTypes TowerType;
+    public string DisplayName;
     public string Description;
     public float Cost;
     public Ratings Damage;
