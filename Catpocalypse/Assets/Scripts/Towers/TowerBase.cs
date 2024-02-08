@@ -34,8 +34,6 @@ public class TowerBase : MonoBehaviour
 
     private bool IsSelected = false;
 
-
-
     private void Awake()
     {
         hasTower = false;
@@ -88,6 +86,7 @@ public class TowerBase : MonoBehaviour
         
         SelectedTowerBase = this;
         OnAnyTowerBaseWasSelected?.Invoke(this, EventArgs.Empty);
+        OnAnyTowerBaseWasSelected?.Invoke(gameObject, EventArgs.Empty);
 
         if (enabled)
         {
@@ -142,6 +141,11 @@ public class TowerBase : MonoBehaviour
 
     }
 
+    public void OnDestroy()
+    {
+        OnAnyTowerBaseWasSelected -= OnAnyTowerBaseSelected;
+    }
+
     public void Deselect()
     {
         IsSelected = false;
@@ -150,10 +154,11 @@ public class TowerBase : MonoBehaviour
 
     public void OnAnyTowerBaseSelected(object towerBase, EventArgs e)
     {
-        TowerBase selected = towerBase as TowerBase;
+        GameObject selected = towerBase as GameObject;
+
 
         // If the tower clicked on was not this one, then deselect this one.
-        if (selected != this)
+        if (selected != this.gameObject)
             Deselect();
     }
 
