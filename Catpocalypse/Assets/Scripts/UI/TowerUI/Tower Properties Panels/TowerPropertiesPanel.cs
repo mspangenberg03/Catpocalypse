@@ -31,6 +31,9 @@ public class TowerPropertiesPanel : MonoBehaviour
         if (TowerBase.SelectedTowerBase == null)
             return;
 
+        if (TowerBase.SelectedTowerBase.tower == null)
+            return;
+
 
         bool showLaserPropertiesUI = TowerBase.SelectedTowerBase.tower.GetComponent<LaserPointerTower>() != null;
         _PropertiesUI_Laser.gameObject.SetActive(showLaserPropertiesUI);
