@@ -45,6 +45,10 @@ public class PropertiesUI_LaserPointerTower : MonoBehaviour
         if (TowerBase.SelectedTowerBase == null)
             return;
 
+        if(TowerBase.SelectedTowerBase.tower == null)
+        {
+            return;
+        }
 
         _LaserPointerTower = TowerBase.SelectedTowerBase.tower.GetComponent<LaserPointerTower>();
         if (_LaserPointerTower == null)
