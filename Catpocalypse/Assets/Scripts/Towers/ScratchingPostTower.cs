@@ -14,9 +14,9 @@ public class ScratchingPostTower : Tower
     [Min(0f)]
     private float _RateOfFire;
 
-    [Tooltip("The object the player sees when placing their target location")]
+    [Tooltip("The Prefab for the object the player sees when placing their target location")]
     [SerializeField]
-    private GameObject _PlayerTarget;
+    private GameObject _PlayerTargetPrefab;
 
     [Header("Launcher Settings")]
 
@@ -33,6 +33,7 @@ public class ScratchingPostTower : Tower
 
     public void Update()
     {
+       
         if(targets.Count <= 0)
         {
             return;
@@ -49,7 +50,7 @@ public class ScratchingPostTower : Tower
     private IEnumerator  LaunchPost()
     {
         yield return new WaitForSeconds(_TimeBetweenLaunches);
-        Instantiate(_ScratchPost, _PlayerTarget.transform.position, Quaternion.identity);
+        Instantiate(_ScratchPost, targets[0].transform.position, Quaternion.identity).GetComponent<ScratchingPost>().parentTower = gameObject;
     }
 
 

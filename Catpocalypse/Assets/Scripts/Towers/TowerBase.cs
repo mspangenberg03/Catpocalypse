@@ -32,7 +32,7 @@ public class TowerBase : MonoBehaviour
     public LayerMask layer;
     public float refundVal;
 
-    private bool IsSelected = false;
+    public bool IsSelected = false;
 
 
 

@@ -147,7 +147,7 @@ MonoBehaviour:
   numberOfTargets: 282
   targets: []
   _RateOfFire: 2
-  _PlayerTarget: {fileID: 3030260927238954927, guid: 0e3f866d92a3e9a43af9e37033330a1a, type: 3}
+  _PlayerTargetPrefab: {fileID: 3030260927238954927, guid: 0e3f866d92a3e9a43af9e37033330a1a, type: 3}
   _ScratchPost: {fileID: 354219167358990314, guid: 6a929441a3700c840922c525efb7ecc3, type: 3}
   _TimeBetweenLaunches: 1
   PostExists: 0

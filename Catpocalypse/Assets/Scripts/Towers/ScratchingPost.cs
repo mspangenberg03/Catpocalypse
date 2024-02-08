@@ -34,6 +34,8 @@ public class ScratchingPost : MonoBehaviour
 
     private List<GameObject> _Cats = new List<GameObject>();
 
+    public GameObject parentTower;
+
     public void Start()
     {
         StartCoroutine(DurationCountDown(_Duration));
@@ -43,7 +45,7 @@ public class ScratchingPost : MonoBehaviour
     {
         if(_Durability <= 0)
         {
-            Destroy(gameObject);
+            DestroyPost();
         }
         if(_Cats.Count > 0)
         {
@@ -83,26 +85,30 @@ public class ScratchingPost : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void DestroyPost()
     {
         //TODO: OnDestroy, OnTriggerEnter, and OnTriggerExit needs to account for if there is another tower affecting the Cat speed and set
         //      it to that speed without setting IsSlowed to false. To do this, we might need to set IsSlowed to an int value (or smaller if we want)
         //      and have it act as a counter instead. From there, the Cat needs to find the greatest slowing effect and set its' speed to that.
         //      This accounts for multiple slow towers of varying effect to occur.
 
-        gameObject.GetComponentInParent<ScratchingPostTower>().PostExists = false;
+        parentTower.GetComponent<ScratchingPostTower>().PostExists = false;
         foreach(GameObject obj in _Cats)
         {
-            obj.GetComponent<NavMeshAgent>().speed = obj.GetComponent<NavMeshAgent>().speed * _SpeedDebuff;
-            obj.GetComponent<CatBase>().isSlowed = false;
+            if (obj != null)
+            {
+                obj.GetComponent<NavMeshAgent>().speed = obj.GetComponent<NavMeshAgent>().speed * _SpeedDebuff;
+                obj.GetComponent<CatBase>().isSlowed = false;
+            }
         }
+        Destroy(gameObject);
     }
 
     private IEnumerator DurationCountDown( float currentTimeLeft)
     {
         if(currentTimeLeft == 0)
         {
-            Destroy(gameObject);
+            DestroyPost();
             yield return new WaitForEndOfFrame();
         } else
         {
