@@ -85,7 +85,6 @@ public class TowerBase : MonoBehaviour
         IsSelected = true;
         
         SelectedTowerBase = this;
-        OnAnyTowerBaseWasSelected?.Invoke(this, EventArgs.Empty);
         OnAnyTowerBaseWasSelected?.Invoke(gameObject, EventArgs.Empty);
 
         if (enabled)
