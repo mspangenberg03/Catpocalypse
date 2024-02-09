@@ -18,6 +18,8 @@ public class TowerSpawn : MonoBehaviour
     [SerializeField]
     private GameObject yarnBallTowerPrefab;
 
+    [SerializeField]
+    private GameObject nonAllergicPrefab;
     private TowerBase towerBase;
 
 
