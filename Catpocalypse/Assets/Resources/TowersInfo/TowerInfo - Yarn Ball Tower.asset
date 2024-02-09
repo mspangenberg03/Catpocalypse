@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 4
   DisplayName: Yarn Ball Tower
-  Description: A tower that gathers strings of Yarn are made into YarnBalls and are
-    prepared to be thrown.
   Cost: 150
-  Damage: 0
-  Range: 2
+  Damage: 5
+  Range: 3
   AOE_Range: 3
   FireRate: 0
-  Special: ???
+  CoolDown: 5
+  UpgradeCost: 3
+  Upgrade: 
+  Special: Ball Shotgun
+  Description: A tower that gathers strings of Yarn are made into YarnBalls and are
+    prepared to be thrown.

@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CatType: 0
   DisplayName: Light Cat
-  Description: A lightweight cat whose lack of weight allows him to be more agile.
   Size: 2
   Speed: 5
   SpawnRate: 2
   HP: 1
   PayOnDistraction: 4
-  Special: This cat has bursts of speed which make it faster every 8s when the ability
-    procs, it raises its movement rate by 30% for 3s, having 70% distraction resistance
-    while this is happening.
+  Special: This cat has bursts of speed which make it faster.
+  Description: A lightweight cat whose slim physique allows him to be more agile.

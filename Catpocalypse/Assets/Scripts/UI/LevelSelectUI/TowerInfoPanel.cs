@@ -21,6 +21,9 @@ public class TowerInfoPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI _Text_Range;
     [SerializeField] TextMeshProUGUI _Text_AOE_Range;
     [SerializeField] TextMeshProUGUI _Text_FireRate;
+    [SerializeField] TextMeshProUGUI _Text_Cooldown;
+    [SerializeField] TextMeshProUGUI _Text_UpgradeCost;
+    [SerializeField] TextMeshProUGUI _Text_Upgrade;
     [SerializeField] TextMeshProUGUI _Text_Special;
     [SerializeField] TextMeshProUGUI _Text_Description;
 
@@ -95,6 +98,9 @@ public class TowerInfoPanel : MonoBehaviour
         _Text_Range.text = Utils.InsertSpacesBeforeCapitalLetters(info.Range.ToString());
         _Text_AOE_Range.text = Utils.InsertSpacesBeforeCapitalLetters(info.AOE_Range.ToString());
         _Text_FireRate.text = Utils.InsertSpacesBeforeCapitalLetters(info.FireRate.ToString());
+        _Text_Cooldown.text = Utils.InsertSpacesBeforeCapitalLetters(info.CoolDown.ToString());
+        _Text_UpgradeCost.text = Utils.InsertSpacesBeforeCapitalLetters(info.UpgradeCost.ToString());
+        _Text_Upgrade.text = info.Upgrade;
         _Text_Special.text = info.Special.ToString();
         _Text_Description.text = info.Description.ToString();
     }

@@ -15,7 +15,7 @@ public class TowerInfo : ScriptableObject
     public Sizes AOE_Range;
     public Ratings FireRate;
     public Ratings CoolDown;
-    public float UpgradeCost;
+    public Ratings UpgradeCost;
     public string Upgrade;
 
     [Space(10)]

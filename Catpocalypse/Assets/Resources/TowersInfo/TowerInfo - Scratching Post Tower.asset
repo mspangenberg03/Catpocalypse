@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 1
   DisplayName: Scratching Post Tower
-  Description: This tower launches itself as a rocket near the cats, slowing all
-    cats as they get tempted to rub themselves on it!
   Cost: 175
   Damage: 1
   Range: 3
-  AOE_Range: 2
+  AOE_Range: 3
   FireRate: 1
+  CoolDown: 7
+  UpgradeCost: 4
+  Upgrade: 
   Special: Slows all affected cats
+  Description: This tower launches itself as a rocket near the cats, slowing all
+    cats as they get tempted to rub themselves on it!

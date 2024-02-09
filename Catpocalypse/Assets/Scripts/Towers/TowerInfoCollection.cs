@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
 using UnityEngine;
 
 
+/// <summary>
+/// This class automatically loads in all TowerInfo assets from the Resources folder,
+/// which contain the data on each tower. It also auto-updates certain fields like cost,
+/// from the prefabs.
+/// </summary>
 public class TowerInfoCollection : MonoBehaviour
 {
     [SerializeField]
@@ -39,6 +45,9 @@ public class TowerInfoCollection : MonoBehaviour
     /// <summary>
     /// This function copies necessary values from the tower prefabs, so the UI stays up-to-date even
     /// when the tower prefabs are modified.
+    /// 
+    /// NOTE: We might want to change this later so all info is pulled from the
+    ///       TowerInfo scriptable objects rather than having some stored on the prefabs.
     /// </summary>
     private void SyncTowerInfosWithPrefabs()
     {

@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 3
   DisplayName: String Waver Tower
+  Cost: 225
+  Damage: 5
+  Range: 2
+  AOE_Range: 6
+  FireRate: 0
+  CoolDown: 6
+  UpgradeCost: 0
+  Upgrade: 
+  Special: High AOE damage
   Description: This tower makes a hypnotic yarn ball and waves it around nearby cats
     doing massive AOE distraction to them!
-  Cost: 225
-  Damage: 2
-  Range: 3
-  AOE_Range: 4
-  FireRate: 1
-  Special: High AOE damage

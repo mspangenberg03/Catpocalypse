@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public enum CatTypes
 {
     Light,
@@ -23,6 +22,7 @@ public enum TowerTypes
 
 public enum Ratings
 {
+    None,
     VeryLow,
     Low,
     SomewhatLow,

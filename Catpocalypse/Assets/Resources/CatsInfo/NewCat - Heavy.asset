@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfedea3a4133f7146b4da6b9aae32c28, type: 3}
   m_Name: NewCat - Heavy
   m_EditorClassIdentifier: 
-  CatType: 1
-  DisplayName: Normal Cat
+  CatType: 2
+  DisplayName: Heavy Cat
   Size: 6
   Speed: 1
   SpawnRate: 2
   HP: 6
   PayOnDistraction: 5
-  Special: The Thick fur this cat has gives it protection and it's not as afraid
-    of cucumbers Brave and Proud Cat (Cucumbers do 0.6 damage to it, All other towers
-    = 0.8, with the only exception of yarn ball tower which deals 1.0).
+  Special: The thick fur this cat has gives it extra protection and it's not as afraid
+    of cucumbers. Brave and proud.
   Description: These big guys take a lot more work to distract, and move slowly.
