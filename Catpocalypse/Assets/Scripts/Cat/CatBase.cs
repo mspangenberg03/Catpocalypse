@@ -48,7 +48,7 @@ public class CatBase : MonoBehaviour
     protected float distraction = 0; //How distracted the cat is currently
     protected bool isDistracted = false; // If the cat has been defeated or not.
     //Rigidbody rb;//The RigidBody component
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     protected PlayerHealthManager healthManager;
 
@@ -65,6 +65,8 @@ public class CatBase : MonoBehaviour
     public List<AudioClip> purrs = new List<AudioClip>();
 
     public bool isSlowed;
+    public bool isBeingPetted = false;
+    public bool isATarget = false;
 
 
     // Start is called before the first frame update
@@ -142,6 +144,8 @@ public class CatBase : MonoBehaviour
     {
         isDistracted = true;
     }
+
+    
     //I am intending this function to be called from either the tower or the projectile that the tower fires
     public void DistractCat(float distractionValue, Tower targetingTower)
     {

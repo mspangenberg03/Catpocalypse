@@ -12,6 +12,7 @@ TagManager:
   - TowerDestroyer
   - Ground
   - TowerBase
+  - Waypoint
   layers:
   - Default
   - TransparentFX
