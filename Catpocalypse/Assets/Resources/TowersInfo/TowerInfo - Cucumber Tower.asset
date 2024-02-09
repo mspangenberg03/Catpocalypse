@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 2
   DisplayName: Cucumber Tower
-  Description: ' The standard tower, it launches cucumbers to scare the more cowardly
-    cats while the braver cats play with them!'
+  Description: The standard tower, it launches cucumbers to scare the more cowardly
+    cats while the braver cats play with them!
   Cost: 100
   Damage: 2
   Range: 4

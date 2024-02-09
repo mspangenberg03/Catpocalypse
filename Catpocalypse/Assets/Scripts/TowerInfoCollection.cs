@@ -42,28 +42,28 @@ public class TowerInfoCollection : MonoBehaviour
     /// </summary>
     private void SyncTowerInfosWithPrefabs()
     {
-        TowerInfo laserTowerInfo = GetTowerInfo(TowerInfo.TowerTypes.LaserPointer);
+        TowerInfo laserTowerInfo = GetTowerInfo(TowerTypes.LaserPointer);
         Tower laserPointerTower = laserPointerTowerPrefab.GetComponent<Tower>();
-        laserTowerInfo.Cost = laserPointerTower.BuildCost;
+        laserTowerInfo.Cost = laserPointerTower.BuildCost;       
 
-        TowerInfo scratchingPostTowerInfo = GetTowerInfo(TowerInfo.TowerTypes.ScratchingPost);
+        TowerInfo scratchingPostTowerInfo = GetTowerInfo(TowerTypes.ScratchingPost);
         Tower scratchingPostTower = scratchingPostTowerPrefab.GetComponent<Tower>();
         scratchingPostTowerInfo.Cost = scratchingPostTower.BuildCost;
 
-        TowerInfo cucumberTowerInfo = GetTowerInfo(TowerInfo.TowerTypes.CucumberThrower);
+        TowerInfo cucumberTowerInfo = GetTowerInfo(TowerTypes.CucumberThrower);
         Tower cucumberTower = cucumberTowerPrefab.GetComponent<Tower>();
         cucumberTowerInfo.Cost = cucumberTower.BuildCost;
 
-        TowerInfo stringWaverTowerInfo = GetTowerInfo(TowerInfo.TowerTypes.StringWaver);
+        TowerInfo stringWaverTowerInfo = GetTowerInfo(TowerTypes.StringWaver);
         Tower stringWaverTower = stringWaverTowerPrefab.GetComponent<Tower>();
         stringWaverTowerInfo.Cost = stringWaverTower.BuildCost;
 
-        TowerInfo yarnBallTowerInfo = GetTowerInfo(TowerInfo.TowerTypes.YarnBall);
+        TowerInfo yarnBallTowerInfo = GetTowerInfo(TowerTypes.YarnBall);
         Tower yarnBallTower = yarnBallTowerPrefab.GetComponent<Tower>();
         yarnBallTowerInfo.Cost = yarnBallTower.BuildCost;
     }
 
-    public TowerInfo GetTowerInfo(TowerInfo.TowerTypes towerType)
+    public TowerInfo GetTowerInfo(TowerTypes towerType)
     {
         for (int i = 0; i < _TowerInfoList.Count; i++)
         {
@@ -73,4 +73,13 @@ public class TowerInfoCollection : MonoBehaviour
 
         return null;
     }
+
+    public TowerInfo GetTowerInfo(int index)
+    {
+        return _TowerInfoList[index];
+    }
+
+
+
+    public int Count { get { return _TowerInfoList.Count; } }
 }

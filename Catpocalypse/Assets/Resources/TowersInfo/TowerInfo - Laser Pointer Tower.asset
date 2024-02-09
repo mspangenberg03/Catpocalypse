@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 0
   DisplayName: Laser Pointer Tower
-  Description: This tower's guiding laser lets you lead a type of cat to a chosen
-    direction in an intersection!
   Cost: 150
   Damage: 0
-  Range: 3
-  AOE_Range: 0
+  Range: 2
+  AOE_Range: 4
   FireRate: 4
-  Special: Can lead a type of cat to another lane/road!
+  UpgradeCost: 0
+  Upgrade: 
+  Special: The tower's laser pointer can distract a specified type of cat to another
+    lane/road!
+  Description: 'This tower utilizes a classic device of feline distraction: the laser
+    pointer!'
