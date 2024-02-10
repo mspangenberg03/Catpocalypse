@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3204049734408813414}
   - component: {fileID: 8150636792477847150}
   - component: {fileID: 49226982669757654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7521085383306290925}
   - component: {fileID: 8573546917957776941}
   - component: {fileID: 21577559033819169}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NonAllergicPerson
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e605d2cc970259e408f1a5efc7edcc2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectLength: 5
 --- !u!135 &7521085383306290925
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -144,13 +145,13 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2.2
+  m_Radius: 2.51
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &8573546917957776941
 NavMeshAgent:
@@ -190,7 +191,7 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

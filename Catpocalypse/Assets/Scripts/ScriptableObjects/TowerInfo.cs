@@ -14,6 +14,7 @@ public class TowerInfo : ScriptableObject
         CucumberThrower,
         StringWaver,
         YarnBall,
+        NonAllergic,
     }
 
     public enum Ratings

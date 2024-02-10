@@ -43,6 +43,8 @@ public class TowerSpawn : MonoBehaviour
                 return stringWaverTowerPrefab.GetComponent<StringWaverTower>().GetBuildCost();
             case 4:
                 return yarnBallTowerPrefab.GetComponent<YarnBallTower>().GetBuildCost();
+            case 5:
+                return nonAllergicPrefab.GetComponent<NonAllergicTower>().GetBuildCost();
         }
         return 0;
     }
@@ -67,6 +69,9 @@ public class TowerSpawn : MonoBehaviour
                 break;
             case 4:
                 StartCoroutine(SpawnYarnBallTower());
+                break;
+            case 5:
+                StartCoroutine(SpawnNATower());
                 break;
                 //default:
                 //    StartCoroutine(SpawnLaserPointerTower());
@@ -149,5 +154,20 @@ public class TowerSpawn : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
   
+    }
+    IEnumerator SpawnNATower()
+    {
+        if (towerBase.tower == null)
+        {
+            towerBase.tower = Instantiate(nonAllergicPrefab, transform);
+
+            NonAllergicTower nonAllergic = nonAllergicPrefab.GetComponent<NonAllergicTower>();
+            towerBase.refundVal = nonAllergic.BuildCost * nonAllergic.GetRefundPercentage();
+
+            towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x, transform.position.y + 1, transform.position.z);
+            towerBase.hasTower = true;
+        }
+
+        yield return new WaitForSeconds(2f);
     }
 }

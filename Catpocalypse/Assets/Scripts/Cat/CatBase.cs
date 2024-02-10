@@ -67,13 +67,13 @@ public class CatBase : MonoBehaviour
     public bool isSlowed;
     public bool isBeingPetted = false;
     public bool isATarget = false;
-
+    private float speed;
 
     // Start is called before the first frame update
     void Start()    
     {
         IsDead = false;
-
+        
         catAudio = GetComponent<AudioSource>();
         InitDistractednessMeter();
         int index = Random.Range(0, sounds.Count - 1);
@@ -81,6 +81,7 @@ public class CatBase : MonoBehaviour
         catAudio.clip = sounds[index];
         catAudio.Play();
         agent = GetComponent<NavMeshAgent>();
+        speed = agent.speed;
         healthManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerHealthManager>();
 
         // Find the closest WayPoint and start moving there.
@@ -96,7 +97,10 @@ public class CatBase : MonoBehaviour
         {
             Distracted();
         }
-
+        if(isBeingPetted == false)
+        {
+            agent.speed = speed;
+        }
         if (_NextWayPoint != null)
         {
             _DistanceFromNextWayPoint = Vector3.Distance(transform.position, _NextWayPoint.transform.position);
@@ -119,7 +123,6 @@ public class CatBase : MonoBehaviour
 
         _DistractednessMeterGO.SetActive(ShowDistractednessBar);
     }
-
     private void InitDistractednessMeter()
     {
         Transform distractednessMeter = Instantiate(_DistractednessMeterPrefab).transform;
@@ -180,8 +183,6 @@ public class CatBase : MonoBehaviour
             KillCat(2);
         }
     }
-
-
     protected void KillCat(int type)
     {
         if (IsDead)

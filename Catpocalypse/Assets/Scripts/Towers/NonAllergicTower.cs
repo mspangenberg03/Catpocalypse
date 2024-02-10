@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class NonAllergicTower : Tower
 {
-    [SerializeField, Tooltip("The number of people the tower spawns")]
+    [SerializeField, Tooltip("The number of people the tower spawns"),Min(1)]
     private int numOfPeople;
     private int peopleSpawned;
     [SerializeField, Tooltip("List of potential locations for the people to spawn")]
     private List<Transform> spawnPoints;
     [SerializeField, Tooltip("The Non-Allergic people that the tower spawns")]
     private GameObject person;
-    [SerializeField, Tooltip("The delay between spawns")]
+    [SerializeField, Tooltip("The delay between spawns"),Min(1)]
     private int spawnRate = 2;
     private GameObject[] waypoints;
     private GameObject closestWaypoint;
@@ -70,5 +70,12 @@ public class NonAllergicTower : Tower
         
         StartCoroutine(Spawner());
         
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Cat")
+        {
+            targets.Remove(other.gameObject);
+        }
     }
 }
