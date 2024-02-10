@@ -48,7 +48,9 @@ public class TowerBase : MonoBehaviour
     {
         // Check if the mouse is over a UI element. If so, then we should ignore the click.
         if (EventSystem.current.IsPointerOverGameObject())
+        {
             return;
+        }
 
 
         hoveredOver = true;
@@ -57,6 +59,7 @@ public class TowerBase : MonoBehaviour
         if (!IsSelected)
             gameObject.GetComponent<Renderer>().material= towerHovered;
     }
+
 
     void OnMouseExit()
     {
