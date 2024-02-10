@@ -73,7 +73,7 @@ public class TowerInfoCollection : MonoBehaviour
         Tower yarnBallTower = yarnBallTowerPrefab.GetComponent<Tower>();
         yarnBallTowerInfo.Cost = yarnBallTower.BuildCost;
 
-        TowerInfo NATowerInfo = GetTowerInfo(TowerInfo.TowerTypes.NonAllergic);
+        TowerInfo NATowerInfo = GetTowerInfo(TowerTypes.NonAllergic);
         Tower NATower = naTowerPrefab.GetComponent<Tower>();
         NATowerInfo.Cost = NATower.BuildCost;
     }
