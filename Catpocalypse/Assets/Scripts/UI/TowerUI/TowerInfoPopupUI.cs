@@ -36,31 +36,14 @@ public class TowerInfoPopupUI : MonoBehaviour
     public void UpdatePopupUI(TowerInfo towerInfo)
     {
         //_Icon.sprite = towerInfo.Icon;
-        _TitleText.text = InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(TowerInfo.TowerTypes), towerInfo.TowerType)) + " Tower";
+        _TitleText.text = towerInfo.DisplayName;
         _DescriptionText.text = towerInfo.Description;
         _CostText.text = $"${towerInfo.Cost}";
-        _DamageText.text = InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(TowerInfo.Ratings), towerInfo.Damage));
-        _RangeText.text = InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(TowerInfo.Sizes), towerInfo.Range));
-        _AOE_Text.text = InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(TowerInfo.Sizes), towerInfo.AOE_Range));
-        _FireRateText.text = InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(TowerInfo.Ratings), towerInfo.FireRate));
+        _DamageText.text = Utils.InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(Ratings), towerInfo.Damage));
+        _RangeText.text = Utils.InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(Sizes), towerInfo.Range));
+        _AOE_Text.text = Utils.InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(Sizes), towerInfo.AOE_Range));
+        _FireRateText.text = Utils.InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(Ratings), towerInfo.FireRate));
         _SpecialText.text = towerInfo.Special;
     }
 
-    private string InsertSpacesBeforeCapitalLetters(string input)
-    {
-        string output = "";
-
-        for (int i = 0; i < input.Length; i++)
-        {
-            char c = input[i];
-
-            if (i > 0 && char.IsUpper(c))
-                output += " ";
-
-            output += c;
-        }
-
-
-        return output;
-    }
 }
