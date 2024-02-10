@@ -112,7 +112,7 @@ public class TowerSelectorUI : MonoBehaviour
         TowerInfo towerInfo = _TowerInfoCollection.GetTowerInfo(e.TowerType);
         if (towerInfo == null)
         {
-            Debug.LogError($"There is no TowerInfo scriptable object created for tower type \"{Enum.GetName(typeof(TowerInfo.TowerTypes), e.TowerType)}\"");
+            Debug.LogError($"There is no TowerInfo scriptable object created for tower type \"{Enum.GetName(typeof(TowerTypes), e.TowerType)}\"");
             return;
         }
 

@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
 using UnityEngine;
 
 
+/// <summary>
+/// This class automatically loads in all TowerInfo assets from the Resources folder,
+/// which contain the data on each tower. It also auto-updates certain fields like cost,
+/// from the prefabs.
+/// </summary>
 public class TowerInfoCollection : MonoBehaviour
 {
     [SerializeField]
@@ -41,26 +47,29 @@ public class TowerInfoCollection : MonoBehaviour
     /// <summary>
     /// This function copies necessary values from the tower prefabs, so the UI stays up-to-date even
     /// when the tower prefabs are modified.
+    /// 
+    /// NOTE: We might want to change this later so all info is pulled from the
+    ///       TowerInfo scriptable objects rather than having some stored on the prefabs.
     /// </summary>
     private void SyncTowerInfosWithPrefabs()
     {
-        TowerInfo laserTowerInfo = GetTowerInfo(TowerInfo.TowerTypes.LaserPointer);
+        TowerInfo laserTowerInfo = GetTowerInfo(TowerTypes.LaserPointer);
         Tower laserPointerTower = laserPointerTowerPrefab.GetComponent<Tower>();
-        laserTowerInfo.Cost = laserPointerTower.BuildCost;
+        laserTowerInfo.Cost = laserPointerTower.BuildCost;       
 
-        TowerInfo scratchingPostTowerInfo = GetTowerInfo(TowerInfo.TowerTypes.ScratchingPost);
+        TowerInfo scratchingPostTowerInfo = GetTowerInfo(TowerTypes.ScratchingPost);
         Tower scratchingPostTower = scratchingPostTowerPrefab.GetComponent<Tower>();
         scratchingPostTowerInfo.Cost = scratchingPostTower.BuildCost;
 
-        TowerInfo cucumberTowerInfo = GetTowerInfo(TowerInfo.TowerTypes.CucumberThrower);
+        TowerInfo cucumberTowerInfo = GetTowerInfo(TowerTypes.CucumberThrower);
         Tower cucumberTower = cucumberTowerPrefab.GetComponent<Tower>();
         cucumberTowerInfo.Cost = cucumberTower.BuildCost;
 
-        TowerInfo stringWaverTowerInfo = GetTowerInfo(TowerInfo.TowerTypes.StringWaver);
+        TowerInfo stringWaverTowerInfo = GetTowerInfo(TowerTypes.StringWaver);
         Tower stringWaverTower = stringWaverTowerPrefab.GetComponent<Tower>();
         stringWaverTowerInfo.Cost = stringWaverTower.BuildCost;
 
-        TowerInfo yarnBallTowerInfo = GetTowerInfo(TowerInfo.TowerTypes.YarnBall);
+        TowerInfo yarnBallTowerInfo = GetTowerInfo(TowerTypes.YarnBall);
         Tower yarnBallTower = yarnBallTowerPrefab.GetComponent<Tower>();
         yarnBallTowerInfo.Cost = yarnBallTower.BuildCost;
 
@@ -69,7 +78,7 @@ public class TowerInfoCollection : MonoBehaviour
         NATowerInfo.Cost = NATower.BuildCost;
     }
 
-    public TowerInfo GetTowerInfo(TowerInfo.TowerTypes towerType)
+    public TowerInfo GetTowerInfo(TowerTypes towerType)
     {
         for (int i = 0; i < _TowerInfoList.Count; i++)
         {
@@ -79,4 +88,13 @@ public class TowerInfoCollection : MonoBehaviour
 
         return null;
     }
+
+    public TowerInfo GetTowerInfo(int index)
+    {
+        return _TowerInfoList[index];
+    }
+
+
+
+    public int Count { get { return _TowerInfoList.Count; } }
 }

@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb99adf0275315242b515b3dc136363f, type: 3}
-  m_Name: TowerInfo - Scratching Power Tower
+  m_Name: TowerInfo - String Waver Tower
   m_EditorClassIdentifier: 
-  TowerType: 1
-  Description: This tower launches itself as a rocket near the cats, slowing all
-    cats as they get tempted to rub themselves on it!
-  Cost: 175
-  Damage: 1
-  Range: 3
-  AOE_Range: 2
-  FireRate: 1
-  Special: Slows all affected cats
+  TowerType: 3
+  DisplayName: String Waver Tower
+  Cost: 225
+  Damage: 5
+  Range: 2
+  AOE_Range: 6
+  FireRate: 0
+  CoolDown: 6
+  UpgradeCost: 0
+  Upgrade: 
+  Special: High AOE damage
+  Description: This tower makes a hypnotic yarn ball and waves it around nearby cats
+    doing massive AOE distraction to them!

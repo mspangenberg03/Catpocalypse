@@ -8,14 +8,14 @@ using UnityEngine.EventSystems;
 
 public class TowerSelectButtonMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public TowerInfo.TowerTypes TowerType;
+    public TowerTypes TowerType;
 
 
     public event EventHandler<MouseOverEventArgs> OnMouseEnter;
     public event EventHandler<MouseOverEventArgs> OnMouseExit;
     public class MouseOverEventArgs : EventArgs
     {
-        public TowerInfo.TowerTypes TowerType;
+        public TowerTypes TowerType;
     }
 
 
