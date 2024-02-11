@@ -10,6 +10,8 @@ public class TowerDestroyerUI : MonoBehaviour
     [SerializeField]
     private Button destroyBtn;
     [SerializeField]
+    private Button upgradeBtn;
+    [SerializeField]
     private PlayerMoneyManager playerMoneyManager;
 
     private TowerBase currentSelectedBase;
@@ -41,6 +43,11 @@ public class TowerDestroyerUI : MonoBehaviour
     {
         currentSelectedBase.DestroyTower();
         playerMoneyManager.SpendMoney((-1) * currentSelectedBase.refundVal);
+        this.gameObject.SetActive(false);
+    }
+    public void OnUpgrade()
+    {
+        currentSelectedBase.tower.GetComponent<Tower>().Upgrade();
         this.gameObject.SetActive(false);
     }
 

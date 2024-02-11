@@ -26,6 +26,8 @@ public class Tower : MonoBehaviour
 
     protected Vector3 targetDirection;
     public List<GameObject> targets;
+    [SerializeField, Tooltip("How much the tower costs to upgrade")]
+    protected float upgradeCost;
 
     // This property is currently only used by the laser pointer tower, but I put it
     // here in Tower in case any other tower needs it later.
@@ -62,6 +64,10 @@ public class Tower : MonoBehaviour
 
             targets.Remove(collider.gameObject);
         }
+    }
+    public virtual void Upgrade()
+    {
+        Debug.Log("Upgrade called");
     }
 
     /// <summary>

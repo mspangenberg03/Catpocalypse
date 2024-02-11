@@ -168,7 +168,11 @@ public class CucumberTower : Tower
             }
         } // end while(true)
     }
-
+    public override void Upgrade()
+    {
+        Debug.Log("Cucumber upgrade");
+        //base.Upgrade();
+    }
     private Vector3 CalculateTargetPoint(GameObject target)
     {
         Vector3 targetPoint = target.transform.position;
