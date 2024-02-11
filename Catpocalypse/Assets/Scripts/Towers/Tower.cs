@@ -29,6 +29,8 @@ public class Tower : MonoBehaviour
     [SerializeField, Tooltip("How much the tower costs to upgrade")]
     protected float upgradeCost;
 
+    public float level = 1;
+
     // This property is currently only used by the laser pointer tower, but I put it
     // here in Tower in case any other tower needs it later.
     protected Type _TargetCatType = typeof(NormalCat);
@@ -67,7 +69,7 @@ public class Tower : MonoBehaviour
     }
     public virtual void Upgrade()
     {
-        Debug.Log("Upgrade called");
+        level++;
     }
 
     /// <summary>

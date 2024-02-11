@@ -6,11 +6,15 @@ public class YarnBallTower : Tower
 {
     [SerializeField] private GameObject yarnBallPrefab;
     [SerializeField] private GameObject throwPointPrefab;
+    [SerializeField] private GameObject ballShotgunPrefab;
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float throwRange = 5f;
     private bool canThrow = true;
     [SerializeField,Tooltip("How quickly the tower reloads to fire again")]
     private float reloadSpeed = 5;
+    private float sizeMultiplier = 1;
+    private bool ballShotgunUnlocked = false;
+    private float bsCooldown = 20;
     void Start()
     {
         // Start the projectile throwing coroutine
@@ -79,6 +83,7 @@ public class YarnBallTower : Tower
 
             GameObject projectile = Instantiate(yarnBallPrefab, throwPoint.position, throwPoint.rotation);
             projectile.GetComponent<YarnBall>().parentTower = gameObject.GetComponent<Tower>();
+            projectile.transform.localScale *= sizeMultiplier;
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
             if (rb != null)
@@ -116,7 +121,20 @@ public class YarnBallTower : Tower
     }
     public override void Upgrade()
     {
-        reloadSpeed--;
+        base.Upgrade();
+        switch(level)
+        {
+            case 2:
+                sizeMultiplier = 2;
+                break;
+            case 3:
+                distractValue *= 1.5f;
+                break;
+            case 4:
+                ballShotgunUnlocked = true;
+                StartCoroutine(BallShotgun());
+                break;
+        }
     }
     GameObject FindTargetByLayer(string Cat)
     {
@@ -129,5 +147,15 @@ public class YarnBallTower : Tower
         }
 
         return null;
+    }
+    IEnumerator BallShotgun()
+    {
+        if(targets.Count > 0)
+        {
+            GameObject proj = Instantiate(ballShotgunPrefab, transform);
+            yield return new WaitForSeconds(bsCooldown);
+        }
+        
+        StartCoroutine(BallShotgun());
     }
 }

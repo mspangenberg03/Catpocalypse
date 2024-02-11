@@ -208,7 +208,11 @@ MonoBehaviour:
   distractValue: 500
   numberOfTargets: 0
   targets: []
+  upgradeCost: 0
+  level: 1
   yarnBallPrefab: {fileID: 7418905643246593257, guid: 543c1eeb918fd8a40b8e656f6691db55, type: 3}
   throwPointPrefab: {fileID: 6487241590536661003, guid: 65a6a48719aa20248aa2a9a05f5b1519, type: 3}
+  ballShotgunPrefab: {fileID: 7418905643246593257, guid: 8169fa8969b743a4e82ff181920757b8, type: 3}
   throwForce: 10
   throwRange: 5
+  reloadSpeed: 5

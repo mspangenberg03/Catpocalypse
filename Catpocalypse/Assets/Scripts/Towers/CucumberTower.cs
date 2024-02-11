@@ -48,6 +48,7 @@ public class CucumberTower : Tower
 
     [SerializeField,Tooltip("How often the Super Cucumber ability activates")]
     private int superCucumberCooldown = 12;
+    private bool SCUnlocked = false;
     private void Awake()
     {
         _CurrentAimDirection = transform.forward;
@@ -178,9 +179,15 @@ public class CucumberTower : Tower
     }
     public override void Upgrade()
     {
-        if(numOfProjectiles < maxProjectiles)
+        base.Upgrade();
+        if (level < 4)
         {
             numOfProjectiles++;
+        }
+        else if (level == 4 && !SCUnlocked)
+        {
+            StartCoroutine(SuperCucumber());
+            SCUnlocked = true;
         }
         
     }
@@ -275,5 +282,19 @@ public class CucumberTower : Tower
         // Change it to be in the range -180 to +180 degrees relative to the from vector.
         float sign = Mathf.Sign(Vector3.Dot(referenceAxis, Vector3.Cross(from, to)));
         return angle * sign;
+    }
+    IEnumerator SuperCucumber()
+    {
+        if(targets.Count > 0)
+        {
+            yield return new WaitForSeconds(superCucumberCooldown);
+        }
+        else
+        {
+
+        }
+       StartCoroutine(SuperCucumber());
+
+        
     }
 }
