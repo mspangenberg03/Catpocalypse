@@ -9,7 +9,8 @@ public class YarnBallTower : Tower
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float throwRange = 5f;
     private bool canThrow = true;
-
+    [SerializeField,Tooltip("How quickly the tower reloads to fire again")]
+    private float reloadSpeed = 5;
     void Start()
     {
         // Start the projectile throwing coroutine
@@ -42,7 +43,7 @@ public class YarnBallTower : Tower
                     canThrow = false; // Set to false after throwing, prevent further throws until reset
 
                     // Wait for a specified time before allowing another throw
-                    yield return new WaitForSeconds(4f); // Adjust the delay as needed
+                    yield return new WaitForSeconds(reloadSpeed); // Adjust the delay as needed
 
                     canThrow = true; // Set back to true to allow another throw
                 }
@@ -113,7 +114,10 @@ public class YarnBallTower : Tower
             
         }
     }
-
+    public override void Upgrade()
+    {
+        reloadSpeed--;
+    }
     GameObject FindTargetByLayer(string Cat)
     {
         // Find the target by layer name
