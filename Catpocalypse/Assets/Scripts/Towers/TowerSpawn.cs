@@ -148,7 +148,7 @@ public class TowerSpawn : MonoBehaviour
             YarnBallTower yarnBallTower = yarnBallTowerPrefab.GetComponent<YarnBallTower>();
             towerBase.refundVal = yarnBallTower.BuildCost * yarnBallTower.GetRefundPercentage();
 
-            towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x, transform.position.y + 1, towerBase.tower.transform.position.z);
+            towerBase.tower.transform.position = transform.position;
             towerBase.hasTower = true;
         }
 
