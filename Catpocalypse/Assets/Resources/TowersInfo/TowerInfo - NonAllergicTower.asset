@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: TowerInfo - NonAllergicTower
   m_EditorClassIdentifier: 
   TowerType: 5
-  Description: Call upon your non-allergic friends to help fend off the cats
+  DisplayName: 'Non-Allergic Tower '
   Cost: 100
   Damage: 2
   Range: 2
   AOE_Range: 2
   FireRate: 1
+  CoolDown: 0
+  UpgradeCost: 0
+  Upgrade: 
   Special: Spawns minions to distract cats
+  Description: Call upon your non-allergic friends to help fend off the cats
