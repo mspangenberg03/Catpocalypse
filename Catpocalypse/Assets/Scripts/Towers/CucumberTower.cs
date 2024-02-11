@@ -41,7 +41,13 @@ public class CucumberTower : Tower
 
     private int reloadTime = 2;
 
+    [SerializeField, Tooltip("How many projectiles are fired")]
+    private int numOfProjectiles = 1;
+    [SerializeField,Tooltip("The maximum number of cucumbers it can be upgraded to fire")]
+    private int maxProjectiles = 3;
 
+    [SerializeField,Tooltip("How often the Super Cucumber ability activates")]
+    private int superCucumberCooldown = 12;
     private void Awake()
     {
         _CurrentAimDirection = transform.forward;
@@ -102,13 +108,15 @@ public class CucumberTower : Tower
         float launchVelocity = CalculateLaunchVelocity(_TargetPoint, distance);
       
         // Spawn the cucumber.
-        GameObject proj = Instantiate(cucumberPrefab, spawn.transform.position, Quaternion.identity);
-
-        Cucumber cucumber = proj.gameObject.GetComponent<Cucumber>();
-        cucumber.target = target;
-        cucumber.parentTower = this;
-
-        proj.GetComponent<Rigidbody>().velocity = direction.normalized * launchVelocity;
+        for(int i = 0; i < numOfProjectiles; i++)
+        {
+            GameObject proj = Instantiate(cucumberPrefab, spawn.transform.position, Quaternion.identity);
+            Cucumber cucumber = proj.gameObject.GetComponent<Cucumber>();
+            cucumber.target = target;
+            cucumber.parentTower = this;
+            proj.GetComponent<Rigidbody>().velocity = direction.normalized * launchVelocity;
+        }
+        
 
 
         StartCoroutine(Reload());
@@ -170,8 +178,11 @@ public class CucumberTower : Tower
     }
     public override void Upgrade()
     {
-        Debug.Log("Cucumber upgrade");
-        //base.Upgrade();
+        if(numOfProjectiles < maxProjectiles)
+        {
+            numOfProjectiles++;
+        }
+        
     }
     private Vector3 CalculateTargetPoint(GameObject target)
     {
