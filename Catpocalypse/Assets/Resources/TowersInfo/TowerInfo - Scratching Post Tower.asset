@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb99adf0275315242b515b3dc136363f, type: 3}
-  m_Name: TowerInfo - Laser Pointer Tower
+  m_Name: TowerInfo - Scratching Post Tower
   m_EditorClassIdentifier: 
-  TowerType: 0
-  Description: This tower's guiding laser lets you lead a type of cat to a chosen
-    direction in an intersection!
-  Cost: 150
-  Damage: 0
+  TowerType: 1
+  DisplayName: Scratching Post Tower
+  Cost: 175
+  Damage: 1
   Range: 3
-  AOE_Range: 0
-  FireRate: 4
-  Special: Can lead a type of cat to another lane/road!
+  AOE_Range: 3
+  FireRate: 1
+  CoolDown: 7
+  UpgradeCost: 4
+  Upgrade: 
+  Special: Slows all affected cats
+  Description: This tower launches itself as a rocket near the cats, slowing all
+    cats as they get tempted to rub themselves on it!

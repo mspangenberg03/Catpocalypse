@@ -10,14 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb99adf0275315242b515b3dc136363f, type: 3}
-  m_Name: TowerInfo - String Waver Tower
+  m_Name: TowerInfo - Laser Pointer Tower
   m_EditorClassIdentifier: 
-  TowerType: 3
-  Description: This tower makes a hypnotic yarn ball and waves it around nearby cats
-    doing massive AOE distraction to them!
-  Cost: 225
-  Damage: 2
-  Range: 3
+  TowerType: 0
+  DisplayName: Laser Pointer Tower
+  Cost: 150
+  Damage: 0
+  Range: 2
   AOE_Range: 4
-  FireRate: 1
-  Special: High AOE damage
+  FireRate: 2
+  CoolDown: 1
+  UpgradeCost: 0
+  Upgrade: None
+  Special: The tower's laser pointer can distract a specified type of cat to another
+    lane/road!
+  Description: 'This tower utilizes a classic device of feline distraction: the laser
+    pointer!'
