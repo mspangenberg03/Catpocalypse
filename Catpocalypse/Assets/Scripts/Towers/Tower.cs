@@ -9,7 +9,7 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
 
-    [SerializeField]
+    [SerializeField,Min(1)]
     protected float buildCost;
     
     [Tooltip("This is the percentage of the cost that is refunded when the player destroys the tower.")]
@@ -17,9 +17,9 @@ public class Tower : MonoBehaviour
     [SerializeField]
     protected float refundPercentage = 0.85f;
     
-    [SerializeField]
+    [SerializeField, Min(1)]
     protected SphereCollider range;
-    [SerializeField]
+    [SerializeField, Min(1)]
     protected float distractValue;
     [SerializeField]
     protected int numberOfTargets;

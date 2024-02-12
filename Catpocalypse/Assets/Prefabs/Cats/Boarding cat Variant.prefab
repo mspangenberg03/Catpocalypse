@@ -254,6 +254,7 @@ MonoBehaviour:
   distractReward: 14
   _DistractednessMeterHeightAboveCat: 8
   _DistractednessMeterPrefab: {fileID: 3512654570813597946, guid: e633f4d5486c0f542b4af3b4ecb326ae, type: 3}
+  agent: {fileID: 0}
   sounds:
   - {fileID: 8300000, guid: 91349c0e77800f348bb26ea102614bda, type: 3}
   - {fileID: 8300000, guid: 2cdd81b48e0a5fa4ba894463142eb035, type: 3}
@@ -293,6 +294,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f8f804323b1e7444db4cf3816c8ecce3, type: 3}
   - {fileID: 8300000, guid: 63339e6695a3af24fbd3b1c1becf28fd, type: 3}
   isSlowed: 0
+  isBeingPetted: 0
+  isATarget: 0
 --- !u!64 &465833493815948020
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -306,7 +309,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
