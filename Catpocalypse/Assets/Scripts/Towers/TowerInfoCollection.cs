@@ -27,6 +27,8 @@ public class TowerInfoCollection : MonoBehaviour
     [SerializeField]
     private GameObject yarnBallTowerPrefab;
 
+    [SerializeField]
+    private GameObject naTowerPrefab;
 
 
     private List<TowerInfo> _TowerInfoList = new List<TowerInfo>();
@@ -70,6 +72,10 @@ public class TowerInfoCollection : MonoBehaviour
         TowerInfo yarnBallTowerInfo = GetTowerInfo(TowerTypes.YarnBall);
         Tower yarnBallTower = yarnBallTowerPrefab.GetComponent<Tower>();
         yarnBallTowerInfo.Cost = yarnBallTower.BuildCost;
+
+        TowerInfo NATowerInfo = GetTowerInfo(TowerTypes.NonAllergic);
+        Tower NATower = naTowerPrefab.GetComponent<Tower>();
+        NATowerInfo.Cost = NATower.BuildCost;
     }
 
     public TowerInfo GetTowerInfo(TowerTypes towerType)

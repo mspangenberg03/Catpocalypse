@@ -29,6 +29,8 @@ public class TowerSelectorUI : MonoBehaviour
     [SerializeField]
     private Button yarnBallTowerBtn;
     [SerializeField]
+    private Button nonAllergicTowerBtn;
+    [SerializeField]
     private Button closeBtn;
     [SerializeField]
     private GameObject notEnoughFundsScreen;
@@ -83,6 +85,8 @@ public class TowerSelectorUI : MonoBehaviour
         cucumberThrowerTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseEnter += OnMouseEnteredAnyTowerButton;
         stringWaverTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseEnter += OnMouseEnteredAnyTowerButton;
         yarnBallTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseEnter += OnMouseEnteredAnyTowerButton;
+        nonAllergicTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseEnter += OnMouseEnteredAnyTowerButton;
+
 
         // Hook up the MouseExit events
         laserPointerTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
@@ -90,6 +94,7 @@ public class TowerSelectorUI : MonoBehaviour
         cucumberThrowerTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
         stringWaverTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
         yarnBallTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
+        nonAllergicTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
     }
 
     private void OnMouseEnteredAnyTowerButton(object sender, TowerSelectButtonMouseOver.MouseOverEventArgs e)
@@ -150,6 +155,10 @@ public class TowerSelectorUI : MonoBehaviour
     public void OnYarnBallTowerSelect()
     {
         OnBuildSelect(4);
+    }
+    public void OnNATowerSelect()
+    {
+        OnBuildSelect(5);
     }
 
     public void OnClose()
