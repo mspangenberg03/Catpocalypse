@@ -20,8 +20,8 @@ public class ScratchingPostTower : Tower
             targets.Add(other.gameObject);
             if(other.gameObject.GetComponent<CatBase>().isSlowed == false)
             {
-                other.gameObject.GetComponent<NavMeshAgent>().speed = other.gameObject.GetComponent<NavMeshAgent>().speed / speedDebuff;
-                other.gameObject.GetComponent<CatBase>().isSlowed = true;
+
+                StartCoroutine(other.gameObject.GetComponent<CatBase>().Slow());
             }
             
             StartCoroutine(DistractCats(other.gameObject));

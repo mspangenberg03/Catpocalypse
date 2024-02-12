@@ -65,8 +65,9 @@ public class CatBase : MonoBehaviour
     public List<AudioClip> purrs = new List<AudioClip>();
 
     public bool isSlowed;
-
-
+    [SerializeField, Tooltip("How long the cat is slowed")]
+    private int slowLength = 5;
+    private float speedDebuff = 1.8f;
     // Start is called before the first frame update
     void Start()    
     {
@@ -117,7 +118,14 @@ public class CatBase : MonoBehaviour
 
         _DistractednessMeterGO.SetActive(ShowDistractednessBar);
     }
-
+    public IEnumerator Slow()
+    {
+        isSlowed = true;
+        agent.speed = agent.speed / speedDebuff;
+        yield return new WaitForSeconds(slowLength);
+        isSlowed = false;
+        agent.speed = agent.speed * speedDebuff;
+    }
     private void InitDistractednessMeter()
     {
         Transform distractednessMeter = Instantiate(_DistractednessMeterPrefab).transform;

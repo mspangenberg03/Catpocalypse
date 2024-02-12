@@ -15,6 +15,8 @@ public class YarnBallTower : Tower
     private float sizeMultiplier = 1;
     private bool ballShotgunUnlocked = false;
     private float bsCooldown = 20;
+    [SerializeField]
+    private Transform bsSpawn;
     void Start()
     {
         // Start the projectile throwing coroutine
@@ -152,10 +154,17 @@ public class YarnBallTower : Tower
     {
         if(targets.Count > 0)
         {
-            GameObject proj = Instantiate(ballShotgunPrefab, transform);
+            GameObject proj = Instantiate(ballShotgunPrefab, bsSpawn);
+            ParabolaCalc(targets[0],proj);
             yield return new WaitForSeconds(bsCooldown);
         }
         
         StartCoroutine(BallShotgun());
+    }
+    private void ParabolaCalc(GameObject target,GameObject projectile)
+    {
+        Vector3 point1 = transform.position;
+        Vector3 point2 = bsSpawn.position;
+        Vector3 point3 = target.transform.position;
     }
 }
