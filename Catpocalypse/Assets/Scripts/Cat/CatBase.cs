@@ -48,7 +48,7 @@ public class CatBase : MonoBehaviour
     protected float distraction = 0; //How distracted the cat is currently
     protected bool isDistracted = false; // If the cat has been defeated or not.
     //Rigidbody rb;//The RigidBody component
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     protected PlayerHealthManager healthManager;
 
@@ -65,13 +65,15 @@ public class CatBase : MonoBehaviour
     public List<AudioClip> purrs = new List<AudioClip>();
 
     public bool isSlowed;
-
+    public bool isBeingPetted = false;
+    public bool isATarget = false;
+    private float speed;
 
     // Start is called before the first frame update
     void Start()    
     {
         IsDead = false;
-
+        
         catAudio = GetComponent<AudioSource>();
         InitDistractednessMeter();
         int index = Random.Range(0, sounds.Count - 1);
@@ -79,6 +81,7 @@ public class CatBase : MonoBehaviour
         catAudio.clip = sounds[index];
         catAudio.Play();
         agent = GetComponent<NavMeshAgent>();
+        speed = agent.speed;
         healthManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerHealthManager>();
 
         // Find the closest WayPoint and start moving there.
@@ -94,7 +97,10 @@ public class CatBase : MonoBehaviour
         {
             Distracted();
         }
-
+        if(isBeingPetted == false)
+        {
+            agent.speed = speed;
+        }
         if (_NextWayPoint != null)
         {
             _DistanceFromNextWayPoint = Vector3.Distance(transform.position, _NextWayPoint.transform.position);
@@ -117,7 +123,6 @@ public class CatBase : MonoBehaviour
 
         _DistractednessMeterGO.SetActive(ShowDistractednessBar);
     }
-
     private void InitDistractednessMeter()
     {
         Transform distractednessMeter = Instantiate(_DistractednessMeterPrefab).transform;
@@ -142,6 +147,8 @@ public class CatBase : MonoBehaviour
     {
         isDistracted = true;
     }
+
+    
     //I am intending this function to be called from either the tower or the projectile that the tower fires
     public void DistractCat(float distractionValue, Tower targetingTower)
     {
@@ -176,8 +183,6 @@ public class CatBase : MonoBehaviour
             KillCat(2);
         }
     }
-
-
     protected void KillCat(int type)
     {
         if (IsDead)

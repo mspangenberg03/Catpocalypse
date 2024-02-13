@@ -18097,6 +18097,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -75
       objectReference: {fileID: 0}
+    - target: {fileID: 9134922607159164636, guid: 83fd67a81a6a9fd468f9f74c0f3ccbe6, type: 3}
+      propertyPath: naTowerPrefab
+      value: 
+      objectReference: {fileID: 1494292692984174254, guid: 3cc1d5d3792ea7a4eb862e4db2506356, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

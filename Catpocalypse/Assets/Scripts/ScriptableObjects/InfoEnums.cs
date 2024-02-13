@@ -18,6 +18,7 @@ public enum TowerTypes
     CucumberThrower,
     StringWaver,
     YarnBall,
+    NonAllergic,
 }
 
 public enum Ratings

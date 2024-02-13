@@ -18,6 +18,8 @@ public class TowerSpawn : MonoBehaviour
     [SerializeField]
     private GameObject yarnBallTowerPrefab;
 
+    [SerializeField]
+    private GameObject nonAllergicPrefab;
     private TowerBase towerBase;
 
 
@@ -41,6 +43,8 @@ public class TowerSpawn : MonoBehaviour
                 return stringWaverTowerPrefab.GetComponent<StringWaverTower>().GetBuildCost();
             case 4:
                 return yarnBallTowerPrefab.GetComponent<YarnBallTower>().GetBuildCost();
+            case 5:
+                return nonAllergicPrefab.GetComponent<NonAllergicTower>().GetBuildCost();
         }
         return 0;
     }
@@ -65,6 +69,9 @@ public class TowerSpawn : MonoBehaviour
                 break;
             case 4:
                 StartCoroutine(SpawnYarnBallTower());
+                break;
+            case 5:
+                StartCoroutine(SpawnNATower());
                 break;
                 //default:
                 //    StartCoroutine(SpawnLaserPointerTower());
@@ -141,11 +148,26 @@ public class TowerSpawn : MonoBehaviour
             YarnBallTower yarnBallTower = yarnBallTowerPrefab.GetComponent<YarnBallTower>();
             towerBase.refundVal = yarnBallTower.BuildCost * yarnBallTower.GetRefundPercentage();
 
-            towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x, transform.position.y + 1, towerBase.tower.transform.position.z);
+            towerBase.tower.transform.position = transform.position;
             towerBase.hasTower = true;
         }
 
         yield return new WaitForSeconds(2f);
   
+    }
+    IEnumerator SpawnNATower()
+    {
+        if (towerBase.tower == null)
+        {
+            towerBase.tower = Instantiate(nonAllergicPrefab, transform);
+
+            NonAllergicTower nonAllergic = nonAllergicPrefab.GetComponent<NonAllergicTower>();
+            towerBase.refundVal = nonAllergic.BuildCost * nonAllergic.GetRefundPercentage();
+
+            towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x, transform.position.y + 1, transform.position.z);
+            towerBase.hasTower = true;
+        }
+
+        yield return new WaitForSeconds(2f);
     }
 }
