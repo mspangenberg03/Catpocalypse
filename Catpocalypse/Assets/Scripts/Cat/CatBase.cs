@@ -18,8 +18,6 @@ public class CatBase : MonoBehaviour
 {
     public static bool ShowDistractednessBar = true;
 
-
-
     // This event is static so we don't need to subscribe the money manager to every cat instance's OnCatDied event.
     public static event EventHandler OnCatDied;
     public static event EventHandler OnCatReachGoal;
@@ -34,9 +32,17 @@ public class CatBase : MonoBehaviour
     [Min(0f)]
     [SerializeField] protected float damageToPlayer = 2f; //How much health the cat takes from the player
 
+    [Header("Cat Movement")]
+    [Tooltip("The Cat Speed")]
+    [Min(0f)]
+    public float speed;
+    
     [Min(0f)]
     [Tooltip("This sets how close the cat must get to the next WayPoint to consider itself to have arrived there. This causes it to then target the next WayPoint (or a randomly selected one if the current WayPoint has multiple next points set in the Inspector.")]
     [SerializeField] protected float _WayPointArrivedDistance = 2f;
+    
+    [Tooltip("Controls the cat's navigation")]
+    public NavMeshAgent agent;
 
     [Tooltip("How much money to player gets for distracting this type of cat.")]
     [SerializeField] protected float distractReward = 50;
@@ -49,8 +55,6 @@ public class CatBase : MonoBehaviour
 
     protected float distraction = 0; //How distracted the cat is currently
     protected bool isDistracted = false; // If the cat has been defeated or not.
-    //Rigidbody rb;//The RigidBody component
-    public NavMeshAgent agent;
 
     protected PlayerHealthManager healthManager;
 
@@ -66,10 +70,9 @@ public class CatBase : MonoBehaviour
 
     public List<AudioClip> purrs = new List<AudioClip>();
 
-    public bool isSlowed;
-    public bool isBeingPetted = false;
+    public List<GameObject> slowingEntities;
+    public List<GameObject> stoppingEntities;
     public bool isATarget = false;
-    private float speed;
 
     private StateMachine _stateMachine;
 
@@ -104,16 +107,46 @@ public class CatBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This function sets up the state machine with a very basic setup that just uses the base class for each state.
+    /// </summary>
+    protected virtual void InitStateMachine()
+    {
+        // Create tower states.
+        CatState_Idle_Base idleState = new CatState_Idle_Base(this);
+        CatState_Moving movingState = new CatState_Moving(this);
+        CatState_Slowed slowedState = new CatState_Slowed(this);
+        CatState_Stopped stoppedState = new CatState_Stopped(this);
+
+        // Create and register transitions.
+        _stateMachine.AddTransitionFromState(movingState, new Transition(slowedState, () => slowingEntities.Count > 0 && stoppingEntities.Count == 0));
+        _stateMachine.AddTransitionFromState(movingState, new Transition(stoppedState, () => stoppingEntities.Count > 0));
+        _stateMachine.AddTransitionFromState(slowedState, new Transition(stoppedState, () => stoppingEntities.Count > 0));
+        _stateMachine.AddTransitionFromState(stoppedState, new Transition(slowedState, () => stoppingEntities.Count == 0 &&
+                                                                                            slowingEntities.Count > 0));
+
+        _stateMachine.AddTransitionFromAnyState(new Transition(movingState, () => slowingEntities.Count == 0 && stoppingEntities.Count == 0));
+
+
+        // Tell state machine to write in the debug console every time it exits or enters a state.
+        _stateMachine.EnableDebugLogging = true;
+
+        // This is necessary since we only have one state and no transitions for now.
+        // Mouse over the AllowUnknownStates property for more info.
+        _stateMachine.AllowUnknownStates = true;
+
+
+        // Set the starting state.
+        _stateMachine.SetState(idleState);
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (distraction >= distractionThreshold && isDistracted == false)
         {
             Distracted();
-        }
-        if(isBeingPetted == false)
-        {
-            agent.speed = speed;
+            return;
         }
         if (_NextWayPoint != null)
         {
@@ -136,30 +169,6 @@ public class CatBase : MonoBehaviour
 
 
         _DistractednessMeterGO.SetActive(ShowDistractednessBar);
-    }
-
-    /// <summary>
-    /// This function sets up the state machine with a very basic setup that just uses the base class for each state.
-    /// </summary>
-    protected virtual void InitStateMachine()
-    {
-        // Create tower states.
-        CatState_Idle_Base idleState = new CatState_Idle_Base(this);
-
-
-        // Create and register transitions.
-
-
-        // Tell state machine to write in the debug console every time it exits or enters a state.
-        //_stateMachine.EnableDebugLogging = true;
-
-        // This is necessary since we only have one state and no transitions for now.
-        // Mouse over the AllowUnknownStates property for more info.
-        _stateMachine.AllowUnknownStates = true;
-
-
-        // Set the starting state.
-        _stateMachine.SetState(idleState);
     }
 
     private void InitDistractednessMeter()

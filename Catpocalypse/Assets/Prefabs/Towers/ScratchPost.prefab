@@ -50,11 +50,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3728119725389862461
 MonoBehaviour:
@@ -68,11 +68,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f200fc7a8d7a432478ec111a963b48a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _SpeedDebuff: 1.8
+  speedDebuff: 1.8
   _Duration: 8
   _DurationTickTime: 1
   _Durability: 20
   _DurabilityRemovedByCat: 1
+  parentTower: {fileID: 0}
 --- !u!1 &5251073758571393886
 GameObject:
   m_ObjectHideFlags: 0

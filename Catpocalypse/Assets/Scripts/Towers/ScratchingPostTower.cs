@@ -14,10 +14,6 @@ public class ScratchingPostTower : Tower
     [Min(0f)]
     private float _RateOfFire;
 
-    [Tooltip("The Prefab for the object the player sees when placing their target location")]
-    [SerializeField]
-    private GameObject _PlayerTargetPrefab;
-
     [Header("Launcher Settings")]
 
     [Tooltip("The ScratchingPost prefab to launch")]
@@ -29,7 +25,11 @@ public class ScratchingPostTower : Tower
     [SerializeField]
     private float _TimeBetweenLaunches;
 
-    public bool PostExists = false;
+    private bool _IsLaunching = false;
+
+    private int _MaxPosts = 1;
+
+    public int postCount = 0;
 
     public void Update()
     {
@@ -37,20 +37,32 @@ public class ScratchingPostTower : Tower
         if(targets.Count <= 0)
         {
             return;
-        }
-        if (!PostExists)
+        } else if(_IsLaunching)
         {
-            PostExists = true;
+            return;
+        }
+        if (postCount < _MaxPosts)
+        {
+            postCount++;
             StartCoroutine(LaunchPost());
         }
+    }
+
+    private Vector3 FindClosestPostDestination()
+    {
+        return targets[0].transform.position;
     }
 
     
 
     private IEnumerator  LaunchPost()
     {
+        _IsLaunching = true;
+        //TODO: Make the launch animation
+        GameObject post = Instantiate(_ScratchPost, FindClosestPostDestination(), Quaternion.identity);
+        post.GetComponent<ScratchingPost>().parentTower = gameObject;
         yield return new WaitForSeconds(_TimeBetweenLaunches);
-        Instantiate(_ScratchPost, targets[0].transform.position, Quaternion.identity).GetComponent<ScratchingPost>().parentTower = gameObject;
+        _IsLaunching = false;
     }
 
 

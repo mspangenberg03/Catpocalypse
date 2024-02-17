@@ -10,7 +10,7 @@ public class ScratchingPost : MonoBehaviour
     [Tooltip("The amount a nearby cat's speed is slowed by")]
     [SerializeField]
     [Min(0f)]
-    private float _SpeedDebuff = 1.8f;
+    public float speedDebuff = 1.8f;
 
     [Tooltip("The duration the Scratching Post will last")]
     [SerializeField]
@@ -34,6 +34,8 @@ public class ScratchingPost : MonoBehaviour
 
     private List<GameObject> _Cats = new List<GameObject>();
 
+    private bool _Destroying = false;
+
     public GameObject parentTower;
 
     public void Start()
@@ -43,14 +45,19 @@ public class ScratchingPost : MonoBehaviour
 
     public void Update()
     {
-        if(_Durability <= 0)
+        if(_Destroying)
         {
+            return;
+        }
+        if (_Durability <= 0)
+        {
+            _Destroying = true;
             DestroyPost();
         }
-        if(_Cats.Count > 0)
+        if (_Cats.Count > 0)
         {
             _Durability -= _Cats.Count * _DurabilityRemovedByCat * Time.deltaTime;
-            
+
         }
     }
 
@@ -59,11 +66,7 @@ public class ScratchingPost : MonoBehaviour
         if (other.gameObject.tag == "Cat")
         {
             _Cats.Add(other.gameObject);
-            if (other.gameObject.GetComponent<CatBase>().isSlowed == false)
-            {
-                other.gameObject.GetComponent<NavMeshAgent>().speed = other.gameObject.GetComponent<NavMeshAgent>().speed / _SpeedDebuff;
-                other.gameObject.GetComponent<CatBase>().isSlowed = true;
-            }
+            other.GetComponent<CatBase>().slowingEntities.Add(gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -71,15 +74,14 @@ public class ScratchingPost : MonoBehaviour
         if (other.gameObject.tag == "Cat")
         {
             _Cats.Remove(other.gameObject);
-            other.gameObject.GetComponent<NavMeshAgent>().speed = other.gameObject.GetComponent<NavMeshAgent>().speed * _SpeedDebuff;
-            other.gameObject.GetComponent<CatBase>().isSlowed = false;
+            other.GetComponent<CatBase>().slowingEntities.Remove(gameObject);
         }
     }
 
     private void RemoveDurability()
     {
         _Durability -= _DurabilityRemovedByCat;
-        if( _Durability <= 0 )
+        if (_Durability <= 0)
         {
             Destroy(gameObject);
         }
@@ -92,25 +94,25 @@ public class ScratchingPost : MonoBehaviour
         //      and have it act as a counter instead. From there, the Cat needs to find the greatest slowing effect and set its' speed to that.
         //      This accounts for multiple slow towers of varying effect to occur.
 
-        parentTower.GetComponent<ScratchingPostTower>().PostExists = false;
-        foreach(GameObject obj in _Cats)
+        foreach (GameObject obj in _Cats)
         {
             if (obj != null)
             {
-                obj.GetComponent<NavMeshAgent>().speed = obj.GetComponent<NavMeshAgent>().speed * _SpeedDebuff;
-                obj.GetComponent<CatBase>().isSlowed = false;
+                obj.GetComponent<CatBase>().slowingEntities.Remove(gameObject);
             }
         }
+        parentTower.GetComponent<ScratchingPostTower>().postCount--;
         Destroy(gameObject);
     }
 
-    private IEnumerator DurationCountDown( float currentTimeLeft)
+    private IEnumerator DurationCountDown(float currentTimeLeft)
     {
-        if(currentTimeLeft == 0)
+        if (currentTimeLeft == 0)
         {
             DestroyPost();
             yield return new WaitForEndOfFrame();
-        } else
+        }
+        else
         {
             yield return new WaitForSeconds(_DurationTickTime);
             StartCoroutine(DurationCountDown(--currentTimeLeft));
@@ -119,11 +121,11 @@ public class ScratchingPost : MonoBehaviour
 
     private IEnumerator DistractCats()
     {
-        if(_Cats.Count > 0)
+        if (_Cats.Count > 0)
         {
-            foreach(GameObject obj in _Cats)
+            foreach (GameObject obj in _Cats)
             {
-                if(obj != null)
+                if (obj != null)
                 {
                     CatBase cat = obj.GetComponent<CatBase>();
                     cat.DistractCat(
@@ -131,10 +133,11 @@ public class ScratchingPost : MonoBehaviour
                         gameObject.GetComponentInParent<ScratchingPostTower>()
                         );
                     RemoveDurability();
-                }    else
+                }
+                else
                 {
                     _Cats.Remove(obj);
-                }             
+                }
             }
             yield return new WaitForSeconds(_DurationTickTime);
             StartCoroutine(DistractCats());
