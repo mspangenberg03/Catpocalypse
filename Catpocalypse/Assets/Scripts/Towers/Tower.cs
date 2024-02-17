@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.InputSystem.XR.Haptics;
 
 
+[RequireComponent(typeof(StateMachine))]
 public class Tower : MonoBehaviour
 {
 
@@ -33,6 +35,8 @@ public class Tower : MonoBehaviour
 
     protected SphereCollider _Collider;
 
+    protected StateMachine _stateMachine;
+
 
 
     private void OnEnable()
@@ -44,6 +48,15 @@ public class Tower : MonoBehaviour
         // whether we use x, y, or z here since it is a sphere.
         _Collider = GetComponent<SphereCollider>();
         _Collider.radius = _Collider.radius / transform.localScale.x;
+
+        if (_stateMachine == null)
+        {
+            _stateMachine = GetComponent<StateMachine>();
+            if (_stateMachine == null)
+                throw new Exception($"The tower \"{gameObject.name}\" does not have a state machine component!");
+
+            InitStateMachine();
+        }
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -62,6 +75,31 @@ public class Tower : MonoBehaviour
 
             targets.Remove(collider.gameObject);
         }
+    }
+
+    /// <summary>
+    /// This function sets up the state machine with a very basic setup that just uses the base class for each state.
+    /// </summary>
+    protected virtual void InitStateMachine()
+    {
+        // Create tower states.
+        TowerState_Active_Base activeState = new TowerState_Active_Base(this);
+        TowerState_Disabled_Base disabledState = new TowerState_Disabled_Base(this);
+        TowerState_Idle_Base idleState = new TowerState_Idle_Base(this);
+        TowerState_Upgrading_Base upgradingState = new TowerState_Upgrading_Base(this);
+
+        // Create and register transitions.
+        _stateMachine.AddTransitionFromState(idleState, new Transition(activeState, () => targets.Count > 0));
+
+        _stateMachine.AddTransitionFromAnyState(new Transition(idleState, () => targets.Count < 1 && 
+                                                                                _stateMachine.CurrentState.Name != "TowerState_Disabled_Base"));
+
+
+        // Tell state machine to write in the debug console every time it exits or enters a state.
+        //_stateMachine.EnableDebugLogging = true;
+
+        // Set the starting state.
+        _stateMachine.SetState(idleState);
     }
 
     /// <summary>

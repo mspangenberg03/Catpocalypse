@@ -12,6 +12,8 @@ using TMPro;
 using Random = UnityEngine.Random;
 using UnityEngine.UIElements;
 
+
+[RequireComponent(typeof(StateMachine))]
 public class CatBase : MonoBehaviour
 {
     public static bool ShowDistractednessBar = true;
@@ -69,6 +71,9 @@ public class CatBase : MonoBehaviour
     public bool isATarget = false;
     private float speed;
 
+    private StateMachine _stateMachine;
+
+
     // Start is called before the first frame update
     void Start()    
     {
@@ -87,7 +92,16 @@ public class CatBase : MonoBehaviour
         // Find the closest WayPoint and start moving there.
         FindNearestWayPoint();
         agent.SetDestination(_NextWayPoint.transform.position);
-        
+
+
+        if (_stateMachine == null)
+        {
+            _stateMachine = GetComponent<StateMachine>();
+            if (_stateMachine == null)
+                throw new Exception($"The cat \"{gameObject.name}\" does not have a StateMachine component!");
+
+            InitStateMachine();
+        }
     }
 
     // Update is called once per frame
@@ -123,6 +137,31 @@ public class CatBase : MonoBehaviour
 
         _DistractednessMeterGO.SetActive(ShowDistractednessBar);
     }
+
+    /// <summary>
+    /// This function sets up the state machine with a very basic setup that just uses the base class for each state.
+    /// </summary>
+    protected virtual void InitStateMachine()
+    {
+        // Create tower states.
+        CatState_Idle_Base idleState = new CatState_Idle_Base(this);
+
+
+        // Create and register transitions.
+
+
+        // Tell state machine to write in the debug console every time it exits or enters a state.
+        //_stateMachine.EnableDebugLogging = true;
+
+        // This is necessary since we only have one state and no transitions for now.
+        // Mouse over the AllowUnknownStates property for more info.
+        _stateMachine.AllowUnknownStates = true;
+
+
+        // Set the starting state.
+        _stateMachine.SetState(idleState);
+    }
+
     private void InitDistractednessMeter()
     {
         Transform distractednessMeter = Instantiate(_DistractednessMeterPrefab).transform;
