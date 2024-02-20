@@ -28,6 +28,17 @@ public class Tower : MonoBehaviour
     public List<GameObject> targets;
     [SerializeField, Tooltip("How much the tower costs to upgrade")]
     protected float upgradeCost;
+    public float UpgradeCost
+    {
+        get 
+        { 
+            return upgradeCost; 
+        } 
+        set 
+        { 
+            upgradeCost = value;
+        }
+    }
 
     public float level = 1;
 
@@ -169,7 +180,7 @@ public class Tower : MonoBehaviour
 
     public float BuildCost { get { return buildCost; } }
     public float DistractValue { get { return distractValue; } }
-
+    
 
     public Type TargetCatType
     {

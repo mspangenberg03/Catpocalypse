@@ -5,9 +5,8 @@ using UnityEngine.AI;
 
 public class ScratchingPostTower : Tower
 {
-    
-    private float speedDebuff = 1.8f;
-
+    [SerializeField, Tooltip("How long the cat is slowed for")]
+    private float slowLength = 5;
     private void Start()
     {
         
@@ -21,7 +20,7 @@ public class ScratchingPostTower : Tower
             if(other.gameObject.GetComponent<CatBase>().isSlowed == false)
             {
 
-                StartCoroutine(other.gameObject.GetComponent<CatBase>().Slow());
+                StartCoroutine(other.gameObject.GetComponent<CatBase>().Slow(slowLength));
             }
             
             StartCoroutine(DistractCats(other.gameObject));
@@ -32,27 +31,15 @@ public class ScratchingPostTower : Tower
         if (other.gameObject.tag == "Cat")
         {
             targets.Remove(other.gameObject);
-            other.gameObject.GetComponent<NavMeshAgent>().speed = other.gameObject.GetComponent<NavMeshAgent>().speed*speedDebuff;
-            other.gameObject.GetComponent<CatBase>().isSlowed = false;
         }
     }
     IEnumerator DistractCats(GameObject cat)
     {
-
-
         yield return new WaitForSeconds(1f);
         if(cat != null && targets.Contains(cat))
         {
             cat.GetComponent<CatBase>().DistractCat(this.distractValue, this);
             StartCoroutine(DistractCats(cat));
         }
-        
-                
-                
-            
-            
-        
-        
-        
     }
 }

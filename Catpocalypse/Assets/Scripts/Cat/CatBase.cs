@@ -64,10 +64,12 @@ public class CatBase : MonoBehaviour
 
     public List<AudioClip> purrs = new List<AudioClip>();
 
-    public bool isSlowed;
+    public bool isSlowed = false;
     public bool isBeingPetted = false;
     public bool isATarget = false;
     private float speed;
+    [SerializeField,Tooltip("How much the cat is slowed")]
+    private float speedDebuff = 1.8f;
 
     // Start is called before the first frame update
     void Start()    
@@ -182,6 +184,22 @@ public class CatBase : MonoBehaviour
 
             KillCat(2);
         }
+    }
+    public IEnumerator Slow(float slowLength)
+    {
+        agent.speed = agent.speed / speedDebuff;
+        speed = agent.speed;
+        isSlowed = true;
+        yield return new WaitForSeconds(slowLength);
+        agent.speed = agent.speed * speedDebuff;
+        speed = agent.speed;
+        isSlowed = false;
+    }
+    public IEnumerator Stun(float effectLength)
+    {
+        agent.speed = 0;
+        yield return new WaitForSeconds(effectLength);
+        agent.speed = speed;
     }
     protected void KillCat(int type)
     {

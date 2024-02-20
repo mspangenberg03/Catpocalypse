@@ -47,6 +47,7 @@ public class NonAllergicPerson : MonoBehaviour
         if(catsInRange.Contains(target) && !target.GetComponent<CatBase>().isBeingPetted)
         {
             target.GetComponent<CatBase>().isBeingPetted = true;
+            StartCoroutine(target.GetComponent<CatBase>().Stun(effectLength));
             StartCoroutine(PetCat());
         }
         if (target != null)
@@ -112,7 +113,6 @@ public class NonAllergicPerson : MonoBehaviour
 
     IEnumerator PetCat()
     {
-        target.GetComponent<CatBase>().agent.speed = 0;
         isPetting = true;
         StartCoroutine(DistractOverTime());
         pastTargets.Add(target);

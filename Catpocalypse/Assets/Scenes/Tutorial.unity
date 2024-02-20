@@ -16933,7 +16933,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 624746751195183796}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8030653062610841474}
+        m_TargetAssemblyTypeName: TowerDestroyerUI, Assembly-CSharp
+        m_MethodName: OnUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &1597151112286780299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18120,6 +18132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyTowerUI: {fileID: 2270266354490641477}
   destroyBtn: {fileID: 2709960668818696754}
+  upgradeBtn: {fileID: 0}
   playerMoneyManager: {fileID: 1161630510}
   inUse: 0
 --- !u!224 &8471906372761773808

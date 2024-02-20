@@ -5,6 +5,8 @@ using UnityEngine;
 public class BallShotgun : MonoBehaviour
 {
     private List<GameObject> cats;
+    [SerializeField, Tooltip("How long the cat is slowed for")]
+    private float slowLength = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,7 @@ public class BallShotgun : MonoBehaviour
         {
             foreach(GameObject cat in cats)
             {
-                StartCoroutine(cat.GetComponent<CatBase>().Slow());
+                StartCoroutine(cat.GetComponent<CatBase>().Slow(slowLength));
             }
         }
     }
