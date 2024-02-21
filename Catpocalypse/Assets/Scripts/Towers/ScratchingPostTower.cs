@@ -1,45 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ScratchingPostTower : Tower
 {
-    [SerializeField, Tooltip("How long the cat is slowed for")]
-    private float slowLength = 5;
-    private void Start()
-    {
-        
-    }
-    //Slows the cat when it enters range
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Cat")
-        {
-            targets.Add(other.gameObject);
-            if(other.gameObject.GetComponent<CatBase>().isSlowed == false)
-            {
 
-                StartCoroutine(other.gameObject.GetComponent<CatBase>().Slow(slowLength));
-            }
-            
-            StartCoroutine(DistractCats(other.gameObject));
-        }
-    }
-    private void OnTriggerExit(Collider other)
+    [Header("Targeting Settings")]
+
+    [Tooltip("The rate new scratching posts are launched in seconds")]
+    [SerializeField]
+    [Min(0f)]
+    private float _RateOfFire;
+
+    [Header("Launcher Settings")]
+
+    [Tooltip("The ScratchingPost prefab to launch")]
+    [SerializeField]
+    private GameObject _ScratchPost;
+
+    [Tooltip("The time to wait between post destruction and launch")]
+    [Min(0f)]
+    [SerializeField]
+    private float _TimeBetweenLaunches;
+
+    private bool _IsLaunching = false;
+
+    private int _MaxPosts = 1;
+
+    public int postCount = 0;
+
+    public void Update()
     {
-        if (other.gameObject.tag == "Cat")
+       
+        if(targets.Count <= 0)
         {
-            targets.Remove(other.gameObject);
+            return;
+        } else if(_IsLaunching)
+        {
+            return;
+        }
+        if (postCount < _MaxPosts)
+        {
+            postCount++;
+            StartCoroutine(LaunchPost());
         }
     }
-    IEnumerator DistractCats(GameObject cat)
+
+    private Vector3 FindClosestPostDestination()
     {
-        yield return new WaitForSeconds(1f);
-        if(cat != null && targets.Contains(cat))
-        {
-            cat.GetComponent<CatBase>().DistractCat(this.distractValue, this);
-            StartCoroutine(DistractCats(cat));
-        }
+        return targets[0].transform.position;
     }
+
+    
+
+    private IEnumerator  LaunchPost()
+    {
+        _IsLaunching = true;
+        //TODO: Make the launch animation
+        GameObject post = Instantiate(_ScratchPost, FindClosestPostDestination(), Quaternion.identity);
+        post.GetComponent<ScratchingPost>().parentTower = gameObject;
+        yield return new WaitForSeconds(_TimeBetweenLaunches);
+        _IsLaunching = false;
+    }
+
+
+
 }

@@ -32,7 +32,7 @@ public class NonAllergicPerson : MonoBehaviour
         //If there are cats in range and the person does not have a target, find a target
         if (tower.targets.Count > 0 && target == null)
         {
-            FindClosestCat();
+            FindClosestAvailableCat();
         }
         if (target != null && tower.targets.Contains(target))
         {
@@ -44,23 +44,16 @@ public class NonAllergicPerson : MonoBehaviour
             RemoveTarget();
             
         }
-        if(catsInRange.Contains(target) && !target.GetComponent<CatBase>().isBeingPetted)
+        if(catsInRange.Contains(target) && !(target.GetComponent<CatBase>().stoppingEntities.Count > 0))
         {
-            target.GetComponent<CatBase>().isBeingPetted = true;
-            StartCoroutine(target.GetComponent<CatBase>().Stun(effectLength));
+            target.GetComponent<CatBase>().stoppingEntities.Add(gameObject);
+
             StartCoroutine(PetCat());
-        }
-        if (target != null)
-        {
-            if (target.GetComponent<CatBase>().isBeingPetted && !isPetting)
-            {
-                RemoveTarget();
-            }
         }
     }
     
-    //Gets the cat closest to the player and sets it as the target
-    private void FindClosestCat()
+    //Gets the cat closest to the player that is not stopped and sets it as the target
+    private void FindClosestAvailableCat()
     {
         GameObject closestCat = null;
         float smallestDist = 2000000;
@@ -68,10 +61,10 @@ public class NonAllergicPerson : MonoBehaviour
         {
             if (cat != null) //If the cat exists
             {
-                if (CatDistance(cat) < smallestDist &&            //If it is closer to the person than the previous smallest distance
-                    !pastTargets.Contains(cat) &&                 //If the person has not already pet the cat
-                    !cat.GetComponent<CatBase>().isBeingPetted && //If the cat is not a target of another person
-                    tower.targets.Contains(cat))                  //If the cat is in range of the tower  
+                if (CatDistance(cat) < smallestDist &&                           //If it is closer to the person than the previous smallest distance
+                    !pastTargets.Contains(cat) &&                                //If the person has not already pet the cat
+                    !(cat.GetComponent<CatBase>().isATarget) &&                  //If the cat is not a target of another person
+                    tower.targets.Contains(cat))                                 //If the cat is in range of the tower  
                 {
                     smallestDist = CatDistance(cat);
                     closestCat = cat;
@@ -113,7 +106,6 @@ public class NonAllergicPerson : MonoBehaviour
 
     IEnumerator PetCat()
     {
-        isPetting = true;
         StartCoroutine(DistractOverTime());
         pastTargets.Add(target);
         yield return new WaitForSeconds(effectLength);
@@ -126,7 +118,7 @@ public class NonAllergicPerson : MonoBehaviour
         if (target != null)
         {
             target.GetComponent<CatBase>().isATarget = false;
-            target.GetComponent<CatBase>().isBeingPetted = false;
+            target.GetComponent<CatBase>().stoppingEntities.Remove(gameObject);
             target = null;
             
         }
