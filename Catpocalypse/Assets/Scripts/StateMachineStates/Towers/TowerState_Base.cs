@@ -21,6 +21,9 @@ public abstract class TowerState_Base : State_Base
         _parentTower = parentTower;
     }
 
-
+    public override void OnEnter()
+    {
+        _parentTower.EnableTargetDetection();
+    }
 }
 

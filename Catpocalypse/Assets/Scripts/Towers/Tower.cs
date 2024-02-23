@@ -57,6 +57,14 @@ public class Tower : MonoBehaviour
 
             InitStateMachine();
         }
+
+
+        EnableTargetDetection();        
+    }
+
+    private void OnDisable()
+    {
+        DisableTargetDetection();
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -78,7 +86,7 @@ public class Tower : MonoBehaviour
     }
 
     /// <summary>
-    /// This function sets up the state machine with a very basic setup that just uses the base class for each state.
+    /// This function is overriden by subclasses to allow them to setup the state machine with their own states.
     /// </summary>
     protected virtual void InitStateMachine()
     {
@@ -88,15 +96,21 @@ public class Tower : MonoBehaviour
         TowerState_Idle_Base idleState = new TowerState_Idle_Base(this);
         TowerState_Upgrading_Base upgradingState = new TowerState_Upgrading_Base(this);
 
-        // Create and register transitions.
-        _stateMachine.AddTransitionFromState(idleState, new Transition(activeState, () => targets.Count > 0));
 
-        _stateMachine.AddTransitionFromAnyState(new Transition(idleState, () => targets.Count < 1 && 
-                                                                                _stateMachine.CurrentState.Name != "TowerState_Disabled_Base"));
+        // Create and register transitions.
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        _stateMachine.AddTransitionFromState(idleState, new Transition(activeState, () => targets.Count > 0));
+        _stateMachine.AddTransitionFromState(disabledState, new Transition(idleState, () => IsTargetDetectionEnabled));
+
+        _stateMachine.AddTransitionFromAnyState(new Transition(disabledState, () => !IsTargetDetectionEnabled));
+        _stateMachine.AddTransitionFromAnyState(new Transition(idleState, () => IsTargetDetectionEnabled));
+
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
         // Tell state machine to write in the debug console every time it exits or enters a state.
-        //_stateMachine.EnableDebugLogging = true;
+        _stateMachine.EnableDebugLogging = true;
 
         // Set the starting state.
         _stateMachine.SetState(idleState);
@@ -195,11 +209,23 @@ public class Tower : MonoBehaviour
         return refundPercentage;
     }
 
+    public virtual void EnableTargetDetection()
+    {
+        _Collider.enabled = true;
+        targets.Clear();
+    }
+
+    public virtual void DisableTargetDetection()
+    {
+        _Collider.enabled = false;
+        targets.Clear();
+    }
+
 
 
     public float BuildCost { get { return buildCost; } }
     public float DistractValue { get { return distractValue; } }
-
+    public bool IsTargetDetectionEnabled { get { return _Collider.enabled; } }
 
     public Type TargetCatType
     {

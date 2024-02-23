@@ -108,7 +108,7 @@ public class CatBase : MonoBehaviour
     }
 
     /// <summary>
-    /// This function sets up the state machine with a very basic setup that just uses the base class for each state.
+    /// This function is overriden by subclasses to allow them to setup the state machine with their own states.
     /// </summary>
     protected virtual void InitStateMachine()
     {
@@ -118,18 +118,23 @@ public class CatBase : MonoBehaviour
         CatState_Slowed slowedState = new CatState_Slowed(this);
         CatState_Stopped stoppedState = new CatState_Stopped(this);
 
+
         // Create and register transitions.
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
         _stateMachine.AddTransitionFromState(movingState, new Transition(slowedState, () => slowingEntities.Count > 0 && stoppingEntities.Count == 0));
         _stateMachine.AddTransitionFromState(movingState, new Transition(stoppedState, () => stoppingEntities.Count > 0));
         _stateMachine.AddTransitionFromState(slowedState, new Transition(stoppedState, () => stoppingEntities.Count > 0));
         _stateMachine.AddTransitionFromState(stoppedState, new Transition(slowedState, () => stoppingEntities.Count == 0 &&
-                                                                                            slowingEntities.Count > 0));
+                                                                                             slowingEntities.Count > 0));
 
         _stateMachine.AddTransitionFromAnyState(new Transition(movingState, () => slowingEntities.Count == 0 && stoppingEntities.Count == 0));
 
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
         // Tell state machine to write in the debug console every time it exits or enters a state.
-        _stateMachine.EnableDebugLogging = true;
+        //_stateMachine.EnableDebugLogging = true;
 
         // This is necessary since we only have one state and no transitions for now.
         // Mouse over the AllowUnknownStates property for more info.

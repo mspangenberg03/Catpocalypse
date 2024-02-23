@@ -12,10 +12,9 @@ public class TowerState_Upgrading_Base : TowerState_Base
 
     }
 
-
     public override void OnEnter()
     {
-
+        _parentTower.DisableTargetDetection();
     }
 
     public override void OnExit()
