@@ -200,6 +200,11 @@ public class StateMachine : MonoBehaviour
         bool isInList = _statesByNameLookup.ContainsKey(state.Name);
 
 
+        // If we are already in the specified state, then simply return false.
+        if (_currentState == state)
+            return false;
+
+
         // If enabled, then register the state if it is not in the list.
         if (!isInList && AllowUnknownStates)
         {
@@ -233,7 +238,7 @@ public class StateMachine : MonoBehaviour
 
     private void LogUnknownStateError(string stateName)
     {
-        Debug.LogError($"State Machine could not switch to unknown state \"{stateName}\", because it is not known from any of the specified transitions! That means the state machine would be stuck in this state forever if this were allowed!");
+        Debug.LogError($"State Machine could not switch to unknown state \"{stateName}\", because it is not known from any of the specified transitions! That means the state machine would be stuck in this state forever if this were allowed! If you are not using transitions, then enable StateMachine.AllowUnknownStates to disable this error.");
     }
 
     /// <summary>
@@ -245,7 +250,7 @@ public class StateMachine : MonoBehaviour
     public void AddTransitionFromState(IState fromState, Transition transition)
     {
         if (fromState == null)
-            throw new ArgumentNullException("The passed in from state is null!");
+            throw new ArgumentNullException("The passed in fromState is null!");
         if (transition == null)
             throw new ArgumentNullException("The passed in transition is null!");
 
