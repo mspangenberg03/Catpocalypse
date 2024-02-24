@@ -6,7 +6,8 @@ public class SuperCucumber : MonoBehaviour
 {
     [SerializeField, Tooltip("How many cucumbers the Super Cucumber spawns")]
     private int numOfCucumbers = 4;
-
+    public GameObject target;
+    public CucumberTower parentTower;
     [SerializeField,Tooltip("The smaller cucumbers that are spawned")]
     private GameObject cucumber;
     // Start is called before the first frame update

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1771865644149417347}
   - component: {fileID: 7777318993304524583}
   - component: {fileID: -124246188904749348}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cucumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
