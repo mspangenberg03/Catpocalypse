@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 
@@ -58,6 +58,8 @@ public class LaserPointerTower : Tower
 
     private List<TargetInfo> _ActiveTargets;
 
+
+
     void Awake()
     {
         _ActiveTargets = new List<TargetInfo>();
@@ -107,6 +109,38 @@ public class LaserPointerTower : Tower
 
         
         CheckActiveTargets();
+    }
+
+    protected override void InitStateMachine()
+    {
+        // NOTE: This code looks the same as the base class for now, but there is a subtle difference.
+        //       The condition for entering the activeState from the idleState is different.
+
+
+        // Create tower states.
+        TowerState_Active_Base activeState = new TowerState_Active_Base(this);
+        TowerState_Disabled_Base disabledState = new TowerState_Disabled_Base(this);
+        TowerState_Idle_Base idleState = new TowerState_Idle_Base(this);
+        TowerState_Upgrading_Base upgradingState = new TowerState_Upgrading_Base(this);
+
+
+        // Create and register transitions.
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        _stateMachine.AddTransitionFromState(idleState, new Transition(activeState, () => _ActiveTargets.Count > 0));
+        _stateMachine.AddTransitionFromState(disabledState, new Transition(idleState, () => IsTargetDetectionEnabled));
+
+        _stateMachine.AddTransitionFromAnyState(new Transition(disabledState, () => !IsTargetDetectionEnabled));
+        _stateMachine.AddTransitionFromAnyState(new Transition(idleState, () => IsTargetDetectionEnabled));
+
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        // Tell state machine to write in the debug console every time it exits or enters a state.
+        _stateMachine.EnableDebugLogging = true;
+
+        // Set the starting state.
+        _stateMachine.SetState(idleState);
     }
 
     /// <summary>
@@ -384,7 +418,20 @@ public class LaserPointerTower : Tower
         q.eulerAngles = new Vector3(0f, -rotation, 0f);
         _Arrow.transform.rotation = q;
     }
-    
+
+    public override void EnableTargetDetection()
+    {
+        base.EnableTargetDetection();
+
+        _ActiveTargets.Clear();
+    }
+
+    public override void DisableTargetDetection()
+    {
+        base.DisableTargetDetection();
+
+        _ActiveTargets.Clear();
+    }
 
 
     /// <summary>
