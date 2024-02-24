@@ -32,7 +32,7 @@ public class BallShotgun : MonoBehaviour
         {
             foreach(GameObject cat in cats)
             {
-                StartCoroutine(cat.GetComponent<CatBase>().Slow(slowLength));
+                
             }
         }
     }
