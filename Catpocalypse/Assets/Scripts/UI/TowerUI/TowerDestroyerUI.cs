@@ -47,7 +47,7 @@ public class TowerDestroyerUI : MonoBehaviour
     }
     public void OnUpgrade()
     {
-        if (playerMoneyManager.SpendMoney(currentSelectedBase.tower.GetComponent<Tower>().UpgradeCost))
+        if (playerMoneyManager.SpendMoney(currentSelectedBase.tower.GetComponent<Tower>().GetUpgradeCost()))
         {
             currentSelectedBase.tower.GetComponent<Tower>().Upgrade();
         }

@@ -124,7 +124,7 @@ public class YarnBallTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        switch(level)
+        switch(towerLevel)
         {
             case 2:
                 sizeMultiplier = 2;
