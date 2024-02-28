@@ -200,6 +200,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4145678819214184079}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8302564871340476652}
   m_SourcePrefab: {fileID: 100100000, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
 --- !u!4 &5924269042197407257 stripped
 Transform:
@@ -223,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ceb7e5b6ba6c1b4bb55c5fc5dfe2644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerTypeTag: 2
   buildCost: 100
   refundPercentage: 0.85
   range: {fileID: 8621096765691456122}
@@ -326,3 +330,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!114 &8302564871340476652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6448288126085725347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a381c3779cca78419bf814c3b35c05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowUnknownStates: 0

@@ -3,29 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
-using System.Runtime.CompilerServices;
 
 
-/// <summary>
-/// This class runs the build tower UI.
-/// </summary>
 [RequireComponent(typeof(TowerInfoCollection))]
-public class TowerSelectorUI : MonoBehaviour
+public class TowerSelectorUI_OLD : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject buildTowerUI;
+
     [SerializeField]
     private TowerInfoPopupUI _TowerInfoPopupUI;
 
-    [Tooltip("This is the parent object of all the tower select buttons.")]
-    [SerializeField] GameObject _ButtonsParent;
 
-    [Tooltip("This field adjusts the radius used to position the buttons on the ring.")]
-    [Min(0)]
-    [SerializeField] int _ButtonsRadius = 80;
-
-
+    [Header("Button References")]
+    [SerializeField]
+    private Button laserPointerTowerBtn;
+    [SerializeField]
+    private Button scratchingPostTowerBtn;
+    [SerializeField]
+    private Button cucumberThrowerTowerBtn;
+    [SerializeField]
+    private Button stringWaverTowerBtn;
+    [SerializeField]
+    private Button yarnBallTowerBtn;
+    [SerializeField]
+    private Button nonAllergicTowerBtn;
+    [SerializeField]
+    private Button closeBtn;
     [SerializeField]
     private GameObject notEnoughFundsScreen;
     [SerializeField]
@@ -49,15 +55,12 @@ public class TowerSelectorUI : MonoBehaviour
 
         _TowerInfoPopupUI.gameObject.SetActive(false);
 
-        _TowerInfoCollection = GetComponent<TowerInfoCollection>();
-
+        ConnectTowerButtonMouseOverEvents();
     }
 
     private void Start()
     {
-        PositionButtonsAroundRing();
-
-        ConnectTowerButtonMouseOverEvents();
+        _TowerInfoCollection = GetComponent<TowerInfoCollection>();
     }
 
     private void Update()
@@ -69,45 +72,6 @@ public class TowerSelectorUI : MonoBehaviour
             inUse = false;
             gameObject.SetActive(false);
         }
-
-
-        UpdatePosition();
-    }
-
-    /// <summary>
-    /// This function updates the position of the tower selector UI on the screen. This keeps it centered on the selected
-    /// tower base when the user zooms in/out.
-    /// </summary>
-    private void UpdatePosition()
-    {
-        RectTransform rectTrans = GetComponent<RectTransform>();
-
-        TowerBase selected = TowerBase.SelectedTowerBase;
-        if (selected == null)
-            return;
-
-        Vector2 position = Camera.main.WorldToScreenPoint(selected.transform.position);
-        //Debug.Log($"World: {selected.transform.position}    Screen: {position}");
-        
-        GetComponent<RectTransform>().position = position;
-    }
-
-    private void PositionButtonsAroundRing()
-    {
-        // Get the buttom most point on the ring to start at.
-        Vector2 bottomPoint = new Vector2(0, -_ButtonsRadius);
-
-        int buttonCount = _ButtonsParent.transform.childCount;
-        float angleBetweenButtons = 360f / buttonCount;
-
-        Quaternion rotation = Quaternion.identity;
-        for (int i = 0; i < buttonCount; i++)
-        {
-            Transform curButton = _ButtonsParent.transform.GetChild(i);
-
-            rotation.eulerAngles = new Vector3(0, 0, i * angleBetweenButtons);
-            curButton.position = transform.position + (rotation * bottomPoint);
-        }
     }
 
     private void ConnectTowerButtonMouseOverEvents()
@@ -115,42 +79,40 @@ public class TowerSelectorUI : MonoBehaviour
         // I had to create a separate component and add it to each button as you can see, since Button does not have a MouseOver event for some odd reason.
         // Well it does, but you have to override OnMouseEnter in a class that's inherits from Button.
 
-        int buttonCount = _ButtonsParent.transform.childCount;
-        for (int i = 0; i < buttonCount; i++)
-        {
-            BuildTowerButtonUI curButton = _ButtonsParent.transform.GetChild(i).GetComponent<BuildTowerButtonUI>();
+        // Hook up the MouseEnter events
+        laserPointerTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseEnter += OnMouseEnteredAnyTowerButton;
+        scratchingPostTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseEnter += OnMouseEnteredAnyTowerButton;
+        cucumberThrowerTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseEnter += OnMouseEnteredAnyTowerButton;
+        stringWaverTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseEnter += OnMouseEnteredAnyTowerButton;
+        yarnBallTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseEnter += OnMouseEnteredAnyTowerButton;
+        nonAllergicTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseEnter += OnMouseEnteredAnyTowerButton;
 
-            // Hook up the MouseEnter event
-            curButton.Button.OnMouseEnter += OnMouseEnteredAnyTowerButton;
 
-            // Hook up the MouseExit event
-            curButton.Button.OnMouseExit += OnMouseExitedAnyTowerButton;
-
-        }
-
+        // Hook up the MouseExit events
+        laserPointerTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
+        scratchingPostTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
+        cucumberThrowerTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
+        stringWaverTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
+        yarnBallTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
+        nonAllergicTowerBtn.GetComponent<TowerSelectButtonMouseOver>().OnMouseExit += OnMouseExitedAnyTowerButton;
     }
 
-    private void OnMouseEnteredAnyTowerButton(object sender, EventArgs e)
+    private void OnMouseEnteredAnyTowerButton(object sender, TowerSelectButtonMouseOver.MouseOverEventArgs e)
     {
-        BuildTowerButtonUI clickedBuildButtonUI = (sender as CustomButton).GetComponent<BuildTowerButtonUI>();
-        if (clickedBuildButtonUI.name == "Close Button")
-            return;
-
+        TowerSelectButtonMouseOver mouseOverComponent = (sender as TowerSelectButtonMouseOver);
 
         RectTransform rectTransform = _TowerInfoPopupUI.GetComponent<RectTransform>();
 
-        // Calculate the position of the tower info popup.
         Vector3 popupPosition = rectTransform.anchoredPosition;        
-        popupPosition = clickedBuildButtonUI.GetComponent<RectTransform>().anchoredPosition;
-        Vector2 offset = new Vector2(-clickedBuildButtonUI.RectTransform.rect.width / 2, 0f);
-        rectTransform.anchoredPosition = popupPosition - (Vector3) offset;
+        popupPosition.x = mouseOverComponent.GetComponent<RectTransform>().anchoredPosition.x;
+        popupPosition.x -= (mouseOverComponent.GetWidth() / 2);
+        rectTransform.anchoredPosition = popupPosition;
 
 
-        // Get the corresponding tower info so we can use it to fill in the popup.
-        TowerInfo towerInfo = _TowerInfoCollection.GetTowerInfo(clickedBuildButtonUI.TowerType);
+        TowerInfo towerInfo = _TowerInfoCollection.GetTowerInfo(e.TowerType);
         if (towerInfo == null)
         {
-            Debug.LogError($"There is no TowerInfo scriptable object created for tower type \"{Enum.GetName(typeof(TowerTypes), clickedBuildButtonUI.TowerType)}\"");
+            Debug.LogError($"There is no TowerInfo scriptable object created for tower type \"{Enum.GetName(typeof(TowerTypes), e.TowerType)}\"");
             return;
         }
 
@@ -158,9 +120,11 @@ public class TowerSelectorUI : MonoBehaviour
         _TowerInfoPopupUI.gameObject.SetActive(true);
     }
 
-    private void OnMouseExitedAnyTowerButton(object sender, EventArgs e)
+    private void OnMouseExitedAnyTowerButton(object sender, TowerSelectButtonMouseOver.MouseOverEventArgs e)
     {
         _TowerInfoPopupUI.gameObject.SetActive(false);
+
+        TowerSelectButtonMouseOver mouseOverComponent = (sender as TowerSelectButtonMouseOver);
     }
 
     public void SetCurrentSelectedSpawn(GameObject current)

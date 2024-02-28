@@ -18,7 +18,7 @@ public class TowerBase : MonoBehaviour
 
     public bool usable;  
     
-    public GameObject towerSelectorUI;
+    public TowerSelectorUI towerSelectorUI;
     public GameObject towerDestroyerUI;
     public Material towerHovered;
     public Material towerNotHovered;

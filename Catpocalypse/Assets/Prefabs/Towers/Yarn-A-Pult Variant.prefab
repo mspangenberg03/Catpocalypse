@@ -121,6 +121,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a94d9343e834fb47adb2014f2ac3ad3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8148985274260696171}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a94d9343e834fb47adb2014f2ac3ad3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9164917387896508413}
   m_SourcePrefab: {fileID: 100100000, guid: 5a94d9343e834fb47adb2014f2ac3ad3, type: 3}
 --- !u!1 &6053846418755319415 stripped
 GameObject:
@@ -202,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a50ae0e6fdb7294cb912fd7b3f656d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerTypeTag: 4
   buildCost: 200
   refundPercentage: 0.85
   range: {fileID: 560913167619528523}
@@ -212,3 +216,16 @@ MonoBehaviour:
   throwPointPrefab: {fileID: 6487241590536661003, guid: 65a6a48719aa20248aa2a9a05f5b1519, type: 3}
   throwForce: 10
   throwRange: 5
+--- !u!114 &9164917387896508413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053846418755319415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a381c3779cca78419bf814c3b35c05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowUnknownStates: 0
