@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f28463251a9ea84c80e8386df687c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerTypeTag: 1
   buildCost: 175
   refundPercentage: 0.85
   range: {fileID: 8975065090706773128}
