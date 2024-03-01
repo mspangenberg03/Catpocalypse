@@ -10,6 +10,8 @@ using UnityEngine.InputSystem.XR.Haptics;
 [RequireComponent(typeof(StateMachine))]
 public class Tower : MonoBehaviour
 {
+    [Tooltip("This field gives us an easy way to find the TowerInfo object that corresponds to this tower.")]
+    [SerializeField] TowerTypes towerTypeTag;
 
     [SerializeField,Min(1)]
     protected float buildCost;
@@ -19,7 +21,7 @@ public class Tower : MonoBehaviour
     [SerializeField]
     protected float refundPercentage = 0.85f;
     
-    [SerializeField, Min(1)]
+    [SerializeField]
     protected SphereCollider range;
     [SerializeField, Min(1)]
     protected float distractValue;
@@ -254,4 +256,6 @@ public class Tower : MonoBehaviour
             _TargetCatType = value; 
         }
     }
+
+    public TowerTypes TowerTypeTag { get { return towerTypeTag; } }
 }

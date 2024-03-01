@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4253721149309096944}
   - component: {fileID: 8268352777581577139}
   - component: {fileID: 5282408448303499490}
+  - component: {fileID: 6487769620832846495}
   m_Layer: 2
   m_Name: NonAllergicTower
   m_TagString: Untagged
@@ -51,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4c76a258fa50047a1b052b05149daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerTypeTag: 5
   buildCost: 100
   refundPercentage: 0.85
   range: {fileID: 5282408448303499490}
@@ -136,6 +138,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 11.82
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &6487769620832846495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494292692984174254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a381c3779cca78419bf814c3b35c05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowUnknownStates: 0
 --- !u!1 &2090155517382614116
 GameObject:
   m_ObjectHideFlags: 0
