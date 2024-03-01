@@ -44,8 +44,6 @@ public class CucumberTower : Tower
 
     [SerializeField, Tooltip("How many projectiles are fired")]
     private int numOfProjectiles = 1;
-    [SerializeField,Tooltip("The maximum number of cucumbers it can be upgraded to fire")]
-    private int maxProjectiles = 3;
 
     [SerializeField,Tooltip("How often the Super Cucumber ability activates")]
     private int superCucumberCooldown = 12;

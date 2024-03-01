@@ -96,8 +96,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0.01}
+  m_Radius: 2.7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1771865644149417347
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -205,4 +205,4 @@ MonoBehaviour:
   numOfCucumbers: 4
   target: {fileID: 0}
   parentTower: {fileID: 0}
-  cucumber: {fileID: 0}
+  cucumber: {fileID: 6603149977634291862, guid: 356491f32b54d504ab168c5639033d23, type: 3}

@@ -13,10 +13,7 @@ public class YarnBallTower : Tower
     [SerializeField,Tooltip("How quickly the tower reloads to fire again")]
     private float reloadSpeed = 5;
     private float sizeMultiplier = 1;
-    private bool ballShotgunUnlocked = false;
-    private float bsCooldown = 20;
-    [SerializeField]
-    private Transform bsSpawn;
+    
     void Start()
     {
         // Start the projectile throwing coroutine
@@ -130,11 +127,11 @@ public class YarnBallTower : Tower
                 sizeMultiplier = 2;
                 break;
             case 3:
+                SetUpgradeCost(GetUpgradeCost() * 2);
                 distractValue *= 1.5f;
                 break;
             case 4:
-                ballShotgunUnlocked = true;
-                StartCoroutine(BallShotgun());
+                
                 break;
         }
     }
@@ -150,21 +147,6 @@ public class YarnBallTower : Tower
 
         return null;
     }
-    IEnumerator BallShotgun()
-    {
-        if(targets.Count > 0)
-        {
-            GameObject proj = Instantiate(ballShotgunPrefab, bsSpawn);
-            ParabolaCalc(targets[0],proj);
-            yield return new WaitForSeconds(bsCooldown);
-        }
-        
-        StartCoroutine(BallShotgun());
-    }
-    private void ParabolaCalc(GameObject target,GameObject projectile)
-    {
-        Vector3 point1 = transform.position;
-        Vector3 point2 = bsSpawn.position;
-        Vector3 point3 = target.transform.position;
-    }
+   
+    
 }

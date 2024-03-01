@@ -212,6 +212,11 @@ public class Tower : MonoBehaviour
     {
         return upgradeCost;
     }
+    public float SetUpgradeCost(float newCost)
+    {
+        upgradeCost = newCost;
+        return upgradeCost;
+    }
 
     public float GetRefundPercentage()
     {
