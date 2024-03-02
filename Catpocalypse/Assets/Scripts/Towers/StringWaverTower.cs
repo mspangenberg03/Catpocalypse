@@ -35,7 +35,7 @@ public class StringWaverTower : Tower
     }
     public override void Upgrade()
     {
-        distractionInterval--;
+        base.Upgrade();
     }
     IEnumerator DistractCat(GameObject cat)
     {

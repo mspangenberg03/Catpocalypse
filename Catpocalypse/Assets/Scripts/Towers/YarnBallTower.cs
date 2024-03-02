@@ -123,16 +123,7 @@ public class YarnBallTower : Tower
         base.Upgrade();
         switch(towerLevel)
         {
-            case 2:
-                sizeMultiplier = 2;
-                break;
-            case 3:
-                SetUpgradeCost(GetUpgradeCost() * 2);
-                distractValue *= 1.5f;
-                break;
-            case 4:
-                
-                break;
+            
         }
     }
     GameObject FindTargetByLayer(string Cat)

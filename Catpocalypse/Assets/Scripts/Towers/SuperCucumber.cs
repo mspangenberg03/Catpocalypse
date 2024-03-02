@@ -24,7 +24,7 @@ public class SuperCucumber : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Cat")
         {
-            SpawnCucumbers();
+            DistractCats();
             Destroy(gameObject);
         }
     }
@@ -46,16 +46,11 @@ public class SuperCucumber : MonoBehaviour
             catsInRange.Remove(other.gameObject);
         }
     }
-    private void SpawnCucumbers()
+    private void DistractCats()
     {
         foreach(GameObject cat in catsInRange)
         {
-            Transform spawn = cat.transform;
-            spawn.position = new Vector3(spawn.position.x,spawn.position.y+50,spawn.position.z);
-            GameObject cuc = Instantiate(cucumber, spawn);
-            Debug.Log("Cucumber Spawned");
-            cuc.GetComponent<Cucumber>().target = cat;
-            cuc.GetComponent<Cucumber>().parentTower = parentTower;
+            cat.GetComponent<CatBase>().DistractCat(parentTower.GetComponent<Tower>().DistractValue,parentTower.GetComponent<Tower>());
         }
     }
 }

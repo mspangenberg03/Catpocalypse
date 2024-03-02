@@ -74,13 +74,8 @@ public class ScratchingPostTower : Tower
         base.Upgrade();
         switch (towerLevel)
         {
+     
             case 2:
-                AOE += AOEUpgrade;
-                break;
-            case 3:
-                speedDebuff += debuffUpgrade;
-                break;
-            case 4:
                 ISPReady = true;
                 break;
         }

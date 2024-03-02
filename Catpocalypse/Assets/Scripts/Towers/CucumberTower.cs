@@ -42,14 +42,11 @@ public class CucumberTower : Tower
 
     private int reloadTime = 2;
 
-    [SerializeField, Tooltip("How many projectiles are fired")]
-    private int numOfProjectiles = 1;
+    
 
     [SerializeField,Tooltip("How often the Super Cucumber ability activates")]
     private int superCucumberCooldown = 12;
-    private bool SCUnlocked = false;
-    [SerializeField,Tooltip("How quickly the tower fires projectiles in one shot")] 
-    private float fireRate = .5f;
+    
     private bool canSCBeFired = false;
     private bool firingSC = false;
     private void Awake()
@@ -110,29 +107,18 @@ public class CucumberTower : Tower
         // Calculate the launch velocity, and then combine it with the direction vector
         // to get the launch velocity as the proper 3D direction vector.
         float launchVelocity = CalculateLaunchVelocity(_TargetPoint, distance);
-      
+
         // Spawn the cucumber.
-        StartCoroutine(FireDelay(launchVelocity,direction,target));
-        
-
-
-        StartCoroutine(Reload());
-
-    }
-    private IEnumerator FireDelay(float launchVelocity, Vector3 direction , GameObject target)
-    {
-        //If firing normally
         if (!firingSC)
         {
-            for (int i = 0; i < numOfProjectiles; i++)
-            {
-                GameObject proj = Instantiate(cucumberPrefab, spawn.transform.position, Quaternion.identity);
-                Cucumber cucumber = proj.gameObject.GetComponent<Cucumber>();
-                cucumber.target = target;
-                cucumber.parentTower = this;
-                proj.GetComponent<Rigidbody>().velocity = direction.normalized * launchVelocity;
-                yield return new WaitForSeconds(fireRate);
-            }
+
+            GameObject proj = Instantiate(cucumberPrefab, spawn.transform.position, Quaternion.identity);
+            Cucumber cucumber = proj.gameObject.GetComponent<Cucumber>();
+            cucumber.target = target;
+            cucumber.parentTower = this;
+            proj.GetComponent<Rigidbody>().velocity = direction.normalized * launchVelocity;
+
+
         }
         //If firing a super cucumber
         else
@@ -145,7 +131,13 @@ public class CucumberTower : Tower
             proj.GetComponent<Rigidbody>().velocity = direction.normalized * launchVelocity;
             StartCoroutine(SuperCucumber());
         }
+
+
+
+        StartCoroutine(Reload());
+
     }
+    
 
     /// <summary>
     /// This function makes the tower swivel toward the target.
@@ -200,19 +192,14 @@ public class CucumberTower : Tower
             }
         } // end while(true)
     }
+
+    //Overrides the Upgrade function in the tower script
     public override void Upgrade()
     {
         base.Upgrade();
-        if (towerLevel < 4)
-        {
-            numOfProjectiles++;
-        }
-        else if (towerLevel == 4 && !SCUnlocked)
-        {
-            StartCoroutine(SuperCucumber());
-            SCUnlocked = true;
-            canSCBeFired = true;
-        }
+        StartCoroutine(SuperCucumber());
+        canSCBeFired = true;
+        
         
     }
     private Vector3 CalculateTargetPoint(GameObject target)
