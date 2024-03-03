@@ -233,13 +233,20 @@ MonoBehaviour:
   distractValue: 133
   numberOfTargets: 0
   targets: []
+  towerLevel: 1
+  upgradeCost: 200
   cucumberPrefab: {fileID: 6603149977634291862, guid: 356491f32b54d504ab168c5639033d23, type: 3}
+  superCucumberPrefab: {fileID: 6603149977634291862, guid: 0da83d018d3a45e4ea5f2e1e967b4ef6, type: 3}
   spawn: {fileID: 8574672227803443362}
   _DistanceInFrontOfTargetToAimFor: 5
   _Gravity: 9.81
   _LaunchAngle: 15
   _AimSpeed: 30
   _AimThreshold: 10
+  numOfProjectiles: 1
+  maxProjectiles: 3
+  superCucumberCooldown: 12
+  fireRate: 0.5
 --- !u!135 &8621096765691456122
 SphereCollider:
   m_ObjectHideFlags: 0

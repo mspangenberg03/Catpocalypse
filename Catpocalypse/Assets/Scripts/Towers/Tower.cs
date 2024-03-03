@@ -38,6 +38,8 @@ public class Tower : MonoBehaviour
     protected SphereCollider _Collider;
 
     protected StateMachine _stateMachine;
+    public int towerLevel = 1;
+    [SerializeField] private float upgradeCost;
 
 
 
@@ -162,7 +164,10 @@ public class Tower : MonoBehaviour
     {
 
     }
-
+    public virtual void Upgrade()
+    {
+        towerLevel++;
+    }
     void OnMouseEnter()
     {
         gameObject.GetComponentInParent<TowerBase>().hoveredOver = true;
@@ -204,6 +209,15 @@ public class Tower : MonoBehaviour
     public float GetBuildCost()
     {
         return buildCost;
+    }
+    public float GetUpgradeCost()
+    {
+        return upgradeCost;
+    }
+    public float SetUpgradeCost(float newCost)
+    {
+        upgradeCost = newCost;
+        return upgradeCost;
     }
 
     public float GetRefundPercentage()

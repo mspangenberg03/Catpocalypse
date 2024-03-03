@@ -6,6 +6,7 @@ using UnityEngine;
 public class CucumberTower : Tower
 {
     [SerializeField] GameObject cucumberPrefab;
+    [SerializeField] GameObject superCucumberPrefab;
     [SerializeField]
     private Transform spawn;
 
@@ -41,7 +42,13 @@ public class CucumberTower : Tower
 
     private int reloadTime = 2;
 
+    
 
+    [SerializeField,Tooltip("How often the Super Cucumber ability activates")]
+    private int superCucumberCooldown = 12;
+    
+    private bool canSCBeFired = false;
+    private bool firingSC = false;
     private void Awake()
     {
         _CurrentAimDirection = transform.forward;
@@ -100,20 +107,37 @@ public class CucumberTower : Tower
         // Calculate the launch velocity, and then combine it with the direction vector
         // to get the launch velocity as the proper 3D direction vector.
         float launchVelocity = CalculateLaunchVelocity(_TargetPoint, distance);
-      
+
         // Spawn the cucumber.
-        GameObject proj = Instantiate(cucumberPrefab, spawn.transform.position, Quaternion.identity);
+        if (!firingSC)
+        {
 
-        Cucumber cucumber = proj.gameObject.GetComponent<Cucumber>();
-        cucumber.target = target;
-        cucumber.parentTower = this;
+            GameObject proj = Instantiate(cucumberPrefab, spawn.transform.position, Quaternion.identity);
+            Cucumber cucumber = proj.gameObject.GetComponent<Cucumber>();
+            cucumber.target = target;
+            cucumber.parentTower = this;
+            proj.GetComponent<Rigidbody>().velocity = direction.normalized * launchVelocity;
 
-        proj.GetComponent<Rigidbody>().velocity = direction.normalized * launchVelocity;
+
+        }
+        //If firing a super cucumber
+        else
+        {
+            Debug.Log("SuperCuc fired");
+            GameObject proj = Instantiate(superCucumberPrefab, spawn.transform.position, Quaternion.identity);
+            SuperCucumber cucumber = proj.gameObject.GetComponent<SuperCucumber>();
+            cucumber.target = target;
+            cucumber.parentTower = this;
+            proj.GetComponent<Rigidbody>().velocity = direction.normalized * launchVelocity;
+            StartCoroutine(SuperCucumber());
+        }
+
 
 
         StartCoroutine(Reload());
 
     }
+    
 
     /// <summary>
     /// This function makes the tower swivel toward the target.
@@ -169,6 +193,15 @@ public class CucumberTower : Tower
         } // end while(true)
     }
 
+    //Overrides the Upgrade function in the tower script
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        StartCoroutine(SuperCucumber());
+        canSCBeFired = true;
+        
+        
+    }
     private Vector3 CalculateTargetPoint(GameObject target)
     {
         Vector3 targetPoint = target.transform.position;
@@ -208,18 +241,40 @@ public class CucumberTower : Tower
     {
         GameObject target = null;
         float smallestDistance = float.MaxValue;
-        foreach(GameObject cat in targets)
+        //If the Super Cucumber is not ready, target normally
+        if (!canSCBeFired)
         {
-            if(cat != null)
+            foreach (GameObject cat in targets)
             {
-                float distance = Vector3.Distance(transform.position, cat.transform.position);
-                if (distance < smallestDistance)
+                if (cat != null)
                 {
-                    smallestDistance = distance;
-                    target = cat;
+                    float distance = Vector3.Distance(transform.position, cat.transform.position);
+                    if (distance < smallestDistance)
+                    {
+                        smallestDistance = distance;
+                        target = cat;
+                    }
                 }
             }
         }
+        //If the Super Cucumber can be fired, target the cat closest to the goal
+        else
+        {
+            firingSC = true;
+            foreach (GameObject cat in GameObject.FindGameObjectsWithTag("Cat"))
+            {
+                if (cat != null)
+                {
+                    float distance = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Goal").transform.position);
+                    if (distance < smallestDistance)
+                    {
+                        smallestDistance = distance;
+                        target = cat;
+                    }
+                }
+            }
+        }
+        
 
 
         // This null check prevents an exception being thrown below when we call CalculateTargetPoint().
@@ -260,5 +315,15 @@ public class CucumberTower : Tower
         // Change it to be in the range -180 to +180 degrees relative to the from vector.
         float sign = Mathf.Sign(Vector3.Dot(referenceAxis, Vector3.Cross(from, to)));
         return angle * sign;
+    }
+    //The Super Cucumber cooldown
+    IEnumerator SuperCucumber()
+    {
+        firingSC = false;
+        canSCBeFired = false;
+        yield return new WaitForSeconds(superCucumberCooldown);
+        canSCBeFired = true;
+
+        
     }
 }
