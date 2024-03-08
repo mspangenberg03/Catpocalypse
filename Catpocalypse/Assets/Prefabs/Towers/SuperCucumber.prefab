@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2970322579017596125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2075518692672291132}
+  m_Layer: 0
+  m_Name: CucumberSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2075518692672291132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970322579017596125}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.103, z: 0.010000038}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8569501347822294217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6603149977634291862
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,13 +41,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8569501347822294217}
   - component: {fileID: 6873299542539657863}
-  - component: {fileID: 653438787734340216}
   - component: {fileID: 8848898697398727732}
   - component: {fileID: 1771865644149417347}
   - component: {fileID: 7777318993304524583}
   - component: {fileID: -124246188904749348}
+  - component: {fileID: 3319115890763768483}
   m_Layer: 9
-  m_Name: Cucumber
+  m_Name: SuperCucumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +65,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2075518692672291132}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6873299542539657863
@@ -45,21 +77,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6603149977634291862}
   m_Mesh: {fileID: 8691780276856062721, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
---- !u!114 &653438787734340216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6603149977634291862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cefad7256aa32434e9f8cf1c8e1bbd3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _MaxLifeTime: 5
-  target: {fileID: 0}
-  parentTower: {fileID: 0}
 --- !u!135 &8848898697398727732
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -79,8 +96,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 80
-  m_Center: {x: 0, y: 0, z: 0.01}
+  m_Radius: 2.7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1771865644149417347
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -94,7 +111,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -173,3 +190,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3319115890763768483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6603149977634291862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96dff3384dae6c04f80027db097785dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numOfCucumbers: 4
+  target: {fileID: 0}
+  parentTower: {fileID: 0}
+  cucumber: {fileID: 6603149977634291862, guid: 356491f32b54d504ab168c5639033d23, type: 3}
