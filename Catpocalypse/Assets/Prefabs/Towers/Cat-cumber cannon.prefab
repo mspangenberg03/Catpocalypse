@@ -230,15 +230,15 @@ MonoBehaviour:
   buildCost: 100
   refundPercentage: 0.85
   range: {fileID: 8621096765691456122}
-  distractValue: 133
+  distractValue: 175
   numberOfTargets: 0
   targets: []
   cucumberPrefab: {fileID: 6603149977634291862, guid: 356491f32b54d504ab168c5639033d23, type: 3}
   spawn: {fileID: 8574672227803443362}
   _DistanceInFrontOfTargetToAimFor: 5
-  _Gravity: 9.81
+  _Gravity: 5
   _LaunchAngle: 15
-  _AimSpeed: 30
+  _AimSpeed: 75
   _AimThreshold: 10
 --- !u!135 &8621096765691456122
 SphereCollider:
@@ -259,7 +259,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 15
+  m_Radius: 65
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2115721319496029504
 MeshRenderer:

@@ -53,13 +53,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerTypeTag: 5
-  buildCost: 100
+  buildCost: 200
   refundPercentage: 0.85
   range: {fileID: 5282408448303499490}
   distractValue: 10
   numberOfTargets: 0
   targets: []
-  numOfPeople: 3
+  numOfPeople: 2
   spawnPoints:
   - {fileID: 5166565675440634197}
   - {fileID: 265189496869523864}

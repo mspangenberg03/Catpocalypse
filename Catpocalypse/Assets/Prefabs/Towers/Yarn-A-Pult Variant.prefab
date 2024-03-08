@@ -209,7 +209,7 @@ MonoBehaviour:
   buildCost: 200
   refundPercentage: 0.85
   range: {fileID: 560913167619528523}
-  distractValue: 500
+  distractValue: 275
   numberOfTargets: 0
   targets: []
   yarnBallPrefab: {fileID: 7418905643246593257, guid: 543c1eeb918fd8a40b8e656f6691db55, type: 3}
