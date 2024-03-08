@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerTypeTag: 1
-  buildCost: 175
+  buildCost: 125
   refundPercentage: 0.85
   range: {fileID: 8975065090706773128}
   distractValue: 8

@@ -207,6 +207,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8e942cb04267be94fb807e2830e3fb46, type: 3}
       insertIndex: -1
       addedObject: {fileID: 797072595149710763}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8e942cb04267be94fb807e2830e3fb46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3226867234852970270}
   m_SourcePrefab: {fileID: 100100000, guid: 8e942cb04267be94fb807e2830e3fb46, type: 3}
 --- !u!1 &2247931869541265458 stripped
 GameObject:
@@ -248,13 +251,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _CutenessValue: 1
-  distractionThreshold: 445
+  distractionThreshold: 350
   damageToPlayer: 1
+  speed: 0
   _WayPointArrivedDistance: 6
+  agent: {fileID: 0}
   distractReward: 14
   _DistractednessMeterHeightAboveCat: 8
   _DistractednessMeterPrefab: {fileID: 3512654570813597946, guid: e633f4d5486c0f542b4af3b4ecb326ae, type: 3}
-  agent: {fileID: 0}
   sounds:
   - {fileID: 8300000, guid: 91349c0e77800f348bb26ea102614bda, type: 3}
   - {fileID: 8300000, guid: 2cdd81b48e0a5fa4ba894463142eb035, type: 3}
@@ -293,8 +297,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3cf17b0ffcb763e4d98c6fc7067a1280, type: 3}
   - {fileID: 8300000, guid: f8f804323b1e7444db4cf3816c8ecce3, type: 3}
   - {fileID: 8300000, guid: 63339e6695a3af24fbd3b1c1becf28fd, type: 3}
-  isSlowed: 0
-  isBeingPetted: 0
+  slowingEntities: []
+  stoppingEntities: []
   isATarget: 0
 --- !u!64 &465833493815948020
 MeshCollider:
@@ -441,3 +445,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3226867234852970270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2247931869541265458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a381c3779cca78419bf814c3b35c05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowUnknownStates: 0

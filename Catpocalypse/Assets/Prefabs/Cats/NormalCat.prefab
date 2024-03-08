@@ -211,6 +211,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7dc187c064e6c7489ad1f4b4c6d6e91, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4483574012576929532}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7dc187c064e6c7489ad1f4b4c6d6e91, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4271309147003016060}
   m_SourcePrefab: {fileID: 100100000, guid: d7dc187c064e6c7489ad1f4b4c6d6e91, type: 3}
 --- !u!1 &1589074876568128993 stripped
 GameObject:
@@ -279,13 +282,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _CutenessValue: 5
-  distractionThreshold: 750
+  distractionThreshold: 450
   damageToPlayer: 2
+  speed: 0
   _WayPointArrivedDistance: 4
+  agent: {fileID: 0}
   distractReward: 8
   _DistractednessMeterHeightAboveCat: 8
   _DistractednessMeterPrefab: {fileID: 3512654570813597946, guid: e633f4d5486c0f542b4af3b4ecb326ae, type: 3}
-  agent: {fileID: 0}
   sounds:
   - {fileID: 8300000, guid: 91349c0e77800f348bb26ea102614bda, type: 3}
   - {fileID: 8300000, guid: 2cdd81b48e0a5fa4ba894463142eb035, type: 3}
@@ -324,10 +328,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3cf17b0ffcb763e4d98c6fc7067a1280, type: 3}
   - {fileID: 8300000, guid: f8f804323b1e7444db4cf3816c8ecce3, type: 3}
   - {fileID: 8300000, guid: 63339e6695a3af24fbd3b1c1becf28fd, type: 3}
-  isSlowed: 0
-  isBeingPetted: 0
+  slowingEntities: []
+  stoppingEntities: []
   isATarget: 0
-  speed: 0
 --- !u!64 &5254691421844368040
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -446,3 +449,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4271309147003016060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589074876568128993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a381c3779cca78419bf814c3b35c05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowUnknownStates: 0
