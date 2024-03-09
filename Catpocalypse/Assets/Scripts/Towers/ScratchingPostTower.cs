@@ -67,7 +67,11 @@ public class ScratchingPostTower : Tower
 
     private Vector3 FindClosestPostDestination()
     {
-        return targets[0].transform.position;
+        if (targets[0])
+        {
+            return targets[0].transform.position;
+        }
+        return new Vector3(-100, -100, -100);
     }
     public override void Upgrade()
     {
@@ -86,18 +90,25 @@ public class ScratchingPostTower : Tower
     private IEnumerator  LaunchPost()
     {
         _IsLaunching = true;
+        Vector3 destination = FindClosestPostDestination();
+        if (destination.y == -100)
+        {
+            _IsLaunching = false;
+            yield return new WaitForEndOfFrame();
+        }
         if (!ISPReady)
         {
-            
+
             //TODO: Make the launch animation
-            GameObject post = Instantiate(_ScratchPost, FindClosestPostDestination(), Quaternion.identity);
+            
+            GameObject post = Instantiate(_ScratchPost, destination, Quaternion.identity);
             post.GetComponent<ScratchingPost>().parentTower = gameObject;
             post.GetComponent<SphereCollider>().radius = AOE;
             post.GetComponent<ScratchingPost>().speedDebuff = speedDebuff;
         }
         else
         {
-            GameObject post = Instantiate(_IrScratchPost, FindClosestPostDestination(), Quaternion.identity);
+            GameObject post = Instantiate(_IrScratchPost, destination, Quaternion.identity);
             post.GetComponent<IrresistableScratchingPost>().parentTower = gameObject;
             post.GetComponent<SphereCollider>().radius = AOE;
             StartCoroutine(ISPCooldown());
