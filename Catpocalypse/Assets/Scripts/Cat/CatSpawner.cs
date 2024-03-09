@@ -6,65 +6,55 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-using Random = UnityEngine.Random;
-
 
 public class CatSpawner : MonoBehaviour
 {
+    [Header("Wave Settings")]
+    [Tooltip("A list of Wave scriptable Objects that have a list of cats to spawn")]
+    [SerializeField]
+    private List<Wave> _CatsToSpawn;
+
+    [Tooltip("The time between cats to spawn")]
+    [SerializeField]
+    private float _TimeBetweenSpawns;
+
+    [Header("Game Object References")]
     [SerializeField, Tooltip("One possible spawn point for cats")]
-    private Transform spawnPoint1;
+    private Transform _SpawnPoint1;
 
-    [SerializeField] private int _CatsInFirstWave = 5;
+    [SerializeField] private GameObject _NormalCat;
+    [SerializeField] private GameObject _HeavyCat;
+    [SerializeField] private GameObject _LightCat;
+    [SerializeField] private PlayerCutenessManager _CutenessManager;
 
-    [SerializeField] private GameObject normalCat;
-    [SerializeField] private GameObject heavyCat;
-    [SerializeField] private GameObject lightCat;
-    [SerializeField] private PlayerCutenessManager cutenessManager;
-
-    private List<GameObject> catsToSpawn;
-
-
-    private int catsInCurrentWave;
+    private int _CurrentWave;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        catsInCurrentWave = _CatsInFirstWave;
-
-        catsToSpawn = new List<GameObject>();
-        catsToSpawn.Add(normalCat);
-        catsToSpawn.Add(lightCat);
-        catsToSpawn.Add(heavyCat);
+        _CurrentWave = 0;
     }
 
     public void StartNextWave()
     {       
-        if (WaveManager.Instance.WaveCount == 1)
-        {
-            StartCoroutine(Spawner());
-        }
-        else
-        {
-            catsInCurrentWave += 2;
-            StartCoroutine(Spawner());
-        }
+        StartCoroutine(Spawner(_CurrentWave++));
     }
     public void StopSpawner()
     {
-        StopCoroutine(Spawner());
+        StartCoroutine(Spawner(_CurrentWave));
     }
-    IEnumerator Spawner()
+    IEnumerator Spawner(int currentWave)
     {
-        for (int i = 0; i < catsInCurrentWave; i++)
+        int catsLeftInWave = _CatsToSpawn[currentWave].cats.Count;
+        for (int i = 0; i < catsLeftInWave; i++)
         {
-            int index = Random.Range(0, 3);
-            GameObject catPrefab = catsToSpawn[index];
+            GameObject catPrefab = _CatsToSpawn[_CurrentWave].cats[catsLeftInWave];
 
-            GameObject cat = Instantiate(catPrefab, spawnPoint1);
+            GameObject cat = Instantiate(catPrefab, _SpawnPoint1);
 
             CatBase catComponent = cat.GetComponent<CatBase>();
-            cutenessManager.AddCuteness(catComponent.Cuteness);
+            _CutenessManager.AddCuteness(catComponent.Cuteness);
 
             yield return new WaitForSeconds(2f);
         }
@@ -72,5 +62,5 @@ public class CatSpawner : MonoBehaviour
     }
 
 
-    public int CatsInCurrentWave { get { return catsInCurrentWave; } }
+    public int CatsInCurrentWave { get { return _CatsToSpawn[_CurrentWave].cats.Count; } }
 }
