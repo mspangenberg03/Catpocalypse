@@ -36,17 +36,9 @@ public class ScratchingPostTower : Tower
     public int postCount = 0;
     private float IrCooldown = 8;
     private bool ISPReady = false;
-    [SerializeField, Tooltip("How much the upgrade increases the scratching post tower AOE")]
-    private float AOEUpgrade = 5;
-    [SerializeField, Tooltip("How much the upgrade increases the scratching post tower speed debuff")]
-    private float debuffUpgrade = 5;
-
-    private float speedDebuff;
-    private float AOE;
     private void Start()
     {
-        speedDebuff = _ScratchPost.GetComponent<ScratchingPost>().speedDebuff;
-        AOE = _ScratchPost.GetComponent<SphereCollider>().radius;
+        
     }
     public void Update()
     {
@@ -103,14 +95,13 @@ public class ScratchingPostTower : Tower
             
             GameObject post = Instantiate(_ScratchPost, destination, Quaternion.identity);
             post.GetComponent<ScratchingPost>().parentTower = gameObject;
-            post.GetComponent<SphereCollider>().radius = AOE;
-            post.GetComponent<ScratchingPost>().speedDebuff = speedDebuff;
+            
         }
         else
         {
             GameObject post = Instantiate(_IrScratchPost, destination, Quaternion.identity);
             post.GetComponent<IrresistableScratchingPost>().parentTower = gameObject;
-            post.GetComponent<SphereCollider>().radius = AOE;
+           
             StartCoroutine(ISPCooldown());
         }
         
