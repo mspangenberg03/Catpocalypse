@@ -211,9 +211,6 @@ public class CatBase : MonoBehaviour
             float debuffPercent = PlayerCutenessManager.Instance.CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
             distractionValue = distractionValue * debuffPercent;
         }
-
-
-
         distraction += distractionValue;
         UpdateDistractednessMeter();
 

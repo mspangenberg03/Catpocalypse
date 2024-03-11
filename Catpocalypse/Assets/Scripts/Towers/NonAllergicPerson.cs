@@ -8,7 +8,7 @@ public class NonAllergicPerson : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Tower tower; //The parent tower
-    private bool isPetting = false;
+    private bool isPetting = false; //Is the person petting a cat
     private GameObject target;
     private List<GameObject> pastTargets; //Cats that the person has already petted
     private List<GameObject> catsInRange; //The cats that are in range of the collider
@@ -106,9 +106,12 @@ public class NonAllergicPerson : MonoBehaviour
 
     IEnumerator PetCat()
     {
+        //target.GetComponent<CatBase>().stoppingEntities.Add(gameObject);
+        isPetting = true;
         StartCoroutine(DistractOverTime());
         pastTargets.Add(target);
         yield return new WaitForSeconds(effectLength);
+        target.GetComponent<CatBase>().stoppingEntities.Remove(gameObject);
         RemoveTarget();
     }
 
@@ -127,7 +130,7 @@ public class NonAllergicPerson : MonoBehaviour
 
     IEnumerator DistractOverTime()
    {
-     
+        
         if(isPetting && target != null)
         {
             target.GetComponent<CatBase>().DistractCat(tower.DistractValue, tower);
