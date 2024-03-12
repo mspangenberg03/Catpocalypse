@@ -5089,7 +5089,7 @@ PrefabInstance:
       objectReference: {fileID: 1161630509}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: _Waves.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: _TimeBetweenSpawns
@@ -5097,6 +5097,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: _Waves.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6cb7396151b1f3b41a3e4deb93a8cc3c, type: 2}
+    - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
+      propertyPath: _Waves.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 6cb7396151b1f3b41a3e4deb93a8cc3c, type: 2}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
