@@ -32,7 +32,7 @@ public class ScratchingPost : MonoBehaviour
     [Min(0f)]
     private float _DurabilityRemovedByCat;
 
-    private List<GameObject> _Cats = new List<GameObject>();
+    private List<GameObject> _Cats;
 
     private bool _Destroying = false;
 
@@ -40,6 +40,7 @@ public class ScratchingPost : MonoBehaviour
 
     public void Start()
     {
+        _Cats = new List<GameObject>();
         StartCoroutine(DurationCountDown(_Duration));
     }
 
@@ -114,13 +115,15 @@ public class ScratchingPost : MonoBehaviour
         }
         else
         {
+            DistractCats();
             yield return new WaitForSeconds(_DurationTickTime);
             StartCoroutine(DurationCountDown(--currentTimeLeft));
         }
     }
 
-    private IEnumerator DistractCats()
+    private void DistractCats()
     {
+        
         if (_Cats.Count > 0)
         {
             foreach (GameObject obj in _Cats)
@@ -129,8 +132,8 @@ public class ScratchingPost : MonoBehaviour
                 {
                     CatBase cat = obj.GetComponent<CatBase>();
                     cat.DistractCat(
-                        gameObject.GetComponentInParent<ScratchingPostTower>().DistractValue,
-                        gameObject.GetComponentInParent<ScratchingPostTower>()
+                        parentTower.GetComponent<ScratchingPostTower>().DistractValue,
+                        parentTower.GetComponent<ScratchingPostTower>()
                         );
                     RemoveDurability();
                 }
@@ -139,8 +142,8 @@ public class ScratchingPost : MonoBehaviour
                     _Cats.Remove(obj);
                 }
             }
-            yield return new WaitForSeconds(_DurationTickTime);
-            StartCoroutine(DistractCats());
         }
+        
+        
     }
 }
