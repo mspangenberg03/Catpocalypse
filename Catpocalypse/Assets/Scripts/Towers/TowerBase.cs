@@ -19,7 +19,7 @@ public class TowerBase : MonoBehaviour
     public bool usable;  
     
     public TowerSelectorUI towerSelectorUI;
-    public GameObject towerDestroyerUI;
+    public TowerDestroyerUI towerDestroyerUI;
     public Material towerHovered;
     public Material towerNotHovered;
     public Material towerSelected;
@@ -94,27 +94,35 @@ public class TowerBase : MonoBehaviour
         {
             if(hoveredOver){
                 if(!hasTower){
+
+                    /*
+                    Debug.Log("A: " + towerSelectorUI == null);
+                    if (towerSelectorUI != null)
+                        Debug.Log("B: " + towerSelectorUI.gameObject == null);
+                    */
+
                     if(towerSelectorUI.gameObject.activeSelf)
                     {
-                        towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
+                        towerSelectorUI.SetCurrentSelectedSpawn(towerSpawn);
                     }
                     else
                     {
                         ShowTowerSelectorUI(true);
                         ShowTowerDestroyerUI(false);
-                        towerSelectorUI.gameObject.GetComponent<TowerSelectorUI>().SetCurrentSelectedSpawn(towerSpawn);
+                        towerSelectorUI.SetCurrentSelectedSpawn(towerSpawn);
                     }
                     
                 } else {
                     if (towerDestroyerUI.gameObject.activeSelf)
                     {
-                        towerDestroyerUI.gameObject.GetComponent<TowerDestroyerUI>().SetCurrentSelectedBase(this);
+                        towerDestroyerUI.SetCurrentSelectedBase(this);
                     }
                     else
                     {
                         ShowTowerDestroyerUI(true);
                         ShowTowerSelectorUI(false);
-                        towerDestroyerUI.gameObject.GetComponent<TowerDestroyerUI>().SetCurrentSelectedBase(this);
+                        
+                        towerDestroyerUI.SetCurrentSelectedBase(this);
                     }
                     
                 }
@@ -132,7 +140,7 @@ public class TowerBase : MonoBehaviour
     private void ShowTowerDestroyerUI(bool state)
     {
         towerDestroyerUI.gameObject.SetActive(state);
-        towerDestroyerUI.GetComponent<TowerDestroyerUI>().inUse = state;
+        towerDestroyerUI.inUse = state;
     }
 
     public void DestroyTower()
