@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de6575396e1563d46b0709c23474319d, type: 3}
-  m_Name: NewWave - L1 W1
+  m_Name: Wave-L1W1
   m_EditorClassIdentifier: 
   cats:
   - {fileID: 11400000, guid: c64a1278df8e127458a427b89e8aaf0d, type: 2}

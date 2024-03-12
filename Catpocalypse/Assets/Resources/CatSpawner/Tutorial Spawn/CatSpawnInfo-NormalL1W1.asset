@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1770b78bc45da45a3cb7e7c9509420, type: 3}
-  m_Name: NewCatSpawnInfo - Normal Cat L1W1
+  m_Name: CatSpawnInfo-NormalL1W1
   m_EditorClassIdentifier: 
   CatType: 1
   NumberToSpawn: 8
