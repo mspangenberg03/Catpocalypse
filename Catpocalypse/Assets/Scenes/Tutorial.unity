@@ -154,11 +154,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36
@@ -1921,11 +1921,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3770,11 +3770,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3989,7 +3989,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28
@@ -4138,11 +4138,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
@@ -4438,11 +4438,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -28
@@ -5913,11 +5913,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28
@@ -6889,11 +6889,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
@@ -8042,11 +8042,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12
@@ -8945,11 +8945,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -9363,11 +9363,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20
@@ -9454,11 +9454,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -9545,11 +9545,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32
@@ -9919,7 +9919,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48
@@ -10663,11 +10663,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
@@ -10953,11 +10953,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
@@ -11184,11 +11184,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
@@ -11344,11 +11344,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36
@@ -12204,10 +12204,10 @@ RectTransform:
   - {fileID: 1278233587}
   m_Father: {fileID: 1506401115}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 223, y: -305}
-  m_SizeDelta: {x: 400, y: 60}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -960, y: 235}
+  m_SizeDelta: {x: -1520, y: -1020}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1671971178
 PrefabInstance:
@@ -13309,7 +13309,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32
@@ -13412,11 +13412,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24
@@ -13969,6 +13969,10 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
+      propertyPath: refundVal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSpawn
       value: 
       objectReference: {fileID: 1838911302}
@@ -13979,7 +13983,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36
@@ -15787,7 +15791,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48
@@ -15940,7 +15944,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36
@@ -16027,11 +16031,11 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerSelectorUI
       value: 
-      objectReference: {fileID: 2027200478}
+      objectReference: {fileID: 2027200481}
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
@@ -16221,11 +16225,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2026771826}
   m_CullTransparentMesh: 1
---- !u!1 &2027200478 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5420544566641844296, guid: 7df6d332e41010448b537f3ee13ac731, type: 3}
-  m_PrefabInstance: {fileID: 4426760579519969208}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2027200479 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6440641282935615788, guid: 7df6d332e41010448b537f3ee13ac731, type: 3}
@@ -16236,7 +16235,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2989440580004339167, guid: 7df6d332e41010448b537f3ee13ac731, type: 3}
   m_PrefabInstance: {fileID: 4426760579519969208}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027200478}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86e82d6d678f7ca4b99718fb0b65afce, type: 3}
@@ -16452,7 +16451,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 745, y: -250}
+  m_AnchoredPosition: {x: 1200, y: -250}
   m_SizeDelta: {x: 1500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &2061615062 stripped
@@ -16506,7 +16505,7 @@ PrefabInstance:
     - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: towerDestroyerUI
       value: 
-      objectReference: {fileID: 2270266354490641477}
+      objectReference: {fileID: 8030653062610841474}
     - target: {fileID: 4909307955314551537, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28
@@ -17381,6 +17380,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1918297609}
     m_Modifications:
+    - target: {fileID: 1191429290881838623, guid: 7df6d332e41010448b537f3ee13ac731, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2989440580004339167, guid: 7df6d332e41010448b537f3ee13ac731, type: 3}
       propertyPath: playerMoneyManager
       value: 
@@ -17912,6 +17915,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8433098053932618482, guid: f69487eeb79d664489307b0643fb1901, type: 3}
   m_PrefabInstance: {fileID: 7246688861424619070}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7246688861424619072 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1782252046764561174, guid: f69487eeb79d664489307b0643fb1901, type: 3}
+  m_PrefabInstance: {fileID: 7246688861424619070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19baa6b1bf56d594699f6cb87fa96848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7418951050088595964
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17976,8 +17990,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTowerUI: {fileID: 2270266354490641477}
+  _TowerPropertiesPanel: {fileID: 7246688861424619072}
   destroyBtn: {fileID: 2709960668818696754}
-  upgradeBtn: {fileID: 0}
+  upgradeBtn: {fileID: 1574181999101943369}
   playerMoneyManager: {fileID: 1161630510}
   inUse: 0
 --- !u!224 &8471906372761773808

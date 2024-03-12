@@ -109,12 +109,13 @@ public class IrresistableScratchingPost : MonoBehaviour
         }
         else
         {
+            DistractCats();
             yield return new WaitForSeconds(_DurationTickTime);
             StartCoroutine(DurationCountDown(--currentTimeLeft));
         }
     }
 
-    private IEnumerator DistractCats()
+    private void DistractCats()
     {
         if (_Cats.Count > 0)
         {
@@ -124,8 +125,8 @@ public class IrresistableScratchingPost : MonoBehaviour
                 {
                     CatBase cat = obj.GetComponent<CatBase>();
                     cat.DistractCat(
-                        gameObject.GetComponentInParent<ScratchingPostTower>().DistractValue,
-                        gameObject.GetComponentInParent<ScratchingPostTower>()
+                        parentTower.GetComponent<ScratchingPostTower>().DistractValue,
+                        parentTower.GetComponent<ScratchingPostTower>()
                         );
                     RemoveDurability();
                 }
@@ -134,8 +135,7 @@ public class IrresistableScratchingPost : MonoBehaviour
                     _Cats.Remove(obj);
                 }
             }
-            yield return new WaitForSeconds(_DurationTickTime);
-            StartCoroutine(DistractCats());
+           
         }
     }
 }

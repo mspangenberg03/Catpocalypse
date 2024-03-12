@@ -7,6 +7,10 @@ public class TowerDestroyerUI : MonoBehaviour
 {
     [SerializeField]
     private GameObject destroyTowerUI;
+
+    [Tooltip("The GameObject that displays the properties of the selected tower on the left of the tower manipulation bar.")]
+    [SerializeField] TowerPropertiesPanel _TowerPropertiesPanel;
+
     [SerializeField]
     private Button destroyBtn;
     [SerializeField]
@@ -37,6 +41,8 @@ public class TowerDestroyerUI : MonoBehaviour
     public void SetCurrentSelectedBase(TowerBase current)
     {
         currentSelectedBase = current;
+
+        RefreshUI();
     }
 
     public void OnDestroySelect()
@@ -58,5 +64,10 @@ public class TowerDestroyerUI : MonoBehaviour
     public void OnCloseClicked()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void RefreshUI()
+    {
+        _TowerPropertiesPanel.RefreshUI();
     }
 }
