@@ -18,7 +18,7 @@ public class WaveManager : MonoBehaviour
 
     public static WaveManager Instance;
 
-    [SerializeField] private int _TotalWavesInLevel = 5;
+    private int _TotalWavesInLevel;
 
     private List<CatSpawner> _CatSpawners;
     private int _TotalCatsInWave;
@@ -41,13 +41,25 @@ public class WaveManager : MonoBehaviour
 
         CatBase.OnCatDied += OnCatDied;
         CatBase.OnCatReachGoal += OnCatReachGoal;
+        _CatSpawners = new List<CatSpawner>();
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("CatSpawnPoint");
+
+        foreach(GameObject spawner in spawners)
+        {
+            CatSpawner catSpawner = spawner.GetComponent<CatSpawner>();
+            _CatSpawners.Add(spawner.GetComponent<CatSpawner>());
+            if(spawner.GetComponent<CatSpawner>().NumberOfWaves > _TotalWavesInLevel)
+            {
+                _TotalWavesInLevel = spawner.GetComponent<CatSpawner>().NumberOfWaves;
+            }
+        }
 
         HUD.HideWaveDisplay();
     }
 
     private void Update()
     {
-        if (!_WaveInProgress && WaveCount == _TotalWavesInLevel)
+        if (!_WaveInProgress && WaveNumber == _TotalWavesInLevel)
         {
             LevelCleared?.Invoke(this, EventArgs.Empty);
 
@@ -127,7 +139,7 @@ public class WaveManager : MonoBehaviour
         foreach (CatSpawner spawner in _CatSpawners)
         {
             //Debug.Log($"Spawner: {spawner.CatsInCurrentWave}");
-            _TotalCatsInWave += spawner.CatsInCurrentWave;
+            _TotalCatsInWave += spawner.CatsInCurrentWave();
         }
 
         //Debug.Log($"Total: {_TotalCatsInWave}");
@@ -147,7 +159,9 @@ public class WaveManager : MonoBehaviour
     }
 
 
-    public int WaveCount { get { return _WaveNumber; } }
+    public int TotalWaves { get { return _TotalWavesInLevel; } }
+
+    public int WaveNumber { get { return _WaveNumber; } }
     public bool IsWaveInProgress { get { return _WaveInProgress; } }
 
 }

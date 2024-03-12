@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,10 +13,11 @@ public class CatSpawner : MonoBehaviour
     [Header("Wave Settings")]
     [Tooltip("A list of Wave scriptable Objects that have a list of cats to spawn")]
     [SerializeField]
-    private List<Wave> _CatsToSpawn;
+    private List<Wave> _Waves;
 
     [Tooltip("The time between cats to spawn")]
     [SerializeField]
+    [Min(1f)]
     private float _TimeBetweenSpawns;
 
     [Header("Game Object References")]
@@ -25,6 +27,7 @@ public class CatSpawner : MonoBehaviour
     [SerializeField] private GameObject _NormalCat;
     [SerializeField] private GameObject _HeavyCat;
     [SerializeField] private GameObject _LightCat;
+    [SerializeField] private GameObject _NormalBoxCat;
     [SerializeField] private PlayerCutenessManager _CutenessManager;
 
     private int _CurrentWave;
@@ -46,21 +49,60 @@ public class CatSpawner : MonoBehaviour
     }
     IEnumerator Spawner(int currentWave)
     {
-        int catsLeftInWave = _CatsToSpawn[currentWave].cats.Count;
-        for (int i = 0; i < catsLeftInWave; i++)
+        int currentCatType = 0;
+        CatTypes type = _Waves[_CurrentWave - 1].cats[currentCatType].CatType;
+        int catsOfCurrentType = _Waves[_CurrentWave - 1].cats[currentCatType].NumberToSpawn;
+        int totalCats = CatsInCurrentWave();
+        GameObject cat = null;
+        for (int i = 0; i < totalCats; i++)
         {
-            GameObject catPrefab = _CatsToSpawn[_CurrentWave].cats[catsLeftInWave];
+            if( catsOfCurrentType == 0 ) {
+                type = _Waves[currentWave].cats[currentCatType].CatType;
+                catsOfCurrentType = _Waves[_CurrentWave - 1].cats[currentCatType].NumberToSpawn;
+            }
+            switch (type)
+            {
+                case CatTypes.Light:
+                    cat = Instantiate(_LightCat, _SpawnPoint1);
+                    break;
+                case CatTypes.Normal:
+                    cat = Instantiate(_NormalCat, _SpawnPoint1);
+                    break;
+                case CatTypes.Heavy:
+                    cat = Instantiate(_HeavyCat, _SpawnPoint1);
+                    break;
+                case CatTypes.LightBox:
+                    break;
+                case CatTypes.NormalBox:
+                    cat = Instantiate(_NormalBoxCat, _SpawnPoint1);
+                    break;
+                case CatTypes.HeavyBox:
+                    break;
 
-            GameObject cat = Instantiate(catPrefab, _SpawnPoint1);
+            }
+            _CutenessManager.AddCuteness(cat.GetComponent<CatBase>().Cuteness);
+            catsOfCurrentType--;
+            if(catsOfCurrentType == 0)
+            {
+                currentCatType++;
+            }
 
-            CatBase catComponent = cat.GetComponent<CatBase>();
-            _CutenessManager.AddCuteness(catComponent.Cuteness);
-
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(_TimeBetweenSpawns);
         }
 
     }
 
 
-    public int CatsInCurrentWave { get { return _CatsToSpawn[_CurrentWave].cats.Count; } }
+    public int CatsInCurrentWave()
+    {
+        Wave current = _Waves[_CurrentWave - 1];
+        int tally = 0;
+        foreach(CatSpawnInfo cats in current.cats)
+        {
+            tally += cats.NumberToSpawn;
+        }
+        return tally;
+    }
+
+    public int NumberOfWaves { get { return _Waves.Count; } }
 }
