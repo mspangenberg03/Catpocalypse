@@ -43,7 +43,9 @@ public class PropertiesUI_LaserPointerTower : MonoBehaviour
     private void OnEnable()
     {
         if (TowerBase.SelectedTowerBase == null)
+        {
             return;
+        }
 
         if(TowerBase.SelectedTowerBase.tower == null)
         {
@@ -53,7 +55,6 @@ public class PropertiesUI_LaserPointerTower : MonoBehaviour
         _LaserPointerTower = TowerBase.SelectedTowerBase.tower.GetComponent<LaserPointerTower>();
         if (_LaserPointerTower == null)
         {
-            Debug.LogError("Selected tower is not a laser pointer tower! This UI code should not have been called.");
             return;
         }
 

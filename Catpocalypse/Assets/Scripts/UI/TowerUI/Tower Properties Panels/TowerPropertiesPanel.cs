@@ -43,4 +43,9 @@ public class TowerPropertiesPanel : MonoBehaviour
     {
         _PropertiesUI_Laser.gameObject.SetActive(false);
     }
+
+    public void RefreshUI()
+    {
+        InitUI();
+    }
 }
