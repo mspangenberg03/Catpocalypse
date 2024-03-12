@@ -8585,7 +8585,7 @@ GameObject:
   - component: {fileID: 773447304}
   m_Layer: 0
   m_Name: CatSpawnPoint 1
-  m_TagString: CatSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10519,7 +10519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e512cc9f18ae388418f01a503e7e8b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuPanel: {fileID: 0}
+  pauseMenuPanel: {fileID: 2059681422}
 --- !u!114 &875652315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20445,7 +20445,7 @@ GameObject:
   - component: {fileID: 1993721024}
   m_Layer: 0
   m_Name: CatSpawner (1)
-  m_TagString: Untagged
+  m_TagString: CatSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20465,7 +20465,7 @@ MonoBehaviour:
   _Waves:
   - {fileID: 11400000, guid: 6cb7396151b1f3b41a3e4deb93a8cc3c, type: 2}
   - {fileID: 11400000, guid: 6cb7396151b1f3b41a3e4deb93a8cc3c, type: 2}
-  _TimeBetweenSpawns: 0
+  _TimeBetweenSpawns: 2
   _SpawnPoint1: {fileID: 773447303}
   _NormalCat: {fileID: 1589074876568128993, guid: 572ce69c6cf5e804a91d52f0edc3c4c7, type: 3}
   _HeavyCat: {fileID: 5758637314826502625, guid: b44e41471936f3248b4cdd4778258f38, type: 3}
@@ -22505,9 +22505,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 189796813664371473, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 216021791644137891, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: m_Name
       value: CatSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 216021791644137891, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
+      propertyPath: m_TagString
+      value: CatSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: heavyCat
@@ -22551,6 +22559,10 @@ PrefabInstance:
       objectReference: {fileID: 439936121}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: _Waves.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
+      propertyPath: _TimeBetweenSpawns
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
