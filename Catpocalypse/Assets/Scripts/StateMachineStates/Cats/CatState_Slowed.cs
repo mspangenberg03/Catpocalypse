@@ -37,7 +37,7 @@ public class CatState_Slowed : CatState_Base
         float modifier = 0;
         foreach (GameObject obj in cat.slowingEntities)
         {
-            if (obj.GetComponent<ScratchingPost>() != null)
+            if (obj != null)
             {
                 ScratchingPost post = obj.GetComponent<ScratchingPost>();
                 if (post.speedDebuff > modifier)
