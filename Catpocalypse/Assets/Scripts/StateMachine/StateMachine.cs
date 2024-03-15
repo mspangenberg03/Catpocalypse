@@ -218,14 +218,14 @@ public class StateMachine : MonoBehaviour
         {
             _currentState?.OnExit();
 
-            if (EnableDebugLogging && _currentState != null)
-                Debug.Log($"Exited state \"{CurrentState.Name}\".");
+           // if (EnableDebugLogging && _currentState != null)
+           //     Debug.Log($"Exited state \"{CurrentState.Name}\".");
 
             _currentState = state;
             _currentState?.OnEnter();
 
-            if (EnableDebugLogging)
-                Debug.Log($"Entered state \"{state.Name}\".");
+            //if (EnableDebugLogging)
+            //   Debug.Log($"Entered state \"{state.Name}\".");
 
             return true;
         }

@@ -9,6 +9,9 @@ public enum CatTypes
     Light,
     Normal,
     Heavy,
+    NormalBox,
+    LightBox,
+    HeavyBox
 }
 
 public enum TowerTypes
