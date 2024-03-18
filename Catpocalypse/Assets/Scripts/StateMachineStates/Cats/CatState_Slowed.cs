@@ -34,7 +34,7 @@ public class CatState_Slowed : CatState_Base
     private void UpdateSlowedModifier()
     {
         CatBase cat = _parent.GetComponent<CatBase>();
-        float modifier = 0;
+        float modifier = 1;
         foreach (GameObject obj in cat.slowingEntities)
         {
             if (obj != null)
