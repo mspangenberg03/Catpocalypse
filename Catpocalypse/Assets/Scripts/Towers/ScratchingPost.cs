@@ -115,18 +115,19 @@ public class ScratchingPost : MonoBehaviour
         }
         else
         {
-            DistractCats();
+            GameObject[] currentCats = _Cats.ToArray();
+            DistractCats(currentCats);
             yield return new WaitForSeconds(_DurationTickTime);
             StartCoroutine(DurationCountDown(--currentTimeLeft));
         }
     }
 
-    private void DistractCats()
+    private void DistractCats(GameObject[] cats)
     {
         
-        if (_Cats.Count > 0)
+        if (cats.Length > 0)
         {
-            foreach (GameObject obj in _Cats)
+            foreach (GameObject obj in cats)
             {
                 if (obj != null)
                 {
