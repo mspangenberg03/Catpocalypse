@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
-
+using UnityEngine.Device;
+using Screen = UnityEngine.Device.Screen;
 
 /// <summary>
 /// This class runs the build tower UI.
@@ -140,9 +141,10 @@ public class TowerSelectorUI : MonoBehaviour
         RectTransform rectTransform = _TowerInfoPopupUI.GetComponent<RectTransform>();
 
         // Calculate the position of the tower info popup.
-        Vector3 popupPosition = rectTransform.anchoredPosition;        
+        Vector3 popupPosition = rectTransform.anchoredPosition;
         popupPosition = clickedBuildButtonUI.GetComponent<RectTransform>().anchoredPosition;
-        Vector2 offset = new Vector2(-clickedBuildButtonUI.RectTransform.rect.width / 2, 0f);
+        float amountOffScreen = (popupPosition.y - Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f)).z);
+        Vector2 offset = new Vector2(-clickedBuildButtonUI.RectTransform.rect.width / 2, amountOffScreen);
         rectTransform.anchoredPosition = popupPosition - (Vector3) offset;
 
 
