@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class TowerDestroyerUI : MonoBehaviour
@@ -37,6 +39,12 @@ public class TowerDestroyerUI : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+
+
+        if (Mouse.current.leftButton.isPressed)
+        {
+            CheckIfClickedOutsideUI();
+        }
     }
     public void SetCurrentSelectedBase(TowerBase current)
     {
@@ -69,5 +77,14 @@ public class TowerDestroyerUI : MonoBehaviour
     public void RefreshUI()
     {
         _TowerPropertiesPanel.RefreshUI();
+    }
+
+    public void CheckIfClickedOutsideUI()
+    {
+        // If the user clicked a spot that is not on the GUI, then close the tower manipulation UI.
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            OnCloseClicked();
+        }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 
 /// <summary>
@@ -16,6 +17,9 @@ public class TowerSelectorUI : MonoBehaviour
 {
     [SerializeField]
     private TowerInfoPopupUI _TowerInfoPopupUI;
+
+    [SerializeField]
+    private Image _RingImage;
 
     [Tooltip("This is the parent object of all the tower select buttons.")]
     [SerializeField] GameObject _ButtonsParent;
@@ -46,6 +50,10 @@ public class TowerSelectorUI : MonoBehaviour
         inUse = false;
 
 
+        // This makes it so the click event is not fired if you click on a transparent part of the ring images, such as in the corners outside the ring.
+        _RingImage.alphaHitTestMinimumThreshold = 0.9f;    
+
+
         _TowerInfoPopupUI.gameObject.SetActive(false);
 
         _TowerInfoCollection = GetComponent<TowerInfoCollection>();
@@ -71,6 +79,11 @@ public class TowerSelectorUI : MonoBehaviour
 
 
         UpdatePosition();
+
+        if (Mouse.current.leftButton.isPressed)
+        {
+            CheckIfClickedOutsideUI();
+        }
     }
 
     /// <summary>
@@ -87,7 +100,7 @@ public class TowerSelectorUI : MonoBehaviour
 
         Vector2 position = Camera.main.WorldToScreenPoint(selected.transform.position);
         //Debug.Log($"World: {selected.transform.position}    Screen: {position}");
-        
+
         GetComponent<RectTransform>().position = position;
     }
 
@@ -139,10 +152,10 @@ public class TowerSelectorUI : MonoBehaviour
         RectTransform rectTransform = _TowerInfoPopupUI.GetComponent<RectTransform>();
 
         // Calculate the position of the tower info popup.
-        Vector3 popupPosition = rectTransform.anchoredPosition;        
+        Vector3 popupPosition = rectTransform.anchoredPosition;
         popupPosition = clickedBuildButtonUI.GetComponent<RectTransform>().anchoredPosition;
         Vector2 offset = new Vector2(-clickedBuildButtonUI.RectTransform.rect.width / 2, 0f);
-        rectTransform.anchoredPosition = popupPosition - (Vector3) offset;
+        rectTransform.anchoredPosition = popupPosition - (Vector3)offset;
 
 
         // Get the corresponding tower info so we can use it to fill in the popup.
@@ -208,11 +221,11 @@ public class TowerSelectorUI : MonoBehaviour
     private void OnBuildSelect(int selection)
     {
         //Debug.Log("Active: " + gameObject.activeSelf);
-        if(playerMoneyManager.SpendMoney(towerSpawner.GetComponent<TowerSpawn>().MoneyToSpend(selection))) 
+        if (playerMoneyManager.SpendMoney(towerSpawner.GetComponent<TowerSpawn>().MoneyToSpend(selection)))
         {
             towerSpawner.GetComponent<TowerSpawn>().BuildTower(selection);
             CloseUI();
-        } 
+        }
         else
         {
             // I put this here to fix a bizarre glitch where occasionally I'm getting an error that the coroutine couldn't be started
@@ -222,7 +235,7 @@ public class TowerSelectorUI : MonoBehaviour
 
             StartCoroutine(RevealNotEnoughFundsScreen());
         }
-        
+
     }
 
     private void CloseUI()
@@ -240,6 +253,21 @@ public class TowerSelectorUI : MonoBehaviour
         notEnoughFundsScreen.SetActive(true);
         yield return new WaitForSeconds(1f);
         notEnoughFundsScreen.SetActive(false);
+    }
+
+    public void CheckIfClickedOutsideUI()
+    {
+        // If the user clicked a spot that is not on the GUI, then close the tower UI.
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            // Check if the mouse position is outside the ring radius. If so, close the towe UI. We don't want it to close if you
+            // click in the transparent area in the middle of the UI, only if you click outside it and not on UI.
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            if (Vector2.Distance(_RingImage.transform.position, mousePos) > _ButtonsRadius + 40f) // We add extra here since the button radius is a little bit inside the ring.
+            {
+                OnClose();
+            }
+        }
     }
 
 }
