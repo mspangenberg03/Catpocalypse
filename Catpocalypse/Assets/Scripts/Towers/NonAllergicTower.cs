@@ -11,11 +11,11 @@ public class NonAllergicTower : Tower
     private List<Transform> spawnPoints;
     [SerializeField, Tooltip("The Non-Allergic people that the tower spawns")]
     private GameObject person;
-    [SerializeField, Tooltip("The delay between spawns"),Min(1)]
-    private int spawnRate = 2;
     private GameObject[] waypoints;
     private GameObject closestWaypoint;
     private Transform spawnPoint;
+    private List<GameObject> personList;
+    public bool Enabled = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +23,7 @@ public class NonAllergicTower : Tower
         StartCoroutine(Spawner());
         peopleSpawned = 0;
         closestWaypoint = GetClosestWaypoint();
+        personList = new List<GameObject>();
         float dist = 100000;
         foreach(Transform spawn in spawnPoints)
         {
@@ -49,23 +50,37 @@ public class NonAllergicTower : Tower
         }
         return waypoint;
     }
+    public void DisableTower()
+    {
+        Enabled = false;
+        foreach (GameObject person in personList)
+        {
+            personList.Remove(person);
+            Destroy(person);
+        }
+       
+    }
     IEnumerator Spawner()
     {
-        yield return new WaitForSeconds(spawnRate);
+        yield return new WaitForSeconds(FireRate);
+        if (Enabled)
+        {
+            if (peopleSpawned >= numOfPeople)
+            {
+
+                StopCoroutine(Spawner());
+            }
+            if (peopleSpawned < numOfPeople)
+            {
+
+                GameObject newPerson = Instantiate(person, spawnPoint.position, Quaternion.identity, gameObject.transform);
+                personList.Add(newPerson);
+
+                peopleSpawned++;
+
+            }
+        }
         
-        if (peopleSpawned >= numOfPeople)
-        {
-            
-            StopCoroutine(Spawner());
-        }
-        if (peopleSpawned < numOfPeople)
-        {
-            
-            Instantiate(person, spawnPoint.position,Quaternion.identity,gameObject.transform);
-            
-            peopleSpawned++;
-            
-        }
         
         
         StartCoroutine(Spawner());

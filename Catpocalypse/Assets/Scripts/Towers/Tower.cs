@@ -40,9 +40,35 @@ public class Tower : MonoBehaviour
     protected StateMachine _stateMachine;
     public int towerLevel = 1;
     [SerializeField] private float upgradeCost;
+    public bool _cutenessChallengeActive = false;
+    PlayerCutenessManager _cutenessManager;
+
+    [SerializeField]
+    protected float fireRate;
+    
+    public float FireRate
+    {
+        set 
+        { 
+            fireRate = value;
+        }
+        get 
+        { 
+            return fireRate; 
+        }
+    }
 
 
-
+    private void Start()
+    {
+        _cutenessManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerCutenessManager>();
+        //Applies the debuff if the tower was built during the cuteness challenge
+        if(_cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.CatsGetHarderToDistract)
+        {
+            DistractValue *= _cutenessManager.CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
+        }
+    }
+    
     private void OnEnable()
     {
         // This corrects the problem with our prefabs. For example, the laser tower
@@ -52,7 +78,7 @@ public class Tower : MonoBehaviour
         // whether we use x, y, or z here since it is a sphere.
         _Collider = GetComponent<SphereCollider>();
         _Collider.radius = _Collider.radius / transform.localScale.x;
-
+        _cutenessManager = GameObject.FindGameObjectWithTag("Goal").GetComponent<PlayerCutenessManager>();
         if (_stateMachine == null)
         {
             _stateMachine = GetComponent<StateMachine>();
@@ -240,7 +266,7 @@ public class Tower : MonoBehaviour
 
 
     public float BuildCost { get { return buildCost; } }
-    public float DistractValue { get { return distractValue; } }
+    public float DistractValue { set { distractValue = value; } get { return distractValue; } }
     public bool IsTargetDetectionEnabled { get { return _Collider.enabled; } }
 
     public Type TargetCatType

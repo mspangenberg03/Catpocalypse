@@ -7,12 +7,9 @@ using UnityEngine.AI;
 public class ScratchingPostTower : Tower
 {
 
-    [Header("Targeting Settings")]
+    
 
-    [Tooltip("The rate new scratching posts are launched in seconds")]
-    [SerializeField]
-    [Min(0f)]
-    private float _RateOfFire;
+    
 
     [Header("Launcher Settings")]
 
@@ -24,10 +21,6 @@ public class ScratchingPostTower : Tower
     [SerializeField]
     private GameObject _IrScratchPost;
 
-    [Tooltip("The time to wait between post destruction and launch")]
-    [Min(0f)]
-    [SerializeField]
-    private float _TimeBetweenLaunches;
 
     private bool _IsLaunching = false;
 
@@ -105,7 +98,7 @@ public class ScratchingPostTower : Tower
             StartCoroutine(ISPCooldown());
         }
         
-        yield return new WaitForSeconds(_TimeBetweenLaunches);
+        yield return new WaitForSeconds(FireRate);
         _IsLaunching = false;
     }
     private IEnumerator ISPCooldown()

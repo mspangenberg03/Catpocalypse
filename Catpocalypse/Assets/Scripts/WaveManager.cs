@@ -26,7 +26,7 @@ public class WaveManager : MonoBehaviour
 
     private int _WaveNumber = 0;
     private bool _WaveInProgress = false;
-
+    private PlayerCutenessManager _cutenessManager;
 
     private void Awake()
     {
@@ -53,7 +53,7 @@ public class WaveManager : MonoBehaviour
                 _TotalWavesInLevel = spawner.GetComponent<CatSpawner>().NumberOfWaves;
             }
         }
-
+        _cutenessManager = GameObject.FindGameObjectWithTag("Goal").GetComponent<PlayerCutenessManager>();
         HUD.HideWaveDisplay();
     }
 
@@ -73,7 +73,10 @@ public class WaveManager : MonoBehaviour
         if (IsWaveInProgress)
             return;
 
-
+        if(_cutenessManager.CurrentCutenessChallenge != PlayerCutenessManager.CutenessChallenges.None)
+        {
+            _cutenessManager.CutenessChallenge();
+        }
         _WaveInProgress = true;
 
         _WaveNumber++;

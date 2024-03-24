@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class StringWaverTower : Tower
 {
-    [SerializeField, Tooltip("The number of seconds between the tower distracting cats")]
-    private int distractionInterval = 6;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +42,7 @@ public class StringWaverTower : Tower
         if(targets.Contains(cat) && cat != null)
         {
             cat.GetComponent<CatBase>().DistractCat(distractValue, this.gameObject.GetComponent<Tower>());
-            yield return new WaitForSeconds(distractionInterval);
+            yield return new WaitForSeconds(FireRate);
             StartCoroutine(DistractCat(cat));
         }
         
