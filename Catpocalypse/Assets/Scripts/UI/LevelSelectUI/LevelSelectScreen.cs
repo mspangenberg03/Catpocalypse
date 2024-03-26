@@ -33,16 +33,19 @@ public class LevelSelectScreen : MonoBehaviour
 
     public void ButtonClicked_TutorialLevel()
     {
-        SceneManager.LoadScene("Tutorial");
+        //SceneManager.LoadScene("Tutorial");
+        SceneLoader_Async.LoadSceneAsync("Tutorial");
     }
 
     public void ButtonClicked_Level1()
     {
-        SceneManager.LoadScene("Level1");
+        //SceneManager.LoadScene("Level1");
+        SceneLoader_Async.LoadSceneAsync("Level1");
     }
 
     public void ButtonClicked_MainMenu() 
     {
-        SceneManager.LoadScene("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
+        SceneLoader_Async.LoadSceneAsync("MainMenu");
     }
 }
