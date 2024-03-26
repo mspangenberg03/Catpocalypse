@@ -84,14 +84,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282d5cff30095554cb88db34287c3775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _catType: 3
   _CutenessValue: 5
   distractionThreshold: 2000
   damageToPlayer: 5
+  speed: 0
   _WayPointArrivedDistance: 2
+  agent: {fileID: -2116463544244376725}
   distractReward: 50
   _DistractednessMeterHeightAboveCat: 2
   _DistractednessMeterPrefab: {fileID: 3512654570813597946, guid: e633f4d5486c0f542b4af3b4ecb326ae, type: 3}
-  agent: {fileID: -2116463544244376725}
   sounds:
   - {fileID: 8300000, guid: 91349c0e77800f348bb26ea102614bda, type: 3}
   - {fileID: 8300000, guid: 2cdd81b48e0a5fa4ba894463142eb035, type: 3}
@@ -130,9 +132,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3cf17b0ffcb763e4d98c6fc7067a1280, type: 3}
   - {fileID: 8300000, guid: f8f804323b1e7444db4cf3816c8ecce3, type: 3}
   - {fileID: 8300000, guid: 63339e6695a3af24fbd3b1c1becf28fd, type: 3}
-  isSlowed: 0
-  isBeingPetted: 0
+  slowingEntities: []
+  stoppingEntities: []
   isATarget: 0
+  spedUp: 0
 --- !u!54 &1154564226045771358
 Rigidbody:
   m_ObjectHideFlags: 0

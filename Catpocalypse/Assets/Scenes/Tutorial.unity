@@ -5100,7 +5100,7 @@ PrefabInstance:
       objectReference: {fileID: 1161630509}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: _Waves.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: _TimeBetweenSpawns
@@ -7886,8 +7886,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MaxCuteness: 100
   cutenessMeterMaxedText: {fileID: 2057695003}
+  cutenessChallengeText: {fileID: 1747054919}
   _CatsDistractionThresholdDebuffPercent: 0.5
-  _TowerFireRateDebuffPercent: 0
+  _TowerFireRateDebuffPercent: 0.25
 --- !u!114 &1161630510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13036,7 +13037,7 @@ GameObject:
   - component: {fileID: 1747054918}
   - component: {fileID: 1747054920}
   - component: {fileID: 1747054919}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: CutenessChallengeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16489,7 +16490,7 @@ GameObject:
   - component: {fileID: 2057695005}
   - component: {fileID: 2057695004}
   - component: {fileID: 2057695003}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: CutenessMaxedText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

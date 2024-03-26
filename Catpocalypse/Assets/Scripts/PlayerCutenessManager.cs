@@ -40,8 +40,9 @@ public class PlayerCutenessManager : MonoBehaviour
 
     private TowerTypes _TowerType;
 
-    //public bool _cutenessMeterFull = false;
+    public CatTypes _CatType;
 
+    public float _cutenessChallengeCatBuffPercent = 1.25f;
 
 
     /// <summary>
@@ -91,9 +92,13 @@ public class PlayerCutenessManager : MonoBehaviour
 
     private void OnWaveEnded(object sender, EventArgs e)
     {
-        EndCutenessChallenge();
-        // Reset this in case one was active in the previous wave.
-        _CurrentCutenessChallenge = CutenessChallenges.None;
+        if(CurrentCutenessChallenge != CutenessChallenges.None)
+        {
+            EndCutenessChallenge();
+            // Reset this in case one was active in the previous wave.
+            _CurrentCutenessChallenge = CutenessChallenges.None;
+        }
+        
 
         // Did the bar get maxed during the previous wave?
         if (_Cuteness >= _MaxCuteness)
@@ -134,33 +139,57 @@ public class PlayerCutenessManager : MonoBehaviour
             {
                 tower.DistractValue *= CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
             }
-            cutenessChallengeText.text = "Towers do less damage";
+            cutenessChallengeText.text = "All towers do less damage";
         }
         if (CurrentCutenessChallenge == CutenessChallenges.DebuffTowerType)
         {
             var towerTypes = Enum.GetValues(typeof(TowerTypes));
-            int index = Random.Range(0,towerTypes.Length-1);
+            //Gets the index, excluding the laser pointer and non-allergic towers
+            int index = Random.Range(1,towerTypes.Length-2);
             _TowerType = (TowerTypes) towerTypes.GetValue(index);
             foreach (Tower tower in FindObjectsOfType<Tower>())
             {
                 //If the tower is the type that is getting debuffed
                 if(tower.TowerTypeTag == _TowerType)
                 {
-                    tower.FireRate *= _TowerFireRateDebuffPercent;
+                    tower.FireRate *= 1+ _TowerFireRateDebuffPercent;
                 }
                 cutenessChallengeText.text = _TowerType+" towers fire slower";
             }
         }
         if(CurrentCutenessChallenge == CutenessChallenges.NonAllergicStrike)
         {
+            
             foreach (Tower tower in FindObjectsOfType<Tower>())
-            {
+            { 
                 if(tower.TowerTypeTag == TowerTypes.NonAllergic)
                 {
                     tower.gameObject.GetComponent<NonAllergicTower>().DisableTower();
                 }
             }
+            foreach (NonAllergicPerson person in FindObjectsOfType<NonAllergicPerson>())
+            {
+                Destroy(person.gameObject);
+            }
             cutenessChallengeText.text = "Non-Allergic towers are disabled";
+        }
+        if(CurrentCutenessChallenge == CutenessChallenges.CucumberTowerBuffsCats)
+        {
+            foreach (Tower tower in FindObjectsOfType<Tower>())
+            {
+                if (tower.TowerTypeTag == TowerTypes.CucumberThrower)
+                {
+                    tower.gameObject.GetComponent<CucumberTower>().buffCats = true;
+                }
+            }
+            cutenessChallengeText.text = "Cucumber Thrower towers buff cats instead of distracting them";
+        }
+        if(CurrentCutenessChallenge == CutenessChallenges.BuffCatType)
+        {
+            var catTypes = Enum.GetValues(typeof(CatTypes));
+            int index = Random.Range(0, 2);
+            _CatType = (CatTypes) catTypes.GetValue(index);
+            cutenessChallengeText.text = _CatType +  " Cats have a buff this wave";
         }
     }
     //Ends the cuteness challenge when the wave ends
@@ -180,7 +209,7 @@ public class PlayerCutenessManager : MonoBehaviour
                 //If the tower is the type that got debuffed
                 if (tower.TowerTypeTag == _TowerType)
                 {
-                    tower.FireRate /= _TowerFireRateDebuffPercent;
+                    tower.FireRate /= 1+_TowerFireRateDebuffPercent;
                 }
             }
         }
@@ -193,6 +222,17 @@ public class PlayerCutenessManager : MonoBehaviour
                     tower.gameObject.GetComponent<NonAllergicTower>().Enabled = true;
                 }
             }
+        }
+        if (CurrentCutenessChallenge == CutenessChallenges.CucumberTowerBuffsCats)
+        {
+            foreach (Tower tower in FindObjectsOfType<Tower>())
+            {
+                if (tower.TowerTypeTag == TowerTypes.CucumberThrower)
+                {
+                    tower.gameObject.GetComponent<CucumberTower>().buffCats = false;
+                }
+            }
+            
         }
 
         cutenessChallengeText.text = "";

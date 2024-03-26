@@ -16,9 +16,17 @@ public class NonAllergicTower : Tower
     private Transform spawnPoint;
     private List<GameObject> personList;
     public bool Enabled = true;
+    PlayerCutenessManager cutenessManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        cutenessManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerCutenessManager>();
+        //Disables the tower if it is built during the Non-Allergic Strike cuteness challenge
+        if (cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.NonAllergicStrike)
+        {
+            Enabled = false;
+        }
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
         StartCoroutine(Spawner());
         peopleSpawned = 0;
@@ -34,6 +42,7 @@ public class NonAllergicTower : Tower
                 dist = Vector3.Distance(spawn.position, closestWaypoint.transform.position);
             }
         }
+        
     }
     //Gets closest navigation waypoint to the tower
     private GameObject GetClosestWaypoint()
@@ -53,11 +62,8 @@ public class NonAllergicTower : Tower
     public void DisableTower()
     {
         Enabled = false;
-        foreach (GameObject person in personList)
-        {
-            personList.Remove(person);
-            Destroy(person);
-        }
+        peopleSpawned = 0;
+        
        
     }
     IEnumerator Spawner()
@@ -74,7 +80,7 @@ public class NonAllergicTower : Tower
             {
 
                 GameObject newPerson = Instantiate(person, spawnPoint.position, Quaternion.identity, gameObject.transform);
-                personList.Add(newPerson);
+                //personList.Add(newPerson);
 
                 peopleSpawned++;
 
