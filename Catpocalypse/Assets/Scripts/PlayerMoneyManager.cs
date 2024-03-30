@@ -21,6 +21,17 @@ public class PlayerMoneyManager : MonoBehaviour
 
     }
 
+    public void AddMoney(float amount)
+    {
+        if (amount <= 0)
+        {
+            Debug.LogError("Cannot add money, because the passed in amount is not positive!");
+            return;
+        }
+
+        _Money += amount;
+    }
+
     /// <summary>
     /// This function is used to spend money.
     /// </summary>
