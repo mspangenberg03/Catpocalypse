@@ -30,6 +30,7 @@ public class PlayerMoneyManager : MonoBehaviour
         }
 
         _Money += amount;
+        HUD.UpdatePlayerMoneyDisplay(_Money);
     }
 
     /// <summary>

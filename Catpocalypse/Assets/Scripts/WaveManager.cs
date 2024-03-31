@@ -30,6 +30,8 @@ public class WaveManager : MonoBehaviour
     private int _TotalCatsDistracted;
     private int _TotalCatsReachedGoal;
 
+    private float _SecondsSinceLevelStart;
+    private float _SecondsSinceWaveStart;
 
     private int _WaveNumber = 0;
     private bool _WaveInProgress = false;
@@ -70,6 +72,12 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
+        _SecondsSinceLevelStart += Time.deltaTime;
+
+        if (_WaveInProgress)
+            _SecondsSinceWaveStart += Time.deltaTime;
+
+
         if (!_WaveInProgress && WaveNumber == _TotalWavesInLevel)
         {
             LevelCleared?.Invoke(this, EventArgs.Empty);
@@ -174,7 +182,7 @@ public class WaveManager : MonoBehaviour
 
     private void OnWaveEnded(object sender, EventArgs e)
     {
-
+        
     }
 
 
@@ -187,9 +195,12 @@ public class WaveManager : MonoBehaviour
     public int NumCatsDistractedInWave { get { return _CatsDistracted; } }
     public int NumCatsReachedGoalInWave { get { return _CatsReachedGoal; } }
     public int TotalCatsInWave { get { return _TotalCatsInWave; } }
-
+   
     public int TotalCatsDistractedInLevel { get { return _TotalCatsDistracted; } }
     public int TotalCatsReachedGoalInLevel { get { return _TotalCatsReachedGoal; } }
+
+    public float SecondsElapsedSinceLevelStarted { get { return _SecondsSinceLevelStart; } }
+    public float SecondsElapsedSinceWaveStarted { get { return _SecondsSinceWaveStart; } }
 
 }
 

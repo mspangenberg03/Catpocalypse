@@ -14,12 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Type: 0
   _Amount: 30
+  _Limit: 1
   _Description: The player is rewarded 30 money at the end of every wave except the
     final one.
   _Conditions:
   - _Value1: 5
     _Value1CustomValue: 0
     _Condition: 2
-    _Value2: 6
+    _Value2: 12
+    _Value2CustomValue: 0
+    _EvaluatesToFalse: 0
+  - _Value1: 2
+    _Value1CustomValue: 0
+    _Condition: 1
+    _Value2: 1
     _Value2CustomValue: 0
     _EvaluatesToFalse: 0
