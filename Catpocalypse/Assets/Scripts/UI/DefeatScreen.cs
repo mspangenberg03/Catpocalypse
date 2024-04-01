@@ -27,7 +27,10 @@ public class DefeatScreen : MonoBehaviour
                 tb.GetComponent<TowerBase>().DestroyTower();
             }
         }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneLoader_Async.LoadSceneAsync("SceneManager.GetActiveScene().name");
     }
 
     public void OnMainMenuClicked()
@@ -40,7 +43,9 @@ public class DefeatScreen : MonoBehaviour
                 tb.GetComponent<TowerBase>().DestroyTower();
             }
         }
-        SceneManager.LoadScene("MainMenu");
+
+        //SceneManager.LoadScene("MainMenu");
+        SceneLoader_Async.LoadSceneAsync("MainMenu");
     }
 
     public void Show()
