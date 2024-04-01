@@ -27,7 +27,9 @@ public class VictoryScreen : MonoBehaviour
                 tb.GetComponent<TowerBase>().DestroyTower();
             }
         }
-        SceneManager.LoadScene("Level1");
+
+        //SceneManager.LoadScene("Level1");
+        SceneLoader_Async.LoadSceneAsync("Level1");
     }
 
     public void OnMainMenuClicked()
@@ -40,7 +42,9 @@ public class VictoryScreen : MonoBehaviour
                 tb.GetComponent<TowerBase>().DestroyTower();
             }
         }
-        SceneManager.LoadScene("MainMenu");
+
+        //SceneManager.LoadScene("MainMenu");
+        SceneLoader_Async.LoadSceneAsync("MainMenu");
     }
 
     public void Show()

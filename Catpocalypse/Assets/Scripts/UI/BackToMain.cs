@@ -15,6 +15,8 @@ public class BackToMain : MonoBehaviour
                 tb.GetComponent<TowerBase>().DestroyTower();
             }
         }
-        SceneManager.LoadScene("MainMenu");
+
+        //SceneManager.LoadScene("MainMenu");
+        SceneLoader_Async.LoadSceneAsync("MainMenu");
     }
 }
