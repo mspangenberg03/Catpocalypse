@@ -35,6 +35,10 @@ public class SlideShow : ScriptableObject
     [SerializeField]
     private AdvancementModes _advancementMode = AdvancementModes.WhenAnyKeyPressed;
 
+    [Tooltip("To have the slide show player load another scene when this slide show ends, just enter the name of that scene in this field. You can leave this field blank if you don't want another scene to load when the slide show finishes playing.")]
+    [SerializeField]
+    private string _sceneToLoadOnSlideShowComplete;
+
     [Tooltip("This is the list of images in this slide show.")]
     [SerializeField]
     private List<Slide> _slides;
@@ -197,6 +201,7 @@ public class SlideShow : ScriptableObject
     public bool FadeSlideShowInAndOut { get { return _fadeSlideShowInAndOut; } }
 
     public int SlideCount { get { return _slides.Count; } }
+    public string SceneToLoadOnSlideShowComplete { get { return _sceneToLoadOnSlideShowComplete; } }
     public AdvancementModes AdvancementMode { get { return _advancementMode; } }
     public float TransitionDuration { get { return _defaultTransitionDuration; } }
 }

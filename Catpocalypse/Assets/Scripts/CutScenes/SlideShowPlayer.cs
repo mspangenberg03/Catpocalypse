@@ -99,7 +99,10 @@ public partial class SlideShowPlayer : MonoBehaviour
 
     private void OnNextSlideInput(object sender, EventArgs e)
     {
-        _goToNextSlide = true;
+        if (_currentSlideShowStateInfo.CurrentSlideIndex >= _currentlyPlayingSlideShow.SlideCount - 1)
+            OnSkipSlideShowInput(this, EventArgs.Empty);
+        else
+            _goToNextSlide = true;
     }
 
     private void OnSkipSlideShowInput(object sender, EventArgs e)
@@ -337,7 +340,8 @@ public partial class SlideShowPlayer : MonoBehaviour
         _isPlaying = true;
         _stopReason = StopReasons.None; // This value gets changed if Pause() or Stop() are called, telling this method to exit, and the appropriate events get fired.
 
-        _playerInput.gameObject.SetActive(false);
+        if (_playerInput != null)
+            _playerInput.gameObject.SetActive(false);
 
         // Fire the slide show started event.
         FireSlideShowStartedEvent();
@@ -425,12 +429,24 @@ public partial class SlideShowPlayer : MonoBehaviour
         yield return StartCoroutine(FadeOutSlideShow());
 
 
-        _playerInput.gameObject.SetActive(true);
+        if (_playerInput != null)
+            _playerInput.gameObject.SetActive(true);
 
         // Fire the slide show stopped event.
         FireSlideShowStoppedEvent();
 
         _isPlaying = false;
+
+        LoadSceneOnSlideShowEnd();
+    }
+
+    private void LoadSceneOnSlideShowEnd()
+    {
+        // If no scene name is specified, then simply return.
+        if (string.IsNullOrWhiteSpace(_currentlyPlayingSlideShow.SceneToLoadOnSlideShowComplete))
+            return;
+
+        SceneLoader_Async.LoadSceneAsync(_currentlyPlayingSlideShow.SceneToLoadOnSlideShowComplete);
     }
 
     private void FireAppropriateStopEvent()

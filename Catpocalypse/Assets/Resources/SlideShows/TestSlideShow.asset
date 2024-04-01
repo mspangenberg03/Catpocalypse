@@ -18,9 +18,10 @@ MonoBehaviour:
   _fadeColor: {r: 0, g: 0, b: 0, a: 1}
   _fadeSlideShowInAndOut: 0
   _advancementMode: 0
+  _sceneToLoadOnSlideShowComplete: Level1
   _slides:
   - _displayTime: 5
-    _backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    _backgroundColor: {r: 0.08235294, g: 0.85882354, b: 0.81960785, a: 1}
     _image: {fileID: 21300000, guid: f48e3c52d8509164692f3a6be0855c33, type: 3}
     _ImageScreenAlignment: 4
     _imageDisplayMode: 0
@@ -31,7 +32,7 @@ MonoBehaviour:
     _fadeInTimeOverride: -1
     _fadeOutTimeOverride: -1
   - _displayTime: 5
-    _backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    _backgroundColor: {r: 0.08235294, g: 0.85882354, b: 0.81960785, a: 1}
     _image: {fileID: 21300000, guid: 9b251dfc837e4f1478cda741dfba5c2b, type: 3}
     _ImageScreenAlignment: 4
     _imageDisplayMode: 0
@@ -42,7 +43,7 @@ MonoBehaviour:
     _fadeInTimeOverride: -1
     _fadeOutTimeOverride: -1
   - _displayTime: 5
-    _backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    _backgroundColor: {r: 0.08235294, g: 0.85882354, b: 0.81960785, a: 1}
     _image: {fileID: 21300000, guid: c6ce3b2621ba70c4a9d5314843e86791, type: 3}
     _ImageScreenAlignment: 4
     _imageDisplayMode: 0
