@@ -25,6 +25,9 @@ public class PauseMenu : MonoBehaviour
                 tb.GetComponent<TowerBase>().DestroyTower();
             }
         }
-        SceneManager.LoadScene("MainMenu");
+
+        //SceneManager.LoadScene("MainMenu");
+        SceneLoader_Async.LoadSceneAsync("MainMenu");
+
     }
 }

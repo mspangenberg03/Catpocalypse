@@ -11284,7 +11284,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12256,7 +12256,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17361,7 +17361,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17389,6 +17389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1626300300}
   - component: {fileID: 1626300299}
+  - component: {fileID: 1626300301}
   m_Layer: 0
   m_Name: WaveManager
   m_TagString: Untagged
@@ -17423,6 +17424,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1626300301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626300298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e520b0066cf5eaa4fb65e5a3306e4ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _generalRewardsCheckFreqency: 1
+  _generalRewards: []
+  _waveEndRewards:
+  - {fileID: 11400000, guid: bad290820c86e354c96218c9ebbe6f93, type: 2}
 --- !u!1001 &1635150667
 PrefabInstance:
   m_ObjectHideFlags: 0
