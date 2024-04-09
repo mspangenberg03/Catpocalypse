@@ -7889,6 +7889,8 @@ MonoBehaviour:
   cutenessChallengeText: {fileID: 1747054919}
   _CatsDistractionThresholdDebuffPercent: 0.5
   _TowerFireRateDebuffPercent: 0.25
+  _CatType: 0
+  _cutenessChallengeCatBuffPercent: 1.25
 --- !u!114 &1161630510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17748,9 +17750,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2305980191011879834, guid: e9c2f92e0180f634d9d336f98e8c3741, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305980191011879834, guid: e9c2f92e0180f634d9d336f98e8c3741, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305980191011879834, guid: e9c2f92e0180f634d9d336f98e8c3741, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305980191011879834, guid: e9c2f92e0180f634d9d336f98e8c3741, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7453710644617372628, guid: e9c2f92e0180f634d9d336f98e8c3741, type: 3}
       propertyPath: m_Name
       value: SlideShowPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453710644617372628, guid: e9c2f92e0180f634d9d336f98e8c3741, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

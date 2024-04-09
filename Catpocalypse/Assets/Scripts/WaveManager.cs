@@ -37,6 +37,7 @@ public class WaveManager : MonoBehaviour
     private bool _WaveInProgress = false;
 
     private PlayerMoneyManager _PlayerMoneyManager;
+    private PlayerCutenessManager _cutenessManager;
 
 
     private void Awake()
@@ -51,7 +52,8 @@ public class WaveManager : MonoBehaviour
         Instance = this;
 
         _PlayerMoneyManager = FindObjectOfType<PlayerMoneyManager>();
-        
+        _cutenessManager = GameObject.FindGameObjectWithTag("Goal").GetComponent<PlayerCutenessManager>();
+
         CatBase.OnCatDied += OnCatDied;
         CatBase.OnCatReachGoal += OnCatReachGoal;
         _CatSpawners = new List<CatSpawner>();
@@ -92,7 +94,10 @@ public class WaveManager : MonoBehaviour
         if (IsWaveInProgress)
             return;
 
-
+        if (_cutenessManager.CurrentCutenessChallenge != PlayerCutenessManager.CutenessChallenges.None)
+        {
+            _cutenessManager.CutenessChallenge();
+        }
         _WaveInProgress = true;
 
         _WaveNumber++;
