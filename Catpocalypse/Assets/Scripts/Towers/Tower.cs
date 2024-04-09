@@ -67,6 +67,18 @@ public class Tower : MonoBehaviour
         {
             DistractValue *= _cutenessManager.CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
         }
+        if(_cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.DebuffTowerType)
+        {
+            if(towerTypeTag == _cutenessManager._TowerType)
+            {
+                FireRate *= 1 + _cutenessManager._TowerFireRateDebuffPercent;
+            }
+        }
+        if(_cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.CucumberTowerBuffsCats &&
+            towerTypeTag == TowerTypes.CucumberThrower)
+        {
+            gameObject.GetComponent<CucumberTower>().buffCats = true;
+        }
     }
     
     private void OnEnable()

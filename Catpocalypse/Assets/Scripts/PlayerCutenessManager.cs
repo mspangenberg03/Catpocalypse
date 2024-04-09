@@ -29,16 +29,16 @@ public class PlayerCutenessManager : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float _CatsDistractionThresholdDebuffPercent = 0.5f;
 
-    [SerializeField, 
+    [ 
     Tooltip("The percent debuff to the fire rate of the tower"),
     Range(0f, 1f)]
-    private float _TowerFireRateDebuffPercent;
+    public float _TowerFireRateDebuffPercent;
 
     private CutenessChallenges _CurrentCutenessChallenge = CutenessChallenges.None;
 
     private float _Cuteness = 0f;
 
-    private TowerTypes _TowerType;
+    public TowerTypes _TowerType;
 
     public CatTypes _CatType;
 
