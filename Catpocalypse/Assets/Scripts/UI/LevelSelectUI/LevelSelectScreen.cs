@@ -13,6 +13,11 @@ public class LevelSelectScreen : MonoBehaviour
 
     public void ButtonClicked_ViewCatInfo()
     {
+        // Just return if the dialog is already open.
+        if (_Panel_CatInfo.gameObject.activeSelf)
+            return;
+
+
         // Display the tower info panel.
         _Panel_CatInfo.gameObject.SetActive(true);
         _Panel_CatInfo.ResetUI();
@@ -23,6 +28,11 @@ public class LevelSelectScreen : MonoBehaviour
 
     public void ButtonClicked_ViewTowerInfo()
     {
+        // Just return if the dialog is already open.
+        if (_Panel_TowerInfo.gameObject.activeSelf)
+            return;
+
+
         // Display the tower info panel.
         _Panel_TowerInfo.gameObject.SetActive(true);
         _Panel_TowerInfo.ResetUI();

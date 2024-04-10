@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 1
   DisplayName: Scratching Post Tower
-  Cost: 175
+  Icon: {fileID: 21300000, guid: 41e5883206c542042b612a72c0a80733, type: 3}
+  Cost: 125
   Damage: 1
   Range: 3
   AOE_Range: 3

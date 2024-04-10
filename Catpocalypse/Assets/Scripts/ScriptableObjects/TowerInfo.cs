@@ -9,6 +9,7 @@ public class TowerInfo : ScriptableObject
 {
     public TowerTypes TowerType;
     public string DisplayName;
+    public Sprite Icon;
     public float Cost;
     public Ratings Damage;
     public Sizes Range;
