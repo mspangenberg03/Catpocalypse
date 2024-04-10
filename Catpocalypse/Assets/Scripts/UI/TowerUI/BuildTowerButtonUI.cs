@@ -24,7 +24,6 @@ public class BuildTowerButtonUI : MonoBehaviour
     [SerializeField] private TowerTypes _TowerType;
 
     [SerializeField] private Image _Image;
-    [SerializeField] private TextMeshProUGUI _ButtonLabel;
 
 
     private RectTransform _RectTransform;
