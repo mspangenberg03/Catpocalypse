@@ -74,7 +74,8 @@ public class CatInfoPanel : MonoBehaviour
 
     public void ButtonClicked_Close()
     {
-        _ParentPanel?.gameObject.SetActive(true);
+        // This is commented out since the level select dialog is no longer being used, but I left it in the scene for now.
+        //_ParentPanel?.gameObject.SetActive(true);
 
         gameObject.SetActive(false);
     }
