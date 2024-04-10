@@ -80,13 +80,18 @@ public class CatSpawner : MonoBehaviour
                     break;
 
             }
+            if(_CutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.BuffCatType && //If the buff cats cuteness challenge is active
+                cat.GetComponent<CatBase>()._catType == _CutenessManager._CatType)                                  //If the cat is the type that is getting buffed
+            {
+                //Increases the distraction threshold
+                cat.GetComponent<CatBase>().DistractionThreshold *= _CutenessManager._cutenessChallengeCatBuffPercent;
+            }
             _CutenessManager.AddCuteness(cat.GetComponent<CatBase>().Cuteness);
             catsOfCurrentType--;
             if(catsOfCurrentType == 0)
             {
                 currentCatType++;
             }
-
             yield return new WaitForSeconds(_TimeBetweenSpawns);
         }
 

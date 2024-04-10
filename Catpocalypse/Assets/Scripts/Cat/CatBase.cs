@@ -21,14 +21,21 @@ public class CatBase : MonoBehaviour
     // This event is static so we don't need to subscribe the money manager to every cat instance's OnCatDied event.
     public static event EventHandler OnCatDied;
     public static event EventHandler OnCatReachGoal;
-
-
+    
+    public CatTypes _catType;
     [Tooltip("The cuteness value is how much this type of cat increases the cuteness meter.")]
     [Min(0)]
     [SerializeField] protected int _CutenessValue = 5;
 
     [Min(0)]
     [SerializeField] protected float distractionThreshold = 50; //The amount of distraction it takes to fully distract the cat
+
+    public float DistractionThreshold
+    {
+        get { return distractionThreshold; }
+        set { distractionThreshold = value; }
+    }
+
     [Min(0f)]
     [SerializeField] protected float damageToPlayer = 2f; //How much health the cat takes from the player
 
@@ -75,13 +82,13 @@ public class CatBase : MonoBehaviour
     public bool isATarget = false;
 
     private StateMachine _stateMachine;
+    public bool spedUp = false;
 
 
     // Start is called before the first frame update
     void Start()    
     {
         IsDead = false;
-        
         catAudio = GetComponent<AudioSource>();
         InitDistractednessMeter();
         int index = Random.Range(0, sounds.Count - 1);
@@ -320,7 +327,7 @@ public class CatBase : MonoBehaviour
 
         KillCat(1);
     }
-
+   
 
     public float DistractionReward { get { return distractReward; } }
     public bool IsDead { get; private set; }

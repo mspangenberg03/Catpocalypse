@@ -151,6 +151,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
+      propertyPath: m_TagString
+      value: Tower
+      objectReference: {fileID: 0}
     - target: {fileID: 3316992658331686828, guid: df70b7cc3da2a3549a09fecb70230108, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -235,6 +239,8 @@ MonoBehaviour:
   targets: []
   towerLevel: 1
   upgradeCost: 200
+  _cutenessChallengeActive: 0
+  fireRate: 2
   cucumberPrefab: {fileID: 6603149977634291862, guid: 356491f32b54d504ab168c5639033d23, type: 3}
   superCucumberPrefab: {fileID: 6603149977634291862, guid: 0da83d018d3a45e4ea5f2e1e967b4ef6, type: 3}
   spawn: {fileID: 8574672227803443362}
@@ -243,10 +249,7 @@ MonoBehaviour:
   _LaunchAngle: 15
   _AimSpeed: 75
   _AimThreshold: 10
-  numOfProjectiles: 1
-  maxProjectiles: 3
   superCucumberCooldown: 12
-  fireRate: 0.5
 --- !u!135 &8621096765691456122
 SphereCollider:
   m_ObjectHideFlags: 0

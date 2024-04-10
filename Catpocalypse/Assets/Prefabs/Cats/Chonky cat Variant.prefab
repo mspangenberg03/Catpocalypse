@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6466957bf6151c449aa8b6ccbb5ec4ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _catType: 2
   _CutenessValue: 3
   distractionThreshold: 850
   damageToPlayer: 3
@@ -308,6 +309,7 @@ MonoBehaviour:
   slowingEntities: []
   stoppingEntities: []
   isATarget: 0
+  spedUp: 0
 --- !u!64 &7767156934386349427
 MeshCollider:
   m_ObjectHideFlags: 0

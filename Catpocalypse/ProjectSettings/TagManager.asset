@@ -13,6 +13,7 @@ TagManager:
   - Ground
   - TowerBase
   - Waypoint
+  - Tower
   layers:
   - Default
   - TransparentFX

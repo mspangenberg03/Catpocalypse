@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Cucumber : MonoBehaviour
 {
@@ -27,13 +28,17 @@ public class Cucumber : MonoBehaviour
         if(target != null)
         {
             
-            float distance = Vector3.Distance(transform.position, target.transform.position);
+            //float distance = Vector3.Distance(transform.position, target.transform.position);
             
-            if(distance < 2)
-            {
-                Distract();
+            //if(distance < 2)
+            //{
+            //    if(parentTower != null)
+            //    {
+            //        Distract();
+            //    }
                 
-            }
+                
+            //}
         }
         else if (target == null)
         {
@@ -63,11 +68,18 @@ public class Cucumber : MonoBehaviour
     }
     private void Distract()
     {
-        
-            
-        target.GetComponent<CatBase>().DistractCat(parentTower.GetDistractionValue(), parentTower);
-            
 
+        if (!parentTower.gameObject.GetComponent<CucumberTower>().buffCats)
+        {
+            target.GetComponent<CatBase>().DistractCat(parentTower.GetDistractionValue(), parentTower);
+        }
+        else if (parentTower.gameObject.GetComponent<CucumberTower>().buffCats && //If the buff cats challenge is active
+                 !target.GetComponent<CatBase>().spedUp) //If the cat is not already sped up
+        {
+            target.GetComponent<CatBase>().spedUp = true;
+            target.GetComponent<NavMeshAgent>().speed *= 1.25f;
+            
+        }
         
         Destroy(gameObject);
     }
@@ -75,7 +87,11 @@ public class Cucumber : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Cat")
         {
-            Distract();
+            if(parentTower != null)
+            {
+                Distract();
+            }
+            
         }
     }
     
