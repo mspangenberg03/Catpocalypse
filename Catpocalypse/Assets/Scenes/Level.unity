@@ -5236,7 +5236,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MaxCuteness: 100
   cutenessMeterMaxedText: {fileID: 347127857}
+  cutenessChallengeText: {fileID: 0}
   _CatsDistractionThresholdDebuffPercent: 0.5
+  _TowerFireRateDebuffPercent: 0
+  _TowerType: 0
+  _CatType: 0
+  _cutenessChallengeCatBuffPercent: 1.25
 --- !u!114 &1172394862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5665,7 +5670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1222495213
 Transform:
   m_ObjectHideFlags: 0
@@ -5709,7 +5714,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222495212}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
