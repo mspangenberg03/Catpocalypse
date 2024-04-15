@@ -5110,6 +5110,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1589074876568128993, guid: 572ce69c6cf5e804a91d52f0edc3c4c7, type: 3}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
+      propertyPath: _HeavyBoxCat
+      value: 
+      objectReference: {fileID: 5902274439958871315, guid: 073d7ab8d580f3442a87c6d32f35df06, type: 3}
+    - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: _SpawnPoint1
       value: 
       objectReference: {fileID: 734307328}

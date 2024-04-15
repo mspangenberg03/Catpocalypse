@@ -20444,6 +20444,7 @@ MonoBehaviour:
   _HeavyCat: {fileID: 5758637314826502625, guid: b44e41471936f3248b4cdd4778258f38, type: 3}
   _LightCat: {fileID: 2247931869541265458, guid: 3ca6ad5e0d8d6ce409ff571221648ad3, type: 3}
   _NormalBoxCat: {fileID: 2914954983465273623, guid: bf51083f89c0a75479fbba12561d048d, type: 3}
+  _HeavyBoxCat: {fileID: 5902274439958871315, guid: 073d7ab8d580f3442a87c6d32f35df06, type: 3}
   _CutenessManager: {fileID: 439936121}
 --- !u!4 &1993721025
 Transform:
@@ -22781,6 +22782,10 @@ PrefabInstance:
       propertyPath: _NormalCat
       value: 
       objectReference: {fileID: 1589074876568128993, guid: 572ce69c6cf5e804a91d52f0edc3c4c7, type: 3}
+    - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
+      propertyPath: _HeavyBoxCat
+      value: 
+      objectReference: {fileID: 5902274439958871315, guid: 073d7ab8d580f3442a87c6d32f35df06, type: 3}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: _SpawnPoint1
       value: 
