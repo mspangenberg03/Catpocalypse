@@ -5116,7 +5116,7 @@ PrefabInstance:
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: _NormalBoxCat
       value: 
-      objectReference: {fileID: 1337580048965529630, guid: 87b750aa9cfe0c1498a2348ee619a2ce, type: 3}
+      objectReference: {fileID: 2914954983465273623, guid: bf51083f89c0a75479fbba12561d048d, type: 3}
     - target: {fileID: 2281345131053859659, guid: 52910a1db5af048429c92e28f9a9d141, type: 3}
       propertyPath: cutenessManager
       value: 
@@ -7916,6 +7916,7 @@ MonoBehaviour:
   cutenessChallengeText: {fileID: 1747054919}
   _CatsDistractionThresholdDebuffPercent: 0.5
   _TowerFireRateDebuffPercent: 0.25
+  _TowerType: 0
   _CatType: 0
   _cutenessChallengeCatBuffPercent: 1.25
 --- !u!114 &1161630510
