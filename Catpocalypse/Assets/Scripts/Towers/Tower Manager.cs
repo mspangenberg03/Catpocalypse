@@ -15,7 +15,6 @@ public class TowerManager : MonoBehaviour
         else
         {
             instance = gameObject;
-            DontDestroyOnLoad(gameObject);
         }
         
     }
