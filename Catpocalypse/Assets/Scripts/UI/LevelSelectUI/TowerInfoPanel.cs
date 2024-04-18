@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 
@@ -26,6 +27,8 @@ public class TowerInfoPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI _Text_Upgrade;
     [SerializeField] TextMeshProUGUI _Text_Special;
     [SerializeField] TextMeshProUGUI _Text_Description;
+    [SerializeField] Image _Image_Icon;
+
 
 
     [Header("Tower Selection Pane Settings")]
@@ -81,7 +84,8 @@ public class TowerInfoPanel : MonoBehaviour
 
     public void ButtonClicked_Close()
     {
-        _ParentPanel?.gameObject.SetActive(true);
+        // This is commented out since the level select dialog is no longer being used, but I left it in the scene for now.
+        //_ParentPanel?.gameObject.SetActive(true);
 
         gameObject.SetActive(false);
     }
@@ -103,6 +107,7 @@ public class TowerInfoPanel : MonoBehaviour
         _Text_Upgrade.text = info.Upgrade;
         _Text_Special.text = info.Special.ToString();
         _Text_Description.text = info.Description.ToString();
+        _Image_Icon.sprite = info.Icon;
     }
 
     public void ResetUI()

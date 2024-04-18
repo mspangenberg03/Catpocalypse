@@ -25,12 +25,12 @@ public abstract class State_Base : IState
     // These overridable methods are automatically called by the state machine.
     public virtual void OnEnter() 
     {
-        Debug.Log($"Entered state \"{this.Name}\"."); 
+       // Debug.Log($"Entered state \"{this.Name}\"."); 
     }
     public virtual void OnUpdate() { }
     public virtual void OnExit() 
     { 
-        Debug.Log($"Exited state \"{this.Name}\"."); 
+       // Debug.Log($"Exited state \"{this.Name}\"."); 
     }
 
 

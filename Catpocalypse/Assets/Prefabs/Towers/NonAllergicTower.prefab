@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6487769620832846495}
   m_Layer: 2
   m_Name: NonAllergicTower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,6 +59,10 @@ MonoBehaviour:
   distractValue: 10
   numberOfTargets: 0
   targets: []
+  towerLevel: 1
+  upgradeCost: 0
+  _cutenessChallengeActive: 0
+  fireRate: 2
   numOfPeople: 2
   spawnPoints:
   - {fileID: 5166565675440634197}

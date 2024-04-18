@@ -28,6 +28,7 @@ public class CatSpawner : MonoBehaviour
     [SerializeField] private GameObject _HeavyCat;
     [SerializeField] private GameObject _LightCat;
     [SerializeField] private GameObject _NormalBoxCat;
+    [SerializeField] private GameObject _HeavyBoxCat;
     [SerializeField] private PlayerCutenessManager _CutenessManager;
 
     private int _CurrentWave;
@@ -77,8 +78,15 @@ public class CatSpawner : MonoBehaviour
                     cat = Instantiate(_NormalBoxCat, _SpawnPoint1);
                     break;
                 case CatTypes.HeavyBox:
+                    cat = Instantiate(_HeavyBoxCat, _SpawnPoint1);
                     break;
 
+            }
+            if(_CutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.BuffCatType && //If the buff cats cuteness challenge is active
+                cat.GetComponent<CatBase>()._catType == _CutenessManager._CatType)                                  //If the cat is the type that is getting buffed
+            {
+                //Increases the distraction threshold
+                cat.GetComponent<CatBase>().DistractionThreshold *= _CutenessManager._cutenessChallengeCatBuffPercent;
             }
             _CutenessManager.AddCuteness(cat.GetComponent<CatBase>().Cuteness);
             catsOfCurrentType--;
@@ -86,7 +94,6 @@ public class CatSpawner : MonoBehaviour
             {
                 currentCatType++;
             }
-
             yield return new WaitForSeconds(_TimeBetweenSpawns);
         }
 

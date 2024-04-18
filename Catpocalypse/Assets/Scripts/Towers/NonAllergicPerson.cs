@@ -111,7 +111,11 @@ public class NonAllergicPerson : MonoBehaviour
         StartCoroutine(DistractOverTime());
         pastTargets.Add(target);
         yield return new WaitForSeconds(effectLength);
-        target.GetComponent<CatBase>().stoppingEntities.Remove(gameObject);
+        if(target != null)
+        {
+            target.GetComponent<CatBase>().stoppingEntities.Remove(gameObject);
+        }
+        
         RemoveTarget();
     }
 

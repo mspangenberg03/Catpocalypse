@@ -78,6 +78,9 @@ public class CameraController : MonoBehaviour
         if (Mouse.current.scroll.value != Vector2.zero)
             AdjustZoomLevel(Mouse.current.scroll.value);
 
+
+        // Check if the user pressed the WASD or arrow keys, or dragged the mouse with RMB down.
+        // If so, move the camera accordingly.
         if (PlayerInputManager.PanCamera != Vector2.zero)
             MoveCamera(PlayerInputManager.PanCamera * _CameraMoveSpeed);
 

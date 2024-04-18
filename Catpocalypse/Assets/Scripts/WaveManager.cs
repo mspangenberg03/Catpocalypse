@@ -23,9 +23,21 @@ public class WaveManager : MonoBehaviour
     private List<CatSpawner> _CatSpawners;
     private int _TotalCatsInWave;
     private int _CatsRemainingInWave;
+    
+    private int _CatsDistracted;
+    private int _CatsReachedGoal;
+
+    private int _TotalCatsDistracted;
+    private int _TotalCatsReachedGoal;
+
+    private float _SecondsSinceLevelStart;
+    private float _SecondsSinceWaveStart;
 
     private int _WaveNumber = 0;
     private bool _WaveInProgress = false;
+
+    private PlayerMoneyManager _PlayerMoneyManager;
+    private PlayerCutenessManager _cutenessManager;
 
 
     private void Awake()
@@ -38,6 +50,9 @@ public class WaveManager : MonoBehaviour
         }
 
         Instance = this;
+
+        _PlayerMoneyManager = FindObjectOfType<PlayerMoneyManager>();
+        _cutenessManager = GameObject.FindGameObjectWithTag("Goal").GetComponent<PlayerCutenessManager>();
 
         CatBase.OnCatDied += OnCatDied;
         CatBase.OnCatReachGoal += OnCatReachGoal;
@@ -59,6 +74,12 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
+        _SecondsSinceLevelStart += Time.deltaTime;
+
+        if (_WaveInProgress)
+            _SecondsSinceWaveStart += Time.deltaTime;
+
+
         if (!_WaveInProgress && WaveNumber == _TotalWavesInLevel)
         {
             LevelCleared?.Invoke(this, EventArgs.Empty);
@@ -73,7 +94,10 @@ public class WaveManager : MonoBehaviour
         if (IsWaveInProgress)
             return;
 
-
+        if (_cutenessManager.CurrentCutenessChallenge != PlayerCutenessManager.CutenessChallenges.None)
+        {
+            _cutenessManager.CutenessChallenge();
+        }
         _WaveInProgress = true;
 
         _WaveNumber++;
@@ -87,6 +111,10 @@ public class WaveManager : MonoBehaviour
         }
 
         CalculateTotalCatsInWave();
+
+        _CatsRemainingInWave = _TotalCatsInWave;
+        _CatsDistracted = 0;
+        _CatsReachedGoal = 0;
 
         HUD.ShowWaveDisplay();
         HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
@@ -103,6 +131,9 @@ public class WaveManager : MonoBehaviour
     public void OnCatDied(object Sender, EventArgs e)
     {
         _CatsRemainingInWave--;
+        _CatsDistracted++;
+        _TotalCatsDistracted++;
+
         HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
 
         if (_CatsRemainingInWave < 1)
@@ -119,6 +150,9 @@ public class WaveManager : MonoBehaviour
     public void OnCatReachGoal(object Sender, EventArgs e)
     {
         _CatsRemainingInWave--;
+        _CatsReachedGoal++;
+        _TotalCatsReachedGoal++;
+
         HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
 
         if (_CatsRemainingInWave < 1)
@@ -143,8 +177,6 @@ public class WaveManager : MonoBehaviour
         }
 
         //Debug.Log($"Total: {_TotalCatsInWave}");
-
-        _CatsRemainingInWave = _TotalCatsInWave;
     }
 
     private void FindAllSpawners()
@@ -159,10 +191,21 @@ public class WaveManager : MonoBehaviour
     }
 
 
-    public int TotalWaves { get { return _TotalWavesInLevel; } }
+
+    public int TotalWavesInLevel { get { return _TotalWavesInLevel; } }
 
     public int WaveNumber { get { return _WaveNumber; } }
     public bool IsWaveInProgress { get { return _WaveInProgress; } }
+
+    public int NumCatsDistractedInWave { get { return _CatsDistracted; } }
+    public int NumCatsReachedGoalInWave { get { return _CatsReachedGoal; } }
+    public int TotalCatsInWave { get { return _TotalCatsInWave; } }
+   
+    public int TotalCatsDistractedInLevel { get { return _TotalCatsDistracted; } }
+    public int TotalCatsReachedGoalInLevel { get { return _TotalCatsReachedGoal; } }
+
+    public float SecondsElapsedSinceLevelStarted { get { return _SecondsSinceLevelStart; } }
+    public float SecondsElapsedSinceWaveStarted { get { return _SecondsSinceWaveStart; } }
 
 }
 

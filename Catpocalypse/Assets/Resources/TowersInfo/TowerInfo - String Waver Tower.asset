@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 3
   DisplayName: String Waver Tower
+  Icon: {fileID: 21300000, guid: d2a23c55480b5be49a1a649339e08adf, type: 3}
   Cost: 225
   Damage: 5
   Range: 2

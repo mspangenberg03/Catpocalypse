@@ -10,8 +10,6 @@ public class YarnBallTower : Tower
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float throwRange = 5f;
     private bool canThrow = true;
-    [SerializeField,Tooltip("How quickly the tower reloads to fire again")]
-    private float reloadSpeed = 5;
     private float sizeMultiplier = 1;
     
     void Start()
@@ -46,7 +44,7 @@ public class YarnBallTower : Tower
                     canThrow = false; // Set to false after throwing, prevent further throws until reset
 
                     // Wait for a specified time before allowing another throw
-                    yield return new WaitForSeconds(reloadSpeed); // Adjust the delay as needed
+                    yield return new WaitForSeconds(FireRate); // Adjust the delay as needed
 
                     canThrow = true; // Set back to true to allow another throw
                 }

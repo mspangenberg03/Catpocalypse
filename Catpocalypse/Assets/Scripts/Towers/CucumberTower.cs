@@ -40,9 +40,9 @@ public class CucumberTower : Tower
     private GameObject _CurrentTarget;
     private Vector3 _CurrentAimDirection;
 
-    private int reloadTime = 2;
+    private float reloadTime = 2f;
 
-    
+    public bool buffCats;
 
     [SerializeField,Tooltip("How often the Super Cucumber ability activates")]
     private int superCucumberCooldown = 12;
@@ -290,7 +290,9 @@ public class CucumberTower : Tower
     }
     IEnumerator Reload()
     {
+        reloadTime = FireRate;
         yield return new WaitForSeconds(reloadTime);
+        //reloadTime = FireRate;
     }
 
     private void OnDrawGizmos()

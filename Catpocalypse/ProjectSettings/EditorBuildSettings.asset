@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level.unity
     guid: 38cb8caf880ec13488901c4d2f530ceb
+  - enabled: 1
+    path: Assets/Scenes/StorySlideShow.unity
+    guid: 6b4880aba2acc4444bed3091d23e6174
   m_configObjects: {}
