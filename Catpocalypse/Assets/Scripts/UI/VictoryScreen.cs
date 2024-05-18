@@ -1,20 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 public class VictoryScreen : MonoBehaviour
 {
+    [Tooltip("The list of random victory text images that can appear on this screen.")]
+    [SerializeField]
+    private List<Sprite> _VictoryTextImages;
+
+    [Tooltip("This is the image where the random victory message gets displayed.")]
+    [SerializeField]
+    private Image _VictoryTextImage;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        // Select a random display text every time this panel is opened.
+        SelectRandomDisplayText();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void SelectRandomDisplayText()
+    {
+        int index = Random.Range(0, _VictoryTextImages.Count);
+
+        _VictoryTextImage.sprite = _VictoryTextImages[index];
     }
 
     public void OnNextLevelClicked()

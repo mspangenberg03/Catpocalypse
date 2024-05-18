@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 
 /// <summary>
@@ -33,7 +34,8 @@ public class HUD : MonoBehaviour
     [Header("Player Money Display Refs")]
     [SerializeField] private TextMeshProUGUI _PlayerMoneyLabel;
 
-    [Header("Victory Screen Panel")]
+    [Header("Level End Panels")]
+    [SerializeField] private GameObject _DefeatScreen;
     [SerializeField] private GameObject _VictoryScreen;
     
 
@@ -59,7 +61,6 @@ public class HUD : MonoBehaviour
         UpdatePlayerMoneyDisplay(542);
         */
     }
-
 
 
     public static void UpdatePlayerHealthDisplay(float currentHP, float maxHP)
@@ -122,7 +123,15 @@ public class HUD : MonoBehaviour
         Instance.CatsRemainingLabel.gameObject.SetActive(false);
 
         Instance._VictoryScreen.SetActive(true);
+    }
 
+    public static void RevealDefeat()
+    {
+        Instance._StartWaveButton.gameObject.SetActive(false);
+        Instance.WaveNumberLabel.gameObject.SetActive(false);
+        Instance.CatsRemainingLabel.gameObject.SetActive(false);
+
+        Instance._DefeatScreen.SetActive(true);
     }
 
 
