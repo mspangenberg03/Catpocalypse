@@ -17252,7 +17252,7 @@ MonoBehaviour:
   _PlayerHealthBarLabel: {fileID: 96999060}
   _CutenessBar: {fileID: 234698848}
   _CutenessBarLabel: {fileID: 287018310}
-  _StartWaveButton: {fileID: 0}
+  _StartWaveButton: {fileID: 2117514276}
   _WaveNumberLabel: {fileID: 1382797111}
   _CatsRemainingLabel: {fileID: 1832792897}
   _PlayerMoneyLabel: {fileID: 1187354357}
