@@ -51,15 +51,15 @@ public class CatSpawner : MonoBehaviour
     IEnumerator Spawner(int currentWave)
     {
         int currentCatType = 0;
-        CatTypes type = _Waves[_CurrentWave - 1].cats[currentCatType].CatType;
-        int catsOfCurrentType = _Waves[_CurrentWave - 1].cats[currentCatType].NumberToSpawn;
+        CatTypes type = _Waves[currentWave].cats[currentCatType].CatType;
+        int catsOfCurrentType = _Waves[currentWave].cats[currentCatType].NumberToSpawn;
         int totalCats = CatsInCurrentWave();
         GameObject cat = null;
         for (int i = 0; i < totalCats; i++)
         {
             if( catsOfCurrentType == 0 ) {
                 type = _Waves[currentWave].cats[currentCatType].CatType;
-                catsOfCurrentType = _Waves[_CurrentWave - 1].cats[currentCatType].NumberToSpawn;
+                catsOfCurrentType = _Waves[currentWave].cats[currentCatType].NumberToSpawn;
             }
             switch (type)
             {
