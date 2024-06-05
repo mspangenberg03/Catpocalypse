@@ -13,8 +13,7 @@ public class PlayerHealthManager : MonoBehaviour
     public List<AudioClip> sounds = new List<AudioClip>();
     private AudioSource healthAudio;
 
-    [SerializeField]
-    private GameObject defeatPanel;
+
     private void Start()
     {
         health = maxHealth;
@@ -33,8 +32,7 @@ public class PlayerHealthManager : MonoBehaviour
             }
             playerOutOfHealth = true;
 
-            defeatPanel.SetActive(true);
-            //FindObjectOfType<DefeatScreen>()?.Show();
+            HUD.RevealDefeat();
         }
     }
     public void TakeDamage(float damage)

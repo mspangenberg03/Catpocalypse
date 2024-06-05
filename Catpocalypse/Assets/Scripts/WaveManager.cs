@@ -144,7 +144,7 @@ public class WaveManager : MonoBehaviour
             WaveEnded?.Invoke(this, EventArgs.Empty);
 
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
-                FindObjectOfType<VictoryScreen>()?.Show();
+                HUD.RevealVictory();
         }
     }
     public void OnCatReachGoal(object Sender, EventArgs e)
@@ -163,7 +163,7 @@ public class WaveManager : MonoBehaviour
             WaveEnded?.Invoke(this, EventArgs.Empty);
 
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
-                FindObjectOfType<VictoryScreen>()?.Show();
+                HUD.RevealVictory();
         }
     }
 
