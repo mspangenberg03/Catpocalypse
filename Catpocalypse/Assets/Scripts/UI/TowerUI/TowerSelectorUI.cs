@@ -150,11 +150,12 @@ public class TowerSelectorUI : MonoBehaviour
 
 
         RectTransform rectTransform = _TowerInfoPopupUI.GetComponent<RectTransform>();
-
+        //rectTransform.gameObject.transform.SetParent(null, false);
         // Calculate the position of the tower info popup.
         Vector3 popupPosition = rectTransform.anchoredPosition;
         popupPosition = clickedBuildButtonUI.GetComponent<RectTransform>().anchoredPosition;
-        Vector2 offset = new Vector2(-clickedBuildButtonUI.RectTransform.rect.width / 2, 0f);
+        popupPosition = Camera.main.ViewportToScreenPoint(new Vector3(.3f, 0, Camera.main.nearClipPlane));
+        Vector2 offset = new Vector2(-clickedBuildButtonUI.RectTransform.rect.width/2, 0); //Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f)).z + 200);
         rectTransform.anchoredPosition = popupPosition - (Vector3)offset;
 
 
