@@ -50,7 +50,7 @@ public class SuperCucumber : MonoBehaviour
     {
         foreach(GameObject cat in catsInRange)
         {
-            cat.GetComponent<CatBase>().DistractCat(parentTower.GetComponent<Tower>().DistractValue,parentTower.GetComponent<Tower>());
+            cat.GetComponent<CatBase>().DistractCat(parentTower.GetComponent<Tower>().towerStats.DistractValue,parentTower.GetComponent<Tower>());
         }
     }
 }

@@ -125,7 +125,7 @@ public class IrresistableScratchingPost : MonoBehaviour
                 {
                     CatBase cat = obj.GetComponent<CatBase>();
                     cat.DistractCat(
-                        parentTower.GetComponent<ScratchingPostTower>().DistractValue,
+                        parentTower.GetComponent<ScratchingPostTower>().towerStats.DistractValue,
                         parentTower.GetComponent<ScratchingPostTower>()
                         );
                     RemoveDurability();

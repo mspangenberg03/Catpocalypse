@@ -57,6 +57,7 @@ MonoBehaviour:
   refundPercentage: 0.85
   range: {fileID: 5282408448303499490}
   distractValue: 10
+  towerStats: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
   numberOfTargets: 0
   targets: []
   towerLevel: 1
@@ -70,7 +71,7 @@ MonoBehaviour:
   - {fileID: 7026091286525087815}
   - {fileID: 8652873599773914154}
   person: {fileID: 7827236959392879461, guid: 1ea39eb69ec1d4a41837559853048c7a, type: 3}
-  spawnRate: 2
+  Enabled: 1
 --- !u!23 &4253721149309096944
 MeshRenderer:
   m_ObjectHideFlags: 0

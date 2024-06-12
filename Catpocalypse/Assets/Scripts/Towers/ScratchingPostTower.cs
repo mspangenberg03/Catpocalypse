@@ -98,7 +98,7 @@ public class ScratchingPostTower : Tower
             StartCoroutine(ISPCooldown());
         }
         
-        yield return new WaitForSeconds(FireRate);
+        yield return new WaitForSeconds(towerStats.FireRate);
         _IsLaunching = false;
     }
     private IEnumerator ISPCooldown()

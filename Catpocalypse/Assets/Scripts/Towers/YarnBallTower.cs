@@ -44,7 +44,7 @@ public class YarnBallTower : Tower
                     canThrow = false; // Set to false after throwing, prevent further throws until reset
 
                     // Wait for a specified time before allowing another throw
-                    yield return new WaitForSeconds(FireRate); // Adjust the delay as needed
+                    yield return new WaitForSeconds(towerStats.FireRate); // Adjust the delay as needed
 
                     canThrow = true; // Set back to true to allow another throw
                 }

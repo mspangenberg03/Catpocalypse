@@ -137,7 +137,7 @@ public class NonAllergicPerson : MonoBehaviour
         
         if(isPetting && target != null)
         {
-            target.GetComponent<CatBase>().DistractCat(tower.DistractValue, tower);
+            target.GetComponent<CatBase>().DistractCat(tower.towerStats.DistractValue, tower);
         }
         yield return new WaitForSeconds(1);
         StartCoroutine(DistractOverTime());

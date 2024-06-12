@@ -235,6 +235,7 @@ MonoBehaviour:
   refundPercentage: 0.85
   range: {fileID: 8621096765691456122}
   distractValue: 175
+  towerStats: {fileID: 11400000, guid: a572c91e31552ab4c9e133f4109ab9b9, type: 2}
   numberOfTargets: 0
   targets: []
   towerLevel: 1
@@ -249,6 +250,7 @@ MonoBehaviour:
   _LaunchAngle: 15
   _AimSpeed: 75
   _AimThreshold: 10
+  buffCats: 0
   superCucumberCooldown: 12
 --- !u!135 &8621096765691456122
 SphereCollider:

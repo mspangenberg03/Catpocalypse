@@ -25,6 +25,9 @@ public class Tower : MonoBehaviour
     protected SphereCollider range;
     [SerializeField, Min(1)]
     protected float distractValue;
+
+    [SerializeField]
+    public TowerData towerStats;
     [SerializeField]
     protected int numberOfTargets;
 
@@ -65,13 +68,13 @@ public class Tower : MonoBehaviour
         //Applies the debuff if the tower was built during the cuteness challenge
         if(_cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.CatsGetHarderToDistract)
         {
-            DistractValue *= _cutenessManager.CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
+            towerStats.DistractValue *= _cutenessManager.CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
         }
         if(_cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.DebuffTowerType)
         {
             if(towerTypeTag == _cutenessManager._TowerType)
             {
-                FireRate *= 1 + _cutenessManager._TowerFireRateDebuffPercent;
+                towerStats.FireRate *= 1 + _cutenessManager._TowerFireRateDebuffPercent;
             }
         }
         if(_cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.CucumberTowerBuffsCats &&

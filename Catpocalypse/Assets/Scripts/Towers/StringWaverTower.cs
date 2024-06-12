@@ -41,8 +41,8 @@ public class StringWaverTower : Tower
         
         if(targets.Contains(cat) && cat != null)
         {
-            cat.GetComponent<CatBase>().DistractCat(distractValue, this.gameObject.GetComponent<Tower>());
-            yield return new WaitForSeconds(FireRate);
+            cat.GetComponent<CatBase>().DistractCat(towerStats.DistractValue, this.gameObject.GetComponent<Tower>());
+            yield return new WaitForSeconds(towerStats.FireRate);
             StartCoroutine(DistractCat(cat));
         }
         

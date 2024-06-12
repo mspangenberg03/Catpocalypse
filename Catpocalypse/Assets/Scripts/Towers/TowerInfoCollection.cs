@@ -59,23 +59,23 @@ public class TowerInfoCollection : MonoBehaviour
 
         TowerInfo scratchingPostTowerInfo = GetTowerInfo(TowerTypes.ScratchingPost);
         Tower scratchingPostTower = scratchingPostTowerPrefab.GetComponent<Tower>();
-        scratchingPostTowerInfo.Cost = scratchingPostTower.BuildCost;
+        scratchingPostTowerInfo.Cost = scratchingPostTower.towerStats.BuildCost;
 
         TowerInfo cucumberTowerInfo = GetTowerInfo(TowerTypes.CucumberThrower);
         Tower cucumberTower = cucumberTowerPrefab.GetComponent<Tower>();
-        cucumberTowerInfo.Cost = cucumberTower.BuildCost;
+        cucumberTowerInfo.Cost = cucumberTower.towerStats.BuildCost;
 
         TowerInfo stringWaverTowerInfo = GetTowerInfo(TowerTypes.StringWaver);
         Tower stringWaverTower = stringWaverTowerPrefab.GetComponent<Tower>();
-        stringWaverTowerInfo.Cost = stringWaverTower.BuildCost;
+        stringWaverTowerInfo.Cost = stringWaverTower.towerStats.BuildCost;
 
         TowerInfo yarnBallTowerInfo = GetTowerInfo(TowerTypes.YarnBall);
         Tower yarnBallTower = yarnBallTowerPrefab.GetComponent<Tower>();
-        yarnBallTowerInfo.Cost = yarnBallTower.BuildCost;
+        yarnBallTowerInfo.Cost = yarnBallTower.towerStats.BuildCost;
 
         TowerInfo NATowerInfo = GetTowerInfo(TowerTypes.NonAllergic);
         Tower NATower = naTowerPrefab.GetComponent<Tower>();
-        NATowerInfo.Cost = NATower.BuildCost;
+        NATowerInfo.Cost = NATower.towerStats.BuildCost;
     }
 
     public TowerInfo GetTowerInfo(TowerTypes towerType)

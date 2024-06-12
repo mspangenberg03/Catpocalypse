@@ -68,7 +68,7 @@ public class NonAllergicTower : Tower
     }
     IEnumerator Spawner()
     {
-        yield return new WaitForSeconds(FireRate);
+        yield return new WaitForSeconds(towerStats.FireRate);
         if (Enabled)
         {
             if (peopleSpawned >= numOfPeople)
