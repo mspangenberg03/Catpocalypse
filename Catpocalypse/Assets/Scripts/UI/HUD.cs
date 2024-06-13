@@ -62,6 +62,38 @@ public class HUD : MonoBehaviour
         */
     }
 
+    private void Update()
+    {
+        // This test function opens the victory or defeat screen when you press the space bar.
+        //TestRandomWinLoseText(false);
+    }
+
+    /// <summary>
+    /// This function allows you to quickly test the victory or defeat screens by pressing the spacebar.
+    /// It should be called from the Update() method.
+    /// Pressing the space bar a second time will close the screen it opened.
+    /// If the parameter is true, the victory screen is opened. Otherwise the defeat screen is opened.
+    /// </summary>
+    /// <param name="testVictoryScreen"></param>
+    private void TestRandomWinLoseText(bool testVictoryScreen = true)
+    {
+        GameObject screen = testVictoryScreen ? _VictoryScreen : _DefeatScreen;
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            if (screen.activeSelf)
+            {
+                screen.SetActive(false);
+            }
+            else
+            {
+                if (testVictoryScreen)
+                    HUD.RevealVictory();
+                else
+                    HUD.RevealDefeat();
+            }
+        }
+    }
 
     public static void UpdatePlayerHealthDisplay(float currentHP, float maxHP)
     {

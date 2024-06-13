@@ -8,13 +8,13 @@ using TMPro;
 
 public class DefeatScreen : MonoBehaviour
 {
-    [Tooltip("The list of random defeat text images that can appear on this screen.")]
+    [Tooltip("The list of random defeat text messages that can appear on this screen.")]
     [SerializeField]
-    private List<Sprite> _DefeatTextImages;
+    private List<string> _DefeatTextMessages;
 
-    [Tooltip("This is the image where the random defeat message gets displayed.")]
+    [Tooltip("This is the text element where the random defeat message gets displayed.")]
     [SerializeField]
-    private Image _DefeatTextImage;
+    private TextMeshProUGUI _RandomDefeatText;
 
 
 
@@ -38,9 +38,9 @@ public class DefeatScreen : MonoBehaviour
 
     private void SelectRandomDisplayText()
     {
-        int index = Random.Range(0, _DefeatTextImages.Count);
+        int index = Random.Range(0, _DefeatTextMessages.Count);
 
-        _DefeatTextImage.sprite = _DefeatTextImages[index];
+        _RandomDefeatText.text = _DefeatTextMessages[index];
     }
 
     public void OnRetryClicked()
