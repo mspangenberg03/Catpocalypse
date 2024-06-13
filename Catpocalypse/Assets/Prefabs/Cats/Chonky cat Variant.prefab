@@ -260,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _catType: 2
   _CutenessValue: 3
-  distractionThreshold: 850
+  distractionThreshold: 150
   damageToPlayer: 3
   speed: 0
   _WayPointArrivedDistance: 2

@@ -223,7 +223,7 @@ MonoBehaviour:
   yarnBallPrefab: {fileID: 7418905643246593257, guid: 543c1eeb918fd8a40b8e656f6691db55, type: 3}
   throwPointPrefab: {fileID: 6487241590536661003, guid: 65a6a48719aa20248aa2a9a05f5b1519, type: 3}
   ballShotgunPrefab: {fileID: 0}
-  throwForce: 10
+  throwForce: 20
   throwRange: 5
 --- !u!114 &9164917387896508413
 MonoBehaviour:
