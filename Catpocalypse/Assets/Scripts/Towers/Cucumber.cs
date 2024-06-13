@@ -54,14 +54,14 @@ public class Cucumber : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Cat")
+        if (other.gameObject.layer == 3)
         {
             cats.Add(other.gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Cat")
+        if (other.gameObject.layer == 3)
         {
             cats.Remove(other.gameObject);
         }

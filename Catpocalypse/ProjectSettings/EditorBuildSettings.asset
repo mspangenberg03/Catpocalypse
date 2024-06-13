@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StorySlideShow.unity
     guid: 6b4880aba2acc4444bed3091d23e6174
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: e8b42e2c2241cfd4582d97b6981e2d4c
   m_configObjects: {}
