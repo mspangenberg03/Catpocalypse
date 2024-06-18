@@ -8,7 +8,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
-public class CameraController : MonoBehaviour
+/// <summary>
+/// This class controls the main game camera, responding to user input to move it around as the user desires.
+/// </summary>
+public class GameCameraController : MonoBehaviour
 {
     public enum MouseButtons { Left, Middle, Right };
 

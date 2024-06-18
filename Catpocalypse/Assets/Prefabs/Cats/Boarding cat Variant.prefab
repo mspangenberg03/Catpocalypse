@@ -200,7 +200,7 @@ PrefabInstance:
       addedObject: {fileID: 6952830383801161826}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8e942cb04267be94fb807e2830e3fb46, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 465833493815948020}
+      addedObject: {fileID: 677036356697332132}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8e942cb04267be94fb807e2830e3fb46, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3325332961720871933}
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _catType: 0
   _CutenessValue: 1
-  distractionThreshold: 80
+  distractionThreshold: 350
   damageToPlayer: 1
   speed: 0
   _WayPointArrivedDistance: 6
@@ -302,8 +302,8 @@ MonoBehaviour:
   stoppingEntities: []
   isATarget: 0
   spedUp: 0
---- !u!64 &465833493815948020
-MeshCollider:
+--- !u!135 &677036356697332132
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -317,13 +317,12 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 8
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2959467708922500008, guid: 8e942cb04267be94fb807e2830e3fb46, type: 3}
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 1, z: 0.5}
 --- !u!54 &3325332961720871933
 Rigidbody:
   m_ObjectHideFlags: 0

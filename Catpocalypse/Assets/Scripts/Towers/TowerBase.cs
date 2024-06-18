@@ -34,6 +34,9 @@ public class TowerBase : MonoBehaviour
 
     public bool IsSelected = false;
 
+    private RobotController _Robot;
+
+
     private void Awake()
     {
         hasTower = false;
@@ -41,13 +44,15 @@ public class TowerBase : MonoBehaviour
         tower = null;
         refundVal = 0;
 
+        _Robot = FindObjectOfType<RobotController>();
+
         OnAnyTowerBaseWasSelected += OnAnyTowerBaseSelected;
     }
 
     void OnMouseEnter()
     {
-        // Check if the mouse is over a UI element. If so, then we should ignore the click.
-        if (EventSystem.current.IsPointerOverGameObject())
+        // Check if the mouse is over a UI element or the robot is active. If so, then we should ignore the hover.
+        if (EventSystem.current.IsPointerOverGameObject() || _Robot.IsActive)
         {
             return;
         }
@@ -57,7 +62,7 @@ public class TowerBase : MonoBehaviour
 
         // Don't set the hover color if the tower is selected.
         if (!IsSelected)
-            gameObject.GetComponent<Renderer>().material= towerHovered;
+            gameObject.GetComponent<Renderer>().material = towerHovered;
     }
 
 
@@ -79,8 +84,8 @@ public class TowerBase : MonoBehaviour
 
     void OnMouseUpAsButton()
     {
-        // Check if the mouse is over a UI element. If so, then we should ignore the click.
-        if (EventSystem.current.IsPointerOverGameObject())
+        // Check if the mouse is over a UI element, or the robot is active. If so, then we should ignore the click.
+        if (EventSystem.current.IsPointerOverGameObject() || _Robot.IsActive)
             return;
 
 
@@ -92,40 +97,38 @@ public class TowerBase : MonoBehaviour
 
         if (enabled)
         {
-            if(hoveredOver){
-                if(!hasTower){
+            if (!hasTower){
 
-                    /*
-                    Debug.Log("A: " + towerSelectorUI == null);
-                    if (towerSelectorUI != null)
-                        Debug.Log("B: " + towerSelectorUI.gameObject == null);
-                    */
+                /*
+                Debug.Log("A: " + towerSelectorUI == null);
+                if (towerSelectorUI != null)
+                    Debug.Log("B: " + towerSelectorUI.gameObject == null);
+                */
 
-                    if(towerSelectorUI.gameObject.activeSelf)
-                    {
-                        towerSelectorUI.SetCurrentSelectedSpawn(towerSpawn);
-                    }
-                    else
-                    {
-                        ShowTowerSelectorUI(true);
-                        ShowTowerDestroyerUI(false);
-                        towerSelectorUI.SetCurrentSelectedSpawn(towerSpawn);
-                    }
-                    
-                } else {
-                    if (towerDestroyerUI.gameObject.activeSelf)
-                    {
-                        towerDestroyerUI.SetCurrentSelectedBase(this);
-                    }
-                    else
-                    {
-                        ShowTowerDestroyerUI(true);
-                        ShowTowerSelectorUI(false);
-                        
-                        towerDestroyerUI.SetCurrentSelectedBase(this);
-                    }
-                    
+                if (towerSelectorUI.gameObject.activeSelf)
+                {
+                    towerSelectorUI.SetCurrentSelectedSpawn(towerSpawn);
                 }
+                else
+                {
+                    ShowTowerSelectorUI(true);
+                    ShowTowerDestroyerUI(false);
+                    towerSelectorUI.SetCurrentSelectedSpawn(towerSpawn);
+                }
+                    
+            } else {
+                if (towerDestroyerUI.gameObject.activeSelf)
+                {
+                    towerDestroyerUI.SetCurrentSelectedBase(this);
+                }
+                else
+                {
+                    ShowTowerDestroyerUI(true);
+                    ShowTowerSelectorUI(false);
+                        
+                    towerDestroyerUI.SetCurrentSelectedBase(this);
+                }
+                    
             }
             
         }
@@ -145,6 +148,10 @@ public class TowerBase : MonoBehaviour
 
     public void DestroyTower()
     {
+        if (SelectedTowerBase == this)
+            SelectedTowerBase = null;
+
+
         this.hasTower = false;
         Destroy(tower);
         tower = null;
@@ -159,7 +166,11 @@ public class TowerBase : MonoBehaviour
     public void Deselect()
     {
         IsSelected = false;
+
         gameObject.GetComponent<Renderer>().material = towerNotHovered;
+        
+        if (SelectedTowerBase == this)
+            SelectedTowerBase = null;
     }
 
     public void OnAnyTowerBaseSelected(object towerBase, EventArgs e)
@@ -172,5 +183,20 @@ public class TowerBase : MonoBehaviour
             Deselect();
     }
 
+    /// <summary>
+    /// This function deselects all towers.
+    /// It is used, for example, when we enter the robot control mode.
+    /// </summary>
+    public static void DeselectAllTowers()
+    {
+        if (SelectedTowerBase != null)
+            SelectedTowerBase.Deselect();
 
+
+        TowerBase[] towers = FindObjectsOfType<TowerBase>();
+        for (int i = 0; i < towers.Length; i++)
+        {
+            towers[i].Deselect();
+        }
+    }
 }
