@@ -34,10 +34,16 @@ public class HUD : MonoBehaviour
     [Header("Player Money Display Refs")]
     [SerializeField] private TextMeshProUGUI _PlayerMoneyLabel;
 
+    [Header("Robot Display Refs")]
+    [SerializeField] private Button _ToggleRobotButton;
+    [SerializeField] private TextMeshProUGUI _RobotPowerLevelLabel;
+
     [Header("Level End Panels")]
     [SerializeField] private GameObject _DefeatScreen;
     [SerializeField] private GameObject _VictoryScreen;
     
+
+    private RobotController _RobotController;
 
 
     private void Awake()
@@ -49,6 +55,9 @@ public class HUD : MonoBehaviour
             Destroy(gameObject);
         }
 
+
+        _RobotController = FindAnyObjectByType<RobotController>();
+        _RobotController.OnBatteryLevelChanged += UpdateRobotBatteryLevelDisplay;
 
         Instance = this;
     }
@@ -92,7 +101,13 @@ public class HUD : MonoBehaviour
                 else
                     HUD.RevealDefeat();
             }
+
         }
+    }
+
+    private void OnDestroy()
+    {
+        _RobotController.OnBatteryLevelChanged -= UpdateRobotBatteryLevelDisplay;
     }
 
     public static void UpdatePlayerHealthDisplay(float currentHP, float maxHP)
@@ -117,6 +132,12 @@ public class HUD : MonoBehaviour
     {
         Instance.PlayerMoneyLabel.text = $"${playerMoney:N2}";
     }
+
+    public static void UpdateRobotBatteryLevelDisplay(object sender, RobotBatteryEventArgs e)
+    {
+        Instance.RobotPowerLevelLabel.text = $"{(e.NewBatteryLevel * 100):F0}%";
+    }
+
 
     public static void HideWaveDisplay()
     {
@@ -179,5 +200,8 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI CatsRemainingLabel { get { return _CatsRemainingLabel; } }
 
     public TextMeshProUGUI PlayerMoneyLabel { get { return _PlayerMoneyLabel; } }
+
+    public TextMeshProUGUI RobotPowerLevelLabel { get { return _RobotPowerLevelLabel; } }
+    public Button ToggleRobotButton { get { return _ToggleRobotButton; } }
 
 }
