@@ -151,17 +151,15 @@ MonoBehaviour:
   buildCost: 125
   refundPercentage: 0.85
   range: {fileID: 8975065090706773128}
-  distractValue: 8
+  distractValue: 15
   numberOfTargets: 0
   targets: []
   towerLevel: 1
   upgradeCost: 0
   _cutenessChallengeActive: 0
   fireRate: 1
-  _RateOfFire: 2
   _ScratchPost: {fileID: 354219167358990314, guid: 6a929441a3700c840922c525efb7ecc3, type: 3}
   _IrScratchPost: {fileID: 354219167358990314, guid: 8ae07f1517e833d42b835dc0ccc97f2a, type: 3}
-  _TimeBetweenLaunches: 1
   postCount: 0
 --- !u!23 &6451762848420790279
 MeshRenderer:

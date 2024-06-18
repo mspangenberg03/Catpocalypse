@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: -7843176459592845784}
   - component: {fileID: -3663537553205616267}
   - component: {fileID: -4148980327507456664}
-  - component: {fileID: -2453567495901440180}
   - component: {fileID: 1457698527591907605}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: yarnBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,30 +132,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &-2453567495901440180
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7418905643246593257}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1457698527591907605
 MonoBehaviour:

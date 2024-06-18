@@ -56,13 +56,13 @@ MonoBehaviour:
   buildCost: 200
   refundPercentage: 0.85
   range: {fileID: 5282408448303499490}
-  distractValue: 10
+  distractValue: 20
   numberOfTargets: 0
   targets: []
   towerLevel: 1
   upgradeCost: 0
   _cutenessChallengeActive: 0
-  fireRate: 2
+  fireRate: 1
   numOfPeople: 2
   spawnPoints:
   - {fileID: 5166565675440634197}
@@ -70,7 +70,7 @@ MonoBehaviour:
   - {fileID: 7026091286525087815}
   - {fileID: 8652873599773914154}
   person: {fileID: 7827236959392879461, guid: 1ea39eb69ec1d4a41837559853048c7a, type: 3}
-  spawnRate: 2
+  Enabled: 1
 --- !u!23 &4253721149309096944
 MeshRenderer:
   m_ObjectHideFlags: 0
