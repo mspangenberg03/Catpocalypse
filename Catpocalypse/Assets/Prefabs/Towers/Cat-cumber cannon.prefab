@@ -235,6 +235,7 @@ MonoBehaviour:
   refundPercentage: 0.85
   range: {fileID: 8621096765691456122}
   distractValue: 30
+  towerStats: {fileID: 11400000, guid: a572c91e31552ab4c9e133f4109ab9b9, type: 2}
   numberOfTargets: 0
   targets: []
   towerLevel: 1
