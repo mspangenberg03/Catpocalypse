@@ -283,7 +283,7 @@ public class CucumberTower : Tower
             return null;
         }
 
-        // Find the point that is the specififed distance ahead of the target.
+        // Find the point that is the specified distance ahead of the target.
         _TargetPoint = CalculateTargetPoint(target);
 
         return target;

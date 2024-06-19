@@ -9,13 +9,13 @@ using TMPro;
 
 public class VictoryScreen : MonoBehaviour
 {
-    [Tooltip("The list of random victory text images that can appear on this screen.")]
+    [Tooltip("The list of random victory text messages that can appear on this screen.")]
     [SerializeField]
-    private List<Sprite> _VictoryTextImages;
+    private List<string> _VictoryTextMessages;
 
-    [Tooltip("This is the image where the random victory message gets displayed.")]
+    [Tooltip("This is the text element where the random victory message gets displayed.")]
     [SerializeField]
-    private Image _VictoryTextImage;
+    private TextMeshProUGUI _RandomVictoryText;
 
 
 
@@ -39,9 +39,9 @@ public class VictoryScreen : MonoBehaviour
 
     private void SelectRandomDisplayText()
     {
-        int index = Random.Range(0, _VictoryTextImages.Count);
+        int index = Random.Range(0, _VictoryTextMessages.Count);
 
-        _VictoryTextImage.sprite = _VictoryTextImages[index];
+        _RandomVictoryText.text = _VictoryTextMessages[index];
     }
 
     public void OnNextLevelClicked()

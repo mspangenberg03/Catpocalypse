@@ -7,12 +7,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    public static PlayerInputManager Instance;
+    public static PlayerInputManager Instance { get; private set; }
 
-    public GameObject pauseMenuPanel;
 
-    private InputAction _PanCameraAction;
+    public PauseMenu pauseMenuPanel;
+
     private PlayerInput _PlayerInputComponent;
+
+    private InputAction _Robot_FireProjectileAction;
+    private InputAction _Robot_MovementAction;
+    private InputAction _Robot_ToggleControlAction;
+
+    private InputAction _PanCameraAction; // This action pans the camera when in top-down view
+
+
+    private RobotController _Robot;
 
 
 
@@ -25,6 +34,8 @@ public class PlayerInputManager : MonoBehaviour
 
         _PlayerInputComponent = GetComponent<PlayerInput>();
         GetInputActions();
+
+        _Robot = FindAnyObjectByType<RobotController>();
 
         IsInitialized = true;
     }
@@ -49,7 +60,10 @@ public class PlayerInputManager : MonoBehaviour
     /// This function gets a reference to each InputAction in the PlayerInputActions asset.
     /// </summary>
     private void GetInputActions()
-    {
+    {        
+        _Robot_FireProjectileAction = _PlayerInputComponent.actions["Robot - Fire Projectile"];
+        _Robot_MovementAction = _PlayerInputComponent.actions["Robot - Movement"];
+        _Robot_ToggleControlAction = _PlayerInputComponent.actions["Robot - Toggle Control"];
         _PanCameraAction = _PlayerInputComponent.actions["Pan Camera"];
     }
 
@@ -58,7 +72,28 @@ public class PlayerInputManager : MonoBehaviour
     /// </summary>
     private void UpdateInputValues()
     {
-        PanCamera = _PanCameraAction.ReadValue<Vector2>();
+        if (_Robot.IsActive)
+        {
+            // The robot is active, so set the PanCamera value to zero to disable movement of the main game camera while piloting the robot.
+            Robot_FireProjectile = _Robot_FireProjectileAction.WasPerformedThisFrame();
+            Robot_Movement = _Robot_MovementAction.ReadValue<Vector2>();
+            Robot_ToggleControl = _Robot_ToggleControlAction.WasPerformedThisFrame();
+            PanCamera = Vector2.zero;
+        }
+        else
+        {
+            //  The robot is not active, so clear the robot input values to disable the robot controls.
+            Robot_FireProjectile = false;
+            Robot_Movement = Vector2.zero;
+            Robot_ToggleControl = _Robot_ToggleControlAction.WasPerformedThisFrame(); // We don't set this one to false here, as we want this action to still work when the robot is inactive.
+            PanCamera = _PanCameraAction.ReadValue<Vector2>();
+        }
+    }
+
+    public void PressedPause()
+    {
+        pauseMenuPanel.gameObject.SetActive(true);
+        pauseMenuPanel.OnPauseGame();
     }
 
 
@@ -74,11 +109,10 @@ public class PlayerInputManager : MonoBehaviour
     // a reference to this object.
     // ====================================================================================================
     
+    public static bool Robot_FireProjectile { get; private set; }
+    public static Vector2 Robot_Movement { get; private set; }
+    public static bool Robot_ToggleControl { get; private set; }
+
     public static Vector2 PanCamera { get; private set; }
 
-    public void PressedPause()
-    {
-        Time.timeScale = 0;
-        pauseMenuPanel.gameObject.SetActive(true);
-    }
 }

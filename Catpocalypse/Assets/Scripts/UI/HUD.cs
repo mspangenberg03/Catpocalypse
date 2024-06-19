@@ -34,10 +34,16 @@ public class HUD : MonoBehaviour
     [Header("Player Money Display Refs")]
     [SerializeField] private TextMeshProUGUI _PlayerMoneyLabel;
 
+    [Header("Robot Display Refs")]
+    [SerializeField] private Button _ToggleRobotButton;
+    [SerializeField] private TextMeshProUGUI _RobotPowerLevelLabel;
+
     [Header("Level End Panels")]
     [SerializeField] private GameObject _DefeatScreen;
     [SerializeField] private GameObject _VictoryScreen;
     
+
+    private RobotController _RobotController;
 
 
     private void Awake()
@@ -49,6 +55,9 @@ public class HUD : MonoBehaviour
             Destroy(gameObject);
         }
 
+
+        _RobotController = FindAnyObjectByType<RobotController>();
+        _RobotController.OnBatteryLevelChanged += UpdateRobotBatteryLevelDisplay;
 
         Instance = this;
     }
@@ -62,6 +71,44 @@ public class HUD : MonoBehaviour
         */
     }
 
+    private void Update()
+    {
+        // This test function opens the victory or defeat screen when you press the space bar.
+        //TestRandomWinLoseText(false);
+    }
+
+    /// <summary>
+    /// This function allows you to quickly test the victory or defeat screens by pressing the spacebar.
+    /// It should be called from the Update() method.
+    /// Pressing the space bar a second time will close the screen it opened.
+    /// If the parameter is true, the victory screen is opened. Otherwise the defeat screen is opened.
+    /// </summary>
+    /// <param name="testVictoryScreen"></param>
+    private void TestRandomWinLoseText(bool testVictoryScreen = true)
+    {
+        GameObject screen = testVictoryScreen ? _VictoryScreen : _DefeatScreen;
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            if (screen.activeSelf)
+            {
+                screen.SetActive(false);
+            }
+            else
+            {
+                if (testVictoryScreen)
+                    HUD.RevealVictory();
+                else
+                    HUD.RevealDefeat();
+            }
+
+        }
+    }
+
+    private void OnDestroy()
+    {
+        _RobotController.OnBatteryLevelChanged -= UpdateRobotBatteryLevelDisplay;
+    }
 
     public static void UpdatePlayerHealthDisplay(float currentHP, float maxHP)
     {
@@ -85,6 +132,12 @@ public class HUD : MonoBehaviour
     {
         Instance.PlayerMoneyLabel.text = $"${playerMoney:N2}";
     }
+
+    public static void UpdateRobotBatteryLevelDisplay(object sender, RobotBatteryEventArgs e)
+    {
+        Instance.RobotPowerLevelLabel.text = $"{(e.NewBatteryLevel * 100):F0}%";
+    }
+
 
     public static void HideWaveDisplay()
     {
@@ -147,5 +200,8 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI CatsRemainingLabel { get { return _CatsRemainingLabel; } }
 
     public TextMeshProUGUI PlayerMoneyLabel { get { return _PlayerMoneyLabel; } }
+
+    public TextMeshProUGUI RobotPowerLevelLabel { get { return _RobotPowerLevelLabel; } }
+    public Button ToggleRobotButton { get { return _ToggleRobotButton; } }
 
 }

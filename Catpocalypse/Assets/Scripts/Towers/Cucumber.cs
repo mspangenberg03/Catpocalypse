@@ -28,17 +28,17 @@ public class Cucumber : MonoBehaviour
         if(target != null)
         {
             
-            //float distance = Vector3.Distance(transform.position, target.transform.position);
+            float distance = Vector3.Distance(transform.position, target.transform.position);
             
-            //if(distance < 2)
-            //{
-            //    if(parentTower != null)
-            //    {
-            //        Distract();
-            //    }
+            if(distance < 2)
+            {
+                if(parentTower != null)
+                {
+                    Distract();
+                }
                 
                 
-            //}
+            }
         }
         else if (target == null)
         {
@@ -54,45 +54,34 @@ public class Cucumber : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Cat")
+        if (other.gameObject.layer == 3)
         {
             cats.Add(other.gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Cat")
+        if (other.gameObject.layer == 3)
         {
             cats.Remove(other.gameObject);
         }
     }
     private void Distract()
     {
-
+        CatBase cat = target.GetComponent<CatBase>();
         if (!parentTower.gameObject.GetComponent<CucumberTower>().buffCats)
         {
-            target.GetComponent<CatBase>().DistractCat(parentTower.GetDistractionValue(), parentTower);
+            cat.DistractCat(parentTower.GetDistractionValue(), parentTower);
         }
         else if (parentTower.gameObject.GetComponent<CucumberTower>().buffCats && //If the buff cats challenge is active
-                 !target.GetComponent<CatBase>().spedUp) //If the cat is not already sped up
+                 cat.spedUp) //If the cat is not already sped up
         {
-            target.GetComponent<CatBase>().spedUp = true;
+            cat.spedUp = true;
             target.GetComponent<NavMeshAgent>().speed *= 1.25f;
             
         }
         
         Destroy(gameObject);
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Cat")
-        {
-            if(parentTower != null)
-            {
-                Distract();
-            }
-            
-        }
     }
     
 }

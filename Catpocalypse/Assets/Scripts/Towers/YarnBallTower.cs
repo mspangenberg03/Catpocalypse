@@ -102,7 +102,7 @@ public class YarnBallTower : Tower
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Cat")
+        if (other.gameObject.layer == 3)
         {
             targets.Add(other.gameObject);
             
@@ -110,7 +110,7 @@ public class YarnBallTower : Tower
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Cat")
+        if (other.gameObject.layer == 3)
         {
             targets.Remove(other.gameObject);
             

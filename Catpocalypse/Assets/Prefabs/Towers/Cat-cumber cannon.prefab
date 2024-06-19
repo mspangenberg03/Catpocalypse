@@ -234,21 +234,20 @@ MonoBehaviour:
   buildCost: 100
   refundPercentage: 0.85
   range: {fileID: 8621096765691456122}
-  distractValue: 175
-  towerStats: {fileID: 11400000, guid: a572c91e31552ab4c9e133f4109ab9b9, type: 2}
+  distractValue: 30
   numberOfTargets: 0
   targets: []
   towerLevel: 1
   upgradeCost: 200
   _cutenessChallengeActive: 0
-  fireRate: 2
+  fireRate: 0.75
   cucumberPrefab: {fileID: 6603149977634291862, guid: 356491f32b54d504ab168c5639033d23, type: 3}
   superCucumberPrefab: {fileID: 6603149977634291862, guid: 0da83d018d3a45e4ea5f2e1e967b4ef6, type: 3}
   spawn: {fileID: 8574672227803443362}
-  _DistanceInFrontOfTargetToAimFor: 5
-  _Gravity: 5
+  _DistanceInFrontOfTargetToAimFor: 2
+  _Gravity: 7
   _LaunchAngle: 15
-  _AimSpeed: 75
+  _AimSpeed: 90
   _AimThreshold: 10
   buffCats: 0
   superCucumberCooldown: 12

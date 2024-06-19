@@ -8,7 +8,7 @@ public class StringWaverTower : Tower
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(DistractCat());
     }
 
     // Update is called once per frame
@@ -18,33 +18,39 @@ public class StringWaverTower : Tower
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Cat")
+        if(other.gameObject.layer == 3)
         {
             targets.Add(other.gameObject);
-            StartCoroutine(DistractCat(other.gameObject));
+            
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Cat")
+        if (other.gameObject.layer == 3)
         {
             targets.Remove(other.gameObject);
-            StopCoroutine(DistractCat(other.gameObject));
         }
     }
     public override void Upgrade()
     {
         base.Upgrade();
     }
-    IEnumerator DistractCat(GameObject cat)
+    IEnumerator DistractCat()
     {
-        
-        if(targets.Contains(cat) && cat != null)
+        List<GameObject>.Enumerator cats = targets.GetEnumerator();
+        if(cats.Current != null)
         {
-            cat.GetComponent<CatBase>().DistractCat(towerStats.DistractValue, this.gameObject.GetComponent<Tower>());
-            yield return new WaitForSeconds(towerStats.FireRate);
-            StartCoroutine(DistractCat(cat));
+            GameObject cat = cats.Current;
+            do
+            {
+                if (targets.Contains(cat) && cat != null)
+                {
+                    cat.GetComponent<CatBase>().DistractCat(distractValue, this.gameObject.GetComponent<Tower>());
+
+                }
+            } while (cats.MoveNext());
         }
-        
+        yield return new WaitForSeconds(FireRate);
+        StartCoroutine(DistractCat());
     }
 }

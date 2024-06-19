@@ -227,10 +227,13 @@ PrefabInstance:
       addedObject: {fileID: 6212514819465014724}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31cce6d45ec1f8e4db15560b3b017c9b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1699814510724812543}
+      addedObject: {fileID: -8017009453871223181}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31cce6d45ec1f8e4db15560b3b017c9b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 29456582985701235}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31cce6d45ec1f8e4db15560b3b017c9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1699814510724812543}
   m_SourcePrefab: {fileID: 100100000, guid: 31cce6d45ec1f8e4db15560b3b017c9b, type: 3}
 --- !u!1 &5902274439958871315 stripped
 GameObject:
@@ -247,7 +250,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -286,7 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _catType: 5
   _CutenessValue: 5
-  distractionThreshold: 2000
+  distractionThreshold: 300
   damageToPlayer: 5
   speed: 0
   _WayPointArrivedDistance: 2
@@ -336,6 +339,54 @@ MonoBehaviour:
   stoppingEntities: []
   isATarget: 0
   spedUp: 0
+--- !u!135 &-8017009453871223181
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902274439958871315}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 1, z: 0.5}
+--- !u!54 &29456582985701235
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902274439958871315}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!82 &1699814510724812543
 AudioSource:
   m_ObjectHideFlags: 0
@@ -432,30 +483,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!54 &29456582985701235
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5902274439958871315}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0

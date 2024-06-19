@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 
 /// <summary>
-/// This is the Moving State providing functionality for Cats that are moving
+/// This is the Slowed State providing functionality for enemies that are slowed
 /// </summary>
 public class CatState_Slowed : CatState_Base
 {
