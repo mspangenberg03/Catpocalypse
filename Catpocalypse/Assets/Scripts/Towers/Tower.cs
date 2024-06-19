@@ -82,6 +82,7 @@ public class Tower : MonoBehaviour
         {
             gameObject.GetComponent<CucumberTower>().buffCats = true;
         }
+
     }
     
     private void OnEnable()
@@ -92,6 +93,7 @@ public class Tower : MonoBehaviour
         // radius by simply dividing it by the gameObject's scale. It doesn't matter
         // whether we use x, y, or z here since it is a sphere.
         _Collider = GetComponent<SphereCollider>();
+        _Collider.radius = towerStats.Range;
         _Collider.radius = _Collider.radius / transform.localScale.x;
         _cutenessManager = GameObject.FindGameObjectWithTag("Goal").GetComponent<PlayerCutenessManager>();
         if (_stateMachine == null)

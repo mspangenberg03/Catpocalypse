@@ -7289,6 +7289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57b291273e92e44f8776966d86f0432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: {fileID: 11400000, guid: 21a33f0cb7b5f2c40bfc92d23cabc3a7, type: 2}
   maxHealth: 10
   spawner: {fileID: 401920715}
   sounds:

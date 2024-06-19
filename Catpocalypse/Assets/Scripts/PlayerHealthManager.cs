@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 10f;
+    
+    [SerializeField] private float maxHealth;
 
     private float health;
     [SerializeField] private CatSpawner spawner;
@@ -13,9 +14,13 @@ public class PlayerHealthManager : MonoBehaviour
     public List<AudioClip> sounds = new List<AudioClip>();
     private AudioSource healthAudio;
 
+    [SerializeField]
+    private PlayerUpgradeData _playerUpgrades;
+
 
     private void Start()
     {
+        maxHealth = _playerUpgrades.MaxHealth;
         health = maxHealth;
         healthAudio = GetComponent<AudioSource>();
         HUD.UpdatePlayerHealthDisplay(health, maxHealth);
