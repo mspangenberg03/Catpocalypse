@@ -24,5 +24,10 @@ MonoBehaviour:
   UpgradeCost: 0
   Upgrade: 
   Special: High AOE damage
-  Description: This tower makes a hypnotic yarn ball and waves it around nearby cats
-    doing massive AOE distraction to them!
+  Description: 'The string waver tower makes a ball of yarn and waves it in an hypnotic
+    pattern, causing distraction per second to nearby cats while it''s waving the
+    ball.
+
+
+    A cat can watch a granny weave for hours. We don''t have any granny
+    towers, but this string weaver would do just fine to distract nearby felines!'

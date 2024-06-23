@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfedea3a4133f7146b4da6b9aae32c28, type: 3}
-  m_Name: NewCat - Normal
+  m_Name: Cat - Normal
   m_EditorClassIdentifier: 
   CatType: 1
   DisplayName: Normal Cat
-  Description: As a normal cat, it has no special ability and just follows the path
-    normally, they're just there for the ride!
   Size: 4
   Speed: 3
   SpawnRate: 3
   HP: 3
   PayOnDistraction: 2
   Special: None
+  Description: As a normal cat, it has no special ability and just follows the path
+    normally. They're just along for the ride!

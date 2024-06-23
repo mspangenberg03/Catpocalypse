@@ -24,5 +24,11 @@ MonoBehaviour:
   UpgradeCost: 3
   Upgrade: Adds more cucumbers
   Special: Cheap
-  Description: The standard tower, it launches cucumbers to scare the more cowardly
-    cats while the braver cats play with them!
+  Description: 'The standard tower, it launches cucumbers to scare the more cowardly
+    cats while the braver cats play with them! Each launched cucumber can somewhat
+    distract a single cat.
+
+
+    Science can never tell why cats got bamboozled by
+    cucumbers, but since they are, launching cucumbers at them will surely distract
+    them from everything!'
