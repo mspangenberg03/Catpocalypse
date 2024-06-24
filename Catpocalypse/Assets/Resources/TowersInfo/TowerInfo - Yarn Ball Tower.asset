@@ -24,5 +24,10 @@ MonoBehaviour:
   UpgradeCost: 3
   Upgrade: 
   Special: Ball Shotgun
-  Description: A tower that gathers strings of Yarn are made into YarnBalls and are
-    prepared to be thrown.
+  Description: 'The Yarn Ball tower shoots a yarn ball very fast towards a cat, which
+    makes it chase it. This distracts the cat a lot.
+
+
+    Kitties love yarn balls,
+    so let''s exploit that by firing speedy yarn balls at them so they''ll have to
+    chase them off the garden in awe!'

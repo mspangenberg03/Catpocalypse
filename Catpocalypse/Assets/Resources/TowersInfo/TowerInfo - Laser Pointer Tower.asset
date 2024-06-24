@@ -25,5 +25,10 @@ MonoBehaviour:
   Upgrade: None
   Special: The tower's laser pointer can distract a specified type of cat to another
     lane/road!
-  Description: 'This tower utilizes a classic device of feline distraction: the laser
-    pointer!'
+  Description: 'The laser tower deals no distraction and starts already built on
+    the map, it''s main use is to lead types of cats to another lane/road for the
+    player.
+
+
+    It''s common knowledge that a cat will follow laser pointers, making
+    this tower the perfect path diversion machine!'
