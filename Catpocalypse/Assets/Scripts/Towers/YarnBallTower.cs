@@ -11,7 +11,7 @@ public class YarnBallTower : Tower
     [SerializeField] private float throwRange = 5f;
     private bool canThrow = true;
     private float sizeMultiplier = 1;
-    
+
     void Start()
     {
         // Start the projectile throwing coroutine
@@ -98,14 +98,14 @@ public class YarnBallTower : Tower
                 }
             }
         }
-            
+
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Cat")
         {
             targets.Add(other.gameObject);
-            
+
         }
     }
     private void OnTriggerExit(Collider other)
@@ -113,15 +113,15 @@ public class YarnBallTower : Tower
         if (other.gameObject.tag == "Cat")
         {
             targets.Remove(other.gameObject);
-            
+
         }
     }
     public override void Upgrade()
     {
         base.Upgrade();
-        switch(towerLevel)
+        switch (towerLevel)
         {
-            
+
         }
     }
     GameObject FindTargetByLayer(string Cat)
@@ -136,6 +136,6 @@ public class YarnBallTower : Tower
 
         return null;
     }
-   
-    
+
+
 }

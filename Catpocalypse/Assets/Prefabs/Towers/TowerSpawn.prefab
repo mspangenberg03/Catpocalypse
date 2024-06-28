@@ -49,4 +49,4 @@ MonoBehaviour:
   cucumberTowerPrefab: {fileID: 6448288126085725347, guid: bab15dc771dc3464a85b4283f9710e6f, type: 3}
   stringWaverTowerPrefab: {fileID: 8043389372904318211, guid: 26fc2ecdaca6a2d48b8d900808be3691, type: 3}
   yarnBallTowerPrefab: {fileID: 6053846418755319415, guid: b24ec43d900efa548b8861aaed8dc24a, type: 3}
-  nonAllergicPrefab: {fileID: 1494292692984174254, guid: 3cc1d5d3792ea7a4eb862e4db2506356, type: 3}
+  nonAllergicPrefab: {fileID: 7296135706584994114, guid: 1617019568fb7904da67cdebf1cc6d4d, type: 3}
