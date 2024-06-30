@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
 
@@ -19,7 +20,7 @@ public class TowerBase : MonoBehaviour
     public bool usable;  
     
     public TowerSelectorUI towerSelectorUI;
-    public TowerDestroyerUI towerDestroyerUI;
+    public TowerManipulationUI towerManipulationUI;
     public Material towerHovered;
     public Material towerNotHovered;
     public Material towerSelected;
@@ -27,14 +28,27 @@ public class TowerBase : MonoBehaviour
     private GameObject towerSpawn;
     public bool hasTower;
     public bool hoveredOver;
-    public GameObject tower;
     [SerializeField]
     public LayerMask layer;
     public float refundVal;
-
     public bool IsSelected = false;
 
+    [Tooltip("This is the vertical position that the rally point GameObject will be at. This propery just gives us an easy way to move all rally point flags up/down as needed by just editing the TowerBase prefab in the prefabs folder.")]
+    [SerializeField]
+    private float _RallyPointVerticalOffset = 0.5f;
+
+
+    private Tower _Tower;
     private RobotController _Robot;
+
+    // This is just a capsule with a shader graph on it that I made.
+    // It's already a child object, so the OnEnable() method just finds it and sets this variable.
+    // However, it is also its own prefab, so the parameters on the outline material can be changed once and affect all towers in one go!
+    protected GameObject _TowerRangeOutline;
+
+    // The RallyPoint GameObject.
+    protected GameObject _RallyPointGameObject;
+
 
 
     private void Awake()
@@ -47,12 +61,42 @@ public class TowerBase : MonoBehaviour
         _Robot = FindObjectOfType<RobotController>();
 
         OnAnyTowerBaseWasSelected += OnAnyTowerBaseSelected;
+
+
+        // But first, get a reference to it if we don't have one yet.
+        Transform t = transform.Find("TowerRangeOutline");
+        if (t != null)
+        {
+            _TowerRangeOutline = t.gameObject;
+
+            // Hide the outline for now.
+            HideRangeOutline();
+        }
+        else
+        {
+            Debug.LogError($"Tower base \"{gameObject.name}\" does not have a \"TowerRangeOutline\" child object for displaying the tower's range!", gameObject);
+        }
+
+
+        Transform t2 = transform.Find("RallyPoint");
+        if (t2 != null)
+        {
+            _RallyPointGameObject = t2.gameObject;
+
+            // Hide the rally point for now.
+            HideRallyPoint();
+        }
+        else
+        {
+            Debug.LogError($"Tower base \"{gameObject.name}\" does not have a \"RallyPoint\" child object for displaying the tower's rally point!", gameObject);
+        }
     }
 
     void OnMouseEnter()
     {
         // Check if the mouse is over a UI element or the robot is active. If so, then we should ignore the hover.
-        if (EventSystem.current.IsPointerOverGameObject() || _Robot.IsActive)
+        if (EventSystem.current.IsPointerOverGameObject() || 
+            (_Robot != null && _Robot.IsActive))
         {
             return;
         }
@@ -85,26 +129,23 @@ public class TowerBase : MonoBehaviour
     void OnMouseUpAsButton()
     {
         // Check if the mouse is over a UI element, or the robot is active. If so, then we should ignore the click.
-        if (EventSystem.current.IsPointerOverGameObject() || _Robot.IsActive)
+        if (EventSystem.current.IsPointerOverGameObject() ||
+            (_Robot != null && _Robot.IsActive))
+        {
             return;
+        }
 
 
         gameObject.GetComponent<Renderer>().material = towerSelected;
         IsSelected = true;
-        
+
         SelectedTowerBase = this;
         OnAnyTowerBaseWasSelected?.Invoke(gameObject, EventArgs.Empty);
 
         if (enabled)
         {
-            if (!hasTower){
-
-                /*
-                Debug.Log("A: " + towerSelectorUI == null);
-                if (towerSelectorUI != null)
-                    Debug.Log("B: " + towerSelectorUI.gameObject == null);
-                */
-
+            if (!hasTower)
+            {
                 if (towerSelectorUI.gameObject.activeSelf)
                 {
                     towerSelectorUI.SetCurrentSelectedSpawn(towerSpawn);
@@ -112,21 +153,23 @@ public class TowerBase : MonoBehaviour
                 else
                 {
                     ShowTowerSelectorUI(true);
-                    ShowTowerDestroyerUI(false);
+                    ShowTowerManiulationUI(false);
                     towerSelectorUI.SetCurrentSelectedSpawn(towerSpawn);
                 }
                     
-            } else {
-                if (towerDestroyerUI.gameObject.activeSelf)
+            } 
+            else 
+            {
+                if (towerManipulationUI.gameObject.activeSelf)
                 {
-                    towerDestroyerUI.SetCurrentSelectedBase(this);
+                    towerManipulationUI.SetCurrentSelectedBase(this);
                 }
                 else
                 {
-                    ShowTowerDestroyerUI(true);
+                    ShowTowerManiulationUI(true);
                     ShowTowerSelectorUI(false);
                         
-                    towerDestroyerUI.SetCurrentSelectedBase(this);
+                    towerManipulationUI.SetCurrentSelectedBase(this);
                 }
                     
             }
@@ -140,10 +183,10 @@ public class TowerBase : MonoBehaviour
         towerSelectorUI.GetComponent<TowerSelectorUI>().inUse = state;
     }
 
-    private void ShowTowerDestroyerUI(bool state)
+    private void ShowTowerManiulationUI(bool state)
     {
-        towerDestroyerUI.gameObject.SetActive(state);
-        towerDestroyerUI.inUse = state;
+        towerManipulationUI.gameObject.SetActive(state);
+        towerManipulationUI.inUse = state;
     }
 
     public void DestroyTower()
@@ -153,7 +196,7 @@ public class TowerBase : MonoBehaviour
 
 
         this.hasTower = false;
-        Destroy(tower);
+        Destroy(tower.gameObject);
         tower = null;
 
     }
@@ -166,6 +209,8 @@ public class TowerBase : MonoBehaviour
     public void Deselect()
     {
         IsSelected = false;
+        HideRangeOutline();
+        HideRallyPoint();
 
         gameObject.GetComponent<Renderer>().material = towerNotHovered;
         
@@ -199,4 +244,65 @@ public class TowerBase : MonoBehaviour
             towers[i].Deselect();
         }
     }
+
+    public void ShowRangeOutline()
+    {
+        if (tower == null)
+            return;
+
+
+        // Set the scale of the range outline object appropriately now.
+        // We are dividing the radius by the tower base's scale, because it is set to 4. As a result, when we set the scale of the outline, it ends of 4x too big. This counteracts that.
+        // Then we multiply by 2f since this value is a radius.
+        float scale = (tower.RangeRadius / transform.localScale.x) * 2f;
+        // The y scale here is set to 50f to make the capsule's vertical dimension much larger than the other two. This way it doesn't accidentally highlight the top of the tower if it intersects with it.
+        _TowerRangeOutline.transform.localScale = new Vector3(scale, 50f, scale);
+
+
+        _TowerRangeOutline.SetActive(true);
+    }
+
+    public void HideRangeOutline()
+    {
+        _TowerRangeOutline.SetActive(false);
+    }
+
+    public void ShowRallyPoint()
+    {
+        if (tower == null)
+            return;
+
+
+        // Calculate vector from tower to rally point.
+        Vector3 direction = tower.RallyPointPosition - transform.position;
+        direction.y = _RallyPointVerticalOffset;
+
+        // Move the rally point visual to the correct location.
+        _RallyPointGameObject.transform.position = transform.position + direction;
+
+        // Make the rally point object visible.
+        _RallyPointGameObject.SetActive(true);
+    }
+
+    public void HideRallyPoint()
+    {
+        _RallyPointGameObject.SetActive(false);
+    }
+
+
+    
+    public Tower tower
+    {
+        get { return _Tower; }
+        set
+        {
+            if (_Tower != null)
+                _Tower.ParentTowerBase = null;
+
+            _Tower = value;
+            if (_Tower != null)
+                _Tower.ParentTowerBase = this;
+        }
+    }
+
 }

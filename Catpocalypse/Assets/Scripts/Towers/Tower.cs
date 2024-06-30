@@ -20,7 +20,8 @@ public class Tower : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField]
     protected float refundPercentage = 0.85f;
-    
+
+    [Tooltip("This SphereCollider defines the range of the tower.")]
     [SerializeField]
     protected SphereCollider range;
     [SerializeField, Min(1)]
@@ -35,7 +36,6 @@ public class Tower : MonoBehaviour
     // here in Tower in case any other tower needs it later.
     protected Type _TargetCatType = typeof(NormalCat);
 
-    protected SphereCollider _Collider;
 
     protected StateMachine _stateMachine;
     public int towerLevel = 1;
@@ -45,8 +45,14 @@ public class Tower : MonoBehaviour
 
     [SerializeField]
     protected float fireRate;
+
+    // This just caches the default rally point position for this tower.
+    protected Vector3 _DefaultRallyPoint;
+
     
-    public float FireRate
+
+
+public float FireRate
     {
         set 
         { 
@@ -59,9 +65,18 @@ public class Tower : MonoBehaviour
     }
 
 
+
+    private void Awake()
+    {
+        RangeRadius = range.radius;
+        
+        FindDefaultRallyPoint();        
+    }
+
     private void Start()
     {
         _cutenessManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerCutenessManager>();
+
         //Applies the debuff if the tower was built during the cuteness challenge
         if(_cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.CatsGetHarderToDistract)
         {
@@ -83,13 +98,18 @@ public class Tower : MonoBehaviour
     
     private void OnEnable()
     {
+        // Update the RadiusRange property with the original range before we adjust it.
+        RangeRadius = range.radius;
+
         // This corrects the problem with our prefabs. For example, the laser tower
         // has a scale of 500. It's collider has a radius of 6. This effectively means
         // the true size of the collider is radius = 30,000. This adjusts the collider
         // radius by simply dividing it by the gameObject's scale. It doesn't matter
         // whether we use x, y, or z here since it is a sphere.
-        _Collider = GetComponent<SphereCollider>();
-        _Collider.radius = _Collider.radius / transform.localScale.x;
+        //_Collider = GetComponent<SphereCollider>();
+        range.radius = range.radius / transform.localScale.x;
+
+
         _cutenessManager = GameObject.FindGameObjectWithTag("Goal").GetComponent<PlayerCutenessManager>();
         if (_stateMachine == null)
         {
@@ -99,6 +119,9 @@ public class Tower : MonoBehaviour
 
             InitStateMachine();
         }
+
+
+        FindDefaultRallyPoint();
 
 
         EnableTargetDetection();        
@@ -190,7 +213,7 @@ public class Tower : MonoBehaviour
     /// <param name="target"></param>
     protected virtual void OnTargetWentOutOfRange(GameObject target)
     {
-        Debug.Log("Out");
+
     }
 
     /// <summary>
@@ -244,6 +267,83 @@ public class Tower : MonoBehaviour
         return distractValue;
     }
 
+    /// <summary>
+    /// Finds the default rally point, and initializes the current rally point to be that default.
+    /// </summary>
+    /// <returns></returns>
+    private bool FindDefaultRallyPoint()
+    {
+        // Attempt to find the nearest WayPoint within the tower's range.
+        if (FindNearestWayPoint(out WayPoint wayPoint))
+        {           
+            // Set the default rally point to the location of the nearest WayPoint.
+            _DefaultRallyPoint = wayPoint.transform.position;
+
+            // Set the current rally point equal to the default.
+            RallyPointPosition = _DefaultRallyPoint;
+
+
+            return true;
+        }
+
+
+        return false;
+    }
+
+    /// <summary>
+    /// Finds the nearest WayPoint within the tower's range.
+    /// </summary>
+    /// <param name="wayPoint">This out parameter returns the nearest WayPoint within the tower's range, or null if none was found.</param>
+    /// <returns>True if the nearest WayPoint was found, or false if none were in range.</returns>
+    private bool FindNearestWayPoint(out WayPoint wayPoint)
+    {
+        wayPoint = null;
+
+        // Find all WayPoints that are within this tower's range.
+        RaycastHit[] hits = Physics.SphereCastAll(transform.parent.parent.position,
+                                                  RangeRadius,
+                                                  Vector3.forward,
+                                                  0.1f,
+                                                  LayerMask.GetMask("WayPoints"),
+                                                  QueryTriggerInteraction.Collide);
+
+        // Did we find at least one WayPoint within range of this tower?
+        if (hits.Length < 1)
+        {
+            Debug.LogError($"Tower \"{gameObject.name}\" could not set a default rally point, because no WayPoints were found within the tower's range!", gameObject);
+            return false;
+        }
+
+        // Iterate through the WayPoints we found to determine the nearest one.
+        float closestDistance = float.MaxValue;
+        WayPoint closestWayPoint = null;
+        foreach (RaycastHit hit in hits)
+        {
+            float distance = Vector3.Distance(transform.parent.parent.position, hit.transform.position);
+            if (distance < closestDistance)
+            {
+                WayPoint p = hit.collider.GetComponent<WayPoint>();
+                if (p != null)
+                {
+                    closestDistance = distance;
+                    closestWayPoint = p;
+                }
+                else
+                {
+                    Debug.LogWarning($"WayPoint \"{hit.collider.name}\" does not have a WayPoint component. Skipping it.", gameObject);
+                    continue;
+                }
+            }
+        }
+
+
+        // Return the nearest WayPoint via the out parameter.
+        wayPoint = closestWayPoint;
+
+        // return the nearest WayPoint.
+        return true;
+    }
+
     public float GetBuildCost()
     {
         return buildCost;
@@ -265,21 +365,33 @@ public class Tower : MonoBehaviour
 
     public virtual void EnableTargetDetection()
     {
-        _Collider.enabled = true;
+        range.enabled = true;
         targets.Clear();
     }
 
     public virtual void DisableTargetDetection()
     {
-        _Collider.enabled = false;
+        range.enabled = false;
         targets.Clear();
     }
 
 
-
     public float BuildCost { get { return buildCost; } }
     public float DistractValue { set { distractValue = value; } get { return distractValue; } }
-    public bool IsTargetDetectionEnabled { get { return _Collider.enabled; } }
+    public bool IsTargetDetectionEnabled { get { return range.enabled; } }
+
+    public TowerBase ParentTowerBase { get; set; }
+
+
+    public Vector3 RallyPointPosition { get; set; }
+
+    /// <summary>
+    /// The radius of the tower's range.
+    /// </summary>
+    /// <remarks>
+    /// This is dividing by the scale, because the radius is automatically adjusted based on the scale in 
+    /// </remarks>
+    public float RangeRadius { get; private set; }
 
     public Type TargetCatType
     {

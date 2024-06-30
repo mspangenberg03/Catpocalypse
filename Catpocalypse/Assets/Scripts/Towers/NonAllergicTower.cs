@@ -79,7 +79,7 @@ public class NonAllergicTower : Tower
             if (peopleSpawned < numOfPeople)
             {
 
-                GameObject newPerson = Instantiate(person, spawnPoint.position, Quaternion.identity, gameObject.transform);
+                GameObject newPerson = Instantiate(person, RallyPointPosition, Quaternion.identity, gameObject.transform);
                 //personList.Add(newPerson);
 
                 peopleSpawned++;

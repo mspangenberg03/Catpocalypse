@@ -14,6 +14,7 @@ TagManager:
   - TowerBase
   - Waypoint
   - Tower
+  - TowerRangeOutline
   layers:
   - Default
   - TransparentFX

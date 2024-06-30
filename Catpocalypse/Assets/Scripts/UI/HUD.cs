@@ -57,7 +57,8 @@ public class HUD : MonoBehaviour
 
 
         _RobotController = FindAnyObjectByType<RobotController>();
-        _RobotController.OnBatteryLevelChanged += UpdateRobotBatteryLevelDisplay;
+        if (_RobotController != null)
+            _RobotController.OnBatteryLevelChanged += UpdateRobotBatteryLevelDisplay;
 
         Instance = this;
     }
@@ -107,7 +108,8 @@ public class HUD : MonoBehaviour
 
     private void OnDestroy()
     {
-        _RobotController.OnBatteryLevelChanged -= UpdateRobotBatteryLevelDisplay;
+        if (_RobotController != null)
+            _RobotController.OnBatteryLevelChanged -= UpdateRobotBatteryLevelDisplay;
     }
 
     public static void UpdatePlayerHealthDisplay(float currentHP, float maxHP)
@@ -135,7 +137,8 @@ public class HUD : MonoBehaviour
 
     public static void UpdateRobotBatteryLevelDisplay(object sender, RobotBatteryEventArgs e)
     {
-        Instance.RobotPowerLevelLabel.text = $"{(e.NewBatteryLevel * 100):F0}%";
+        if (Instance.RobotPowerLevelLabel != null)
+            Instance.RobotPowerLevelLabel.text = $"{(e.NewBatteryLevel * 100):F0}%";
     }
 
 

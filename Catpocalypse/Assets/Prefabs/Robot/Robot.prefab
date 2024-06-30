@@ -246,7 +246,7 @@ MonoBehaviour:
   _MovementDecelerationRate: 3
   _TurningDecelerationRate: 100
   _InvertSteeringWhenInReverse: 1
-  _AllowActivationBetweenWaves: 1
+  _AllowActivationBetweenWaves: 0
   _BatteryMaxCapacity: 100
   _BatteryDrainPerSecond: 0.5
   _BatteryRechargePerSecond: 0.25
