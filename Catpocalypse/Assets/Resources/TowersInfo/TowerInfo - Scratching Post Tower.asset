@@ -24,5 +24,10 @@ MonoBehaviour:
   UpgradeCost: 4
   Upgrade: 
   Special: Slows all affected cats
-  Description: This tower launches itself as a rocket near the cats, slowing all
+  Description: 'This tower launches itself as a rocket near the cats, slowing all
     cats as they get tempted to rub themselves on it!
+
+
+    Cats love scratches and
+    can never say no to them. These scratch-post projectiles should keep them pinned
+    on contact!'
