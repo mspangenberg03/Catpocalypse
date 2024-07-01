@@ -18,10 +18,35 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _scrap; }
         set { _scrap = value; }
     }
-    private CatTypes _catType;
-    public CatTypes CatType
+    private bool _rewardUpgraded;
+    public bool IsUpgraded
     {
-        get { return _catType; }
-        set { _catType = value; }
+        get { return _rewardUpgraded; }
+        set { _rewardUpgraded = value; }
+    }
+    [SerializeField,Tooltip("The bonus to the cat reward")]
+    private float _rewardMultiplier;
+    public float RewardMultiplier
+    {
+        get { return _rewardMultiplier; }
+        set { _rewardMultiplier = value; }
+    }
+    private int _towerUpgadeCost;
+    public int TowerUpgradeCost
+    {
+        get { return _towerUpgadeCost; }
+        set { _towerUpgadeCost = value; }
+    }
+    private int _healthUpgradeCost;
+    public int HealthUpgradeCost
+    {
+        get { return _healthUpgradeCost; }
+        set { _healthUpgradeCost = value; }
+    }
+    private int _rewardUpgradeCost;
+    public int RewardUpgradeCost
+    {
+        get { return _healthUpgradeCost; }
+        set { _healthUpgradeCost = value; }
     }
 }

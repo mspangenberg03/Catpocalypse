@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PlayerUpgrades
   m_EditorClassIdentifier: 
   _maxHealth: 10
+  _rewardMultiplier: 1

@@ -224,9 +224,7 @@ public class CatBase : MonoBehaviour
         if (distraction >= distractionThreshold)
         {
             StartCoroutine(Sound());
-
             targetingTower.targets.Remove(this.gameObject);           
-            
         }
     }
 
