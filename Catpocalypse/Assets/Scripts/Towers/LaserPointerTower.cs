@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 
@@ -19,8 +19,9 @@ public class LaserPointerTower : Tower
     private GameObject laserPrefab; // The laser prefab to be copied
     [SerializeField]
     private GameObject laserEndPointPrefab; // The laser end point effect prefab
-    [SerializeField]
-    private int numOfLasers; // The number of lasers a tower can instantiate
+    [Tooltip("The max number of simulateous lasers this tower can have.")]
+    [SerializeField, Min(1)]
+    private int MaxLasers = 1; // The number of lasers a tower can instantiate
     [SerializeField]
     private GameObject arrowPrefab;
 
@@ -52,22 +53,29 @@ public class LaserPointerTower : Tower
     private GameObject _Arrow;
 
 
+    private List<LaserInfo> _Lasers;
+    private int _ActiveLasersCount; // The number of lasers that are currently active
+
+
+    /*
+    private List<TargetInfo> _ActiveTargets;
     private List<GameObject> lasers; // The list of instantiated lasers, both active and inactive
     private List<GameObject> laserEndPoints; // The list of instantiated end point effects for the lasers.
     private List<float> laserSweepTimers; // Holds the elapsed time for each laser. This is used to make the laser sweep back and forth.
 
-    private List<TargetInfo> _ActiveTargets;
-
+    */
 
 
     void Awake()
     {
-        _ActiveTargets = new List<TargetInfo>();
+        _Lasers = new List<LaserInfo>();
 
+        /*
+        _ActiveTargets = new List<TargetInfo>();
         lasers = new List<GameObject>();
         laserEndPoints = new List<GameObject>();
         laserSweepTimers = new List<float>();
-
+        */
 
         if (SelectedPathIndicatorsParent == null)
         {
@@ -97,14 +105,14 @@ public class LaserPointerTower : Tower
     // Update is called once per frame
     void Update()
     {
-        if(lasers.Count < numOfLasers)
+        if(_Lasers.Count < MaxLasers)
         {
             StartCoroutine(SpawnLasers());
         }
         StartCoroutine(LaserControl());
 
 
-        if (_ActiveTargets.Count < numOfLasers)
+        if (_ActiveLasersCount < MaxLasers)
             SelectTargets();
 
         
@@ -127,7 +135,7 @@ public class LaserPointerTower : Tower
         // Create and register transitions.
         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        _stateMachine.AddTransitionFromState(idleState, new Transition(activeState, () => _ActiveTargets.Count > 0));
+        _stateMachine.AddTransitionFromState(idleState, new Transition(activeState, () => _ActiveLasersCount > 0));
         _stateMachine.AddTransitionFromState(disabledState, new Transition(idleState, () => IsTargetDetectionEnabled));
 
         _stateMachine.AddTransitionFromAnyState(new Transition(disabledState, () => !IsTargetDetectionEnabled));
@@ -137,7 +145,7 @@ public class LaserPointerTower : Tower
 
 
         // Tell state machine to write in the debug console every time it exits or enters a state.
-        _stateMachine.EnableDebugLogging = true;
+        //_stateMachine.EnableDebugLogging = true;
 
         // Set the starting state.
         _stateMachine.SetState(idleState);
@@ -173,9 +181,13 @@ public class LaserPointerTower : Tower
                 if (cat.NextWayPoint == PathJunction)
                     info.IsApproachingJunction = true;
 
-                _ActiveTargets.Add(info);
+                int laserIndex = GetIndexOfFirstInactiveLaser();
+                if (laserIndex >= 0)
+                {
+                    ActivateLaser(laserIndex, info);
+                }
                 
-                if (_ActiveTargets.Count >= numOfLasers)
+                if (_ActiveLasersCount >= MaxLasers)
                     break;
             }
 
@@ -185,9 +197,11 @@ public class LaserPointerTower : Tower
 
     private void CheckActiveTargets()
     {
-        for (int i = 0; i < _ActiveTargets.Count; i++) 
+        for (int i = 0; i < _ActiveLasersCount; i++) 
         { 
-            TargetInfo info = _ActiveTargets[i];
+            TargetInfo info = _Lasers[i].TargetInfo;
+            if (info == null)
+                continue;
 
             WayPoint nextWaypoint = info.TargetCat.NextWayPoint;
 
@@ -204,6 +218,23 @@ public class LaserPointerTower : Tower
                 info.TargetCat.NextWayPoint = PathJunction.NextWayPoints[SelectedPathIndex];
 
         }
+    }
+
+    /// <summary>
+    /// Finds the first inactive laser.
+    /// </summary>
+    /// <returns>The first inactive laser.</returns>
+    private int GetIndexOfFirstInactiveLaser()
+    {
+        for (int i = 0; i < _Lasers.Count; i++)
+        {
+            if (_Lasers[i].TargetInfo == null)
+                return i;
+        }
+
+
+        // There are no inactive lasers at this time, so return -1 as an error code.
+        return -1;
     }
 
     /// <summary>
@@ -241,11 +272,12 @@ public class LaserPointerTower : Tower
         }
 
 
-        for (int i = 0; i < _ActiveTargets.Count; i++)
+        for (int i = 0; i < _ActiveLasersCount; i++)
         {
-            if (_ActiveTargets[i].TargetCat == cat)
+            if (_Lasers[i].TargetInfo != null && _Lasers[i].TargetInfo.TargetCat == cat)
             {
-                _ActiveTargets.RemoveAt(i);
+                DeactivateLaser(i);
+
                 break;
             }
         } // end for i
@@ -281,50 +313,46 @@ public class LaserPointerTower : Tower
 
     IEnumerator LaserControl()
     {
-        for( int i = 0; i < numOfLasers; i++)
+        for( int i = 0; i < MaxLasers; i++)
         {
-            //Base case for the tower
-            if(_ActiveTargets.Count == 0)
+            //Base case for the tower. If any tower's still have target info, disable them.
+            if(_ActiveLasersCount == 0 && _Lasers[i].TargetInfo != null)
             {
                 DeactivateLaser(i);
                 yield return new WaitForSeconds(1f);
-            }
-            else if (i >= _ActiveTargets.Count)
+            }           
+/*            else if (_Lasers[i].TargetInfo == null)
             {
-                DeactivateLaser(i);
-            }
-            else if(i < _ActiveTargets.Count && _ActiveTargets.Count > 0)
+                //DeactivateLaser(i);
+            }*/
+            else if (_Lasers[i].TargetInfo != null && _ActiveLasersCount > 0)
             {
                 // Checks for a null value in case a cat moves out of range
-                if(_ActiveTargets[i].TargetCat != null)
+                if(_Lasers[i].TargetInfo != null)
                 {
                     // Activates a laser if it is inactive
-                    if (!lasers[i].activeSelf) 
-                    { 
-                        lasers[i].SetActive(true);
-                        lasers[i].gameObject.GetComponent<AudioSource>().Play();
-                        laserEndPoints[i].SetActive(true);
-                        laserSweepTimers[i] = 2f;
+                    if (!_Lasers[i].Laser.activeSelf)
+                    {
+                        ActivateLaser(i, _Lasers[i].TargetInfo);
                     }
 
                     // Changes the laser's length and _ActiveTargets the cat with it
                     Vector3[] linePositions = new Vector3[2];
-                    linePositions[0] = lasers[0].transform.position;
+                    linePositions[0] = _Lasers[i].Laser.transform.position;
 
-                    Vector3 targetPoint = CalculateLaserEndPoint(i);
-                   
+                    Vector3 targetPoint = CalculateLaserEndPoint(i);                   
 
                     linePositions[1] = targetPoint;
 
-                    laserEndPoints[i].transform.position = targetPoint;
+                    _Lasers[i].LaserEndPoint.transform.position = targetPoint;
 
-                    //Debug.Log(linePositions[0] + "    " + _ActiveTargets[i].name + " " + linePositions[1] + "  " + _ActiveTargets[i].transform.position);
+                    //Debug.Log(linePositions[0] + "    " + _Lasers[i].TargetInfo.TargetCat.name + " " + linePositions[1] + "  " + _Lasers[i].TargetInfo.TargetCat.position);
 
-                    lasers[i].GetComponent<LineRenderer>().SetPositions(linePositions);
+                    _Lasers[i].Laser.GetComponent<LineRenderer>().SetPositions(linePositions);
                     
 
                     // This is commented out since laser should no longer do damage.
-                    //_ActiveTargets[i].GetComponent<CatBase>().DistractCat(distractValue, this);
+                    //_Lasers[i].TargetInfo.TargetCat.GetComponent<CatBase>().DistractCat(distractValue, this);
                 }              
 
             }
@@ -335,17 +363,33 @@ public class LaserPointerTower : Tower
 
     }
 
+    private void ActivateLaser(int laserIndex, TargetInfo targetInfo)
+    {
+        _Lasers[laserIndex].Activate(targetInfo);
+        _Lasers[laserIndex].SweepTimer = _LaserSweepTime;
+        _Lasers[laserIndex].SweepWidth = _LaserSweepWidth;
+        _ActiveLasersCount++;
+    }
+
     private void DeactivateLaser(int laserIndex)
     {
-        lasers[laserIndex].gameObject.GetComponent<AudioSource>().Stop();
-        lasers[laserIndex].SetActive(false);
-        laserEndPoints[laserIndex].SetActive(false);
-        laserSweepTimers[laserIndex] = 0f;
+        _Lasers[laserIndex].Deactivate();
+        _ActiveLasersCount--;
+    }
+
+    private void DeactivateAllLasers()
+    {
+        return;
+        Debug.Log("DEACTIVATE ALL!");
+        for (int i = 0; i < _Lasers.Count; i++)
+        {
+            DeactivateLaser(i);
+        }
     }
 
     private Vector3 CalculateLaserEndPoint(int index)
     {
-        CatBase targetCat = _ActiveTargets[index].TargetCat;
+        CatBase targetCat = _Lasers[index].TargetInfo.TargetCat;
         Vector3 targetPoint = targetCat.transform.position;
 
 
@@ -357,17 +401,17 @@ public class LaserPointerTower : Tower
         Vector3 right = new Vector3(forward.z, 0, -forward.x).normalized;
         //Vector3 left = -right;
 
-        // Multiply by the laserSweepWidth so we get the desired sweep width.
-        right *= _LaserSweepWidth;
+        // Multiply by the laser's SweepWidth so we get the desired sweep width.
+        right *= _Lasers[index].SweepWidth;
 
         // Update the sweep timer for this laser.
-        laserSweepTimers[index] += Time.deltaTime;
+        _Lasers[index].SweepTimer += Time.deltaTime;
 
         // Make the laser move back and forth.
         // First, calculate the angle to pass into the Sin function.
-        float angle = 360 * (laserSweepTimers[index] / _LaserSweepTime);
+        float angle = 360 * (_Lasers[index].SweepTimer / _LaserSweepTime);
         if (angle >= 360)
-            laserSweepTimers[index] = 0f; // Reset this laser's sweep timer.
+            _Lasers[index].SweepTimer = 0f; // Reset this laser's sweep timer.
 
         // Convert the angle from degrees to radians, and then calculate the sine value.
         angle *= Mathf.Deg2Rad;
@@ -378,7 +422,7 @@ public class LaserPointerTower : Tower
         right *= sinValue;
 
         
-
+        // Add the vectors we calculated to the target point to get the final target point in front of the cat.
         targetPoint += forward;
         targetPoint += right;
 
@@ -389,16 +433,20 @@ public class LaserPointerTower : Tower
     // Spawns the laser and sets its position to the top of the tower
     IEnumerator SpawnLasers()
     {
-        for (int i = lasers.Count; i < numOfLasers; i++)
+        for (int i = _Lasers.Count; i < MaxLasers; i++)
         {
+            LaserInfo newLaser = new LaserInfo();
 
-            lasers.Add(Instantiate(laserPrefab, laserSpawn));
-            lasers[i].gameObject.GetComponent<AudioSource>().Stop();
+            newLaser.Laser = Instantiate(laserPrefab, laserSpawn);
+            newLaser.Laser.gameObject.GetComponent<AudioSource>().Stop();
 
-            laserEndPoints.Add(Instantiate(laserEndPointPrefab, LaserEndPointsParent));
-            laserEndPoints[i].gameObject.SetActive(false);
+            newLaser.LaserEndPoint = Instantiate(laserEndPointPrefab, LaserEndPointsParent);
+            newLaser.LaserEndPoint.gameObject.SetActive(false);
 
-            laserSweepTimers.Add(0f);
+            newLaser.SweepTimer = _LaserSweepTime;
+            newLaser.SweepWidth = _LaserSweepWidth;
+
+            _Lasers.Add(newLaser);
 
             yield return new WaitForSeconds(1f);
         }
@@ -423,14 +471,22 @@ public class LaserPointerTower : Tower
     {
         base.EnableTargetDetection();
 
-        _ActiveTargets.Clear();
+
+        // Clear all current laser targets.
+        DeactivateAllLasers();
     }
 
     public override void DisableTargetDetection()
     {
         base.DisableTargetDetection();
 
-        _ActiveTargets.Clear();
+        // Clear all current laser targets.
+        DeactivateAllLasers();
+    }
+
+    protected override void OnRallyPointChanged()
+    {
+        
     }
 
 
@@ -475,4 +531,41 @@ public class LaserPointerTower : Tower
         public CatBase TargetCat;
         public bool IsApproachingJunction; // This will be true if the cat's next waypoint is set to the junction associated with this tower.
     }
+
+
+    /// <summary>
+    /// Stores info related to a given laser.
+    /// </summary>
+    private class LaserInfo
+    {
+        public GameObject Laser; // The instantiated laser GameObject
+        public GameObject LaserEndPoint; // The instantiated end point effects GameObject for the laser.
+        public float SweepTimer; // Holds the elapsed time for the laser. This is used to make the laser sweep back and forth.
+        public float SweepWidth; // How far back and forth the laser sweeps.
+        public TargetInfo TargetInfo = null;
+
+
+
+        public void Activate(TargetInfo targetInfo)
+        {
+            Debug.Log("ACTIVATE");
+            Laser.SetActive(true);
+            Laser.gameObject.GetComponent<AudioSource>().Play();
+            LaserEndPoint.SetActive(true);
+            SweepTimer = 2f;
+            TargetInfo = targetInfo;           
+        }
+
+        public void Deactivate()
+        {
+            Debug.Log("DEACTIVATE");
+            Laser.gameObject.GetComponent<AudioSource>().Stop();
+            Laser.SetActive(false);
+            LaserEndPoint.SetActive(false);
+            SweepTimer = 0f;
+            TargetInfo = null;
+        }
+    }
 }
+
+
