@@ -20,8 +20,8 @@ MonoBehaviour:
   Range: 2
   AOE_Range: 2
   FireRate: 1
-  CoolDown: 0
-  UpgradeCost: 0
-  Upgrade: 
+  CoolDown: 4
+  UpgradeCost: 4
+  Upgrade: Spawns more minions
   Special: Spawns minions to distract cats
   Description: Call upon your non-allergic friends to help fend off the cats
