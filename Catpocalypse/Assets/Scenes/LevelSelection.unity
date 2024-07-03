@@ -16381,7 +16381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1541960114
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16427,7 +16427,9 @@ MonoBehaviour:
   _nonAllergicTowerData: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
   _scrapText: {fileID: 278926329}
   _towerUpgradeDescription: {fileID: 1610864763}
-  _maxUpgrades: 2
+  _maxTowerUpgrades: 2
+  _maxHealthUpgrades: 2
+  _maxRewardUpgrades: 2
 --- !u!114 &1541960117
 MonoBehaviour:
   m_ObjectHideFlags: 0

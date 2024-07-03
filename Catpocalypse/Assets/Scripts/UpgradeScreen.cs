@@ -70,6 +70,10 @@ public class UpgradeScreen : MonoBehaviour
         }
         //_towerUpgrade.onClick.AddListener(() => UpgradeTower(_towerDropdown.value));
     }
+    private void Update()
+    {
+        _scrapText.text = "Scrap: " + _playerUpgradeData.Scrap;
+    }
     public void UpdateTowerButtonText()
     {
         //_towerUpgrade.GetComponentInChildren<TextMeshProUGUI>().text ="Upgrade " + _towerSelectedText.text;
