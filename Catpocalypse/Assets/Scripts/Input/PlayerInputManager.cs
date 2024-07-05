@@ -61,13 +61,12 @@ public class PlayerInputManager : MonoBehaviour
     /// </summary>
     private void GetInputActions()
     {
-        if(_Robot != null)
-        {
+        
             _Robot_FireProjectileAction = _PlayerInputComponent.actions["Robot - Fire Projectile"];
             _Robot_MovementAction = _PlayerInputComponent.actions["Robot - Movement"];
             _Robot_ToggleControlAction = _PlayerInputComponent.actions["Robot - Toggle Control"];
             _PanCameraAction = _PlayerInputComponent.actions["Pan Camera"];
-        }
+        
         
     }
 
@@ -76,8 +75,7 @@ public class PlayerInputManager : MonoBehaviour
     /// </summary>
     private void UpdateInputValues()
     {
-        if (_Robot != null)
-        {
+     
             if (_Robot.IsActive)
             {
                 // The robot is active, so set the PanCamera value to zero to disable movement of the main game camera while piloting the robot.
@@ -94,7 +92,7 @@ public class PlayerInputManager : MonoBehaviour
                 Robot_ToggleControl = _Robot_ToggleControlAction.WasPerformedThisFrame(); // We don't set this one to false here, as we want this action to still work when the robot is inactive.
                 PanCamera = _PanCameraAction.ReadValue<Vector2>();
             }
-        }
+        
        
     }
 

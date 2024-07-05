@@ -70,7 +70,7 @@ MonoBehaviour:
   - {fileID: 265189496869523864}
   - {fileID: 7026091286525087815}
   - {fileID: 8652873599773914154}
-  person: {fileID: 7827236959392879461, guid: 1ea39eb69ec1d4a41837559853048c7a, type: 3}
+  person: {fileID: 3328012633065954755, guid: 5ed7c0ae560f6b74382cccb1ec070559, type: 3}
   Enabled: 1
 --- !u!23 &4253721149309096944
 MeshRenderer:
