@@ -390,8 +390,8 @@ public class LaserPointerTower : Tower
                     _Lasers[i].Laser.GetComponent<LineRenderer>().SetPositions(linePositions);
 
 
-                    // This is commented out since laser should no longer do damage.
-                    _Lasers[i].TargetInfo.TargetCat.GetComponent<CatBase>().DistractCat(distractValue, this);
+                    // Do damage to the cat. We multiply by Time.deltaTime so that the tower's distraction value is per-second.
+                    _Lasers[i].TargetInfo.TargetCat.GetComponent<CatBase>().DistractCat(distractValue * Time.deltaTime, this);
                 }
 
             }

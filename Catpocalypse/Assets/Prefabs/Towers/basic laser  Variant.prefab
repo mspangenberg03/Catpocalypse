@@ -244,7 +244,7 @@ MonoBehaviour:
   buildCost: 150
   refundPercentage: 0.85
   range: {fileID: 7869331787080667454}
-  distractValue: 1
+  distractValue: 5
   numberOfTargets: 0
   targets: []
   towerLevel: 1
