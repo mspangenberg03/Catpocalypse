@@ -20,9 +20,9 @@ MonoBehaviour:
   Range: 2
   AOE_Range: 4
   FireRate: 2
-  CoolDown: 1
-  UpgradeCost: 0
-  Upgrade: None
+  CoolDown: 0
+  UpgradeCost: 5
+  Upgrade: Adds more lasers
   Special: The tower's laser pointer can distract a specified type of cat to another
     lane/road!
   Description: 'The laser tower deals no distraction and starts already built on
