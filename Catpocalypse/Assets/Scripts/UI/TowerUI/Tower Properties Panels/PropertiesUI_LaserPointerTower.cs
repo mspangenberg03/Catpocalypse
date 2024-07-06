@@ -63,7 +63,7 @@ public class PropertiesUI_LaserPointerTower : MonoBehaviour
         GetTypesWithLaserTowerCanTargetAttribute(Assembly.GetExecutingAssembly());
 
         // Get the list of redirection paths that are available at the selected laser pointer tower.
-        GetRedirectPathOptions();
+        //GetRedirectPathOptions();
 
 
         PopulateUI();
@@ -85,20 +85,27 @@ public class PropertiesUI_LaserPointerTower : MonoBehaviour
         foreach (Type t in _TargetableCatTypes)
             _TargetTypeDropdown.options.Add(new TMP_Dropdown.OptionData(t.Name));
 
+        _TargetTypeDropdown.options.Add(new TMP_Dropdown.OptionData("All Cats"));
+
         SelectCurrentValuesInUI();
     }
 
     private void SelectCurrentValuesInUI()
     {
-        _TargetTypeDropdown.value = _TargetableCatTypes.IndexOf(_LaserPointerTower.TargetCatType);
-        _SelectedPathIndex = _LaserPointerTower.SelectedPathIndex;
+        if (_LaserPointerTower.TargetCatType == null)
+            _TargetTypeDropdown.value = _TargetTypeDropdown.options.Count - 1; 
+        else
+            _TargetTypeDropdown.value = _TargetableCatTypes.IndexOf(_LaserPointerTower.TargetCatType);
+        
+
+        //_SelectedPathIndex = _LaserPointerTower.SelectedPathIndex;
 
         UpdateSelectedPathArrow();
     }
 
     private void UpdateSelectedPathArrow()
     {
-        _LaserPointerTower.SetArrowRotation(_RedirectPathOptions[_SelectedPathIndex].DirectionAngle);
+        //_LaserPointerTower.SetArrowRotation(_RedirectPathOptions[_SelectedPathIndex].DirectionAngle);
     }
 
     private void GetTypesWithLaserTowerCanTargetAttribute(Assembly assembly)
@@ -157,7 +164,15 @@ public class PropertiesUI_LaserPointerTower : MonoBehaviour
 
     public void OnTargetTypeChanged()
     {
-        _LaserPointerTower.TargetCatType = _TargetableCatTypes[_TargetTypeDropdown.value];
+        if (_TargetTypeDropdown.options[_TargetTypeDropdown.value].text == "All Cats")
+        {
+            foreach (Type t in _TargetableCatTypes)
+                _LaserPointerTower.TargetCatType = null;
+        }
+        else
+        {
+            _LaserPointerTower.TargetCatType = _TargetableCatTypes[_TargetTypeDropdown.value];
+        }
     }
 
     public void OnPreviousRedirectPathButtonClicked()

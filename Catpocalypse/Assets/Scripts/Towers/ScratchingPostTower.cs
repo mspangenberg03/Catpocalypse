@@ -29,10 +29,13 @@ public class ScratchingPostTower : Tower
     public int postCount = 0;
     private float IrCooldown = 8;
     private bool ISPReady = false;
-    private void Start()
+
+
+    private new void Start()
     {
-        
+        base.Start();
     }
+
     public void Update()
     {
        

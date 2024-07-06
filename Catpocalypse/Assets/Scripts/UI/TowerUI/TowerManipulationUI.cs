@@ -29,10 +29,6 @@ public class TowerManipulationUI : MonoBehaviour
     [SerializeField]
     private Color _RallyPointButtonTint;
     
-    [Tooltip("This is the prefab used to create the ghost rally point in rally point edit mode.")]
-    [SerializeField]
-    private GameObject _RallyPointPrefab;
-
     private TowerBase currentSelectedBase;
 
     public bool inUse;
@@ -69,10 +65,10 @@ public class TowerManipulationUI : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
                 {
-                    // Is this position within range of the tower?
-                    if (ValidateNewRallyPoint(hit.point))
+                    // Is this position within range of the tower and on a path?
+                    if (ValidateNewRallyPoint(hit))
                     {
-                        currentSelectedBase.tower.RallyPointPosition = new Vector3(hit.point.x, 0f, hit.point.z);
+                        currentSelectedBase.tower.SetRallyPoint(new Vector3(hit.point.x, 0f, hit.point.z));
                         currentSelectedBase.ShowRallyPoint();
 
                         _TimeSinceLastRallyPointSet = 0f;
@@ -214,9 +210,17 @@ public class TowerManipulationUI : MonoBehaviour
     /// <summary>
     /// Checks if the user clicked in a valid spot for the new rally point.
     /// </summary>
-    private bool ValidateNewRallyPoint(Vector3 newRallyPoint)
+    private bool ValidateNewRallyPoint(RaycastHit hit)
     {
-        float distance = Vector3.Distance(currentSelectedBase.transform.position, newRallyPoint);
+        float distance = Vector3.Distance(currentSelectedBase.transform.position, hit.point);
+
+
+        // Is this point on a path?
+        int layerMask = 1 << hit.collider.gameObject.layer;
+        if ((layerMask & LayerMask.GetMask("Pathing")) == 0)
+            return false;
+
+
         // Is this point within range of the tower?
         if (distance <= currentSelectedBase.tower.RangeRadius)
             return true;

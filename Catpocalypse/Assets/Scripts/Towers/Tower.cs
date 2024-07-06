@@ -5,6 +5,7 @@ using System.Linq;
 
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
+using static UnityEngine.Rendering.DebugUI;
 
 
 [RequireComponent(typeof(StateMachine))]
@@ -34,7 +35,7 @@ public class Tower : MonoBehaviour
 
     // This property is currently only used by the laser pointer tower, but I put it
     // here in Tower in case any other tower needs it later.
-    protected Type _TargetCatType = typeof(NormalCat);
+    protected Type _TargetCatType = null; // null means target all types of cats. This was previously set to: typeof(NormalCat); to target only normal cats.
 
 
     protected StateMachine _stateMachine;
@@ -49,10 +50,19 @@ public class Tower : MonoBehaviour
     // This just caches the default rally point position for this tower.
     protected Vector3 _DefaultRallyPoint;
 
+    // The current rally point for this tower.
+    protected Vector3 _RallyPoint;
+
+    // Holds a list of all WayPoints that are within this tower's range.
+    protected List<WayPoint> _WayPointsInRange = new List<WayPoint>();
+
+    // The closest waypoint to the Rally Point. Will be null if no WayPoints are within the tower's range.
+    protected WayPoint _ClosestWayPointToRP;
+
     
 
 
-public float FireRate
+    public float FireRate
     {
         set 
         { 
@@ -66,14 +76,14 @@ public float FireRate
 
 
 
-    private void Awake()
+    protected void Awake()
     {
         RangeRadius = range.radius;
         
         FindDefaultRallyPoint();        
     }
 
-    private void Start()
+    protected void Start()
     {
         _cutenessManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerCutenessManager>();
 
@@ -96,7 +106,7 @@ public float FireRate
         }
     }
     
-    private void OnEnable()
+    protected void OnEnable()
     {
         // Update the RadiusRange property with the original range before we adjust it.
         RangeRadius = range.radius;
@@ -175,7 +185,7 @@ public float FireRate
 
 
         // Tell state machine to write in the debug console every time it exits or enters a state.
-        _stateMachine.EnableDebugLogging = true;
+        //_stateMachine.EnableDebugLogging = true;
 
         // Set the starting state.
         _stateMachine.SetState(idleState);
@@ -196,7 +206,19 @@ public float FireRate
     /// <param name="target">The target game object to verify and add to the list.</param>
     protected virtual void OnNewTargetEnteredRange(GameObject target)
     {
-        targets.Add(target);
+        if (TargetCatType == null) // All cats
+        {
+            targets.Add(target);
+        }
+        else // A specific cat type is selected, so target only that cat type.
+        {
+            CatBase cat = target.GetComponent<CatBase>();
+            if (cat != null && cat.GetType() == TargetCatType)
+            {
+                targets.Add(target);
+            }
+        }
+
     }
 
     /// <summary>
@@ -280,7 +302,7 @@ public float FireRate
             _DefaultRallyPoint = wayPoint.transform.position;
 
             // Set the current rally point equal to the default.
-            RallyPointPosition = _DefaultRallyPoint;
+            _RallyPoint = _DefaultRallyPoint;
 
 
             return true;
@@ -291,12 +313,13 @@ public float FireRate
     }
 
     /// <summary>
-    /// Finds the nearest WayPoint within the tower's range.
+    /// Finds the nearest WayPoint within the tower's range, and fills in the _WayPointsInRange list in the same loop.
     /// </summary>
     /// <param name="wayPoint">This out parameter returns the nearest WayPoint within the tower's range, or null if none was found.</param>
     /// <returns>True if the nearest WayPoint was found, or false if none were in range.</returns>
     private bool FindNearestWayPoint(out WayPoint wayPoint)
     {
+        _WayPointsInRange.Clear();
         wayPoint = null;
 
         // Find all WayPoints that are within this tower's range.
@@ -319,22 +342,28 @@ public float FireRate
         WayPoint closestWayPoint = null;
         foreach (RaycastHit hit in hits)
         {
-            float distance = Vector3.Distance(transform.parent.parent.position, hit.transform.position);
-            if (distance < closestDistance)
+            WayPoint p = hit.collider.GetComponent<WayPoint>();
+            if (p != null)
             {
-                WayPoint p = hit.collider.GetComponent<WayPoint>();
-                if (p != null)
+                _WayPointsInRange.Add(p);
+
+                float distance = Vector3.Distance(transform.parent.parent.position, hit.transform.position);
+                if (distance < closestDistance)
                 {
-                    closestDistance = distance;
-                    closestWayPoint = p;
-                }
-                else
-                {
-                    Debug.LogWarning($"WayPoint \"{hit.collider.name}\" does not have a WayPoint component. Skipping it.", gameObject);
-                    continue;
+                    if (p != null)
+                    {
+                        closestDistance = distance;
+                        closestWayPoint = p;
+                    }
                 }
             }
-        }
+            else
+            {
+                Debug.LogWarning($"WayPoint \"{hit.collider.name}\" does not have a WayPoint component. Skipping it.", gameObject);
+                continue;
+            }
+
+        } // end foreach
 
 
         // Return the nearest WayPoint via the out parameter.
@@ -375,6 +404,38 @@ public float FireRate
         targets.Clear();
     }
 
+    public Vector3 GetRallyPoint()
+    {
+        return _RallyPoint;
+    }
+
+    public void SetRallyPoint(Vector3 newRallyPoint)
+    {
+        bool changed = true;
+        if (_RallyPoint == newRallyPoint)
+            changed = false;
+
+
+        if (changed)
+        {
+            _RallyPoint = newRallyPoint;
+
+            _ClosestWayPointToRP = WayPointUtils.FindNearestWayPointTo(_RallyPoint);
+
+            OnRallyPointChanged();
+        }
+    }
+
+
+    /// <summary>
+    /// This function is called whenever the tower's rally point gets changed.
+    /// Subclasses can override this function to do any extra logic they need to happen whenever the rally point changes.
+    /// </summary>
+    protected virtual void OnRallyPointChanged()
+    {
+
+    }
+
 
     public float BuildCost { get { return buildCost; } }
     public float DistractValue { set { distractValue = value; } get { return distractValue; } }
@@ -382,8 +443,6 @@ public float FireRate
 
     public TowerBase ParentTowerBase { get; set; }
 
-
-    public Vector3 RallyPointPosition { get; set; }
 
     /// <summary>
     /// The radius of the tower's range.
@@ -398,10 +457,12 @@ public float FireRate
         get { return _TargetCatType; }
         set 
         {
+            /*
             if (!typeof(CatBase).IsAssignableFrom(value))
             {
                 throw new Exception($"The passed in cat type is not a subclass of CatBase! The tower in question is \"{gameObject.name}\" of type {this.GetType()}");
             }
+            */
 
             _TargetCatType = value; 
         }

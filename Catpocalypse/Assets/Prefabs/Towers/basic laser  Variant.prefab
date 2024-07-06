@@ -226,7 +226,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 6
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8449678034992396974
 MonoBehaviour:
@@ -253,7 +253,7 @@ MonoBehaviour:
   fireRate: 0
   laserPrefab: {fileID: 5513968051566747971, guid: b91d010c08c2b284bb79cc19087d05df, type: 3}
   laserEndPointPrefab: {fileID: 6133470768189819576, guid: 2ebd2f586f92cd84b9cabdbdccc3eb68, type: 3}
-  MaxLasers: 1
+  MaxLasers: 3
   arrowPrefab: {fileID: 4243881067050464554, guid: 6115cbf542c30d64881177fe59736afa, type: 3}
   laserSpawn: {fileID: 9041661084162585967}
   _PathJunctionDetectionRadius: 10

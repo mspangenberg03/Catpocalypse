@@ -256,7 +256,7 @@ public class TowerBase : MonoBehaviour
         // Then we multiply by 2f since this value is a radius.
         float scale = (tower.RangeRadius / transform.localScale.x) * 2f;
         // The y scale here is set to 50f to make the capsule's vertical dimension much larger than the other two. This way it doesn't accidentally highlight the top of the tower if it intersects with it.
-        _TowerRangeOutline.transform.localScale = new Vector3(scale, 50f, scale);
+        _TowerRangeOutline.transform.localScale = new Vector3(scale, 1000f, scale);
 
 
         _TowerRangeOutline.SetActive(true);
@@ -274,11 +274,14 @@ public class TowerBase : MonoBehaviour
 
 
         // Calculate vector from tower to rally point.
-        Vector3 direction = tower.RallyPointPosition - transform.position;
+        Vector3 direction = tower.GetRallyPoint() - transform.position;
         direction.y = _RallyPointVerticalOffset;
 
         // Move the rally point visual to the correct location.
         _RallyPointGameObject.transform.position = transform.position + direction;
+
+        // Make sure the flag has no rotation at all. This way it always faces toward the camera. This won't matter if we replace it with a model, or maybe a symbol laid flat on the ground later.
+        _RallyPointGameObject.transform.rotation = Quaternion.identity;
 
         // Make the rally point object visible.
         _RallyPointGameObject.SetActive(true);
