@@ -1280,7 +1280,7 @@ GameObject:
   - component: {fileID: 203693406595441866}
   - component: {fileID: 3446500016540169783}
   m_Layer: 5
-  m_Name: CutenessLabel
+  m_Name: CutenessLabel (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
