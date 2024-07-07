@@ -19,8 +19,10 @@ public class NonAllergicTower : Tower
     PlayerCutenessManager cutenessManager;
 
     // Start is called before the first frame update
-    void Start()
+    private new void Start()
     {
+        base.Start();
+
         cutenessManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerCutenessManager>();
         //Disables the tower if it is built during the Non-Allergic Strike cuteness challenge
         if (cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.NonAllergicStrike)
@@ -79,7 +81,7 @@ public class NonAllergicTower : Tower
             if (peopleSpawned < numOfPeople)
             {
 
-                GameObject newPerson = Instantiate(person, spawnPoint.position, Quaternion.identity, gameObject.transform);
+                GameObject newPerson = Instantiate(person, _RallyPoint, Quaternion.identity, gameObject.transform);
                 //personList.Add(newPerson);
 
                 peopleSpawned++;

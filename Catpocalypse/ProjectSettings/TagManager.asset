@@ -14,6 +14,7 @@ TagManager:
   - TowerBase
   - Waypoint
   - Tower
+  - TowerRangeOutline
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Projectile
   - LevelSelectScreenLevelTiles
   - Robot
-  - 
+  - Pathing
   - 
   - 
   - 

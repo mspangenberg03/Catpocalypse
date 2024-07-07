@@ -10,7 +10,7 @@ using UnityEngine;
 /// This class allows us to traverse the waypoint network and find out if a given waypoint comes before or after another one.
 /// The LaserTower uses this to find out where each potential target is in relation to the associated path junction.
 /// </summary>
-public static class WaypointUtils
+public static class WayPointUtils
 {
     private static Dictionary<WayPoint, WayPointInfo> _WayPointInfoLookup; // A lookup table that gives you a list of the waypoints that reference the passed in way point.
 
@@ -212,10 +212,43 @@ public static class WaypointUtils
     }
 
     /// <summary>
+    /// Finds the nearest WayPoint to the specified position.
+    /// </summary>
+    /// <param name="position">The position to find the closest WayPoint to.</param>
+    /// <returns>The closest WayPoint to the specified position, or null if there are no WayPoints in the scene.</returns>
+    public static WayPoint FindNearestWayPointTo(Vector3 position)
+    {
+        if (!_IsInitialized)
+            Init();
+
+        if (_AllWayPointsInScene.Count <= 0)
+            return null;
+
+
+        float smallestDistance = float.MaxValue;
+        WayPoint nearestWayPoint = null;
+        for (int i = 0; i < _AllWayPointsInScene.Count; i++)
+        {
+            WayPoint curWayPoint = _AllWayPointsInScene[i];
+
+            float dist = Vector3.Distance(position, curWayPoint.transform.position);
+            if (dist < smallestDistance)
+            {
+                smallestDistance = dist;
+                nearestWayPoint = curWayPoint;
+            }
+
+        } // end for i
+
+
+        return nearestWayPoint;
+    }
+
+    /// <summary>
     /// This recursive function starts at the specified start point, and then walks the path
     /// until it reaches a dead end or a junction. If it reaches a junction, it will call itself
     /// for each path branch. It will also return if it encounters a waypoint that has already
-    /// been visited to prevent any scenario where it could get stuck going in circles for ever.
+    /// been visited to prevent any scenario where it could get stuck going in circles forever.
     /// </summary>
     /// <param name="walkPathInfo">An object containing data that needs to persist between the recursive calls of this function.</param>
     /// <returns>A list of WalkPathInfos (one for each possible path encountered).</returns>

@@ -49,14 +49,18 @@ public class CucumberTower : Tower
     
     private bool canSCBeFired = false;
     private bool firingSC = false;
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
+
         _CurrentAimDirection = transform.forward;
     }
 
     // Start is called before the first frame update
-    void Start()
+    private new void Start()
     {
+        base.Start();
+
         StartCoroutine(Aim());
     }
 

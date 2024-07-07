@@ -60,14 +60,11 @@ public class PlayerInputManager : MonoBehaviour
     /// This function gets a reference to each InputAction in the PlayerInputActions asset.
     /// </summary>
     private void GetInputActions()
-    {
-        
-            _Robot_FireProjectileAction = _PlayerInputComponent.actions["Robot - Fire Projectile"];
-            _Robot_MovementAction = _PlayerInputComponent.actions["Robot - Movement"];
-            _Robot_ToggleControlAction = _PlayerInputComponent.actions["Robot - Toggle Control"];
-            _PanCameraAction = _PlayerInputComponent.actions["Pan Camera"];
-        
-        
+    {        
+        _Robot_FireProjectileAction = _PlayerInputComponent.actions["Robot - Fire Projectile"];
+        _Robot_MovementAction = _PlayerInputComponent.actions["Robot - Movement"];
+        _Robot_ToggleControlAction = _PlayerInputComponent.actions["Robot - Toggle Control"];
+        _PanCameraAction = _PlayerInputComponent.actions["Pan Camera"];
     }
 
     /// <summary>
@@ -75,8 +72,10 @@ public class PlayerInputManager : MonoBehaviour
     /// </summary>
     private void UpdateInputValues()
     {
-        if(_Robot is not null)
+        // Is the robot present in this scene?
+        if (_Robot != null)
         {
+            // The robot is present, so update it's user input values appropriately based on whether it is activated or not.
             if (_Robot.IsActive)
             {
                 // The robot is active, so set the PanCamera value to zero to disable movement of the main game camera while piloting the robot.
@@ -94,19 +93,12 @@ public class PlayerInputManager : MonoBehaviour
                 PanCamera = _PanCameraAction.ReadValue<Vector2>();
             }
         }
-        
-        
-       
     }
 
     public void PressedPause()
     {
-        if(pauseMenuPanel != null)
-        {
-            pauseMenuPanel.gameObject.SetActive(true);
-            pauseMenuPanel.OnPauseGame();
-        }
-
+        pauseMenuPanel.gameObject.SetActive(true);
+        pauseMenuPanel.OnPauseGame();
     }
 
 

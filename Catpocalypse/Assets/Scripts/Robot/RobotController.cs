@@ -127,7 +127,7 @@ public class RobotController : MonoBehaviour
 
         _PlayerInputManager = FindObjectOfType<PlayerInputManager>();
         _Rigidbody = GetComponent<Rigidbody>();
-        _RobotVirtualCamera = GameObject.Find(ROBOT_CAMERA_GAMEOBJECT_NAME).GetComponent<CinemachineVirtualCamera>();
+        _RobotVirtualCamera = transform.Find(ROBOT_CAMERA_GAMEOBJECT_NAME).GetComponent<CinemachineVirtualCamera>();
         _WaveManager = FindObjectOfType<WaveManager>();
 
         // Disable the robot's camera to force it to start with the main game camera.
