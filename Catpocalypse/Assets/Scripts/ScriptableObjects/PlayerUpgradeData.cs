@@ -60,4 +60,28 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _healthUpgradeCost; }
         set { _healthUpgradeCost = value; }
     }
+    private int _currentTowerUpgrade = 0;
+    public int CurrentTowerUpgrade
+    {
+        get { return _currentTowerUpgrade; }
+        set { _currentTowerUpgrade = value; }
+    }
+    private int _currentRewardUpgrade = 0;
+    public int CurrentRewardUpgrade
+    {
+        get { return _currentRewardUpgrade; }
+        set { _currentRewardUpgrade = value; }
+    }
+    private int _currentHealthUpgrade = 0;
+    public int CurrentHealthUpgrade
+    {
+        get { return _currentHealthUpgrade; }
+        set { _currentHealthUpgrade = value; }
+    }
+    private int _index = 0;
+    public int Index
+    {
+        get { return _index; }
+        set { _index = value; }
+    }
 }

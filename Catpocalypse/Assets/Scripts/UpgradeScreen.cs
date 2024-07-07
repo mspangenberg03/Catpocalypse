@@ -29,28 +29,31 @@ public class UpgradeScreen : MonoBehaviour
     
 
     private int _index = 0;
-
+    [Header("Descriptive text fields")]
     [SerializeField]
     private TextMeshProUGUI _scrapText;
     [SerializeField]
     private TextMeshProUGUI _towerUpgradeDescription;
+    [SerializeField]
+    private TextMeshProUGUI _healthUpgradeDescription;
+    [SerializeField]
+    private TextMeshProUGUI _rewardUpgradeDescription;
+    [SerializeField]
+    private TextMeshProUGUI _notEnoughScrap;
 
+    [Header("Max Upgrades")]
     [SerializeField,Tooltip("How many tower upgrades can the player get")]
     private int _maxTowerUpgrades;
 
     //How many upgrades can the player get
-    private int _currentTowerUpgrades = 0;
     [SerializeField, Tooltip("How many health upgrades can the player get")]
     private int _maxHealthUpgrades;
-    private int _currentHealthUpgrades = 0;
     [SerializeField, Tooltip("How many reward upgrades can the player get")]
     private int _maxRewardUpgrades;
-    private int _currentRewardUpgrades = 0;
     private void Start()
     {
-        _index = 0;//PlayerPrefs.GetInt("index");
-        //_towerDropdown = _towerSelectedText.transform.parent.gameObject.GetComponent<TMP_Dropdown>();
-        switch (_index)
+        //_index = _playerUpgradeData.CurrentTowerUpgrade;//PlayerPrefs.GetInt("index");
+        switch (_playerUpgradeData.Index)
         {
             case 0:
                 _towerUpgradeDescription.text = "Reduce Cucumber tower build cost";
@@ -68,75 +71,88 @@ public class UpgradeScreen : MonoBehaviour
                 _towerUpgradeDescription.text = "Increase the range of the Scratching Post Tower";
                 break;
         }
-        //_towerUpgrade.onClick.AddListener(() => UpgradeTower(_towerDropdown.value));
+        _towerUpgradeDescription.text += "\nCost: " + _playerUpgradeData.TowerUpgradeCost;
+        _healthUpgradeDescription.text = "Give yourself more health\nCost: "+_playerUpgradeData.HealthUpgradeCost;
+        _rewardUpgradeDescription.text = "Increase the amount of money you get from distracting cats\n Cost: "+_playerUpgradeData.RewardUpgradeCost;
     }
     private void Update()
     {
         _scrapText.text = "Scrap: " + _playerUpgradeData.Scrap;
     }
-    public void UpdateTowerButtonText()
-    {
-        //_towerUpgrade.GetComponentInChildren<TextMeshProUGUI>().text ="Upgrade " + _towerSelectedText.text;
-    }
-
     //Upgrades the tower that is selected
     public void UpgradeTower()
     {
         //Debug.Log("Upgrade Tower called");
-        if(_currentTowerUpgrades < _maxTowerUpgrades && _playerUpgradeData.Scrap > _playerUpgradeData.TowerUpgradeCost)
+        if(_playerUpgradeData.CurrentTowerUpgrade < _maxTowerUpgrades && _playerUpgradeData.Scrap >= _playerUpgradeData.TowerUpgradeCost)
         {
             _playerUpgradeData.Scrap -= _playerUpgradeData.TowerUpgradeCost;
-            switch (_index)
+            _notEnoughScrap.gameObject.SetActive(false);
+            switch (_playerUpgradeData.Index)
             {
                 case 0: //Cucumber tower
                     _cucumberTowerData.BuildCost /= 1.25f;
                     _towerUpgradeDescription.text = "Increase Yarn Thrower firerate";
-                    _index++;
+                    _playerUpgradeData.Index++;
                     break;
                 case 1://Yarn Thrower
                     _yarnThrowerTowerData.FireRate /= 1.25f;
                     _towerUpgradeDescription.text = "Increase the range and Distraction value of the String Waver Tower";
-                    _index++;
+                    _playerUpgradeData.Index++;
                     break;
                 case 2: //String Waver
                     _stringWaverTowerData.DistractValue *= 1.25f;
                     _stringWaverTowerData.Range *= 1.25f;
                     _towerUpgradeDescription.text = "Increase the distract value of the Non-Allergic tower";
-                    _index++;
+                    _playerUpgradeData.Index++;
                     break;
                 case 3: //Non-Allergic
                     _nonAllergicTowerData.DistractValue *= 1.25f;
                     _towerUpgradeDescription.text = "Increase the range of the Scratching Post Tower";
-                    _index++;
+                    _playerUpgradeData.Index++;
                     break;
                 case 4: //Scratching post
                     _scratchingPostTowerData.Range *= 1.15f;
                     _towerUpgradeDescription.text = "Reduce Cucumber tower build cost";
-                    _index = 0;
-                    _currentTowerUpgrades++;
+                    _playerUpgradeData.Index = 0;
+                    _playerUpgradeData.CurrentTowerUpgrade++;
                     break;
             }
             PlayerPrefs.SetInt("index", _index);
+            _towerUpgradeDescription.text += "\nCost: " + _playerUpgradeData.TowerUpgradeCost;
         }
-        
+        else if(_playerUpgradeData.Scrap < _playerUpgradeData.TowerUpgradeCost)
+        {
+            _notEnoughScrap.gameObject.SetActive(true);
+        }
+
     }
     public void UpgradeHealth()
     {
-        if(_playerUpgradeData.Scrap > _playerUpgradeData.HealthUpgradeCost && _currentHealthUpgrades < _maxHealthUpgrades)
+        if(_playerUpgradeData.Scrap >= _playerUpgradeData.HealthUpgradeCost && _playerUpgradeData.CurrentHealthUpgrade < _maxHealthUpgrades)
         {
+            _notEnoughScrap.gameObject.SetActive(false);
             _playerUpgradeData.MaxHealth += 2;
             _playerUpgradeData.Scrap -= _playerUpgradeData.HealthUpgradeCost;
-            _currentHealthUpgrades++;
+            _playerUpgradeData.CurrentHealthUpgrade++;
+        }
+        else if(_playerUpgradeData.Scrap < _playerUpgradeData.HealthUpgradeCost)
+        {
+            _notEnoughScrap.gameObject.SetActive(true);
         }
         
     }
     public void UpgradeEXPReward()
     {
-        if(_playerUpgradeData.Scrap > _playerUpgradeData.RewardUpgradeCost && _currentRewardUpgrades < _maxRewardUpgrades)
+        if(_playerUpgradeData.Scrap >= _playerUpgradeData.RewardUpgradeCost && _playerUpgradeData.CurrentRewardUpgrade < _maxRewardUpgrades)
         {
+            _notEnoughScrap.gameObject.SetActive(false);
             _playerUpgradeData.RewardMultiplier += .25f;
             _playerUpgradeData.Scrap -= _playerUpgradeData.RewardUpgradeCost;
-            _currentRewardUpgrades++;
+            _playerUpgradeData.CurrentRewardUpgrade++;
+        }
+        else if(_playerUpgradeData.Scrap < _playerUpgradeData.RewardUpgradeCost)
+        {
+            _notEnoughScrap.gameObject.SetActive(true);
         }
         
     }
