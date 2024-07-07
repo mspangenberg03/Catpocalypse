@@ -72,21 +72,26 @@ public class PlayerInputManager : MonoBehaviour
     /// </summary>
     private void UpdateInputValues()
     {
-        if (_Robot.IsActive)
+        // Is the robot present in this scene?
+        if (_Robot != null)
         {
-            // The robot is active, so set the PanCamera value to zero to disable movement of the main game camera while piloting the robot.
-            Robot_FireProjectile = _Robot_FireProjectileAction.WasPerformedThisFrame();
-            Robot_Movement = _Robot_MovementAction.ReadValue<Vector2>();
-            Robot_ToggleControl = _Robot_ToggleControlAction.WasPerformedThisFrame();
-            PanCamera = Vector2.zero;
-        }
-        else
-        {
-            //  The robot is not active, so clear the robot input values to disable the robot controls.
-            Robot_FireProjectile = false;
-            Robot_Movement = Vector2.zero;
-            Robot_ToggleControl = _Robot_ToggleControlAction.WasPerformedThisFrame(); // We don't set this one to false here, as we want this action to still work when the robot is inactive.
-            PanCamera = _PanCameraAction.ReadValue<Vector2>();
+            // The robot is present, so update it's user input values appropriately based on whether it is activated or not.
+            if (_Robot.IsActive)
+            {
+                // The robot is active, so set the PanCamera value to zero to disable movement of the main game camera while piloting the robot.
+                Robot_FireProjectile = _Robot_FireProjectileAction.WasPerformedThisFrame();
+                Robot_Movement = _Robot_MovementAction.ReadValue<Vector2>();
+                Robot_ToggleControl = _Robot_ToggleControlAction.WasPerformedThisFrame();
+                PanCamera = Vector2.zero;
+            }
+            else
+            {
+                //  The robot is not active, so clear the robot input values to disable the robot controls.
+                Robot_FireProjectile = false;
+                Robot_Movement = Vector2.zero;
+                Robot_ToggleControl = _Robot_ToggleControlAction.WasPerformedThisFrame(); // We don't set this one to false here, as we want this action to still work when the robot is inactive.
+                PanCamera = _PanCameraAction.ReadValue<Vector2>();
+            }
         }
     }
 

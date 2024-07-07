@@ -22,6 +22,11 @@ public class CatBase : MonoBehaviour
     public static event EventHandler OnCatDied;
     public static event EventHandler OnCatReachGoal;
     
+
+    public event EventHandler<CatReachedNextWayPointEventArgs> OnCatReachedNextWayPoint;
+    
+
+    
     public CatTypes _catType;
     [Tooltip("The cuteness value is how much this type of cat increases the cuteness meter.")]
     [Min(0)]
@@ -166,6 +171,12 @@ public class CatBase : MonoBehaviour
 
             if (HasReachedDestination())
             {
+                OnCatReachedNextWayPoint?.Invoke(this,
+                    new CatReachedNextWayPointEventArgs
+                    {
+                        Cat = this
+                    });
+
                 GetNextWaypoint();
 
                 // Check for null in case we are already at the last WayPoint, as GetNextWayPoint()
@@ -339,4 +350,11 @@ public class CatBase : MonoBehaviour
             _NextWayPoint = value; 
         }
     }
+
+    public float WayPointArrivedDistance { get { return _WayPointArrivedDistance; } }
+}
+
+public class CatReachedNextWayPointEventArgs : EventArgs
+{
+    public CatBase Cat;
 }

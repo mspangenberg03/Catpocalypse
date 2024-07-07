@@ -6,8 +6,10 @@ public class StringWaverTower : Tower
 {
 
     // Start is called before the first frame update
-    void Start()
+    private new void Start()
     {
+        base.Start();
+
         StartCoroutine(DistractCat());
     }
 

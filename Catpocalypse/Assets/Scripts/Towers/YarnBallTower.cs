@@ -11,9 +11,11 @@ public class YarnBallTower : Tower
     [SerializeField] private float throwRange = 5f;
     private bool canThrow = true;
     private float sizeMultiplier = 1;
-    
-    void Start()
+
+    private new void Start()
     {
+        base.Start();
+
         // Start the projectile throwing coroutine
         StartCoroutine(ThrowProjectiles());
     }

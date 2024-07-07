@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 
@@ -19,8 +20,9 @@ public class LaserPointerTower : Tower
     private GameObject laserPrefab; // The laser prefab to be copied
     [SerializeField]
     private GameObject laserEndPointPrefab; // The laser end point effect prefab
-    [SerializeField]
-    private int numOfLasers; // The number of lasers a tower can instantiate
+    [Tooltip("The max number of simulateous lasers this tower can have.")]
+    [SerializeField, Min(1)]
+    private int MaxLasers = 1; // The number of lasers a tower can instantiate
     [SerializeField]
     private GameObject arrowPrefab;
 
@@ -52,22 +54,23 @@ public class LaserPointerTower : Tower
     private GameObject _Arrow;
 
 
-    private List<GameObject> lasers; // The list of instantiated lasers, both active and inactive
-    private List<GameObject> laserEndPoints; // The list of instantiated end point effects for the lasers.
-    private List<float> laserSweepTimers; // Holds the elapsed time for each laser. This is used to make the laser sweep back and forth.
+    private List<LaserInfo> _Lasers;
+    private int _ActiveLasersCount; // The number of lasers that are currently active
 
-    private List<TargetInfo> _ActiveTargets;
+    /// <summary>
+    /// This holds the index of the next way point cats should visit upon reaching the path junction.
+    /// It depends upon where the Rally Point has been positioned.
+    /// A value of -1 means the cat will randomly select a direction for itself, since the rally point is before the junction point, which means it does not specify which way to go.
+    /// </summary>
+    private int _CurrentJunctionDirectionIndex = -1;
 
 
 
-    void Awake()
+    private new void Awake()
     {
-        _ActiveTargets = new List<TargetInfo>();
+        base.Awake();
 
-        lasers = new List<GameObject>();
-        laserEndPoints = new List<GameObject>();
-        laserSweepTimers = new List<float>();
-
+        _Lasers = new List<LaserInfo>();
 
         if (SelectedPathIndicatorsParent == null)
         {
@@ -82,14 +85,19 @@ public class LaserPointerTower : Tower
         }
     }
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
+
         // Find the path junction that is near this tower.
         _PathJunction = FindAssociatedPathJunction();
         if (_PathJunction == null)
-            throw new Exception("There is no path junction within range of this laser pointer tower!");
+        {
+            //throw new Exception("There is no path junction within range of this laser pointer tower!");
+            return;
+        }
 
-        // Spawn the arrow that is used to show the select path.
+        // Spawn the arrow that is used to show the selected path.
         _Arrow = Instantiate(arrowPrefab, _PathJunction.transform.position + (Vector3.up * 1f), Quaternion.identity, SelectedPathIndicatorsParent);
         _Arrow.gameObject.SetActive(false);
     }
@@ -97,18 +105,21 @@ public class LaserPointerTower : Tower
     // Update is called once per frame
     void Update()
     {
-        if(lasers.Count < numOfLasers)
+        if(_Lasers.Count < MaxLasers)
         {
             StartCoroutine(SpawnLasers());
         }
-        StartCoroutine(LaserControl());
 
 
-        if (_ActiveTargets.Count < numOfLasers)
+        //if (_ActiveLasersCount > 0)
+            LaserControl();
+
+        if (_ActiveLasersCount < MaxLasers)
             SelectTargets();
 
         
-        CheckActiveTargets();
+        if (_PathJunction != null)
+            CheckIfActiveTargetsReachedJunction();
     }
 
     protected override void InitStateMachine()
@@ -127,7 +138,7 @@ public class LaserPointerTower : Tower
         // Create and register transitions.
         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        _stateMachine.AddTransitionFromState(idleState, new Transition(activeState, () => _ActiveTargets.Count > 0));
+        _stateMachine.AddTransitionFromState(idleState, new Transition(activeState, () => _ActiveLasersCount > 0));
         _stateMachine.AddTransitionFromState(disabledState, new Transition(idleState, () => IsTargetDetectionEnabled));
 
         _stateMachine.AddTransitionFromAnyState(new Transition(disabledState, () => !IsTargetDetectionEnabled));
@@ -137,7 +148,7 @@ public class LaserPointerTower : Tower
 
 
         // Tell state machine to write in the debug console every time it exits or enters a state.
-        _stateMachine.EnableDebugLogging = true;
+        //_stateMachine.EnableDebugLogging = true;
 
         // Set the starting state.
         _stateMachine.SetState(idleState);
@@ -159,35 +170,74 @@ public class LaserPointerTower : Tower
                 continue;
             }
 
-            // Is this cat before the junction point associated with this tower?
-            WaypointUtils.WayPointCompareResults result = WaypointUtils.CompareWayPointPositions(cat.NextWayPoint, _PathJunction);
-            
-            //Debug.Log($"Result: {result}    CatNextWaypoint: \"{cat.NextWayPoint.name}\"    JunctionWayPoint: \"{_PathJunction.name}\"");
-            
-            if (result == WaypointUtils.WayPointCompareResults.A_IsBeforeB ||
-                result == WaypointUtils.WayPointCompareResults.A_And_B_AreSamePoint)
-            {
-                // Make this cat an active target for one of the lasers.
-                TargetInfo info = new TargetInfo();
-                info.TargetCat = cat;
-                if (cat.NextWayPoint == PathJunction)
-                    info.IsApproachingJunction = true;
+            if (_ActiveLasersCount >= MaxLasers)
+                break;
 
-                _ActiveTargets.Add(info);
-                
-                if (_ActiveTargets.Count >= numOfLasers)
-                    break;
+
+            // Create a TargetInfo for this cat.
+            TargetInfo targetInfo = new TargetInfo();
+            targetInfo.TargetCat = cat;
+
+            // This bypasses the check below, since that code will always fail if the laser tower is not placed near a path junction.
+            // If there is no nearby path junction, this code runs first, and immediately targets another cat as long as there is at
+            // least one inactive laser available.
+            if (_PathJunction == null)
+            {
+                TargetCat(targetInfo);
+                continue;
+            }
+            else
+            {
+                // Is this cat before the path junction point associated with this tower?
+                WayPointUtils.WayPointCompareResults result = WayPointUtils.CompareWayPointPositions(cat.NextWayPoint, _PathJunction);
+
+                //Debug.Log($"Result: {result}    CatNextWaypoint: \"{cat.NextWayPoint.name}\"    JunctionWayPoint: \"{_PathJunction.name}\"");
+
+                if (result == WayPointUtils.WayPointCompareResults.A_IsBeforeB ||
+                    result == WayPointUtils.WayPointCompareResults.A_And_B_AreSamePoint)
+                {
+                    if (cat.NextWayPoint == PathJunction)
+                        targetInfo.IsApproachingJunction = true;
+
+                    TargetCat(targetInfo);
+
+                }
             }
 
         } // end foreach
 
     }
 
-    private void CheckActiveTargets()
+    private bool TargetCat(TargetInfo targetInfo)
     {
-        for (int i = 0; i < _ActiveTargets.Count; i++) 
+        int laserIndex = GetIndexOfFirstInactiveLaser();
+        if (laserIndex >= 0 && !IsAlreadyTargeted(targetInfo.TargetCat))
+        {
+            ActivateLaser(laserIndex, targetInfo);
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool IsAlreadyTargeted(CatBase cat)
+    {
+        foreach (LaserInfo info in _Lasers)
+        {
+            if (info.TargetInfo != null && info.TargetInfo.TargetCat == cat)
+                return true;
+        }
+
+        return false;
+    }
+
+    private void CheckIfActiveTargetsReachedJunction()
+    {
+        for (int i = 0; i < _ActiveLasersCount; i++) 
         { 
-            TargetInfo info = _ActiveTargets[i];
+            TargetInfo info = _Lasers[i].TargetInfo;
+            if (info == null)
+                continue;
 
             WayPoint nextWaypoint = info.TargetCat.NextWayPoint;
 
@@ -201,9 +251,31 @@ public class LaserPointerTower : Tower
             // the next one. So in this case, we now change it's next waypoint to be the path this
             // tower is set to distract cats to.
             else if (info.IsApproachingJunction == true && nextWaypoint == PathJunction)
-                info.TargetCat.NextWayPoint = PathJunction.NextWayPoints[SelectedPathIndex];
-
+            {
+                int index = _Lasers[i].NextWayPointIndex;
+                // If the index is -1, then don't set the next index. This allows the cat to select it's own path in this case.
+                // This may or may not mean an error has occurred. Check the Unity console for warnings/errors.
+                if (index >= 0)
+                    info.TargetCat.NextWayPoint = PathJunction.NextWayPoints[_Lasers[i].NextWayPointIndex];
+            }
         }
+    }
+
+    /// <summary>
+    /// Finds the first inactive laser.
+    /// </summary>
+    /// <returns>The first inactive laser.</returns>
+    private int GetIndexOfFirstInactiveLaser()
+    {
+        for (int i = 0; i < _Lasers.Count; i++)
+        {
+            if (_Lasers[i].TargetInfo == null)
+                return i;
+        }
+
+
+        // There are no inactive lasers at this time, so return -1 as an error code.
+        return -1;
     }
 
     /// <summary>
@@ -216,9 +288,7 @@ public class LaserPointerTower : Tower
     /// <param name="target">A potential target passed in by the base class.</param>
     protected override void OnNewTargetEnteredRange(GameObject target)
     {
-        // Only accept cats of the type this tower is set to target.
-        if (target.GetComponent(_TargetCatType) != null)
-            targets.Add(target);
+        base.OnNewTargetEnteredRange(target);
     }
 
     protected override void OnTargetWentOutOfRange(GameObject target)
@@ -241,11 +311,12 @@ public class LaserPointerTower : Tower
         }
 
 
-        for (int i = 0; i < _ActiveTargets.Count; i++)
+        for (int i = 0; i < _ActiveLasersCount; i++)
         {
-            if (_ActiveTargets[i].TargetCat == cat)
+            if (_Lasers[i].TargetInfo != null && _Lasers[i].TargetInfo.TargetCat == cat)
             {
-                _ActiveTargets.RemoveAt(i);
+                DeactivateLaser(i);
+
                 break;
             }
         } // end for i
@@ -279,73 +350,89 @@ public class LaserPointerTower : Tower
         return closestWayPoint;
     }
 
-    IEnumerator LaserControl()
-    {
-        for( int i = 0; i < numOfLasers; i++)
+    private void LaserControl()
+    {   
+        for( int i = 0; i < _Lasers.Count; i++)
         {
-            //Base case for the tower
-            if(_ActiveTargets.Count == 0)
-            {
-                DeactivateLaser(i);
-                yield return new WaitForSeconds(1f);
-            }
-            else if (i >= _ActiveTargets.Count)
-            {
-                DeactivateLaser(i);
-            }
-            else if(i < _ActiveTargets.Count && _ActiveTargets.Count > 0)
-            {
-                // Checks for a null value in case a cat moves out of range
-                if(_ActiveTargets[i].TargetCat != null)
-                {
-                    // Activates a laser if it is inactive
-                    if (!lasers[i].activeSelf) 
-                    { 
-                        lasers[i].SetActive(true);
-                        lasers[i].gameObject.GetComponent<AudioSource>().Play();
-                        laserEndPoints[i].SetActive(true);
-                        laserSweepTimers[i] = 2f;
-                    }
+            TargetInfo targetInfo = _Lasers[i].TargetInfo;
 
+            // Base case for the tower. If any lasers still have target info, disable them.
+            if (_ActiveLasersCount == 0 && targetInfo != null)
+            {
+                DeactivateLaser(i);
+                return;
+            }
+            else if (targetInfo != null && targetInfo.TargetCat != null && _ActiveLasersCount > 0)
+            {
+                // If the cat has arrived at the waypoint closest to the rally point, then deactivate the laser so it will be available to target another cat.
+                float distance = _ClosestWayPointToRP != null ? Vector3.Distance(targetInfo.TargetCat.transform.position, _ClosestWayPointToRP.transform.position)
+                                                                : float.MaxValue;
+                if (distance <= targetInfo.TargetCat.WayPointArrivedDistance)
+                {
+                    targets.Remove(targetInfo.TargetCat.gameObject);
+                    DeactivateLaser(i);
+                    continue;
+                }
+                else
+                {
                     // Changes the laser's length and _ActiveTargets the cat with it
                     Vector3[] linePositions = new Vector3[2];
-                    linePositions[0] = lasers[0].transform.position;
+                    linePositions[0] = _Lasers[i].Laser.transform.position;
 
                     Vector3 targetPoint = CalculateLaserEndPoint(i);
-                   
 
                     linePositions[1] = targetPoint;
 
-                    laserEndPoints[i].transform.position = targetPoint;
+                    _Lasers[i].LaserEndPoint.transform.position = targetPoint;
 
-                    //Debug.Log(linePositions[0] + "    " + _ActiveTargets[i].name + " " + linePositions[1] + "  " + _ActiveTargets[i].transform.position);
+                    //Debug.Log(linePositions[0] + "    " + _Lasers[i].TargetInfo.TargetCat.name + " " + linePositions[1] + "  " + _Lasers[i].TargetInfo.TargetCat.position);
 
-                    lasers[i].GetComponent<LineRenderer>().SetPositions(linePositions);
-                    
+                    _Lasers[i].Laser.GetComponent<LineRenderer>().SetPositions(linePositions);
 
-                    // This is commented out since laser should no longer do damage.
-                    //_ActiveTargets[i].GetComponent<CatBase>().DistractCat(distractValue, this);
-                }              
+
+                    // Do damage to the cat. We multiply by Time.deltaTime so that the tower's distraction value is per-second.
+                    _Lasers[i].TargetInfo.TargetCat.GetComponent<CatBase>().DistractCat(distractValue * Time.deltaTime, this);
+                }
 
             }
+            else if (targetInfo != null && targetInfo.TargetCat == null)
+            {
+                DeactivateLaser(i);
+            }
             
-        } // end for i
-        
-        yield return new WaitForSeconds(1f);
+            
+        } // end for i       
 
+    }
+
+    private void ActivateLaser(int laserIndex, TargetInfo targetInfo)
+    {
+        _Lasers[laserIndex].Activate(targetInfo, _CurrentJunctionDirectionIndex);
+        _Lasers[laserIndex].SweepTimer = _LaserSweepTime;
+        _Lasers[laserIndex].SweepWidth = _LaserSweepWidth;
+        _ActiveLasersCount++;
     }
 
     private void DeactivateLaser(int laserIndex)
     {
-        lasers[laserIndex].gameObject.GetComponent<AudioSource>().Stop();
-        lasers[laserIndex].SetActive(false);
-        laserEndPoints[laserIndex].SetActive(false);
-        laserSweepTimers[laserIndex] = 0f;
+        _Lasers[laserIndex].Deactivate();
+        _ActiveLasersCount--;
+    }
+
+    private void DeactivateAllLasers()
+    {
+        for (int i = 0; i < _Lasers.Count; i++)
+        {
+            DeactivateLaser(i);
+        }
     }
 
     private Vector3 CalculateLaserEndPoint(int index)
     {
-        CatBase targetCat = _ActiveTargets[index].TargetCat;
+        CatBase targetCat = _Lasers[index].TargetInfo.TargetCat;
+        if (targetCat == null)
+            return Vector3.zero;
+
         Vector3 targetPoint = targetCat.transform.position;
 
 
@@ -357,17 +444,17 @@ public class LaserPointerTower : Tower
         Vector3 right = new Vector3(forward.z, 0, -forward.x).normalized;
         //Vector3 left = -right;
 
-        // Multiply by the laserSweepWidth so we get the desired sweep width.
-        right *= _LaserSweepWidth;
+        // Multiply by the laser's SweepWidth so we get the desired sweep width.
+        right *= _Lasers[index].SweepWidth;
 
         // Update the sweep timer for this laser.
-        laserSweepTimers[index] += Time.deltaTime;
+        _Lasers[index].SweepTimer += Time.deltaTime;
 
         // Make the laser move back and forth.
         // First, calculate the angle to pass into the Sin function.
-        float angle = 360 * (laserSweepTimers[index] / _LaserSweepTime);
+        float angle = 360 * (_Lasers[index].SweepTimer / _LaserSweepTime);
         if (angle >= 360)
-            laserSweepTimers[index] = 0f; // Reset this laser's sweep timer.
+            _Lasers[index].SweepTimer = 0f; // Reset this laser's sweep timer.
 
         // Convert the angle from degrees to radians, and then calculate the sine value.
         angle *= Mathf.Deg2Rad;
@@ -378,27 +465,30 @@ public class LaserPointerTower : Tower
         right *= sinValue;
 
         
-
+        // Add the vectors we calculated to the target point to get the final target point in front of the cat.
         targetPoint += forward;
         targetPoint += right;
 
         return targetPoint;
     }
 
-
     // Spawns the laser and sets its position to the top of the tower
     IEnumerator SpawnLasers()
     {
-        for (int i = lasers.Count; i < numOfLasers; i++)
+        for (int i = _Lasers.Count; i < MaxLasers; i++)
         {
+            LaserInfo newLaser = new LaserInfo();
 
-            lasers.Add(Instantiate(laserPrefab, laserSpawn));
-            lasers[i].gameObject.GetComponent<AudioSource>().Stop();
+            newLaser.Laser = Instantiate(laserPrefab, laserSpawn);
+            newLaser.Laser.gameObject.GetComponent<AudioSource>().Stop();
 
-            laserEndPoints.Add(Instantiate(laserEndPointPrefab, LaserEndPointsParent));
-            laserEndPoints[i].gameObject.SetActive(false);
+            newLaser.LaserEndPoint = Instantiate(laserEndPointPrefab, LaserEndPointsParent);
+            newLaser.LaserEndPoint.gameObject.SetActive(false);
 
-            laserSweepTimers.Add(0f);
+            newLaser.SweepTimer = _LaserSweepTime;
+            newLaser.SweepWidth = _LaserSweepWidth;
+
+            _Lasers.Add(newLaser);
 
             yield return new WaitForSeconds(1f);
         }
@@ -423,14 +513,59 @@ public class LaserPointerTower : Tower
     {
         base.EnableTargetDetection();
 
-        _ActiveTargets.Clear();
+
+        // Clear all current laser targets.
+        DeactivateAllLasers();
     }
 
     public override void DisableTargetDetection()
     {
         base.DisableTargetDetection();
 
-        _ActiveTargets.Clear();
+        // Clear all current laser targets.
+        DeactivateAllLasers();
+    }
+
+    protected override void OnRallyPointChanged()
+    {
+        // Find the closest waypoint to the new rally point.
+        WayPoint closestWayPoint = WayPointUtils.FindNearestWayPointTo(_RallyPoint);
+
+        // Find out if that waypoint is before or after the path junction near this tower.
+        WayPointUtils.WayPointCompareResults result = WayPointUtils.CompareWayPointPositions(closestWayPoint, _PathJunction);
+
+        if (result == WayPointUtils.WayPointCompareResults.A_IsBeforeB || 
+            result == WayPointUtils.WayPointCompareResults.A_And_B_AreSamePoint)
+        {
+            // The rally point is before the junction near this tower. Thus it does not specify which way to lead the cats.
+            // So set this to -1 to let the cats choose their own path.
+            _CurrentJunctionDirectionIndex = -1;
+        }
+        else if (result == WayPointUtils.WayPointCompareResults.A_IsAfterB)
+        {
+            for (int i = 0; i < _PathJunction.NextWayPoints.Count; i++)
+            {
+                // Find out if that waypoint is before or after the first waypoint in the first path branch from the path junction near this tower.
+                WayPointUtils.WayPointCompareResults branchResult = WayPointUtils.CompareWayPointPositions(_PathJunction.NextWayPoints[i], closestWayPoint);
+
+                // Is the nearest node in the first path branch?
+                if (branchResult == WayPointUtils.WayPointCompareResults.A_IsBeforeB ||
+                    branchResult == WayPointUtils.WayPointCompareResults.A_And_B_AreSamePoint)
+                {
+                    // The rally point is after the junction near this tower. Thus it specifies which way to lead the cats.
+                    _CurrentJunctionDirectionIndex = i;
+
+                    break;
+                }
+
+            } // end for i
+        }
+        else
+        {
+            Debug.LogWarning("Failed to determine how the cats should be directed based on the Rally Point! Setting _CurrentJunctionDirectionIndex to -1 to let the cats choose their own path.");
+            _CurrentJunctionDirectionIndex = -1;
+        }
+
     }
 
 
@@ -474,5 +609,66 @@ public class LaserPointerTower : Tower
     {
         public CatBase TargetCat;
         public bool IsApproachingJunction; // This will be true if the cat's next waypoint is set to the junction associated with this tower.
+        public bool ReachedNextWayPoint;
+    }
+
+
+    /// <summary>
+    /// Stores info related to a given laser.
+    /// </summary>
+    private class LaserInfo
+    {
+        public GameObject Laser; // The instantiated laser GameObject
+        public GameObject LaserEndPoint; // The instantiated end point effects GameObject for the laser.
+        public int NextWayPointIndex; // The index of the waypoint the cat should head to next after it reaches the path junction near this tower. This index is for accessing the appropriate next point from the _PathJunction waypoint's NextWayPoints list.
+        public float SweepTimer; // Holds the elapsed time for the laser. This is used to make the laser sweep back and forth.
+        public float SweepWidth; // How far back and forth the laser sweeps.
+        public TargetInfo TargetInfo = null;
+
+
+
+        public void Activate(TargetInfo targetInfo, int nextWayPointIndex)
+        {
+            Laser.SetActive(true);
+            Laser.gameObject.GetComponent<AudioSource>().Play();
+            LaserEndPoint.SetActive(true);
+            NextWayPointIndex = nextWayPointIndex;
+            SweepTimer = 2f;
+            
+            TargetInfo = targetInfo;
+            TargetInfo.TargetCat.OnCatReachedNextWayPoint += OnTargetReachedNextWayPoint;
+        }
+
+        public void Deactivate()
+        {
+            if (Laser != null)
+            {
+                Laser.gameObject?.GetComponent<AudioSource>().Stop();
+                Laser.SetActive(false);
+            }
+            if (LaserEndPoint != null)
+            {
+                LaserEndPoint.SetActive(false);
+            }
+
+            SweepTimer = 0f;
+
+            // Unsubscribe from the event if the cat still exists.
+            if (TargetInfo != null && TargetInfo.TargetCat != null)
+            {
+                TargetInfo.TargetCat.OnCatReachedNextWayPoint -= OnTargetReachedNextWayPoint;
+            }
+
+            TargetInfo = null;
+
+        }
+
+        private void OnTargetReachedNextWayPoint(object sender, CatReachedNextWayPointEventArgs e)
+        {
+            TargetInfo.ReachedNextWayPoint = true;
+        }
+
     }
 }
+
+

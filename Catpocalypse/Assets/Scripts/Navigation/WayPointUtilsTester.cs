@@ -26,7 +26,7 @@ public class WayPointUtilsTester : MonoBehaviour
     {
         if (_WayPointA != null && _WayPointB != null)
         {
-            WaypointUtils.WayPointCompareResults result = WaypointUtils.CompareWayPointPositions(_WayPointA, _WayPointB);
+            WayPointUtils.WayPointCompareResults result = WayPointUtils.CompareWayPointPositions(_WayPointA, _WayPointB);
             Debug.Log($"WayPointTest Result = {result}");
         }
         else
