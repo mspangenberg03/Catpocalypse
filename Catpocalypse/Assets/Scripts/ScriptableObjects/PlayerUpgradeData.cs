@@ -60,6 +60,27 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _healthUpgradeCost; }
         set { _healthUpgradeCost = value; }
     }
+    [SerializeField]
+    private int _robotMovementUpgradeCost;
+    public int RobotMovementUpgradeCost
+    {
+        get { return _robotMovementUpgradeCost; }
+        set { _robotMovementUpgradeCost = value; }
+    }
+    [SerializeField]
+    private int _robotFirerateUpgradeCost;
+    public int RobotFirerateUpgradeCost
+    {
+        get { return _robotFirerateUpgradeCost; }
+        set { _robotFirerateUpgradeCost = value; }
+    }
+    [SerializeField]
+    private int _robotDistractValueUpgradeCost;
+    public int RobotDistractionValueUpgradeCost
+    {
+        get { return _robotDistractValueUpgradeCost; }
+        set { _robotDistractValueUpgradeCost = value; }
+    }
     private int _currentTowerUpgrade = 0;
     public int CurrentTowerUpgrade
     {
@@ -77,6 +98,24 @@ public class PlayerUpgradeData : ScriptableObject
     {
         get { return _currentHealthUpgrade; }
         set { _currentHealthUpgrade = value; }
+    }
+    private int _currentRobotMovementUpgrade = 0;
+    public int CurrentRobotMovementUpgrade
+    {
+        set { _currentRobotMovementUpgrade = value; }
+        get { return _currentRobotMovementUpgrade; }
+    }
+    private int _currentRobotFirerateUpgrade = 0;
+    public int CurrentRobotFirerateUpgrade
+    {
+        get { return _currentRobotFirerateUpgrade; }
+        set { _currentRobotFirerateUpgrade = value; }
+    }
+    private int _currentRobotDistactionValueUpgrade = 0;
+    public int CurrentRobotDistractionValueUpgrade
+    {
+        get { return _currentRobotDistactionValueUpgrade; }
+        set { _currentRobotDistactionValueUpgrade = value; }
     }
     private int _index = 0;
     public int Index

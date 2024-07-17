@@ -413,6 +413,7 @@ MonoBehaviour:
   - {fileID: 2162205283420624862, guid: b9ad39fb96016d040bd7eb8bc2786fe0, type: 3}
   - {fileID: 3455323922316603053, guid: 6339303a2a47ebb498ec1adcb41891c6, type: 3}
   - {fileID: 1504222617391954164, guid: b623dc5659436094b927bc83032bc6a0, type: 3}
+  _stats: {fileID: 11400000, guid: d45909fa2c79a3744bccee556d0b08da, type: 2}
 --- !u!54 &911420052049344620
 Rigidbody:
   m_ObjectHideFlags: 0

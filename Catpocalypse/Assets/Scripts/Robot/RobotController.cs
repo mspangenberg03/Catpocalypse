@@ -21,9 +21,6 @@ public class RobotController : MonoBehaviour
 
     [Header("Movement Settings")]
 
-    [Tooltip("How fast the robot moves in meters per second.")]
-    [SerializeField, Min(0.1f)]
-    private float _MaxMovementSpeed = 5f;
 
     [Tooltip("How fast the tank turns in degrees per second.")]
     [SerializeField, Min(1f)]
@@ -79,9 +76,6 @@ public class RobotController : MonoBehaviour
     [SerializeField]
     private Transform _ProjectileLaunchPoint;
 
-    [Tooltip("How long in seconds the player must wait before they can fire another projectile.")]
-    [SerializeField, Min(0f)]
-    private float _ProjectileCooldownTime = 1f;
 
     [Tooltip("This list specifies the prefabs for the projectiles that the robot can fire.")]
     [SerializeField]
@@ -94,6 +88,8 @@ public class RobotController : MonoBehaviour
     private Rigidbody _Rigidbody;
     private WaveManager _WaveManager;
 
+    [SerializeField]
+    private RobotStats _stats;
 
 
     /// <summary>
@@ -201,7 +197,7 @@ public class RobotController : MonoBehaviour
 
 
         _ProjectileTimer += Time.deltaTime;
-        if (PlayerInputManager.Robot_FireProjectile && _ProjectileTimer >= _ProjectileCooldownTime)
+        if (PlayerInputManager.Robot_FireProjectile && _ProjectileTimer >= _stats.FireRate)
         {
             // Reset the projectile cooldown timer.
             _ProjectileTimer = 0f;
@@ -224,7 +220,7 @@ public class RobotController : MonoBehaviour
         if (movementInput.y < -_UserInputThreshold || movementInput.y > _UserInputThreshold)
         {
             // We have some input, so move the robot.
-            _CurrentMovementSpeed = movementInput.y * _MaxMovementSpeed;
+            _CurrentMovementSpeed = movementInput.y * _stats.MaxMovementSpeed;
         }
 
         // Do we have a non-zero input for the left/right axis?
@@ -271,13 +267,13 @@ public class RobotController : MonoBehaviour
             // The robot is moving forward, so we need to subtract to slow it down.
             _CurrentMovementSpeed = Mathf.Clamp(_CurrentMovementSpeed - (_MovementDecelerationRate * Time.deltaTime), 
                                                 0f,
-                                                _MaxMovementSpeed);
+                                                _stats.MaxMovementSpeed);
         }
         else
         {
             // The robot is moving backwards, so we need to add to slow it down.
             _CurrentMovementSpeed = Mathf.Clamp(_CurrentMovementSpeed + (_MovementDecelerationRate * Time.deltaTime), 
-                                                -_MaxMovementSpeed,
+                                                -_stats.MaxMovementSpeed,
                                                 0f);
         }
         

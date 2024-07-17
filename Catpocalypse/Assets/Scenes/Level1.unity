@@ -4361,6 +4361,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 74282c5711146a8448e6df0c6db4a79e, type: 3}
   - {fileID: 8300000, guid: 3dd04f8bb94523547979cff309295023, type: 3}
   - {fileID: 8300000, guid: 262481edf4d55284db99f37e8882f190, type: 3}
+  _playerUpgrades: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
 --- !u!54 &439936116
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4507,6 +4508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Money: 600
+  _UpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
 --- !u!82 &439936123
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13178,6 +13180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208426c70451e414c938e16f1d7aa683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 0}
 --- !u!4 &1626300300
 Transform:
   m_ObjectHideFlags: 0
@@ -13209,6 +13212,7 @@ MonoBehaviour:
   _generalRewards: []
   _waveEndRewards:
   - {fileID: 11400000, guid: bad290820c86e354c96218c9ebbe6f93, type: 2}
+  _playerUpgradeData: {fileID: 0}
 --- !u!1001 &1635150667
 PrefabInstance:
   m_ObjectHideFlags: 0

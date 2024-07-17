@@ -59,6 +59,8 @@ public class Tower : MonoBehaviour
     // The closest waypoint to the Rally Point. Will be null if no WayPoints are within the tower's range.
     protected WayPoint _ClosestWayPointToRP;
 
+    [SerializeField]
+    public TowerData towerStats;
     
 
 
