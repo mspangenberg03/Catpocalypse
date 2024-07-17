@@ -135,8 +135,7 @@ public class CatBase : MonoBehaviour
         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         _stateMachine.AddTransitionFromState(movingState, new Transition(slowedState, () => slowingEntities.Count > 0 && stoppingEntities.Count == 0));
-        _stateMachine.AddTransitionFromState(movingState, new Transition(stoppedState, () => stoppingEntities.Count > 0));
-        _stateMachine.AddTransitionFromState(slowedState, new Transition(stoppedState, () => stoppingEntities.Count > 0));
+        _stateMachine.AddTransitionFromAnyState(new Transition(stoppedState, () => stoppingEntities.Count > 0));
         _stateMachine.AddTransitionFromState(stoppedState, new Transition(slowedState, () => stoppingEntities.Count == 0 &&
                                                                                              slowingEntities.Count > 0));
 
@@ -146,7 +145,7 @@ public class CatBase : MonoBehaviour
 
 
         // Tell state machine to write in the debug console every time it exits or enters a state.
-        //_stateMachine.EnableDebugLogging = true;
+        _stateMachine.EnableDebugLogging = true;
 
         // This is necessary since we only have one state and no transitions for now.
         // Mouse over the AllowUnknownStates property for more info.

@@ -61,6 +61,14 @@ public class NonAllergicTower : Tower
         }
         return waypoint;
     }
+
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        numOfPeople++;
+        radius++;
+    }
+
     public void DisableTower()
     {
         Enabled = false;
@@ -94,11 +102,6 @@ public class NonAllergicTower : Tower
         StartCoroutine(Spawner());
         
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.tag == "Cat")
-        {
-            targets.Remove(other.gameObject);
-        }
-    }
+
+    public int ActiveUnits {  get { return numOfPeople; } }
 }

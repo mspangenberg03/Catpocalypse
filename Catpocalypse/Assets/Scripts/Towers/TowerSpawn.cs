@@ -169,7 +169,7 @@ public class TowerSpawn : MonoBehaviour
             NonAllergicTower nonAllergic = nonAllergicPrefab.GetComponent<NonAllergicTower>();
             towerBase.refundVal = nonAllergic.towerStats.BuildCost * nonAllergic.GetRefundPercentage();
 
-            towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x, transform.position.y + 1, transform.position.z);
+            towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x + 0.5f, transform.position.y, transform.position.z - 0.5f);
             towerBase.tower.ParentTowerBase = towerBase;
             towerBase.hasTower = true;
         }
