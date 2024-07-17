@@ -25,6 +25,8 @@ public class Tower : MonoBehaviour
     [Tooltip("This SphereCollider defines the range of the tower.")]
     [SerializeField]
     protected SphereCollider range;
+    [SerializeField]
+    protected float radius;
     [SerializeField, Min(1)]
     protected float distractValue;
     [SerializeField]
@@ -78,6 +80,7 @@ public class Tower : MonoBehaviour
 
     protected void Awake()
     {
+        range.radius = radius;
         RangeRadius = range.radius;
         
         FindDefaultRallyPoint();        

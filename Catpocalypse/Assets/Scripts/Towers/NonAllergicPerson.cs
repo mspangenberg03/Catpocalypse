@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,22 +8,24 @@ using UnityEngine.AI;
 public class NonAllergicPerson : MonoBehaviour
 {
     private NavMeshAgent agent;
-    private Tower tower; //The parent tower
+    private NonAllergicTower tower; //The parent tower
     private bool isPetting = false; //Is the person petting a cat
-    private GameObject target;
-    private List<GameObject> pastTargets; //Cats that the person has already petted
+    private CatBase target;
     private List<GameObject> catsInRange; //The cats that are in range of the collider
+    private Animation animator;
 
     [SerializeField, Tooltip("How long the person pets the cats"), Min(1)]
     private int effectLength;
+    [SerializeField, Tooltip("How often the person pets the cat")]
+    private int petRate;
+
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        tower = transform.parent.gameObject.GetComponent<Tower>();
-        pastTargets = new List<GameObject>();
+        tower = transform.parent.gameObject.GetComponent<NonAllergicTower>();
         catsInRange = new List<GameObject>();
-      
+        animator = GetComponent<Animation>();
     }
    
     // Update is called once per frame
@@ -34,21 +37,26 @@ public class NonAllergicPerson : MonoBehaviour
         {
             FindClosestAvailableCat();
         }
-        if (target != null && tower.targets.Contains(target))
+        if (target != null && tower.targets.Contains(target.gameObject))
         {
-            agent.SetDestination(target.transform.position);
+            if (!isPetting)
+            {
+                if(CatDistance(target.gameObject) <= 2)
+                {
+                    target.stoppingEntities.Add(gameObject);
+                    StartCoroutine(PetCat(effectLength));
+                } else
+                {
+                    agent.SetDestination(target.transform.position);
+                }
+                
+            }
         }
         //If the person has a target that is not in the list, the person does not have a target
-        if(target != null && !tower.targets.Contains(target))
+        if(target != null && !tower.targets.Contains(target.gameObject))
         {
             RemoveTarget();
             
-        }
-        if(catsInRange.Contains(target) && !(target.GetComponent<CatBase>().stoppingEntities.Count > 0))
-        {
-            target.GetComponent<CatBase>().stoppingEntities.Add(gameObject);
-
-            StartCoroutine(PetCat());
         }
     }
     
@@ -62,7 +70,6 @@ public class NonAllergicPerson : MonoBehaviour
             if (cat != null) //If the cat exists
             {
                 if (CatDistance(cat) < smallestDist &&                           //If it is closer to the person than the previous smallest distance
-                    !pastTargets.Contains(cat) &&                                //If the person has not already pet the cat
                     !(cat.GetComponent<CatBase>().isATarget) &&                  //If the cat is not a target of another person
                     tower.targets.Contains(cat))                                 //If the cat is in range of the tower  
                 {
@@ -72,10 +79,12 @@ public class NonAllergicPerson : MonoBehaviour
             }
             
         }
-        target = closestCat; //Sets the target to the closest cat
-        if(target != null)
+        if (closestCat != null){
+            target = closestCat.GetComponent<CatBase>(); ;
+        }                         
+        if (target != null)
         {
-            target.GetComponent<CatBase>().isATarget = true;
+            target.isATarget = true;
             agent.SetDestination(target.transform.position);
         }
     }
@@ -90,13 +99,19 @@ public class NonAllergicPerson : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        catsInRange.Add(other.gameObject);
+        CatBase cat = other.gameObject.GetComponent<CatBase>();
+        if (cat != null)
+        {
+            if(other.gameObject.GetInstanceID() == target.gameObject.GetInstanceID())
+            {
+                
+            }
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        catsInRange.Remove(other.gameObject);
         //If the person leaves the tower's range, find a new target
-        if(other.gameObject == tower.gameObject)
+        if(other.gameObject.GetInstanceID() == tower.gameObject.GetInstanceID())
         {
             RemoveTarget();
         }
@@ -104,43 +119,40 @@ public class NonAllergicPerson : MonoBehaviour
 
 
 
-    IEnumerator PetCat()
+    IEnumerator PetCat(float time)
     {
-        //target.GetComponent<CatBase>().stoppingEntities.Add(gameObject);
         isPetting = true;
-        StartCoroutine(DistractOverTime());
-        pastTargets.Add(target);
-        yield return new WaitForSeconds(effectLength);
         if(target != null)
         {
-            target.GetComponent<CatBase>().stoppingEntities.Remove(gameObject);
+            target.DistractCat(tower.DistractValue, tower);
+        }  
+        yield return new WaitForSeconds(petRate);
+        if (time == 0)
+        {
+            RemoveTarget() ;
+        } else
+        {
+            if(target != null)
+            {
+                StartCoroutine(PetCat(--time));
+            }
+            
         }
-        
-        RemoveTarget();
+        yield return new WaitForEndOfFrame();
     }
 
     private void RemoveTarget()
     {
+        Debug.Log("Removing target " + target);
         StopAllCoroutines();
         if (target != null)
         {
-            target.GetComponent<CatBase>().isATarget = false;
-            target.GetComponent<CatBase>().stoppingEntities.Remove(gameObject);
+            target.isATarget = false;
+            target.stoppingEntities.Remove(gameObject);
             target = null;
             
         }
         isPetting = false;
-    }
-
-    IEnumerator DistractOverTime()
-   {
-        
-        if(isPetting && target != null)
-        {
-            target.GetComponent<CatBase>().DistractCat(tower.DistractValue, tower);
-        }
-        yield return new WaitForSeconds(1);
-        StartCoroutine(DistractOverTime());
     }
 
 

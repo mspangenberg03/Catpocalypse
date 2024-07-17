@@ -213,6 +213,7 @@ MonoBehaviour:
   buildCost: 200
   refundPercentage: 0.85
   range: {fileID: 560913167619528523}
+  radius: 40
   distractValue: 90
   numberOfTargets: 0
   targets: []
