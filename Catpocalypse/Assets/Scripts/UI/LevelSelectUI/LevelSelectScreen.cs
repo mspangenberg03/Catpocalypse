@@ -26,7 +26,7 @@ public class LevelSelectScreen : MonoBehaviour
         // Hide the level select panel.
         gameObject.SetActive(false);
     }
-    public void ButtoneClicked_UpgradeScreen()
+    public void ButtonClicked_UpgradeScreen()
     {
         if (_Panel_UpgradeScreen.gameObject.activeSelf)
             return;
