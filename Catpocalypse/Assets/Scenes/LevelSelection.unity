@@ -7752,7 +7752,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1302499745}
         m_TargetAssemblyTypeName: LevelSelectScreen, Assembly-CSharp
-        m_MethodName: ButtoneClicked_UpgradeScreen
+        m_MethodName: ButtonClicked_UpgradeScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
