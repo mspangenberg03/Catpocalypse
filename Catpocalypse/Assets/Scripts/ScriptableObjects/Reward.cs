@@ -12,6 +12,7 @@ public class Reward : ScriptableObject
     public enum Types
     {
         Money,
+        Scrap
     }
 
 

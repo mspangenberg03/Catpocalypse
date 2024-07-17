@@ -294,7 +294,7 @@ public class CucumberTower : Tower
     }
     IEnumerator Reload()
     {
-        reloadTime = FireRate;
+        reloadTime = towerStats.FireRate;
         yield return new WaitForSeconds(reloadTime);
         //reloadTime = FireRate;
     }

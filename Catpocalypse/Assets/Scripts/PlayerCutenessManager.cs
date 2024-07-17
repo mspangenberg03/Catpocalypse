@@ -137,7 +137,7 @@ public class PlayerCutenessManager : MonoBehaviour
         {
             foreach(Tower tower in FindObjectsOfType<Tower>())
             {
-                tower.DistractValue *= CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
+                tower.towerStats.DistractValue *= CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
             }
             cutenessChallengeText.text = "All towers do less damage";
         }
@@ -152,7 +152,7 @@ public class PlayerCutenessManager : MonoBehaviour
                 //If the tower is the type that is getting debuffed
                 if(tower.TowerTypeTag == _TowerType)
                 {
-                    tower.FireRate *= 1+ _TowerFireRateDebuffPercent;
+                    tower.towerStats.FireRate *= 1+ _TowerFireRateDebuffPercent;
                 }
                 cutenessChallengeText.text = _TowerType+" towers fire slower";
             }
@@ -199,7 +199,7 @@ public class PlayerCutenessManager : MonoBehaviour
         {
             foreach (Tower tower in FindObjectsOfType<Tower>())
             {
-                tower.DistractValue /= CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
+                tower.towerStats.DistractValue /= CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
             }
         }
         if (CurrentCutenessChallenge == CutenessChallenges.DebuffTowerType)
@@ -209,7 +209,7 @@ public class PlayerCutenessManager : MonoBehaviour
                 //If the tower is the type that got debuffed
                 if (tower.TowerTypeTag == _TowerType)
                 {
-                    tower.FireRate /= 1+_TowerFireRateDebuffPercent;
+                    tower.towerStats.FireRate /= 1+_TowerFireRateDebuffPercent;
                 }
             }
         }

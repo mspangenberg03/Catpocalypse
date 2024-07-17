@@ -11,9 +11,6 @@ using UnityEngine.AI;
 /// </summary>
 public class RobotProjectile : MonoBehaviour
 {
-    [Tooltip("How much this projectile distracts a cat when it hits one.")]
-    [SerializeField, Min(0f)]
-    protected float _DistractionAmount = 100f;
 
     [Tooltip("Sets the launch speed of this projectile in meters per seecond.")]
     [SerializeField, Min(0f)]
@@ -23,8 +20,8 @@ public class RobotProjectile : MonoBehaviour
     [SerializeField, Min(1f)]
     protected float _Lifetime = 10f;
 
-
-
+    [SerializeField]
+    private RobotStats _stats;
     /// <summary>
     /// Tracks how long the projectile has existed for.
     /// </summary>
@@ -65,18 +62,14 @@ public class RobotProjectile : MonoBehaviour
     /// <param name="target"></param>
     private void Distract(CatBase target)
     {
-        target.DistractCat(_DistractionAmount, null);
+        target.DistractCat(_stats.DistractionValue, null);
 
         Destroy(gameObject);
     }
 
 
 
-    public float DistractionAmount
-    {
-        get { return _DistractionAmount; }
-        set { _DistractionAmount = value; }
-    }
+    
 
     public float LaunchSpeed
     {

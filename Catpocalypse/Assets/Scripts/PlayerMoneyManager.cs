@@ -9,7 +9,8 @@ public class PlayerMoneyManager : MonoBehaviour
 {
     [SerializeField] private float _Money = 200f;
 
-
+    [SerializeField]
+    private PlayerUpgradeData _UpgradeData;
     private void Start()
     {
         HUD.UpdatePlayerMoneyDisplay(_Money);
@@ -29,7 +30,7 @@ public class PlayerMoneyManager : MonoBehaviour
             return;
         }
 
-        _Money += amount;
+        _Money += (amount * _UpgradeData.RewardMultiplier);
         HUD.UpdatePlayerMoneyDisplay(_Money);
     }
 

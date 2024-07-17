@@ -39,6 +39,10 @@ public class WaveManager : MonoBehaviour
     private PlayerMoneyManager _PlayerMoneyManager;
     private PlayerCutenessManager _cutenessManager;
 
+    [SerializeField]
+    private PlayerUpgradeData _playerUpgradeData;
+    private bool _scrapRewarded = false;
+
 
     private void Awake()
     {
@@ -83,7 +87,11 @@ public class WaveManager : MonoBehaviour
         if (!_WaveInProgress && WaveNumber == _TotalWavesInLevel)
         {
             LevelCleared?.Invoke(this, EventArgs.Empty);
-
+            if (!_scrapRewarded)
+            {
+                _playerUpgradeData.Scrap += _playerUpgradeData.ScrapReward;
+                _scrapRewarded = true;
+            }
             HUD.RevealVictory();
         }
     }

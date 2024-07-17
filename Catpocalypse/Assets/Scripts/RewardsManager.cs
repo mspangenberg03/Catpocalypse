@@ -69,6 +69,8 @@ public class RewardsManager : MonoBehaviour
     PlayerHealthManager _playerHealthManager;
     PlayerMoneyManager _playerMoneyManager;
     WaveManager _waveManager;
+    [SerializeField]
+    PlayerUpgradeData _playerUpgradeData;
 
 
 

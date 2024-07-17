@@ -101,6 +101,7 @@ MonoBehaviour:
   _DistractionAmount: 100
   _LaunchSpeed: 10
   _Lifetime: 10
+  _stats: {fileID: 11400000, guid: d45909fa2c79a3744bccee556d0b08da, type: 2}
 --- !u!135 &4533276925193474172
 SphereCollider:
   m_ObjectHideFlags: 0

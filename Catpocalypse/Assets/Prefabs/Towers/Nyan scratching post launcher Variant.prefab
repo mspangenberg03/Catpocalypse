@@ -153,6 +153,7 @@ MonoBehaviour:
   range: {fileID: 8975065090706773128}
   radius: 45
   distractValue: 15
+  towerStats: {fileID: 11400000, guid: 51ded07837666dd48a3835e93e6815bf, type: 2}
   numberOfTargets: 0
   targets: []
   towerLevel: 1

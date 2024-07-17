@@ -9,6 +9,7 @@ public class LevelSelectScreen : MonoBehaviour
 {
     [SerializeField] CatInfoPanel _Panel_CatInfo;
     [SerializeField] TowerInfoPanel _Panel_TowerInfo;
+    [SerializeField] UpgradeScreen _Panel_UpgradeScreen;
 
 
     public void ButtonClicked_ViewCatInfo()
@@ -25,7 +26,14 @@ public class LevelSelectScreen : MonoBehaviour
         // Hide the level select panel.
         gameObject.SetActive(false);
     }
-
+    public void ButtonClicked_UpgradeScreen()
+    {
+        if (_Panel_UpgradeScreen.gameObject.activeSelf)
+            return;
+        _Panel_UpgradeScreen.gameObject.SetActive(true);
+        // Hide the level select panel.
+        gameObject.SetActive(false);
+    }
     public void ButtonClicked_ViewTowerInfo()
     {
         // Just return if the dialog is already open.

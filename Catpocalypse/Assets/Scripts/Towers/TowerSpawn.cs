@@ -102,7 +102,7 @@ public class TowerSpawn : MonoBehaviour
             towerBase.tower = Instantiate(scratchPostTowerPrefab, transform, true).GetComponent<Tower>();
 
             ScratchingPostTower scratchingPostTower = scratchPostTowerPrefab.GetComponent<ScratchingPostTower>();
-            towerBase.refundVal = scratchingPostTower.BuildCost * scratchingPostTower.GetRefundPercentage();
+            towerBase.refundVal = scratchingPostTower.towerStats.BuildCost * scratchingPostTower.GetRefundPercentage();
 
             towerBase.tower.transform.position = transform.position;
             towerBase.tower.ParentTowerBase = towerBase;
@@ -118,7 +118,7 @@ public class TowerSpawn : MonoBehaviour
             towerBase.tower = Instantiate(cucumberTowerPrefab, transform, true).GetComponent<Tower>();
 
             CucumberTower cucumberTower = cucumberTowerPrefab.GetComponent<CucumberTower>();
-            towerBase.refundVal = cucumberTower.BuildCost * cucumberTower.GetRefundPercentage();
+            towerBase.refundVal = cucumberTower.towerStats.BuildCost * cucumberTower.GetRefundPercentage();
 
             towerBase.tower.transform.position = transform.position;
             towerBase.tower.ParentTowerBase = towerBase;
@@ -134,7 +134,7 @@ public class TowerSpawn : MonoBehaviour
             towerBase.tower = Instantiate(stringWaverTowerPrefab, transform, true).GetComponent<Tower>();
 
             StringWaverTower stringWaverTower = stringWaverTowerPrefab.GetComponent<StringWaverTower>();
-            towerBase.refundVal = stringWaverTower.BuildCost * stringWaverTower.GetRefundPercentage();
+            towerBase.refundVal = stringWaverTower.towerStats.BuildCost * stringWaverTower.GetRefundPercentage();
 
             towerBase.tower.transform.position = transform.position;
             towerBase.tower.ParentTowerBase = towerBase;
@@ -150,7 +150,7 @@ public class TowerSpawn : MonoBehaviour
             towerBase.tower = Instantiate(yarnBallTowerPrefab, transform, true).GetComponent<Tower>();
 
             YarnBallTower yarnBallTower = yarnBallTowerPrefab.GetComponent<YarnBallTower>();
-            towerBase.refundVal = yarnBallTower.BuildCost * yarnBallTower.GetRefundPercentage();
+            towerBase.refundVal = yarnBallTower.towerStats.BuildCost * yarnBallTower.GetRefundPercentage();
 
             towerBase.tower.transform.position = transform.position;
             towerBase.tower.ParentTowerBase = towerBase;
@@ -167,7 +167,7 @@ public class TowerSpawn : MonoBehaviour
             towerBase.tower = Instantiate(nonAllergicPrefab, transform).GetComponent<Tower>();
 
             NonAllergicTower nonAllergic = nonAllergicPrefab.GetComponent<NonAllergicTower>();
-            towerBase.refundVal = nonAllergic.BuildCost * nonAllergic.GetRefundPercentage();
+            towerBase.refundVal = nonAllergic.towerStats.BuildCost * nonAllergic.GetRefundPercentage();
 
             towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x + 0.5f, transform.position.y, transform.position.z - 0.5f);
             towerBase.tower.ParentTowerBase = towerBase;
