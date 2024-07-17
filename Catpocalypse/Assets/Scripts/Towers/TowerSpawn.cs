@@ -34,17 +34,17 @@ public class TowerSpawn : MonoBehaviour
         switch(tower)
         {
             case 0:
-                return laserPointerTowerPrefab.GetComponent<LaserPointerTower>().GetBuildCost();
+                return laserPointerTowerPrefab.GetComponent<LaserPointerTower>().towerStats.BuildCost;
             case 1:
-                return scratchPostTowerPrefab.GetComponent<ScratchingPostTower>().GetBuildCost();
+                return scratchPostTowerPrefab.GetComponent<ScratchingPostTower>().towerStats.BuildCost;
             case 2:
-                return cucumberTowerPrefab.GetComponent<CucumberTower>().GetBuildCost();
+                return cucumberTowerPrefab.GetComponent<CucumberTower>().towerStats.BuildCost;
             case 3:
-                return stringWaverTowerPrefab.GetComponent<StringWaverTower>().GetBuildCost();
+                return stringWaverTowerPrefab.GetComponent<StringWaverTower>().towerStats.BuildCost;
             case 4:
-                return yarnBallTowerPrefab.GetComponent<YarnBallTower>().GetBuildCost();
+                return yarnBallTowerPrefab.GetComponent<YarnBallTower>().towerStats.BuildCost;
             case 5:
-                return nonAllergicPrefab.GetComponent<NonAllergicTower>().GetBuildCost();
+                return nonAllergicPrefab.GetComponent<NonAllergicTower>().towerStats.BuildCost;
         }
         return 0;
     }
