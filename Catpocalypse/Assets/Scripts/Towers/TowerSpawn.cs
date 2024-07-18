@@ -34,7 +34,7 @@ public class TowerSpawn : MonoBehaviour
         switch(tower)
         {
             case 0:
-                return laserPointerTowerPrefab.GetComponent<LaserPointerTower>().towerStats.BuildCost;
+                return laserPointerTowerPrefab.GetComponent<LaserPointerTower>().GetBuildCost();
             case 1:
                 return scratchPostTowerPrefab.GetComponent<ScratchingPostTower>().towerStats.BuildCost;
             case 2:
