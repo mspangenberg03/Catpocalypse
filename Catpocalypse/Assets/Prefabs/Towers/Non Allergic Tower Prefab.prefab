@@ -196,6 +196,7 @@ MonoBehaviour:
   upgradeCost: 150
   _cutenessChallengeActive: 0
   fireRate: 1
+  towerStats: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
   numOfPeople: 2
   spawnPoints:
   - {fileID: 737399380378500220}
