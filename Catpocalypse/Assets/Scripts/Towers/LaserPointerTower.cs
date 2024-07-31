@@ -371,6 +371,7 @@ public class LaserPointerTower : Tower
                 {
                     targets.Remove(targetInfo.TargetCat.gameObject);
                     DeactivateLaser(i);
+                    _towerSound.Stop();
                     continue;
                 }
                 else
@@ -411,12 +412,14 @@ public class LaserPointerTower : Tower
         _Lasers[laserIndex].SweepTimer = _LaserSweepTime;
         _Lasers[laserIndex].SweepWidth = _LaserSweepWidth;
         _ActiveLasersCount++;
+        _towerSound.Play();
     }
 
     private void DeactivateLaser(int laserIndex)
     {
         _Lasers[laserIndex].Deactivate();
         _ActiveLasersCount--;
+
     }
 
     private void DeactivateAllLasers()

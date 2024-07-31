@@ -22,7 +22,8 @@ public class TowerSpawn : MonoBehaviour
     private GameObject nonAllergicPrefab;
     private TowerBase towerBase;
 
-
+    [SerializeField]
+    AudioSource _towerSpawnSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +78,7 @@ public class TowerSpawn : MonoBehaviour
                 //    StartCoroutine(SpawnLaserPointerTower());
                 //    break;
         }
+        _towerSpawnSound.Play();
     }
 
     IEnumerator SpawnLaserPointerTower()

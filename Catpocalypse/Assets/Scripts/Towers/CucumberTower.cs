@@ -135,7 +135,7 @@ public class CucumberTower : Tower
             proj.GetComponent<Rigidbody>().velocity = direction.normalized * launchVelocity;
             StartCoroutine(SuperCucumber());
         }
-
+        _towerSound.Play();
 
 
         StartCoroutine(Reload());

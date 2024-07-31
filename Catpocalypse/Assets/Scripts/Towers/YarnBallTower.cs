@@ -97,6 +97,7 @@ public class YarnBallTower : Tower
 
                     // Apply force in the direction of the target
                     rb.AddForce(direction * throwForce, ForceMode.Impulse);
+                    //_towerSound.Play();
                 }
             }
         }

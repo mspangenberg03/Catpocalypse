@@ -43,6 +43,8 @@ public class WaveManager : MonoBehaviour
     private PlayerUpgradeData _playerUpgradeData;
     private bool _scrapRewarded = false;
 
+    [SerializeField] AudioSource _winSound;
+
 
     private void Awake()
     {
@@ -153,6 +155,7 @@ public class WaveManager : MonoBehaviour
 
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
                 HUD.RevealVictory();
+            //_winSound.
         }
     }
     public void OnCatReachGoal(object Sender, EventArgs e)
