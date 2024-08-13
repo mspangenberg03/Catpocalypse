@@ -19,6 +19,9 @@ public class NonAllergicPerson : MonoBehaviour
     [SerializeField, Tooltip("How often the person pets the cat")]
     private int petRate;
 
+    [SerializeField]
+    private AudioSource _personSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -122,6 +125,7 @@ public class NonAllergicPerson : MonoBehaviour
     IEnumerator PetCat(float time)
     {
         isPetting = true;
+        _personSound.Play();
         if(target != null)
         {
             target.DistractCat(tower.DistractValue, tower);
