@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +11,8 @@ public class PlayerMoneyManager : MonoBehaviour
 
     [SerializeField]
     private PlayerUpgradeData _UpgradeData;
+    [SerializeField]
+    private AudioSource _moneySound;
     private void Start()
     {
         HUD.UpdatePlayerMoneyDisplay(_Money);
@@ -31,6 +33,7 @@ public class PlayerMoneyManager : MonoBehaviour
         }
 
         _Money += (amount * _UpgradeData.RewardMultiplier);
+        _moneySound.Play();
         HUD.UpdatePlayerMoneyDisplay(_Money);
     }
 

@@ -79,7 +79,7 @@ public class YarnBallTower : Tower
             // Instantiate the throwPoint prefab
             GameObject throwPointObject = Instantiate(throwPointPrefab, transform.position, transform.rotation);
             Transform throwPoint = throwPointObject.transform;
-
+            _towerSound.Play();
             GameObject projectile = Instantiate(yarnBallPrefab, throwPoint.position, throwPoint.rotation);
             projectile.GetComponent<YarnBall>().parentTower = gameObject.GetComponent<Tower>();
             projectile.transform.localScale *= sizeMultiplier;

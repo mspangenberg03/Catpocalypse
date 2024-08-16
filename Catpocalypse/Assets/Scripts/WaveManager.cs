@@ -43,7 +43,9 @@ public class WaveManager : MonoBehaviour
     private PlayerUpgradeData _playerUpgradeData;
     private bool _scrapRewarded = false;
 
-    [SerializeField] AudioSource _winSound;
+    [SerializeField] AudioSource _waveSound;
+    [SerializeField] AudioClip _startClip;
+    [SerializeField] AudioClip _endClip;
 
 
     private void Awake()
@@ -109,7 +111,9 @@ public class WaveManager : MonoBehaviour
             _cutenessManager.CutenessChallenge();
         }
         _WaveInProgress = true;
-
+        _waveSound.clip = _startClip;
+        _waveSound.Play();
+        Debug.Log("Start wave sound played");
         _WaveNumber++;
 
 
@@ -172,6 +176,9 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
+            _waveSound.clip = _endClip;
+            _waveSound.Play();
+            Debug.Log("End wave sound played");
 
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
                 HUD.RevealVictory();
@@ -198,7 +205,7 @@ public class WaveManager : MonoBehaviour
 
     private void OnWaveEnded(object sender, EventArgs e)
     {
-        
+
     }
 
 

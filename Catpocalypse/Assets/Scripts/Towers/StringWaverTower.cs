@@ -39,20 +39,35 @@ public class StringWaverTower : Tower
     }
     IEnumerator DistractCat()
     {
-        List<GameObject>.Enumerator cats = targets.GetEnumerator();
-        if(cats.Current != null)
+        List<GameObject> cats = targets;
+
+        ////if (cats.Current != null)
+        if (cats.Count > 0) 
         {
-            GameObject cat = cats.Current;
-            do
+            _towerSound.Play();
+            //GameObject cat = cats.Current;
+            //Debug.LogWarning(cat);
+            //do
+            //{
+            //    if (targets.Contains(cat) && cat != null)
+            //    {
+            //        cat.GetComponent<CatBase>().DistractCat(distractValue, this.gameObject.GetComponent<Tower>());
+
+
+            //    }
+            //} while (cats.MoveNext());
+            //foreach (GameObject cat1 in cats)
+            for(int i = 0; i< cats.Count; i++) 
             {
-                if (targets.Contains(cat) && cat != null)
+                if (cats[i] != null && i < cats.Count)
                 {
-                    cat.GetComponent<CatBase>().DistractCat(distractValue, this.gameObject.GetComponent<Tower>());
+                    cats[i].GetComponent<CatBase>().DistractCat(distractValue, this.gameObject.GetComponent<Tower>());
+
 
                 }
-            } while (cats.MoveNext());
+            }
         }
-        yield return new WaitForSeconds(FireRate);
+        yield return new WaitForSeconds(towerStats.FireRate);
         StartCoroutine(DistractCat());
     }
 }
