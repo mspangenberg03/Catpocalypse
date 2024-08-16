@@ -56,7 +56,7 @@ public class VictoryScreen : MonoBehaviour
         }
 
         //SceneManager.LoadScene("Level1");
-        SceneLoader_Async.LoadSceneAsync("Level1");
+        SceneLoader_Async.LoadSceneAsync("LevelSelection");
     }
 
     public void OnMainMenuClicked()

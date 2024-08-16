@@ -97,17 +97,7 @@ public class NonAllergicPerson : MonoBehaviour
         distance = Mathf.Sqrt(xDist + yDist);
         return distance;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        CatBase cat = other.gameObject.GetComponent<CatBase>();
-        if (cat != null)
-        {
-            if(other.gameObject.GetInstanceID() == target.gameObject.GetInstanceID())
-            {
-                
-            }
-        }
-    }
+    
     private void OnTriggerExit(Collider other)
     {
         //If the person leaves the tower's range, find a new target
