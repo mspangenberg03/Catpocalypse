@@ -51,7 +51,7 @@ public class CatBase : MonoBehaviour
     
     [Min(0f)]
     [Tooltip("This sets how close the cat must get to the next WayPoint to consider itself to have arrived there. This causes it to then target the next WayPoint (or a randomly selected one if the current WayPoint has multiple next points set in the Inspector.")]
-    [SerializeField] protected float _WayPointArrivedDistance = 2f;
+    [SerializeField] protected float _WayPointArrivedDistance = 1f;
     
     [Tooltip("Controls the cat's navigation")]
     public NavMeshAgent agent;
@@ -234,7 +234,10 @@ public class CatBase : MonoBehaviour
         if (distraction >= distractionThreshold)
         {
             StartCoroutine(Sound());
-            targetingTower.targets.Remove(this.gameObject);           
+            if(targetingTower != null)
+            {
+                targetingTower.targets.Remove(this.gameObject);
+            }     
         }
     }
 
@@ -284,6 +287,7 @@ public class CatBase : MonoBehaviour
         }
         else if (count == 1)
         {
+            Debug.Log(NextWayPoint.NextWayPoints[0]);
             _NextWayPoint = _NextWayPoint.NextWayPoints[0];
         }
         else // count is greater than 1
@@ -313,12 +317,13 @@ public class CatBase : MonoBehaviour
 
 
         _NextWayPoint = nearestWayPoint;
+        
     }
 
     public bool HasReachedDestination()
     {
         return _DistanceFromNextWayPoint <= _WayPointArrivedDistance &&
-               agent.pathStatus == NavMeshPathStatus.PathComplete;
+               agent.pathStatus <= NavMeshPathStatus.PathComplete;
     }
 
 
