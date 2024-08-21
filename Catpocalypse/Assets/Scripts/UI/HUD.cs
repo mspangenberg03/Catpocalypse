@@ -174,6 +174,7 @@ public class HUD : MonoBehaviour
 
     public static void RevealVictory()
     {
+        Debug.LogWarning("Reveal victory Called");
         Instance._StartWaveButton.gameObject.SetActive(false);
         Instance.WaveNumberLabel.gameObject.SetActive(false);
         Instance.CatsRemainingLabel.gameObject.SetActive(false);

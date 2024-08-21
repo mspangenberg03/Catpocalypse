@@ -136,6 +136,7 @@ public class WaveManager : MonoBehaviour
 
     public void StopAllSpawning()
     {
+
         foreach (CatSpawner spawner in _CatSpawners)
         {
             spawner.StopSpawner();
@@ -156,9 +157,12 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
-
+            _waveSound.clip = _endClip;
+            _waveSound.Play();
+            Debug.LogWarning("End wave sound played");
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
                 HUD.RevealVictory();
+           
             //_winSound.
         }
     }
@@ -176,12 +180,16 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
+
             _waveSound.clip = _endClip;
             _waveSound.Play();
-            Debug.Log("End wave sound played");
-
+            Debug.LogWarning("End wave sound played");
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
+            {
                 HUD.RevealVictory();
+                
+            }
+                
         }
     }
 
