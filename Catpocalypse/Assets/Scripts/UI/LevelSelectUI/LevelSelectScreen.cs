@@ -52,7 +52,7 @@ public class LevelSelectScreen : MonoBehaviour
     public void ButtonClicked_TutorialLevel()
     {
         //SceneManager.LoadScene("Tutorial");
-        SceneLoader_Async.LoadSceneAsync("TutorialRevamp");
+        SceneLoader_Async.LoadSceneAsync("Tutorial");
     }
 
     public void ButtonClicked_Level1()
