@@ -13,7 +13,8 @@ public class Cucumber : MonoBehaviour
     
     public GameObject target;
     public Tower parentTower;
-
+    [SerializeField]
+    private AudioSource _landingSound;
 
     // If the cucumber does not distract a cat in this amount of time, it will disappear.
     private float _SpawnTime;
@@ -83,5 +84,12 @@ public class Cucumber : MonoBehaviour
         
         Destroy(gameObject);
     }
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.layer == 0)
+        {
+            _landingSound.Play();
+        }
+    }
+
 }

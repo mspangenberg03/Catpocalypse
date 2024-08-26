@@ -108,7 +108,10 @@ public class LaserPointerTower : Tower
             StartCoroutine(SpawnLasers());
         }
 
-
+        if(_ActiveLasersCount == 0)
+        {
+            _towerSound.Stop();
+        }
         //if (_ActiveLasersCount > 0)
             LaserControl();
 
@@ -426,6 +429,7 @@ public class LaserPointerTower : Tower
         {
             DeactivateLaser(i);
         }
+       
     }
 
     private Vector3 CalculateLaserEndPoint(int index)
