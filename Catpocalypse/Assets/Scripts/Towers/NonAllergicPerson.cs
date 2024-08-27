@@ -47,7 +47,9 @@ public class NonAllergicPerson : MonoBehaviour
                 if(CatDistance(target.gameObject) <= 2)
                 {
                     target.stoppingEntities.Add(gameObject);
+                    _personSound.Play();
                     StartCoroutine(PetCat(effectLength));
+
                 } else
                 {
                     agent.SetDestination(target.transform.position);
@@ -115,7 +117,6 @@ public class NonAllergicPerson : MonoBehaviour
     IEnumerator PetCat(float time)
     {
         isPetting = true;
-        _personSound.Play();
         if(target != null)
         {
             target.DistractCat(tower.DistractValue, tower);

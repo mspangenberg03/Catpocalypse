@@ -91,6 +91,7 @@ public class NonAllergicTower : Tower
 
                 GameObject newPerson = Instantiate(person, _RallyPoint, Quaternion.identity, gameObject.transform);
                 _towerSound.Play();
+                Debug.LogWarning("Person spawned");
                 //personList.Add(newPerson);
 
                 peopleSpawned++;

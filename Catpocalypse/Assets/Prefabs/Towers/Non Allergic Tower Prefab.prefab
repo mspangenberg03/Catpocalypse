@@ -198,7 +198,7 @@ MonoBehaviour:
   _cutenessChallengeActive: 0
   fireRate: 1
   towerStats: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
-  _towerSound: {fileID: 0}
+  _towerSound: {fileID: 518502783032453055}
   numOfPeople: 2
   spawnPoints:
   - {fileID: 737399380378500220}
@@ -280,7 +280,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a4eb4071eac6bb347b382a1ffb70ad52, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
