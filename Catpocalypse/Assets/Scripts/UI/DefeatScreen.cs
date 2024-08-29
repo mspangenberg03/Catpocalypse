@@ -16,7 +16,8 @@ public class DefeatScreen : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _RandomDefeatText;
 
-
+    [SerializeField]
+    private AudioSource _defeatSound;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class DefeatScreen : MonoBehaviour
     {
         // Select a random display text every time this panel is opened.
         SelectRandomDisplayText();
+        _defeatSound.Play();
     }
 
     // Update is called once per frame

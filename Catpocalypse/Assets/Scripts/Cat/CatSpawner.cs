@@ -33,7 +33,6 @@ public class CatSpawner : MonoBehaviour
 
     private int _CurrentWave;
 
-
     // Start is called before the first frame update
     void Start()
     {

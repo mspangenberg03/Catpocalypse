@@ -19,6 +19,9 @@ public class NonAllergicPerson : MonoBehaviour
     [SerializeField, Tooltip("How often the person pets the cat")]
     private int petRate;
 
+    [SerializeField]
+    private AudioSource _personSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +47,9 @@ public class NonAllergicPerson : MonoBehaviour
                 if(CatDistance(target.gameObject) <= 2)
                 {
                     target.stoppingEntities.Add(gameObject);
+                    _personSound.Play();
                     StartCoroutine(PetCat(effectLength));
+
                 } else
                 {
                     agent.SetDestination(target.transform.position);

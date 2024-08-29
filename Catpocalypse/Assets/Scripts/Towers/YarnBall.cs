@@ -5,6 +5,8 @@ using UnityEngine;
 public class YarnBall : MonoBehaviour
 {
     public Tower parentTower;
+    [SerializeField]
+    private AudioSource _landingSound;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,6 +25,7 @@ public class YarnBall : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        _landingSound.Play();
         if (collision.gameObject.layer == 11)
         {
             Destroy(gameObject);

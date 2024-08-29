@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StringWaverTower
   m_EditorClassIdentifier: 
   distractValue: 66
-  fireRate: 6
+  fireRate: 1
   buildCost: 200
   upgradeCost: 0
   range: 13

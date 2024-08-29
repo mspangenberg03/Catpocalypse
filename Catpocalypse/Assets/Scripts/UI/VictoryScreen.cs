@@ -17,7 +17,8 @@ public class VictoryScreen : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _RandomVictoryText;
 
-
+    [SerializeField]
+    private AudioSource _victorySound;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class VictoryScreen : MonoBehaviour
     {
         // Select a random display text every time this panel is opened.
         SelectRandomDisplayText();
+        _victorySound.Play();
     }
 
     // Update is called once per frame

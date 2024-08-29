@@ -108,7 +108,10 @@ public class LaserPointerTower : Tower
             StartCoroutine(SpawnLasers());
         }
 
-
+        if(_ActiveLasersCount == 0)
+        {
+            _towerSound.Stop();
+        }
         //if (_ActiveLasersCount > 0)
             LaserControl();
 
@@ -369,6 +372,7 @@ public class LaserPointerTower : Tower
                 {
                     targets.Remove(targetInfo.TargetCat.gameObject);
                     DeactivateLaser(i);
+                    _towerSound.Stop();
                     continue;
                 }
                 else
@@ -409,12 +413,14 @@ public class LaserPointerTower : Tower
         _Lasers[laserIndex].SweepTimer = _LaserSweepTime;
         _Lasers[laserIndex].SweepWidth = _LaserSweepWidth;
         _ActiveLasersCount++;
+        _towerSound.Play();
     }
 
     private void DeactivateLaser(int laserIndex)
     {
         _Lasers[laserIndex].Deactivate();
         _ActiveLasersCount--;
+
     }
 
     private void DeactivateAllLasers()
@@ -423,6 +429,7 @@ public class LaserPointerTower : Tower
         {
             DeactivateLaser(i);
         }
+       
     }
 
     private Vector3 CalculateLaserEndPoint(int index)

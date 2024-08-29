@@ -63,8 +63,8 @@ public class Tower : MonoBehaviour
 
     [SerializeField]
     public TowerData towerStats;
-    
-
+    [SerializeField]
+    public AudioSource _towerSound;
 
     public float FireRate
     {
