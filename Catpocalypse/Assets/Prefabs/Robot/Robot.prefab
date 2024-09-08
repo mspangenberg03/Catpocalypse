@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126104393798665450}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08155233, y: -0, z: -0, w: 0.99666905}
-  m_LocalPosition: {x: 0.00000023841858, y: 1.4000001, z: -2.0000002}
+  m_LocalRotation: {x: 0.081552304, y: -0, z: -0, w: 0.99666905}
+  m_LocalPosition: {x: 0, y: 1.4, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 8825530725394727717}
   - component: {fileID: 9037991028079412331}
   - component: {fileID: 911420052049344620}
+  - component: {fileID: 7381641803219735890}
   m_Layer: 11
   m_Name: Robot
   m_TagString: Untagged
@@ -395,7 +396,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4c135be92c5e54e991da9789b1de53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MaxMovementSpeed: 5
   _MaxTurnSpeed: 40
   _UserInputThreshold: 0.1
   _MovementDecelerationRate: 3
@@ -408,11 +408,11 @@ MonoBehaviour:
   _RobotShutdownThreshold: 0.15
   _RobotMinActivationThreshold: 0.4
   _ProjectileLaunchPoint: {fileID: 4591503004958696695}
-  _ProjectileCooldownTime: 1
   _ProjectilePrefabs:
   - {fileID: 2162205283420624862, guid: b9ad39fb96016d040bd7eb8bc2786fe0, type: 3}
   - {fileID: 3455323922316603053, guid: 6339303a2a47ebb498ec1adcb41891c6, type: 3}
   - {fileID: 1504222617391954164, guid: b623dc5659436094b927bc83032bc6a0, type: 3}
+  _passiveDistractRadius: {fileID: 7381641803219735890}
   _stats: {fileID: 11400000, guid: d45909fa2c79a3744bccee556d0b08da, type: 2}
 --- !u!54 &911420052049344620
 Rigidbody:
@@ -441,6 +441,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
+--- !u!135 &7381641803219735890
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033275683341089311}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5.02
+  m_Center: {x: 0, y: 0.56, z: 0}
 --- !u!1 &4977565327701228380
 GameObject:
   m_ObjectHideFlags: 0

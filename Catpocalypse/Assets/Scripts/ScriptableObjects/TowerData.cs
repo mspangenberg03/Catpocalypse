@@ -59,5 +59,11 @@ public class TowerData : ScriptableObject
             return range;
         }
     }
+    private bool _tierFiveReached = false;
+    public bool TierFiveReached
+    {
+        set { _tierFiveReached = value; }
+        get { return _tierFiveReached; }
+    }
 
 }

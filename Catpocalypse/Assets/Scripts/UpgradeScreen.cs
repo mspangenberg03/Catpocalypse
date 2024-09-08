@@ -179,7 +179,23 @@ public class UpgradeScreen : MonoBehaviour
             switch (_playerUpgradeData.Index)
             {
                 case 0: //Cucumber tower
-                    _cucumberTowerData.BuildCost /= 1.25f;
+                    switch (_playerUpgradeData.TowerTier)
+                    {
+                        case 0:
+                            _cucumberTowerData.FireRate *= .2f;
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            _cucumberTowerData.Range *= 1.4f;
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            _cucumberTowerData.TierFiveReached = true;
+                            break;
+                    }
+                    //_cucumberTowerData.BuildCost /= 1.25f;
                     _towerUpgradeDescription.text = "Increase Yarn Thrower firerate";
                     _playerUpgradeData.Index++;
                     break;
@@ -204,6 +220,7 @@ public class UpgradeScreen : MonoBehaviour
                     _towerUpgradeDescription.text = "Reduce Cucumber tower build cost";
                     _playerUpgradeData.Index = 0;
                     _playerUpgradeData.CurrentTowerUpgrade++;
+                    _playerUpgradeData.TowerTier++;
                     break;
             }
             _playerUpgradeData.TowerUpgradeCost = (int) Mathf.Round(_playerUpgradeData.TowerUpgradeCost*1.05f);
@@ -255,6 +272,28 @@ public class UpgradeScreen : MonoBehaviour
             _notEnoughScrap.gameObject.SetActive(true);
         }
         
+    }
+    public void UpgradeRobot()
+    {
+        switch (_playerUpgradeData.RobotTier)
+        {
+            case 0:
+                _robotStats.MaxMovementSpeed *= 1.15f;
+                break; 
+            case 1:
+                _robotStats.LaunchSpeed *= 1.2f;
+                break; 
+            case 2:
+                _robotStats.FireRate *= .3f;
+                break;
+            case 3:
+                _robotStats.TierFourReached = true;
+                break;
+            case 4:
+                _robotStats.TierFiveReached = true;
+                break;
+        }
+        _playerUpgradeData.RobotTier++;
     }
     public void UpgradeRobotMovementSpeed()
     {

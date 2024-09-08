@@ -9,6 +9,8 @@ public class SuperCucumber : MonoBehaviour
     [SerializeField,Tooltip("The smaller cucumbers that are spawned")]
     private GameObject cucumber;
     private List<GameObject> catsInRange;
+    //true if the cucumber was spawned by a tier 5 cucumber tower
+    public bool _isSubCuc;
     // Start is called before the first frame update
     void Start()
     {

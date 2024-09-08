@@ -32,7 +32,7 @@ public class RobotProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _LaunchSpeed = _stats.LaunchSpeed;
     }
 
     // Update is called once per frame
@@ -50,9 +50,13 @@ public class RobotProjectile : MonoBehaviour
         if (collision.gameObject.tag == "Cat")
         {
             CatBase target = collision.gameObject.GetComponent<CatBase>();
-
+            if (_stats.TierFiveReached)
+            {
+                StartCoroutine(Stun(target));
+            }
             if (target != null)
                 Distract(target);
+
         }
     }
 
@@ -66,6 +70,16 @@ public class RobotProjectile : MonoBehaviour
 
         Destroy(gameObject);
     }
+    IEnumerator Stun(CatBase target)
+    {
+        target.stoppingEntities.Add(gameObject);
+        yield return new WaitForSeconds(.5f);
+        target.stoppingEntities.Remove(gameObject);
+
+    }
+    
+
+    
 
 
 

@@ -123,4 +123,16 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _index; }
         set { _index = value; }
     }
+    private int _towerTier = 0;
+    public int TowerTier
+    {
+        get { return _towerTier; }
+        set { _towerTier = value; }
+    }
+    private int _robotTier = 0;
+    public int RobotTier
+    {
+        get { return _robotTier; }
+        set { _robotTier = value; }
+    }
 }
