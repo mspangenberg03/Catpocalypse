@@ -129,6 +129,12 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _towerTier; }
         set { _towerTier = value; }
     }
+    private int _nonAllergicTier = 0;
+    public int NonAllergicTier
+    {
+        get { return _nonAllergicTier; }
+        set { _nonAllergicTier = value; }
+    }
     private int _robotTier = 0;
     public int RobotTier
     {

@@ -29,6 +29,7 @@ public class NonAllergicPerson : MonoBehaviour
         tower = transform.parent.gameObject.GetComponent<NonAllergicTower>();
         catsInRange = new List<GameObject>();
         animator = GetComponent<Animation>();
+        agent.speed = tower.towerStats.NonAllergicPersonMoveSpeed;
     }
    
     // Update is called once per frame

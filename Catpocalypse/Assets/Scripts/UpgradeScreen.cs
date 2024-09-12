@@ -295,6 +295,28 @@ public class UpgradeScreen : MonoBehaviour
         }
         _playerUpgradeData.RobotTier++;
     }
+    public void UpgradeNonAllergicTower()
+    {
+        switch (_playerUpgradeData.RobotTier)
+        {
+            case 0:
+                _nonAllergicTowerData.BuildCost *= .15f;
+                break;
+            case 1:
+                _nonAllergicTowerData.NonAllergicPersonMoveSpeed *= 1.1f;
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
+    }
+    public void FortificationUpgrade()
+    {
+
+    }
     public void UpgradeRobotMovementSpeed()
     {
         if (_playerUpgradeData.Scrap >= _playerUpgradeData.RobotMovementUpgradeCost && _playerUpgradeData.CurrentRobotMovementUpgrade<_maxRobotMovementUpgrades)

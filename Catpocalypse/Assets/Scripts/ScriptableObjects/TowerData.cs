@@ -65,5 +65,11 @@ public class TowerData : ScriptableObject
         set { _tierFiveReached = value; }
         get { return _tierFiveReached; }
     }
+    private float _nonAllergicPersonMoveSpeed = 5;
+    public float NonAllergicPersonMoveSpeed
+    {
+        get { return _nonAllergicPersonMoveSpeed; }
+        set { _nonAllergicPersonMoveSpeed = value; } 
+    }
 
 }
