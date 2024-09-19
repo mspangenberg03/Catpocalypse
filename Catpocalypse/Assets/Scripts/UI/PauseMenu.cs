@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+
+    [SerializeField] SaveLoadScreen _Panel_SaveLoadScreen;
+
     public void Awake()
     {
         this.gameObject.SetActive(false);
@@ -15,6 +18,18 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 0f;
         this.gameObject.SetActive(true);
+    }
+
+    public void ButtonClicked_SaveLoadScreen()
+    {
+        if (_Panel_SaveLoadScreen.gameObject.activeSelf)
+        {
+            return;
+        }
+
+        // Display the SaveLoadScreen panel.
+        _Panel_SaveLoadScreen.gameObject.SetActive(true);
+
     }
 
     /// <summary>

@@ -10,6 +10,19 @@ public class LevelSelectScreen : MonoBehaviour
     [SerializeField] CatInfoPanel _Panel_CatInfo;
     [SerializeField] TowerInfoPanel _Panel_TowerInfo;
     [SerializeField] UpgradeScreen _Panel_UpgradeScreen;
+    [SerializeField] SaveLoadScreen _Panel_SaveLoadScreen;
+    [SerializeField] PauseMenu _Panel_PauseMenu;
+
+    public void ButtonClicked_PauseMenu()
+    {
+        if (_Panel_PauseMenu.gameObject.activeSelf)
+        {
+            return;
+        }
+
+        // Display the SaveLoadScreen panel.
+        _Panel_PauseMenu.gameObject.SetActive(true);
+    }
 
 
     public void ButtonClicked_ViewCatInfo()

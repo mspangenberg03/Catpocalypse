@@ -31,12 +31,7 @@ public class VictoryScreen : MonoBehaviour
         // Select a random display text every time this panel is opened.
         SelectRandomDisplayText();
         _victorySound.Play();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        PlayerDataManager.Instance.UpdateLevelsCompleted(1);
     }
 
     private void SelectRandomDisplayText()
