@@ -10,7 +10,7 @@ public class LevelSelectScreen : MonoBehaviour
     [SerializeField] CatInfoPanel _Panel_CatInfo;
     [SerializeField] TowerInfoPanel _Panel_TowerInfo;
     [SerializeField] UpgradeScreen _Panel_UpgradeScreen;
-    [SerializeField] SaveLoadScreen _Panel_SaveLoadScreen;
+    [SerializeField] PlayerDataManager _Panel_SaveLoadScreen;
     [SerializeField] PauseMenu _Panel_PauseMenu;
 
     public void ButtonClicked_PauseMenu()

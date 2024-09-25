@@ -41,6 +41,11 @@ public class HUD : MonoBehaviour
     [Header("Level End Panels")]
     [SerializeField] private GameObject _DefeatScreen;
     [SerializeField] private GameObject _VictoryScreen;
+
+    [Header("Game Speed Controls")]
+    [SerializeField] private Button _TogglePauseButton;
+    [SerializeField] private Sprite _PauseImage;
+    [SerializeField] private Sprite _PlayImage;
     
 
     private RobotController _RobotController;
@@ -153,6 +158,9 @@ public class HUD : MonoBehaviour
         
         // The button state should always be the opposite of the labels' state.
         Instance.StartWaveButton.gameObject.SetActive(true);
+
+        // The pause button should only be available when a wave is running
+        Instance._TogglePauseButton.gameObject.SetActive(false);
     }
 
     public static void ShowWaveDisplay()
@@ -170,6 +178,9 @@ public class HUD : MonoBehaviour
 
         // The button state should always be the opposite of the labels' state.
         Instance._StartWaveButton.gameObject.SetActive(false);
+
+        // The pause button should only be available when a wave is running
+        Instance._TogglePauseButton.gameObject.SetActive(true);
     }
 
     public static void RevealVictory()
@@ -177,6 +188,7 @@ public class HUD : MonoBehaviour
         Instance._StartWaveButton.gameObject.SetActive(false);
         Instance.WaveNumberLabel.gameObject.SetActive(false);
         Instance.CatsRemainingLabel.gameObject.SetActive(false);
+        Instance._TogglePauseButton.gameObject.SetActive(false);
 
         Instance._VictoryScreen.SetActive(true);
     }
@@ -186,8 +198,23 @@ public class HUD : MonoBehaviour
         Instance._StartWaveButton.gameObject.SetActive(false);
         Instance.WaveNumberLabel.gameObject.SetActive(false);
         Instance.CatsRemainingLabel.gameObject.SetActive(false);
+        Instance._TogglePauseButton.gameObject.SetActive(false);
 
         Instance._DefeatScreen.SetActive(true);
+    }
+
+    public static void TogglePauseGame()
+    {
+        if(Time.timeScale == 0)
+        {
+            Instance._TogglePauseButton.image.sprite = Instance._PauseImage;
+            Time.timeScale = 1;
+        } else
+        {
+            Instance._TogglePauseButton.image.sprite = Instance._PlayImage;
+
+            Time.timeScale = 0;
+        }
     }
 
 
@@ -207,4 +234,5 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI RobotPowerLevelLabel { get { return _RobotPowerLevelLabel; } }
     public Button ToggleRobotButton { get { return _ToggleRobotButton; } }
 
+    public Button TogglePauseButton { get { return _TogglePauseButton; } }
 }

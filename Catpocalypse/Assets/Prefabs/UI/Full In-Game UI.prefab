@@ -2095,6 +2095,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 1684595135494574383, guid: 5c17d91d1ac75eb499a729d8975f1971, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 799.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376615113980306057, guid: 5c17d91d1ac75eb499a729d8975f1971, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 639.7
+      objectReference: {fileID: 0}
     - target: {fileID: 3899631078937535272, guid: 5c17d91d1ac75eb499a729d8975f1971, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2183,11 +2191,38 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6177022455155177468, guid: 5c17d91d1ac75eb499a729d8975f1971, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 797.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8870608314579743788, guid: 5c17d91d1ac75eb499a729d8975f1971, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4769887558048806494}
+    - target: {fileID: 8870608314579743788, guid: 5c17d91d1ac75eb499a729d8975f1971, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TogglePauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8870608314579743788, guid: 5c17d91d1ac75eb499a729d8975f1971, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HUD, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c17d91d1ac75eb499a729d8975f1971, type: 3}
+--- !u!114 &3071893626945240940 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8870608314579743788, guid: 5c17d91d1ac75eb499a729d8975f1971, type: 3}
+  m_PrefabInstance: {fileID: 5889360006838324032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3710513992412699833 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7117184294222403577, guid: 5c17d91d1ac75eb499a729d8975f1971, type: 3}
@@ -2247,6 +2282,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2759275787118404191, guid: 98ae55ae006993c40afb048925d7c6e3, type: 3}
+      propertyPath: _PlayImage
+      value: 
+      objectReference: {fileID: 21300000, guid: d4ebff566635f5c4c97726efca5e3b88, type: 3}
+    - target: {fileID: 2759275787118404191, guid: 98ae55ae006993c40afb048925d7c6e3, type: 3}
+      propertyPath: _PauseImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 03af5e16c0eef6b4ea8b9acc155621b4, type: 3}
+    - target: {fileID: 2759275787118404191, guid: 98ae55ae006993c40afb048925d7c6e3, type: 3}
       propertyPath: _DefeatScreen
       value: 
       objectReference: {fileID: 437927452308839055}
@@ -2258,6 +2301,10 @@ PrefabInstance:
       propertyPath: _StartWaveButton
       value: 
       objectReference: {fileID: 4990386211989650139}
+    - target: {fileID: 2759275787118404191, guid: 98ae55ae006993c40afb048925d7c6e3, type: 3}
+      propertyPath: _TogglePauseButton
+      value: 
+      objectReference: {fileID: 3071893626945240940}
     - target: {fileID: 2759275787118404191, guid: 98ae55ae006993c40afb048925d7c6e3, type: 3}
       propertyPath: _ToggleRobotButton
       value: 
@@ -2369,6 +2416,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4769887558048806494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2759275787118404191, guid: 98ae55ae006993c40afb048925d7c6e3, type: 3}
+  m_PrefabInstance: {fileID: 7239784631930360833}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73578a958f5c6ff48afaa675e213e693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7425910210547582795

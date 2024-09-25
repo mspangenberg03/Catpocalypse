@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
 
-    [SerializeField] SaveLoadScreen _Panel_SaveLoadScreen;
+    [SerializeField] PlayerDataManager _Panel_SaveLoadScreen;
 
     public void Awake()
     {
@@ -57,6 +57,22 @@ public class PauseMenu : MonoBehaviour
 
         //SceneManager.LoadScene("MainMenu");
         SceneLoader_Async.LoadSceneAsync("MainMenu");
+
+    }
+
+    public void OnLevelSelect()
+    {
+        GameObject[] bases = GameObject.FindGameObjectsWithTag("TowerBase");
+        foreach (GameObject tb in bases)
+        {
+            if (tb.GetComponent<TowerBase>().hasTower == true)
+            {
+                tb.GetComponent<TowerBase>().DestroyTower();
+            }
+        }
+
+        //SceneManager.LoadScene("MainMenu");
+        SceneLoader_Async.LoadSceneAsync("LevelSelection");
 
     }
 }

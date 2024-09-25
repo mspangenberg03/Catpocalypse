@@ -4328,14 +4328,14 @@ PrefabInstance:
     - target: {fileID: 3071893626945240940, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1244659498}
+      objectReference: {fileID: 1244659501}
     - target: {fileID: 3071893626945240940, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnPauseGame
+      value: TogglePauseGame
       objectReference: {fileID: 0}
     - target: {fileID: 3071893626945240940, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseMenu, Assembly-CSharp
+      value: HUD, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3480209391845280370, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_Pivot.x
@@ -4473,6 +4473,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86e82d6d678f7ca4b99718fb0b65afce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1244659501 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4769887558048806494, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
+  m_PrefabInstance: {fileID: 1244659497}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73578a958f5c6ff48afaa675e213e693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1263930229
