@@ -339,6 +339,7 @@ MonoBehaviour:
   stoppingEntities: []
   isATarget: 0
   spedUp: 0
+  _upgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
 --- !u!135 &-8017009453871223181
 SphereCollider:
   m_ObjectHideFlags: 0

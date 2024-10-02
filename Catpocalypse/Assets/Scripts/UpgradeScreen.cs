@@ -26,6 +26,8 @@ public class UpgradeScreen : MonoBehaviour
     [SerializeField]
     private TowerData _nonAllergicTowerData;
     [SerializeField]
+    private TowerData _laserPointerData;
+    [SerializeField]
     private RobotStats _robotStats;
 
     #region Text fields
@@ -66,6 +68,8 @@ public class UpgradeScreen : MonoBehaviour
     private Button _robotSpeedUpgrade;
     [SerializeField]
     private Button _robotDistractValueUpgrade;
+    [SerializeField]
+    private Button _robotUpgrade;
     [Header("Max Upgrades")]
     [SerializeField,Tooltip("How many tower upgrades can the player get")]
     private int _maxTowerUpgrades;
@@ -86,6 +90,7 @@ public class UpgradeScreen : MonoBehaviour
         _robotFirerateUpgrade.onClick.AddListener(() => UpgradeRobotFirerate());
         _robotDistractValueUpgrade.onClick.AddListener(() => UpgradeRobotDistractionValue());
         _robotSpeedUpgrade.onClick.AddListener(() => UpgradeRobotMovementSpeed());
+        _robotUpgrade.onClick.AddListener(() => UpgradeRobot());
         //_index = _playerUpgradeData.CurrentTowerUpgrade;//PlayerPrefs.GetInt("index");
         switch (_playerUpgradeData.Index)
         {
@@ -169,17 +174,17 @@ public class UpgradeScreen : MonoBehaviour
         _robotMovementTier.text = _playerUpgradeData.CurrentRobotMovementUpgrade + "/" + _maxRobotMovementUpgrades;
     }
     //Upgrades the tower that is selected
-    public void UpgradeTower()
+    public void UpgradeTower(int towerInt)
     {
         //Debug.Log("Upgrade Tower called");
         if(_playerUpgradeData.CurrentTowerUpgrade < _maxTowerUpgrades && _playerUpgradeData.Scrap >= _playerUpgradeData.TowerUpgradeCost)
         {
             _playerUpgradeData.Scrap -= _playerUpgradeData.TowerUpgradeCost;
             _notEnoughScrap.gameObject.SetActive(false);
-            switch (_playerUpgradeData.Index)
+            switch (towerInt)
             {
                 case 0: //Cucumber tower
-                    switch (_playerUpgradeData.TowerTier)
+                    switch (_playerUpgradeData.CucumberTowerTier)
                     {
                         case 0:
                             _cucumberTowerData.FireRate *= .2f;
@@ -195,32 +200,103 @@ public class UpgradeScreen : MonoBehaviour
                             _cucumberTowerData.TierFiveReached = true;
                             break;
                     }
+                    
                     //_cucumberTowerData.BuildCost /= 1.25f;
-                    _towerUpgradeDescription.text = "Increase Yarn Thrower firerate";
-                    _playerUpgradeData.Index++;
+                    //_towerUpgradeDescription.text = "Increase Yarn Thrower firerate";
+                    _playerUpgradeData.CucumberTowerTier++;
                     break;
                 case 1://Yarn Thrower
-                    _yarnThrowerTowerData.FireRate /= 1.25f;
-                    _towerUpgradeDescription.text = "Increase the range and Distraction value of the String Waver Tower";
-                    _playerUpgradeData.Index++;
+                    switch (_playerUpgradeData.YarnThrowerTier)
+                    {
+
+                    }
+                    //_yarnThrowerTowerData.FireRate /= 1.25f;
+                    //_towerUpgradeDescription.text = "Increase the range and Distraction value of the String Waver Tower";
+                    _playerUpgradeData.YarnThrowerTier++;
                     break;
                 case 2: //String Waver
-                    _stringWaverTowerData.DistractValue *= 1.25f;
-                    _stringWaverTowerData.Range *= 1.25f;
-                    _towerUpgradeDescription.text = "Increase the distract value of the Non-Allergic tower";
-                    _playerUpgradeData.Index++;
+                    switch (_playerUpgradeData.StringWaverTier)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            _stringWaverTowerData.DistractValue *= 1.25f;
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                    }
+                    _playerUpgradeData.StringWaverTier++;
+                    //_stringWaverTowerData.DistractValue *= 1.25f;
+                    //_stringWaverTowerData.Range *= 1.25f;
+                    //_towerUpgradeDescription.text = "Increase the distract value of the Non-Allergic tower";
+                    //_playerUpgradeData.Index++;
                     break;
                 case 3: //Non-Allergic
-                    _nonAllergicTowerData.DistractValue *= 1.25f;
-                    _towerUpgradeDescription.text = "Increase the range of the Scratching Post Tower";
-                    _playerUpgradeData.Index++;
+                    switch (_playerUpgradeData.NonAllergicTier) 
+                    {
+                        case 0:
+                            _nonAllergicTowerData.BuildCost *= .15f;
+                            break;
+                        case 1:
+                            _nonAllergicTowerData.NonAllergicPersonMoveSpeed *= 1.1f;
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                    }
+
+                    //_nonAllergicTowerData.DistractValue *= 1.25f;
+                    //_towerUpgradeDescription.text = "Increase the range of the Scratching Post Tower";
+                    _playerUpgradeData.NonAllergicTier++;
                     break;
                 case 4: //Scratching post
-                    _scratchingPostTowerData.Range *= 1.15f;
-                    _towerUpgradeDescription.text = "Reduce Cucumber tower build cost";
-                    _playerUpgradeData.Index = 0;
-                    _playerUpgradeData.CurrentTowerUpgrade++;
-                    _playerUpgradeData.TowerTier++;
+                    switch(_playerUpgradeData.ScratchingPostTier)
+                    {
+                        case 0:
+                            
+                            break;
+                        case 1:
+                            //_nonAllergicTowerData.NonAllergicPersonMoveSpeed *= 1.1f;
+                            break;
+                        case 2:
+                            
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                    }
+                    //_scratchingPostTowerData.Range *= 1.15f;
+                    //_towerUpgradeDescription.text = "Reduce Cucumber tower build cost";
+                    //_playerUpgradeData.Index = 0;
+                    //_playerUpgradeData.CurrentTowerUpgrade++;
+                    //_playerUpgradeData.TowerTier++;
+                    _playerUpgradeData.ScratchingPostTier++;
+                    break;
+                case 5: //Laser Pointer Tower
+                    switch (_playerUpgradeData.LaserPointerTier)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            _laserPointerData.Range *= 1.2f;
+                            break;
+                        case 2:
+                            _laserPointerData.DistractValue *= 1.2f;
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                    }
+                    _playerUpgradeData.LaserPointerTier++;
                     break;
             }
             _playerUpgradeData.TowerUpgradeCost = (int) Mathf.Round(_playerUpgradeData.TowerUpgradeCost*1.05f);
@@ -295,27 +371,30 @@ public class UpgradeScreen : MonoBehaviour
         }
         _playerUpgradeData.RobotTier++;
     }
-    public void UpgradeNonAllergicTower()
-    {
-        switch (_playerUpgradeData.RobotTier)
-        {
-            case 0:
-                _nonAllergicTowerData.BuildCost *= .15f;
-                break;
-            case 1:
-                _nonAllergicTowerData.NonAllergicPersonMoveSpeed *= 1.1f;
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-        }
-    }
+
     public void FortificationUpgrade()
     {
-
+        switch (_playerUpgradeData.FortificationTier)
+        {
+            case 0:
+                _playerUpgradeData.MaxHealth *= 2;
+                _playerUpgradeData._fortTierOneReached = true;
+                break;
+            case 1:
+                _playerUpgradeData._fortTierTwoReached = true;
+                break;
+            case 2:
+                _playerUpgradeData._fortTierThreeReached = true;
+                break;
+            case 3:
+                //Hairballs have not been implemented yet
+                _playerUpgradeData.HairballRemovalSpeed *= .5f;
+                break;
+            case 4:
+                _playerUpgradeData._fortTierFiveReached = true;
+                break;
+        }
+        _playerUpgradeData.FortificationTier++;
     }
     public void UpgradeRobotMovementSpeed()
     {

@@ -255,7 +255,7 @@ MonoBehaviour:
   upgradeCost: 0
   _cutenessChallengeActive: 0
   fireRate: 0
-  towerStats: {fileID: 0}
+  towerStats: {fileID: 11400000, guid: b68cea4ef97a9444093591f37642461e, type: 2}
   _towerSound: {fileID: 873177639890731166}
   laserPrefab: {fileID: 5513968051566747971, guid: b91d010c08c2b284bb79cc19087d05df, type: 3}
   laserEndPointPrefab: {fileID: 6133470768189819576, guid: 2ebd2f586f92cd84b9cabdbdccc3eb68, type: 3}

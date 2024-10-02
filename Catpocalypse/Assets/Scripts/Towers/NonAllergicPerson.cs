@@ -9,6 +9,7 @@ public class NonAllergicPerson : MonoBehaviour
 {
     private NavMeshAgent agent;
     private NonAllergicTower tower; //The parent tower
+    private Fortifications fort;
     private bool isPetting = false; //Is the person petting a cat
     private CatBase target;
     private List<GameObject> catsInRange; //The cats that are in range of the collider
@@ -27,6 +28,7 @@ public class NonAllergicPerson : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         tower = transform.parent.gameObject.GetComponent<NonAllergicTower>();
+        fort = transform.parent.gameObject.GetComponent<Fortifications>();
         catsInRange = new List<GameObject>();
         animator = GetComponent<Animation>();
         agent.speed = tower.towerStats.NonAllergicPersonMoveSpeed;
@@ -35,35 +37,72 @@ public class NonAllergicPerson : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        //If there are cats in range and the person does not have a target, find a target
-        if (tower.targets.Count > 0 && target == null)
+        if(tower != null)
         {
-            FindClosestAvailableCat();
-        }
-        if (target != null && tower.targets.Contains(target.gameObject))
-        {
-            if (!isPetting)
+            //If there are cats in range and the person does not have a target, find a target
+            if (tower.targets.Count > 0 && target == null)
             {
-                if(CatDistance(target.gameObject) <= 2)
+                FindClosestAvailableCat();
+            }
+            if (target != null && tower.targets.Contains(target.gameObject))
+            {
+                if (!isPetting)
                 {
-                    target.stoppingEntities.Add(gameObject);
-                    _personSound.Play();
-                    StartCoroutine(PetCat(effectLength));
+                    if (CatDistance(target.gameObject) <= 2)
+                    {
+                        target.stoppingEntities.Add(gameObject);
+                        _personSound.Play();
+                        StartCoroutine(PetCat(effectLength));
 
-                } else
-                {
-                    agent.SetDestination(target.transform.position);
+                    }
+                    else
+                    {
+                        agent.SetDestination(target.transform.position);
+                    }
+
                 }
-                
+            }
+            //If the person has a target that is not in the list, the person does not have a target
+            if (target != null && !tower.targets.Contains(target.gameObject))
+            {
+                RemoveTarget();
+
             }
         }
-        //If the person has a target that is not in the list, the person does not have a target
-        if(target != null && !tower.targets.Contains(target.gameObject))
+        if (fort != null)
         {
-            RemoveTarget();
-            
+            //If there are cats in range and the person does not have a target, find a target
+            if (fort.targets.Count > 0 && target == null)
+            {
+                FindClosestAvailableCat();
+            }
+            if (target != null && fort.targets.Contains(target.gameObject))
+            {
+                if (!isPetting)
+                {
+                    if (CatDistance(target.gameObject) <= 2)
+                    {
+                        target.stoppingEntities.Add(gameObject);
+                        _personSound.Play();
+                        StartCoroutine(PetCat(effectLength));
+
+                    }
+                    else
+                    {
+                        agent.SetDestination(target.transform.position);
+                    }
+
+                }
+            }
+            //If the person has a target that is not in the list, the person does not have a target
+            if (target != null && !fort.targets.Contains(target.gameObject))
+            {
+                RemoveTarget();
+
+            }
         }
+
+
     }
     
     //Gets the cat closest to the player that is not stopped and sets it as the target
@@ -71,22 +110,43 @@ public class NonAllergicPerson : MonoBehaviour
     {
         GameObject closestCat = null;
         float smallestDist = 2000000;
-        foreach(GameObject cat in tower.targets)
+        if(tower != null)
         {
-            if (cat != null) //If the cat exists
+            foreach (GameObject cat in tower.targets)
             {
-                if (CatDistance(cat) < smallestDist &&                           //If it is closer to the person than the previous smallest distance
-                    !(cat.GetComponent<CatBase>().isATarget) &&                  //If the cat is not a target of another person
-                    tower.targets.Contains(cat))                                 //If the cat is in range of the tower  
+                if (cat != null) //If the cat exists
                 {
-                    smallestDist = CatDistance(cat);
-                    closestCat = cat;
+                    if (CatDistance(cat) < smallestDist &&                           //If it is closer to the person than the previous smallest distance
+                        !(cat.GetComponent<CatBase>().isATarget) &&                  //If the cat is not a target of another person
+                        tower.targets.Contains(cat))                                 //If the cat is in range of the tower  
+                    {
+                        smallestDist = CatDistance(cat);
+                        closestCat = cat;
+                    }
                 }
+
             }
-            
         }
-        if (closestCat != null){
-            target = closestCat.GetComponent<CatBase>(); ;
+        if (fort != null)
+        {
+            foreach (GameObject cat in fort.targets)
+            {
+                if (cat != null) //If the cat exists
+                {
+                    if (CatDistance(cat) < smallestDist &&                           //If it is closer to the person than the previous smallest distance
+                        !(cat.GetComponent<CatBase>().isATarget) &&                  //If the cat is not a target of another person
+                        fort.targets.Contains(cat))                                 //If the cat is in range of the fort  
+                    {
+                        smallestDist = CatDistance(cat);
+                        closestCat = cat;
+                    }
+                }
+
+            }
+        }
+        if (closestCat != null)
+        {
+            target = closestCat.GetComponent<CatBase>();
         }                         
         if (target != null)
         {
@@ -106,11 +166,20 @@ public class NonAllergicPerson : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        //If the person leaves the tower's range, find a new target
-        if(other.gameObject.GetInstanceID() == tower.gameObject.GetInstanceID())
+        if (tower != null)
         {
-            RemoveTarget();
+            //If the person leaves the tower's range, find a new target
+            if (other.gameObject.GetInstanceID() == tower.gameObject.GetInstanceID())
+            {
+                RemoveTarget();
+            }
         }
+        if (fort != null)
+        {
+             
+        }
+        
+        
     }
 
 
@@ -118,10 +187,14 @@ public class NonAllergicPerson : MonoBehaviour
     IEnumerator PetCat(float time)
     {
         isPetting = true;
-        if(target != null)
+        if(target != null && tower != null)
         {
             target.DistractCat(tower.DistractValue, tower);
-        }  
+        }
+        if(target != null && fort != null)
+        {
+            target.FortificationCatDistraction(fort.distactionValue,fort);
+        }
         yield return new WaitForSeconds(petRate);
         if (time == 0)
         {
@@ -139,6 +212,10 @@ public class NonAllergicPerson : MonoBehaviour
 
     private void RemoveTarget()
     {
+        if (fort != null)
+        {
+            fort.targets.Remove(target.gameObject);
+        }
         Debug.Log("Removing target " + target);
         StopAllCoroutines();
         if (target != null)
@@ -149,6 +226,7 @@ public class NonAllergicPerson : MonoBehaviour
             
         }
         isPetting = false;
+        
     }
 
 

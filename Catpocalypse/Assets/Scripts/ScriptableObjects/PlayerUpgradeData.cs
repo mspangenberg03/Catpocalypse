@@ -123,11 +123,17 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _index; }
         set { _index = value; }
     }
-    private int _towerTier = 0;
-    public int TowerTier
+    private int _cucumberTowerTier = 0;
+    public int CucumberTowerTier
     {
-        get { return _towerTier; }
-        set { _towerTier = value; }
+        get { return _cucumberTowerTier; }
+        set { _cucumberTowerTier = value; }
+    }
+    private int _yarnThrowerTier = 0;
+    public int YarnThrowerTier
+    {
+        get { return _yarnThrowerTier; }
+        set { _yarnThrowerTier = value; }
     }
     private int _nonAllergicTier = 0;
     public int NonAllergicTier
@@ -135,10 +141,45 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _nonAllergicTier; }
         set { _nonAllergicTier = value; }
     }
+    private int _stringWaverTier = 0;
+    public int StringWaverTier
+    {
+        set { _stringWaverTier = value; }
+        get { return _stringWaverTier; }
+    }
+    private int _scratchingPostTier = 0;
+    public int ScratchingPostTier
+    {
+        set { _scratchingPostTier = value; }
+        get { return _scratchingPostTier; }
+    }
+    private int _laserPointerTier = 0;
+    public int LaserPointerTier
+    {
+        get { return _laserPointerTier; }
+        set { _laserPointerTier = value;}
+    }
     private int _robotTier = 0;
     public int RobotTier
     {
         get { return _robotTier; }
         set { _robotTier = value; }
     }
+    private int _fortificationTier = 0;
+    public int FortificationTier
+    {
+        set { _fortificationTier = value; }
+        get { return _fortificationTier; }
+    }
+    private float _hairballRemovalSpeed;
+    public float HairballRemovalSpeed
+    {
+        get { return _hairballRemovalSpeed; }
+        set { _hairballRemovalSpeed = value;}
+    }
+    public bool _fortTierOneReached = false;
+    public bool _fortTierTwoReached = false;
+    public bool _fortTierThreeReached = false;
+    public bool _fortTierFiveReached = false;
+    
 }
