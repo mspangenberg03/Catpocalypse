@@ -157,8 +157,8 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
-            _waveSound.clip = _endClip;
-            _waveSound.Play();
+            //_waveSound.clip = _endClip;
+            //_waveSound.Play();
             Debug.LogWarning("End wave sound played");
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
                 HUD.RevealVictory();

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e94636f7f71f6e549bb280b005aa28bd, type: 3}
-  m_Name: CucumberTower
+  m_Name: LaserPointerTower
   m_EditorClassIdentifier: 
-  distractValue: 87.5
-  fireRate: 0.8
-  buildCost: 100
-  upgradeCost: 200
-  range: 65
+  distractValue: 5
+  fireRate: 0
+  buildCost: 150
+  upgradeCost: 100
+  range: 80

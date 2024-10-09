@@ -41,7 +41,7 @@ public class PlayerDataManager : MonoBehaviour
     public void SaveGame(int i)
     {
         string saveFilePath = BuildSaveFilePath(_CurrentData);
-        string savePlayerData = JsonUtility.ToJson(_PlayerData[i]);
+        string savePlayerData = JsonUtility.ToJson(_PlayerData[i - 1]);
         File.WriteAllText(saveFilePath, savePlayerData);
 
         Debug.Log("Save file created at: " + saveFilePath);
@@ -135,6 +135,7 @@ public class PlayerDataManager : MonoBehaviour
         _PlayerData[_CurrentData].cucumberUpgrades += amount;
     }
 
+    public PlayerData CurrentData { get { return _PlayerData[_CurrentData]; } }
 
 }
 

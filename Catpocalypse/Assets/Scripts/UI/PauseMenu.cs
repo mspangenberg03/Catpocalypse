@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
 
-    [SerializeField] PlayerDataManager _Panel_SaveLoadScreen;
+    [SerializeField] SaveLoadScreen _Panel_SaveLoadScreen;
 
     public void Awake()
     {
@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
-    public void ButtonClicked_SaveLoadScreen()
+    public void ButtonClicked_SaveScreen()
     {
         if (_Panel_SaveLoadScreen.gameObject.activeSelf)
         {
@@ -28,7 +28,19 @@ public class PauseMenu : MonoBehaviour
         }
 
         // Display the SaveLoadScreen panel.
-        _Panel_SaveLoadScreen.gameObject.SetActive(true);
+        _Panel_SaveLoadScreen.ShowSaveScreen();
+
+    }
+
+    public void ButtonClicked_LoadScreen()
+    {
+        if (_Panel_SaveLoadScreen.gameObject.activeSelf)
+        {
+            return;
+        }
+
+        // Display the SaveLoadScreen panel.
+        _Panel_SaveLoadScreen.ShowLoadScreen();
 
     }
 

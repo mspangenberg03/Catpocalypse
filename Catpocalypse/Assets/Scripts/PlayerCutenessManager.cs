@@ -108,6 +108,10 @@ public class PlayerCutenessManager : MonoBehaviour
 
             cutenessMeterMaxedText.gameObject.SetActive(true);
 
+            new WaitForSeconds(4);
+
+            cutenessMeterMaxedText.gameObject.SetActive(false);
+
             // Randomly select a cuteness challenge for the next wave.
             SelectCutenessChallenge();
         }

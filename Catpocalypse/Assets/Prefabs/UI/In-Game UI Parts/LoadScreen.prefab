@@ -1029,6 +1029,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fcd72ce7e2a2243940f85ec3bdcb54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _SaveButton: {fileID: 6007963235776903019}
+  _LoadButton: {fileID: 6335668147547048069}
+  _SaveFileButtons:
+  - {fileID: 8174076161171235023}
+  - {fileID: 2252025348641711115}
+  - {fileID: 8791793569552229950}
 --- !u!1 &6007963235776903019
 GameObject:
   m_ObjectHideFlags: 0

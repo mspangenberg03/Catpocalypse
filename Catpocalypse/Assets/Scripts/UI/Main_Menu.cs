@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class Main_Menu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _LoadScreen;
+    private SaveLoadScreen _LoadScreen;
 
     // Starts the game
     public void OnPlayButton()
@@ -14,7 +14,7 @@ public class Main_Menu : MonoBehaviour
 
     public void OnLoadButton()
     {
-        _LoadScreen.SetActive(true);
+        _LoadScreen.ShowLoadScreen();
     }
 
     // Opens options

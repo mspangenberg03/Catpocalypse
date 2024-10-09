@@ -256,7 +256,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4954979617875191065}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: ButtonClicked_SaveLoadScreen
+        m_MethodName: ButtonClicked_SaveScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -618,7 +618,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4954979617875191065}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: ButtonClicked_SaveLoadScreen
+        m_MethodName: ButtonClicked_LoadScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -244,7 +244,7 @@ MonoBehaviour:
   towerLevel: 1
   upgradeCost: 200
   _cutenessChallengeActive: 0
-  fireRate: 0.75
+  fireRate: 0.55
   towerStats: {fileID: 11400000, guid: a572c91e31552ab4c9e133f4109ab9b9, type: 2}
   _towerSound: {fileID: 8539556211394392481}
   cucumberPrefab: {fileID: 6603149977634291862, guid: 356491f32b54d504ab168c5639033d23, type: 3}

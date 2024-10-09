@@ -66,6 +66,8 @@ public class HUD : MonoBehaviour
             _RobotController.OnBatteryLevelChanged += UpdateRobotBatteryLevelDisplay;
 
         Instance = this;
+
+        TogglePauseButton.gameObject.SetActive(false);
     }
 
     private void Start()

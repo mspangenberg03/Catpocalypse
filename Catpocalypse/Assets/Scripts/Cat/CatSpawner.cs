@@ -32,6 +32,7 @@ public class CatSpawner : MonoBehaviour
     [SerializeField] private PlayerCutenessManager _CutenessManager;
 
     private int _CurrentWave;
+    private Coroutine _CurrentCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -41,11 +42,15 @@ public class CatSpawner : MonoBehaviour
 
     public void StartNextWave()
     {       
-        StartCoroutine(Spawner(_CurrentWave++));
+         _CurrentCoroutine =  StartCoroutine(Spawner(_CurrentWave++));
     }
     public void StopSpawner()
     {
-        StartCoroutine(Spawner(_CurrentWave));
+        if (_CurrentCoroutine != null)
+        {
+            StopCoroutine(_CurrentCoroutine);
+        }
+        
     }
     IEnumerator Spawner(int currentWave)
     {

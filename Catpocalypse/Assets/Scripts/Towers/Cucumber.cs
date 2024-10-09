@@ -31,7 +31,7 @@ public class Cucumber : MonoBehaviour
             
             float distance = Vector3.Distance(transform.position, target.transform.position);
             
-            if(distance < 2)
+            if(distance < 4)
             {
                 if(parentTower != null)
                 {
