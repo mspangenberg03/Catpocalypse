@@ -19,6 +19,13 @@ MonoBehaviour:
   _towerUpgadeCost: 100
   _healthUpgradeCost: 100
   _rewardUpgradeCost: 100
-  _robotMovementUpgradeCost: 100
-  _robotFirerateUpgradeCost: 100
-  _robotDistractValueUpgradeCost: 100
+  _robotUpgradeCost: 100
+  _fortUpgradeCost: 100
+  _fortTierOneReached: 0
+  _fortTierTwoReached: 0
+  _fortTierThreeReached: 0
+  _fortTierFiveReached: 0
+  _scratchingPostTierFourReached: 0
+  _scratchingPostTierFiveReached: 0
+  _yarnThrowerTierFiveReached: 0
+  _cucumberTowerTierFourReached: 0

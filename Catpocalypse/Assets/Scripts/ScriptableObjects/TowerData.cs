@@ -71,5 +71,6 @@ public class TowerData : ScriptableObject
         get { return _nonAllergicPersonMoveSpeed; }
         set { _nonAllergicPersonMoveSpeed = value; } 
     }
+    public float _cucumberTowerAimingSpeed = 30f;
 
 }

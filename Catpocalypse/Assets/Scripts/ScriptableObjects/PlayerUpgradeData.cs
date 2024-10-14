@@ -61,25 +61,18 @@ public class PlayerUpgradeData : ScriptableObject
         set { _healthUpgradeCost = value; }
     }
     [SerializeField]
-    private int _robotMovementUpgradeCost;
-    public int RobotMovementUpgradeCost
+    private int _robotUpgradeCost;
+    public int RobotUpgradeCost
     {
-        get { return _robotMovementUpgradeCost; }
-        set { _robotMovementUpgradeCost = value; }
+        get { return _robotUpgradeCost; }
+        set { _robotUpgradeCost = value; }
     }
     [SerializeField]
-    private int _robotFirerateUpgradeCost;
-    public int RobotFirerateUpgradeCost
+    private int _fortUpgradeCost;
+    public int FortUpgradeCost
     {
-        get { return _robotFirerateUpgradeCost; }
-        set { _robotFirerateUpgradeCost = value; }
-    }
-    [SerializeField]
-    private int _robotDistractValueUpgradeCost;
-    public int RobotDistractionValueUpgradeCost
-    {
-        get { return _robotDistractValueUpgradeCost; }
-        set { _robotDistractValueUpgradeCost = value; }
+        set { _fortUpgradeCost = value; }
+        get { return _fortUpgradeCost; }
     }
     private int _currentTowerUpgrade = 0;
     public int CurrentTowerUpgrade
@@ -181,5 +174,9 @@ public class PlayerUpgradeData : ScriptableObject
     public bool _fortTierTwoReached = false;
     public bool _fortTierThreeReached = false;
     public bool _fortTierFiveReached = false;
+    public bool _scratchingPostTierFourReached = false;
+    public bool _scratchingPostTierFiveReached = false;
+    public bool _yarnThrowerTierFiveReached = false;
+    public bool _cucumberTowerTierFourReached = false;
     
 }
