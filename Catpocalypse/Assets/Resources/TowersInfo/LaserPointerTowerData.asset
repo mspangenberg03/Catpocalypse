@@ -15,5 +15,6 @@ MonoBehaviour:
   distractValue: 5
   fireRate: 0
   buildCost: 150
-  upgradeCost: 0
+  upgradeCost: 100
   range: 0
+  _cucumberTowerAimingSpeed: 30

@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: PlayerUpgrades
   m_EditorClassIdentifier: 
   _maxHealth: 10
-  _scrap: 200
+  _scrap: 1000
   _scrapReward: 100
   _rewardMultiplier: 1
-  _towerUpgadeCost: 100
+  _cucumberTowerUpgradeCost: 100
+  _yarnThrowerTowerUpgradeCost: 100
+  _scratchingPostUpgradeCost: 100
+  _nonAllergicUpgradeCost: 100
+  _laserPointerUpgradeCost: 100
+  _stringWaverUpgradeCost: 100
   _healthUpgradeCost: 100
   _rewardUpgradeCost: 100
   _robotUpgradeCost: 100

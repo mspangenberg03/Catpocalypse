@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PlayerUpgradeData : ScriptableObject
 {
-    [SerializeField,Tooltip("The player's starting health")]
+    [SerializeField, Tooltip("The player's starting health")]
     private int _maxHealth;
     public int MaxHealth
     {
@@ -32,7 +32,7 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _rewardUpgraded; }
         set { _rewardUpgraded = value; }
     }
-    [SerializeField,Tooltip("The bonus to the cat reward")]
+    [SerializeField, Tooltip("The bonus to the cat reward")]
     private float _rewardMultiplier;
     public float RewardMultiplier
     {
@@ -40,11 +40,46 @@ public class PlayerUpgradeData : ScriptableObject
         set { _rewardMultiplier = value; }
     }
     [SerializeField]
-    private int _towerUpgadeCost;
-    public int TowerUpgradeCost
+    private int _cucumberTowerUpgradeCost;
+    public int CucumberTowerUpgradeCost
     {
-        get { return _towerUpgadeCost; }
-        set { _towerUpgadeCost = value; }
+        get { return _cucumberTowerUpgradeCost; }
+        set { _cucumberTowerUpgradeCost = value; }
+    }
+    [SerializeField]
+    private int _yarnThrowerTowerUpgradeCost;
+    public int YarnThrowerUpgradeCost
+    {
+        get { return _yarnThrowerTowerUpgradeCost; }
+        set { _yarnThrowerTowerUpgradeCost = value; }
+    }
+    [SerializeField]
+    private int _scratchingPostUpgradeCost;
+    public int ScratchingPostUpgradeCost
+    {
+        set { _scratchingPostUpgradeCost = value; }
+        get { return _scratchingPostUpgradeCost; }
+    }
+    [SerializeField]
+    private int _nonAllergicUpgradeCost;
+    public int NonAllergicUpgradeCost
+    {
+        set { _nonAllergicUpgradeCost = value; }
+        get { return _nonAllergicUpgradeCost; }
+    }
+    [SerializeField]
+    private int _laserPointerUpgradeCost;
+    public int LaserPointerUpgradeCost
+    {
+        get { return _laserPointerUpgradeCost; }
+        set { _laserPointerUpgradeCost = value; }
+    }
+    [SerializeField]
+    private int _stringWaverUpgradeCost;
+    public int StringWaverUpgradeCost
+    {
+        get { return _stringWaverUpgradeCost; }
+        set { _stringWaverUpgradeCost = value; }
     }
     [SerializeField]
     private int _healthUpgradeCost;
