@@ -287,7 +287,7 @@ public class UpgradeScreen : MonoBehaviour
             switch (towerInt)
             {
                 case 0: //Cucumber tower
-                    if(_playerUpgradeData.Scrap >= _playerUpgradeData.CucumberTowerUpgradeCost)
+                    if(_playerUpgradeData.Scrap >= _playerUpgradeData.CucumberTowerUpgradeCost && _playerUpgradeData.CucumberTowerTier<5)
                     {
                         _notEnoughScrap.gameObject.SetActive(false);
                         _playerUpgradeData.Scrap -= _playerUpgradeData.CucumberTowerUpgradeCost;
@@ -315,7 +315,7 @@ public class UpgradeScreen : MonoBehaviour
                         _playerUpgradeData.CucumberTowerTier++;
                     
                     }
-                    else
+                    else if(_playerUpgradeData.Scrap > _playerUpgradeData.CucumberTowerUpgradeCost && _playerUpgradeData.CucumberTowerTier < 5)
                     {
                         _notEnoughScrap.gameObject.SetActive(true);
                     }
@@ -323,7 +323,7 @@ public class UpgradeScreen : MonoBehaviour
 
                 break;
                 case 1://Yarn Thrower
-                    if(_playerUpgradeData.Scrap >= _playerUpgradeData.YarnThrowerUpgradeCost)
+                    if(_playerUpgradeData.Scrap >= _playerUpgradeData.YarnThrowerUpgradeCost && _playerUpgradeData.YarnThrowerTier<5)
                     {
                         _notEnoughScrap.gameObject.SetActive(false);
                         switch (_playerUpgradeData.YarnThrowerTier)
@@ -342,17 +342,18 @@ public class UpgradeScreen : MonoBehaviour
                                 break;
 
                         }
+                    _playerUpgradeData.Scrap -= _playerUpgradeData.YarnThrowerUpgradeCost;
                     _playerUpgradeData.YarnThrowerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.YarnThrowerUpgradeCost * 1.2f);
                     _playerUpgradeData.YarnThrowerTier++;
                     }
-                    else
+                    else if(_playerUpgradeData.Scrap < _playerUpgradeData.YarnThrowerUpgradeCost && _playerUpgradeData.YarnThrowerTier < 5)
                     {
                         _notEnoughScrap.gameObject.SetActive(true);
                     }
                    
                     break;
                 case 2: //String Waver
-                    if(_playerUpgradeData.Scrap >= _playerUpgradeData.StringWaverUpgradeCost)
+                    if(_playerUpgradeData.Scrap >= _playerUpgradeData.StringWaverUpgradeCost && _playerUpgradeData.StringWaverTier < 5)
                     {
                         _notEnoughScrap.gameObject.SetActive(false);
                         switch (_playerUpgradeData.StringWaverTier)
@@ -373,13 +374,13 @@ public class UpgradeScreen : MonoBehaviour
                         _playerUpgradeData.StringWaverUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.StringWaverUpgradeCost * 1.2f);
                         _playerUpgradeData.StringWaverTier++;
                     }
-                    else
+                    else if(_playerUpgradeData.Scrap < _playerUpgradeData.StringWaverUpgradeCost && _playerUpgradeData.StringWaverTier < 5)
                     {
                         _notEnoughScrap.gameObject.SetActive(true);
                     }
                     break;
                 case 3: //Non-Allergic
-                    if(_playerUpgradeData.Scrap >= _playerUpgradeData.NonAllergicUpgradeCost)
+                    if(_playerUpgradeData.Scrap >= _playerUpgradeData.NonAllergicUpgradeCost && _playerUpgradeData.NonAllergicTier < 5)
                     {
                         _notEnoughScrap.gameObject.SetActive(false);
                         switch (_playerUpgradeData.NonAllergicTier)
@@ -401,14 +402,14 @@ public class UpgradeScreen : MonoBehaviour
                         _playerUpgradeData.NonAllergicUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.NonAllergicUpgradeCost * 1.2f);
                         _playerUpgradeData.NonAllergicTier++;
                     }
-                    else
+                    else if(_playerUpgradeData.Scrap < _playerUpgradeData.NonAllergicUpgradeCost && _playerUpgradeData.NonAllergicTier < 5)
                     {
                         _notEnoughScrap.gameObject.SetActive(true);
                     }
                     
                     break;
                 case 4: //Scratching post
-                    if(_playerUpgradeData.Scrap >= _playerUpgradeData.ScratchingPostUpgradeCost)
+                    if(_playerUpgradeData.Scrap >= _playerUpgradeData.ScratchingPostUpgradeCost && _playerUpgradeData.ScratchingPostTier < 5)
                     {
                         _notEnoughScrap.gameObject.SetActive(false);
                         switch (_playerUpgradeData.ScratchingPostTier)
@@ -433,14 +434,14 @@ public class UpgradeScreen : MonoBehaviour
                         _playerUpgradeData.ScratchingPostUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.ScratchingPostUpgradeCost * 1.2f);
                         _playerUpgradeData.ScratchingPostTier++;
                     }
-                    else
+                    else if(_playerUpgradeData.Scrap < _playerUpgradeData.ScratchingPostUpgradeCost && _playerUpgradeData.ScratchingPostTier < 5)
                     {
                         _notEnoughScrap.gameObject.SetActive(true);
                     }
                     
                     break;
                 case 5: //Laser Pointer Tower
-                    if(_playerUpgradeData.Scrap >=_playerUpgradeData.LaserPointerUpgradeCost)
+                    if(_playerUpgradeData.Scrap >=_playerUpgradeData.LaserPointerUpgradeCost && _playerUpgradeData.LaserPointerTier < 5)
                     {
                         _notEnoughScrap.gameObject.SetActive(false);
                         switch (_playerUpgradeData.LaserPointerTier)
@@ -462,7 +463,7 @@ public class UpgradeScreen : MonoBehaviour
                         _playerUpgradeData.Scrap -= _playerUpgradeData.LaserPointerUpgradeCost;
                         _playerUpgradeData.LaserPointerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.LaserPointerUpgradeCost * 1.2f);
                     }
-                    else
+                    else if(_playerUpgradeData.Scrap < _playerUpgradeData.LaserPointerUpgradeCost && _playerUpgradeData.LaserPointerTier < 5)
                     {
                         _notEnoughScrap.gameObject.SetActive(true);
                     }
