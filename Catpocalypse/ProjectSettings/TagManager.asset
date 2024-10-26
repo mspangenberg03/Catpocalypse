@@ -15,6 +15,7 @@ TagManager:
   - Waypoint
   - Tower
   - TowerRangeOutline
+  - FortificationRange
   layers:
   - Default
   - TransparentFX

@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PlayerUpgradeData : ScriptableObject
 {
-    [SerializeField,Tooltip("The player's starting health")]
+    [SerializeField, Tooltip("The player's starting health")]
     private int _maxHealth;
     public int MaxHealth
     {
@@ -32,7 +32,7 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _rewardUpgraded; }
         set { _rewardUpgraded = value; }
     }
-    [SerializeField,Tooltip("The bonus to the cat reward")]
+    [SerializeField, Tooltip("The bonus to the cat reward")]
     private float _rewardMultiplier;
     public float RewardMultiplier
     {
@@ -40,11 +40,46 @@ public class PlayerUpgradeData : ScriptableObject
         set { _rewardMultiplier = value; }
     }
     [SerializeField]
-    private int _towerUpgadeCost;
-    public int TowerUpgradeCost
+    private int _cucumberTowerUpgradeCost;
+    public int CucumberTowerUpgradeCost
     {
-        get { return _towerUpgadeCost; }
-        set { _towerUpgadeCost = value; }
+        get { return _cucumberTowerUpgradeCost; }
+        set { _cucumberTowerUpgradeCost = value; }
+    }
+    [SerializeField]
+    private int _yarnThrowerTowerUpgradeCost;
+    public int YarnThrowerUpgradeCost
+    {
+        get { return _yarnThrowerTowerUpgradeCost; }
+        set { _yarnThrowerTowerUpgradeCost = value; }
+    }
+    [SerializeField]
+    private int _scratchingPostUpgradeCost;
+    public int ScratchingPostUpgradeCost
+    {
+        set { _scratchingPostUpgradeCost = value; }
+        get { return _scratchingPostUpgradeCost; }
+    }
+    [SerializeField]
+    private int _nonAllergicUpgradeCost;
+    public int NonAllergicUpgradeCost
+    {
+        set { _nonAllergicUpgradeCost = value; }
+        get { return _nonAllergicUpgradeCost; }
+    }
+    [SerializeField]
+    private int _laserPointerUpgradeCost;
+    public int LaserPointerUpgradeCost
+    {
+        get { return _laserPointerUpgradeCost; }
+        set { _laserPointerUpgradeCost = value; }
+    }
+    [SerializeField]
+    private int _stringWaverUpgradeCost;
+    public int StringWaverUpgradeCost
+    {
+        get { return _stringWaverUpgradeCost; }
+        set { _stringWaverUpgradeCost = value; }
     }
     [SerializeField]
     private int _healthUpgradeCost;
@@ -61,25 +96,18 @@ public class PlayerUpgradeData : ScriptableObject
         set { _healthUpgradeCost = value; }
     }
     [SerializeField]
-    private int _robotMovementUpgradeCost;
-    public int RobotMovementUpgradeCost
+    private int _robotUpgradeCost;
+    public int RobotUpgradeCost
     {
-        get { return _robotMovementUpgradeCost; }
-        set { _robotMovementUpgradeCost = value; }
+        get { return _robotUpgradeCost; }
+        set { _robotUpgradeCost = value; }
     }
     [SerializeField]
-    private int _robotFirerateUpgradeCost;
-    public int RobotFirerateUpgradeCost
+    private int _fortUpgradeCost;
+    public int FortUpgradeCost
     {
-        get { return _robotFirerateUpgradeCost; }
-        set { _robotFirerateUpgradeCost = value; }
-    }
-    [SerializeField]
-    private int _robotDistractValueUpgradeCost;
-    public int RobotDistractionValueUpgradeCost
-    {
-        get { return _robotDistractValueUpgradeCost; }
-        set { _robotDistractValueUpgradeCost = value; }
+        set { _fortUpgradeCost = value; }
+        get { return _fortUpgradeCost; }
     }
     private int _currentTowerUpgrade = 0;
     public int CurrentTowerUpgrade
@@ -123,4 +151,67 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _index; }
         set { _index = value; }
     }
+    private int _cucumberTowerTier = 0;
+    public int CucumberTowerTier
+    {
+        get { return _cucumberTowerTier; }
+        set { _cucumberTowerTier = value; }
+    }
+    private int _yarnThrowerTier = 0;
+    public int YarnThrowerTier
+    {
+        get { return _yarnThrowerTier; }
+        set { _yarnThrowerTier = value; }
+    }
+    private int _nonAllergicTier = 0;
+    public int NonAllergicTier
+    {
+        get { return _nonAllergicTier; }
+        set { _nonAllergicTier = value; }
+    }
+    private int _stringWaverTier = 0;
+    public int StringWaverTier
+    {
+        set { _stringWaverTier = value; }
+        get { return _stringWaverTier; }
+    }
+    private int _scratchingPostTier = 0;
+    public int ScratchingPostTier
+    {
+        set { _scratchingPostTier = value; }
+        get { return _scratchingPostTier; }
+    }
+    private int _laserPointerTier = 0;
+    public int LaserPointerTier
+    {
+        get { return _laserPointerTier; }
+        set { _laserPointerTier = value;}
+    }
+    private int _robotTier = 0;
+    public int RobotTier
+    {
+        get { return _robotTier; }
+        set { _robotTier = value; }
+    }
+    private int _fortificationTier = 0;
+    public int FortificationTier
+    {
+        set { _fortificationTier = value; }
+        get { return _fortificationTier; }
+    }
+    private float _hairballRemovalSpeed;
+    public float HairballRemovalSpeed
+    {
+        get { return _hairballRemovalSpeed; }
+        set { _hairballRemovalSpeed = value;}
+    }
+    public bool _fortTierOneReached = false;
+    public bool _fortTierTwoReached = false;
+    public bool _fortTierThreeReached = false;
+    public bool _fortTierFiveReached = false;
+    public bool _scratchingPostTierFourReached = false;
+    public bool _scratchingPostTierFiveReached = false;
+    public bool _yarnThrowerTierFiveReached = false;
+    public bool _cucumberTowerTierFourReached = false;
+    
 }

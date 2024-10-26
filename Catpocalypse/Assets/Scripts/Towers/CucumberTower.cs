@@ -176,7 +176,7 @@ public class CucumberTower : Tower
 
             // First get the horizontal rotation angle.
             float angleH = CalculateSignedAngle(_CurrentAimDirection, targetDirection, Vector3.up);
-            float rotAmount = _AimSpeed * Time.deltaTime;
+            float rotAmount = towerStats._cucumberTowerAimingSpeed * Time.deltaTime;
 
             if (angleH < 0)
                 rotAmount *= -1;
