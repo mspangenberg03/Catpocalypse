@@ -89,7 +89,8 @@ public class CatBase : MonoBehaviour
     private StateMachine _stateMachine;
     public bool spedUp = false;
 
-
+    [SerializeField]
+    private PlayerUpgradeData _upgradeData;
     // Start is called before the first frame update
     void Start()    
     {
@@ -97,6 +98,11 @@ public class CatBase : MonoBehaviour
         catAudio = GetComponent<AudioSource>();
         InitDistractednessMeter();
         int index = Random.Range(0, sounds.Count - 1);
+        //Divides the cat's cuteness value if the player has gotten the Fortification tier 3 upgrade
+        if (_upgradeData._fortTierThreeReached)
+        {
+            _CutenessValue /= 2;
+        }
 
         catAudio.clip = sounds[index];
         catAudio.Play();
@@ -238,6 +244,24 @@ public class CatBase : MonoBehaviour
             {
                 targetingTower.targets.Remove(this.gameObject);
             }     
+        }
+    }
+    public void FortificationCatDistraction(float distractionValue,Fortifications fort)
+    {
+        if (PlayerCutenessManager.Instance.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.CatsGetHarderToDistract)
+        {
+            float debuffPercent = PlayerCutenessManager.Instance.CuteChallenge_CatsGetHarderToDistract_DebuffPercent;
+            distractionValue = distractionValue * debuffPercent;
+        }
+        distraction += distractionValue;
+        UpdateDistractednessMeter();
+        if (distraction >= distractionThreshold)
+        {
+            StartCoroutine(Sound());
+            if (fort != null)
+            {
+                fort.targets.Remove(this.gameObject);
+            }
         }
     }
 

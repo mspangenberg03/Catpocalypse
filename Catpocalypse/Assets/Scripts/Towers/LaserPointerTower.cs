@@ -396,7 +396,7 @@ public class LaserPointerTower : Tower
 
 
                     // Do damage to the cat. We multiply by Time.deltaTime so that the tower's distraction value is per-second.
-                    _Lasers[i].TargetInfo.TargetCat.GetComponent<CatBase>().DistractCat(distractValue * Time.deltaTime, this);
+                    _Lasers[i].TargetInfo.TargetCat.GetComponent<CatBase>().DistractCat(towerStats.DistractValue * Time.deltaTime, this);
                 }
 
             }

@@ -89,9 +89,16 @@ public class RobotController : MonoBehaviour
     private WaveManager _WaveManager;
 
     [SerializeField]
+    private SphereCollider _passiveDistractRadius;
+
+    [SerializeField]
     private RobotStats _stats;
 
-
+    private List<CatBase> _catsInRange = new List<CatBase>();
+    [SerializeField]
+    private float _passiveDistractRate;
+    [SerializeField]
+    private float _passiveDistractAmount;
     /// <summary>
     /// Tracks the current charge level of the battery.
     /// </summary>
@@ -131,6 +138,10 @@ public class RobotController : MonoBehaviour
 
         // Start the robot fully charged.
         _CurrentBatteryCharge = _BatteryMaxCapacity;
+        if (_stats.TierFourReached)
+        {
+            StartCoroutine(DistractCatsInRange());
+        }
 
         // Deactivate the robot.
         DeactivateRobot();
@@ -176,6 +187,20 @@ public class RobotController : MonoBehaviour
 
         // Get user input and move the robot.
         GetUserInput();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Cat")
+        {
+            _catsInRange.Add(other.gameObject.GetComponent<CatBase>());
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Cat")
+        {
+            _catsInRange.Remove(other.gameObject.GetComponent<CatBase>());
+        }
     }
 
     /// <summary>
@@ -410,6 +435,10 @@ public class RobotController : MonoBehaviour
             ActivateRobot();
     }
 
+    IEnumerator DistractCatsInRange()
+    {
+        yield return new WaitForSeconds(10);
+    }
 
     /// <summary>
     /// Returns the current battery charge as a percentage.
