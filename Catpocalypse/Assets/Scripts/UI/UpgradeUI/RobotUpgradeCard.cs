@@ -17,8 +17,8 @@ public class RobotUpgradeCard : MonoBehaviour, IUpgradeCard
         return false;
     }
 
-    public void UpdateLabels(int level)
+    public bool UpdateLabels(int level)
     {
-
+        return false;
     }
 }
