@@ -65,8 +65,6 @@ public class UpgradeScreen : MonoBehaviour
     [SerializeField]
     private Button _robotUpgrade;
     [Header("Max Upgrades")]
-    //[SerializeField,Tooltip("How many tower upgrades can the player get")]
-    //private int _maxTowerUpgrades;
 
     //How many upgrades can the player get
     [SerializeField, Tooltip("How many reward upgrades can the player get")]
@@ -84,7 +82,6 @@ public class UpgradeScreen : MonoBehaviour
     private void Start()
     {
         _robotUpgrade.onClick.AddListener(() => UpgradeRobot());
-        //_index = _playerUpgradeData.CurrentTowerUpgrade;//PlayerPrefs.GetInt("index");
         _currentUpgradePanel = _towerPanel;
         ChangeText();
        

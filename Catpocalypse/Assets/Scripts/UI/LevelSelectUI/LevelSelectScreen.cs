@@ -12,6 +12,15 @@ public class LevelSelectScreen : MonoBehaviour
     [SerializeField] UpgradeScreen _Panel_UpgradeScreen;
     [SerializeField] PlayerDataManager _Panel_SaveLoadScreen;
     [SerializeField] PauseMenu _Panel_PauseMenu;
+    [SerializeField] List<GameObject> LevelButtons;
+
+    public void OnStart()
+    {
+        for (int i = PlayerDataManager.Instance.CurrentData.levelsCompleted + 1; i < LevelButtons.Count; i++)
+        {
+            LevelButtons[i].SetActive(false);
+        }
+    }
 
     public void ButtonClicked_PauseMenu()
     {
