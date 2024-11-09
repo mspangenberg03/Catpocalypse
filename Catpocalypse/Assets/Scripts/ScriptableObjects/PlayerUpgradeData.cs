@@ -213,5 +213,11 @@ public class PlayerUpgradeData : ScriptableObject
     public bool _scratchingPostTierFiveReached = false;
     public bool _yarnThrowerTierFiveReached = false;
     public bool _cucumberTowerTierFourReached = false;
-    
+    public float _towerUpgradeCostMultiplier = 1.2f;
+    public int _maxTowerTier = 5;
+    public int _maxRobotTier = 5;
+    public int _maxFortTier = 5;
+    [SerializeField, Tooltip("How many reward upgrades can the player get")]
+    public int _maxRewardUpgrades;
+
 }

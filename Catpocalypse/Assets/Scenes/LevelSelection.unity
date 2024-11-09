@@ -10013,8 +10013,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
+      - m_Target: {fileID: 1541960119}
+        m_TargetAssemblyTypeName: UpgradePanelManager, Assembly-CSharp
         m_MethodName: ChangePanel
         m_Mode: 3
         m_Arguments:
@@ -12152,8 +12152,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
+      - m_Target: {fileID: 1541960119}
+        m_TargetAssemblyTypeName: UpgradePanelManager, Assembly-CSharp
         m_MethodName: ChangePanel
         m_Mode: 3
         m_Arguments:
@@ -18665,6 +18665,15 @@ GameObject:
   - component: {fileID: 1541960118}
   - component: {fileID: 1541960117}
   - component: {fileID: 1541960115}
+  - component: {fileID: 1541960119}
+  - component: {fileID: 1541960120}
+  - component: {fileID: 1541960125}
+  - component: {fileID: 1541960124}
+  - component: {fileID: 1541960123}
+  - component: {fileID: 1541960122}
+  - component: {fileID: 1541960121}
+  - component: {fileID: 1541960127}
+  - component: {fileID: 1541960126}
   m_Layer: 5
   m_Name: Panel_UpgradeScreen
   m_TagString: Untagged
@@ -18713,31 +18722,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
-  _cucumberTowerData: {fileID: 11400000, guid: a572c91e31552ab4c9e133f4109ab9b9, type: 2}
-  _stringWaverTowerData: {fileID: 11400000, guid: 03bba1f7ec538254f80b66e0bc98933e, type: 2}
-  _scratchingPostTowerData: {fileID: 11400000, guid: 51ded07837666dd48a3835e93e6815bf, type: 2}
-  _yarnThrowerTowerData: {fileID: 11400000, guid: 9102cc67656cb6e4e99fb9c990781b2c, type: 2}
-  _nonAllergicTowerData: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
-  _laserPointerData: {fileID: 11400000, guid: b68cea4ef97a9444093591f37642461e, type: 2}
-  _robotStats: {fileID: 11400000, guid: d45909fa2c79a3744bccee556d0b08da, type: 2}
   _scrapText: {fileID: 278926329}
-  _towerUpgradeDescription: {fileID: 1610864763}
   _rewardUpgradeDescription: {fileID: 664385115}
   _notEnoughScrap: {fileID: 1347819532}
-  _towerUpgradeTier: {fileID: 1610864763}
-  _stringWaverText: {fileID: 1758858090}
-  _nonAllergicText: {fileID: 2121314642}
-  _yarnThrowerText: {fileID: 28616209}
-  _scratchingPostTower: {fileID: 398279072}
-  _laserPointerText: {fileID: 1860111844}
   _catRewardTier: {fileID: 1840206931}
-  _fortificationTier: {fileID: 1180756551}
-  _robotUpgradeText: {fileID: 1462166869}
   _robotUpgrade: {fileID: 1681674756}
-  _maxRewardUpgrades: 2
-  _towerPanel: {fileID: 1010767221}
-  _defensivePanel: {fileID: 1061558067}
-  _robotPanel: {fileID: 746673187}
 --- !u!114 &1541960117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18776,6 +18765,148 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541960113}
   m_CullTransparentMesh: 1
+--- !u!114 &1541960119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31dd742c23d0f24408d2ed15a7bcf020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _towerPanel: {fileID: 1010767221}
+  _defensivePanel: {fileID: 1061558067}
+  _robotPanel: {fileID: 746673187}
+--- !u!114 &1541960120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7698ef0eadcb974583335dead26005f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _cucumberTowerData: {fileID: 11400000, guid: a572c91e31552ab4c9e133f4109ab9b9, type: 2}
+  _cucumberFirerateUpgrade: 0.2
+  _aimingSpeedUpgrade: 1.3
+  _rangeUpgrade: 1.4
+  _towerUpgradeDescription: {fileID: 1610864763}
+--- !u!114 &1541960121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd155cac9239d194396ddd901aaa4b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _scratchingPostTowerData: {fileID: 11400000, guid: 51ded07837666dd48a3835e93e6815bf, type: 2}
+  _scratchingPostTower: {fileID: 398279072}
+--- !u!114 &1541960122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd2fe1e5b569a2478a37e142c18e486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _yarnThrowerTowerData: {fileID: 11400000, guid: 9102cc67656cb6e4e99fb9c990781b2c, type: 2}
+  _firerateUpgrade: 1.15
+  _yarnThrowerText: {fileID: 28616209}
+--- !u!114 &1541960123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3afe60706566640bd01c7431951553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _stringWaverTowerData: {fileID: 11400000, guid: 03bba1f7ec538254f80b66e0bc98933e, type: 2}
+  _stringWaverText: {fileID: 1758858090}
+--- !u!114 &1541960124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfc8be827e263d4083b5164d803c4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _nonAllergicTowerData: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
+  _nonAllergicText: {fileID: 2121314642}
+--- !u!114 &1541960125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f968b19f7b220544688f47a46a1bef8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _laserPointerData: {fileID: 11400000, guid: b68cea4ef97a9444093591f37642461e, type: 2}
+  _laserPointerText: {fileID: 1860111844}
+--- !u!114 &1541960126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f3281cb25d5344999b6bf12d450f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _hairballRemovalSpeedUpgrade: 0.5
+  _fortificationTier: {fileID: 1180756551}
+--- !u!114 &1541960127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be8b4d834b5aab945b1facc72963bb91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _robotStats: {fileID: 11400000, guid: d45909fa2c79a3744bccee556d0b08da, type: 2}
+  _speedUpgrade: 1.15
+  _launchUpgrade: 1.2
+  _firerateUpgrade: 0.3
+  _robotUpgradeText: {fileID: 1462166869}
 --- !u!4 &1544882562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8191474029889078268, guid: 21db29107db5be3428569a8365b5f48a, type: 3}
@@ -18998,8 +19129,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
+      - m_Target: {fileID: 1541960119}
+        m_TargetAssemblyTypeName: UpgradePanelManager, Assembly-CSharp
         m_MethodName: ChangePanel
         m_Mode: 3
         m_Arguments:
