@@ -13,17 +13,8 @@ public class UpgradeScreen : MonoBehaviour
     [SerializeField]
     private PlayerUpgradeData _playerUpgradeData;    
     
-    #region Text fields
-    [Header("Descriptive text fields")]
     [SerializeField]
     private TextMeshProUGUI _scrapText;
-    [SerializeField]
-    private TextMeshProUGUI _rewardUpgradeDescription;
-    [SerializeField]
-    private TextMeshProUGUI _notEnoughScrap;
-    [SerializeField]
-    private TextMeshProUGUI _catRewardTier;
-    #endregion
 
 
     [SerializeField]
@@ -36,17 +27,6 @@ public class UpgradeScreen : MonoBehaviour
     private void Update()
     {
         _scrapText.text = "Scrap: " + _playerUpgradeData.Scrap;
-
-
-        if (_playerUpgradeData.CurrentRewardUpgrade >= _playerUpgradeData._maxRewardUpgrades)
-        {
-            _rewardUpgradeDescription.text = "Rewards maxed out";
-        }
-        else
-        {
-            _rewardUpgradeDescription.text = "Increase the amount of money you get from distracting cats\n Cost: " + _playerUpgradeData.RewardUpgradeCost;
-        }
-        _catRewardTier.text = _playerUpgradeData.CurrentRewardUpgrade + "/" + _playerUpgradeData._maxRewardUpgrades;
     }
     public void UpgradeTower(int towerIndex)
     {
@@ -80,18 +60,8 @@ public class UpgradeScreen : MonoBehaviour
     }
     public void UpgradeEXPReward()
     {
-        if(_playerUpgradeData.Scrap >= _playerUpgradeData.RewardUpgradeCost && _playerUpgradeData.CurrentRewardUpgrade < _playerUpgradeData._maxRewardUpgrades)
-        {
-            _notEnoughScrap.gameObject.SetActive(false);
-            _playerUpgradeData.RewardMultiplier += .25f;
-            _playerUpgradeData.Scrap -= _playerUpgradeData.RewardUpgradeCost;
-            _playerUpgradeData.CurrentRewardUpgrade++;
-            _playerUpgradeData.RewardUpgradeCost = (int)Mathf.Round(_playerUpgradeData.RewardUpgradeCost * 1.05f);
-        }
-        else if(_playerUpgradeData.Scrap < _playerUpgradeData.RewardUpgradeCost)
-        {
-            _notEnoughScrap.gameObject.SetActive(true);
-        }
+        RewardsUpgrades _reward = GetComponent<RewardsUpgrades>();
+        _reward.Upgrade();
         
     }
     public void UpgradeRobot()
