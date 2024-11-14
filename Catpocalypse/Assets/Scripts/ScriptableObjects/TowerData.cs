@@ -71,6 +71,12 @@ public class TowerData : ScriptableObject
         get { return _nonAllergicPersonMoveSpeed; }
         set { _nonAllergicPersonMoveSpeed = value; } 
     }
-    public float _cucumberTowerAimingSpeed = 30f;
+    [SerializeField]
+    private float _cucumberTowerAimingSpeed = 30f;
+    public float CucumberTowerAimingSpeed
+    {
+        get { return _cucumberTowerAimingSpeed; }
+        set { _cucumberTowerAimingSpeed = value; }
+    }
 
 }

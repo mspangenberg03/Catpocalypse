@@ -91,6 +91,8 @@ public class CatBase : MonoBehaviour
 
     [SerializeField]
     private PlayerUpgradeData _upgradeData;
+    [SerializeField]
+    private int _cutenessReduction = 2;
     // Start is called before the first frame update
     void Start()    
     {
@@ -99,9 +101,9 @@ public class CatBase : MonoBehaviour
         InitDistractednessMeter();
         int index = Random.Range(0, sounds.Count - 1);
         //Divides the cat's cuteness value if the player has gotten the Fortification tier 3 upgrade
-        if (_upgradeData._fortTierThreeReached)
+        if (_upgradeData.FortTierThreeReached)
         {
-            _CutenessValue /= 2;
+            _CutenessValue /= _cutenessReduction;
         }
 
         catAudio.clip = sounds[index];

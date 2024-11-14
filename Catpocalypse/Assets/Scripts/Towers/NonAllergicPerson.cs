@@ -176,7 +176,10 @@ public class NonAllergicPerson : MonoBehaviour
         }
         if (fort != null)
         {
-             
+            if (other.gameObject.GetInstanceID() == fort.gameObject.GetInstanceID())
+            {
+                RemoveTarget();
+            }
         }
         
         

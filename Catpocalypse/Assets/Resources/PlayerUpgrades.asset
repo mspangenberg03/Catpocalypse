@@ -34,3 +34,8 @@ MonoBehaviour:
   _scratchingPostTierFiveReached: 0
   _yarnThrowerTierFiveReached: 0
   _cucumberTowerTierFourReached: 0
+  _towerUpgradeCostMultiplier: 1.2
+  _maxTowerTier: 5
+  _maxRobotTier: 5
+  _maxFortTier: 5
+  _maxRewardUpgrades: 2
