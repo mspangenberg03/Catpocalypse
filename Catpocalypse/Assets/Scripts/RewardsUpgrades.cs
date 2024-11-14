@@ -9,6 +9,10 @@ public class RewardsUpgrades : MonoBehaviour
     private PlayerUpgradeData _playerUpgradeData;
     [SerializeField]
     private TextMeshProUGUI _rewardUpgradeDescription;
+    [SerializeField]
+    private float _upgradeCostMultiplier = 1.05f;
+    [SerializeField]
+    private float _rewardIncrease = .25f;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +35,10 @@ public class RewardsUpgrades : MonoBehaviour
     {
         if (_playerUpgradeData.Scrap >= _playerUpgradeData.RewardUpgradeCost && _playerUpgradeData.CurrentRewardUpgrade < _playerUpgradeData.MaxRewardUpgrades)
         {
-            _playerUpgradeData.RewardMultiplier += .25f;
+            _playerUpgradeData.RewardMultiplier += _rewardIncrease;
             _playerUpgradeData.Scrap -= _playerUpgradeData.RewardUpgradeCost;
             _playerUpgradeData.CurrentRewardUpgrade++;
-            _playerUpgradeData.RewardUpgradeCost = (int)Mathf.Round(_playerUpgradeData.RewardUpgradeCost * 1.05f);
+            _playerUpgradeData.RewardUpgradeCost = (int)Mathf.Round(_playerUpgradeData.RewardUpgradeCost * _upgradeCostMultiplier);
             ChangeText();
         }
     }
