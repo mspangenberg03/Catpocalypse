@@ -44,9 +44,12 @@ public class YarnThrowerUpgrades : MonoBehaviour
     }
     public void Upgrade()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.YarnThrowerUpgradeCost && _playerUpgradeData.YarnThrowerTier < _playerUpgradeData._maxTowerTier)
+        UpgradeYarnThrowerTower();
+    }
+    private void UpgradeYarnThrowerTower()
+    {
+        if (_playerUpgradeData.Scrap >= _playerUpgradeData.YarnThrowerUpgradeCost && _playerUpgradeData.YarnThrowerTier < _playerUpgradeData.MaxTowerTier)
         {
-            //_notEnoughScrap.gameObject.SetActive(false);
             switch (_playerUpgradeData.YarnThrowerTier)
             {
                 case 0:
@@ -59,18 +62,14 @@ public class YarnThrowerUpgrades : MonoBehaviour
                 case 3:
                     break;
                 case 4:
-                    _playerUpgradeData._yarnThrowerTierFiveReached = true;
+                    _playerUpgradeData.YarnThrowerTierFiveReached = true;
                     break;
 
             }
             _playerUpgradeData.Scrap -= _playerUpgradeData.YarnThrowerUpgradeCost;
-            _playerUpgradeData.YarnThrowerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.YarnThrowerUpgradeCost * _playerUpgradeData._towerUpgradeCostMultiplier);
+            _playerUpgradeData.YarnThrowerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.YarnThrowerUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
             _playerUpgradeData.YarnThrowerTier++;
             ChangeText();
-        }
-        else if (_playerUpgradeData.Scrap < _playerUpgradeData.YarnThrowerUpgradeCost && _playerUpgradeData.YarnThrowerTier < _playerUpgradeData._maxTowerTier)
-        {
-            //_notEnoughScrap.gameObject.SetActive(true);
         }
     }
 }

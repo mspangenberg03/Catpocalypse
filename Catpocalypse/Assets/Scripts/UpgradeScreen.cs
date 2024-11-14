@@ -16,64 +16,102 @@ public class UpgradeScreen : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _scrapText;
 
-
-    [SerializeField]
+    #region Buttons
+    [SerializeField,Header("Buttons")]
     private Button _robotUpgrade;
+    [SerializeField]
+    private Button _cucumberButton;
+    [SerializeField]
+    private Button _yarnButton;
+    [SerializeField]
+    private Button _nonAllergicButton;
+    [SerializeField]
+    private Button _stringWaverButton;
+    [SerializeField]
+    private Button _scratchingPostButton;
+    [SerializeField]
+    private Button _laserPointerButton;
+    [SerializeField]
+    private Button _fortButton;
+    [SerializeField]
+    private Button _rewardButton;
+    #endregion
 
     private void Start()
     {
+        #region Event Listeners
         _robotUpgrade.onClick.AddListener(() => UpgradeRobot());
+        _cucumberButton.onClick.AddListener(() => UpgradeCucumberTower());
+        _yarnButton.onClick.AddListener(() => UpgradeYarnThrowerTower());
+        _nonAllergicButton.onClick.AddListener(() => UpgradeNonAllergicTower());
+        _stringWaverButton.onClick.AddListener(() => UpgradeStringWaverTower());
+        _scratchingPostButton.onClick.AddListener(() =>UpgradeScratchingPostTower());
+        _laserPointerButton.onClick.AddListener(() => UpgradeLaserPointerTower());
+        _rewardButton.onClick.AddListener(() => UpgradeEXPReward());
+        _fortButton.onClick.AddListener(() => FortificationUpgrade());
+        #endregion
+        ChangeScrapText();
     }
-    private void Update()
+    private void ChangeScrapText()
     {
         _scrapText.text = "Scrap: " + _playerUpgradeData.Scrap;
     }
-    public void UpgradeTower(int towerIndex)
+    private void UpgradeCucumberTower()
     {
         CucumberUpgrades _cucUpgrade = GetComponent<CucumberUpgrades>();
-        YarnThrowerUpgrades _yarnUpgrades = GetComponent<YarnThrowerUpgrades>();
-        StringWaverUpgrades _strUpgrades = GetComponent<StringWaverUpgrades>();
-        NonAllergicUpgrades naUpgrades = GetComponent<NonAllergicUpgrades>();
-        LaserPointerUpgrades laserPointerUpgrades = GetComponent<LaserPointerUpgrades>();
-        ScratchingPostUpgrades scratchingPostUpgrades = GetComponent<ScratchingPostUpgrades>();
-        switch(towerIndex)
-        {
-            case 0:
-                _cucUpgrade.Upgrade();
-                break;
-            case 1:
-                _yarnUpgrades.Upgrade();
-                break;
-            case 2:
-                _strUpgrades.Upgrade();
-                break;
-            case 3:
-                naUpgrades.Upgrade();
-                break;
-            case 4:
-                scratchingPostUpgrades.Upgrade();
-                break;
-            case 5:
-                laserPointerUpgrades.Upgrade();
-                break;
-        }
+        _cucUpgrade.Upgrade();
+        ChangeScrapText();
     }
-    public void UpgradeEXPReward()
+    private void UpgradeYarnThrowerTower()
+    {
+        YarnThrowerUpgrades _yarnUpgrades = GetComponent<YarnThrowerUpgrades>();
+        _yarnUpgrades.Upgrade();
+        ChangeScrapText();
+    }
+    private void UpgradeStringWaverTower()
+    {
+        StringWaverUpgrades _strUpgrades = GetComponent<StringWaverUpgrades>();
+        _strUpgrades.Upgrade();
+        ChangeScrapText();
+    }
+    private void UpgradeNonAllergicTower()
+    {
+        NonAllergicUpgrades naUpgrades = GetComponent<NonAllergicUpgrades>();
+        naUpgrades.Upgrade();
+        ChangeScrapText();
+    }
+    private void UpgradeScratchingPostTower()
+    {
+        ScratchingPostUpgrades scratchingPostUpgrades = GetComponent<ScratchingPostUpgrades>();
+        scratchingPostUpgrades.Upgrade();
+        ChangeScrapText();
+    }
+    private void UpgradeLaserPointerTower()
+    {
+        LaserPointerUpgrades laserPointerUpgrades = GetComponent<LaserPointerUpgrades>();
+        laserPointerUpgrades.Upgrade();
+        ChangeScrapText();
+    }
+    
+    private void UpgradeEXPReward()
     {
         RewardsUpgrades _reward = GetComponent<RewardsUpgrades>();
         _reward.Upgrade();
-        
+        ChangeScrapText();
+
     }
-    public void UpgradeRobot()
+    private void UpgradeRobot()
     {
         RobotUpgrades robotUpgrades = GetComponent<RobotUpgrades>();
         robotUpgrades.Upgrade();
+        ChangeScrapText();
     }
 
-    public void FortificationUpgrade()
+    private void FortificationUpgrade()
     {
         FortificationUpgrades fortUpgrades = GetComponent<FortificationUpgrades>();
         fortUpgrades.Upgrade();
+        ChangeScrapText();
     }
 
     public void ReturnToMenu()

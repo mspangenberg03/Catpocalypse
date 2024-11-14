@@ -11,6 +11,9 @@ public class FortificationUpgrades : MonoBehaviour
     private float _hairballRemovalSpeedUpgrade = .5f;
     [SerializeField]
     private TextMeshProUGUI _fortificationTier;
+
+    [SerializeField, Tooltip("How much the player health is upgraded by")]
+    private int _healthUpgrade = 2;
     private void Start()
     {
         ChangeText();
@@ -39,33 +42,38 @@ public class FortificationUpgrades : MonoBehaviour
                 break;
         }
     }
-    public void Upgrade()
+    private void UpgradeFort()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.FortUpgradeCost && _playerUpgradeData.FortificationTier < _playerUpgradeData._maxFortTier)
+        if (_playerUpgradeData.Scrap >= _playerUpgradeData.FortUpgradeCost && _playerUpgradeData.FortificationTier < _playerUpgradeData.MaxFortTier)
         {
             switch (_playerUpgradeData.FortificationTier)
             {
                 case 0:
-                    _playerUpgradeData.MaxHealth *= 2;
-                    _playerUpgradeData._fortTierOneReached = true;
+                    _playerUpgradeData.MaxHealth *= _healthUpgrade;
+                    _playerUpgradeData.FortTierOneReached = true;
                     break;
                 case 1:
-                    _playerUpgradeData._fortTierTwoReached = true;
+                    _playerUpgradeData.FortTierTwoReached = true;
                     break;
                 case 2:
-                    _playerUpgradeData._fortTierThreeReached = true;
+                    _playerUpgradeData.FortTierThreeReached = true;
                     break;
                 case 3:
                     //Hairballs have not been implemented yet
                     _playerUpgradeData.HairballRemovalSpeed *= _hairballRemovalSpeedUpgrade;
                     break;
                 case 4:
-                    _playerUpgradeData._fortTierFiveReached = true;
+                    _playerUpgradeData.FortTierFiveReached = true;
                     break;
             }
             _playerUpgradeData.FortificationTier++;
             _playerUpgradeData.Scrap -= _playerUpgradeData.FortUpgradeCost;
             ChangeText();
         }
+    }
+
+    public void Upgrade()
+    {
+        UpgradeFort();
     }
 }

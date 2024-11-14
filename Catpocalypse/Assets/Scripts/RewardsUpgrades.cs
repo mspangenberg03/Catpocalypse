@@ -18,7 +18,7 @@ public class RewardsUpgrades : MonoBehaviour
  
     private void ChangeText()
     {
-        if (_playerUpgradeData.CurrentRewardUpgrade >= _playerUpgradeData._maxRewardUpgrades)
+        if (_playerUpgradeData.CurrentRewardUpgrade >= _playerUpgradeData.MaxRewardUpgrades)
         {
             _rewardUpgradeDescription.text = "Rewards maxed out";
         }
@@ -27,15 +27,19 @@ public class RewardsUpgrades : MonoBehaviour
             _rewardUpgradeDescription.text = "Increase the amount of money you get from distracting cats\n Cost: " + _playerUpgradeData.RewardUpgradeCost;
         }
     }
-    public void Upgrade()
+    private void UpgradeReward()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.RewardUpgradeCost && _playerUpgradeData.CurrentRewardUpgrade < _playerUpgradeData._maxRewardUpgrades)
+        if (_playerUpgradeData.Scrap >= _playerUpgradeData.RewardUpgradeCost && _playerUpgradeData.CurrentRewardUpgrade < _playerUpgradeData.MaxRewardUpgrades)
         {
-            ChangeText();
             _playerUpgradeData.RewardMultiplier += .25f;
             _playerUpgradeData.Scrap -= _playerUpgradeData.RewardUpgradeCost;
             _playerUpgradeData.CurrentRewardUpgrade++;
             _playerUpgradeData.RewardUpgradeCost = (int)Mathf.Round(_playerUpgradeData.RewardUpgradeCost * 1.05f);
+            ChangeText();
         }
+    }
+    public void Upgrade()
+    {
+        UpgradeReward();
     }
 }

@@ -12,6 +12,11 @@ public class LaserPointerUpgrades : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI _laserPointerText;
+
+    [SerializeField]
+    private float _rangeUpgrade = 1.2f;
+    [SerializeField]
+    private float _distractionUpgrade = 1.2f;
     private void Start()
     {
         ChangeText();
@@ -40,20 +45,19 @@ public class LaserPointerUpgrades : MonoBehaviour
                 break;
         }
     }
-    public void Upgrade()
+    private void UpgradeLaserPointer()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.LaserPointerUpgradeCost && _playerUpgradeData.LaserPointerTier < 5)
+        if (_playerUpgradeData.Scrap >= _playerUpgradeData.LaserPointerUpgradeCost && _playerUpgradeData.LaserPointerTier < _playerUpgradeData.MaxTowerTier)
         {
-            //_notEnoughScrap.gameObject.SetActive(false);
             switch (_playerUpgradeData.LaserPointerTier)
             {
                 case 0:
                     break;
                 case 1:
-                    _laserPointerData.Range *= 1.2f;
+                    _laserPointerData.Range *= _rangeUpgrade;
                     break;
                 case 2:
-                    _laserPointerData.DistractValue *= 1.2f;
+                    _laserPointerData.DistractValue *= _distractionUpgrade;
                     break;
                 case 3:
                     break;
@@ -62,12 +66,12 @@ public class LaserPointerUpgrades : MonoBehaviour
             }
             _playerUpgradeData.LaserPointerTier++;
             _playerUpgradeData.Scrap -= _playerUpgradeData.LaserPointerUpgradeCost;
-            _playerUpgradeData.LaserPointerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.LaserPointerUpgradeCost * _playerUpgradeData._towerUpgradeCostMultiplier);
+            _playerUpgradeData.LaserPointerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.LaserPointerUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
             ChangeText();
         }
-        else if (_playerUpgradeData.Scrap < _playerUpgradeData.LaserPointerUpgradeCost && _playerUpgradeData.LaserPointerTier < 5)
-        {
-            //_notEnoughScrap.gameObject.SetActive(true);
-        }
+    }
+    public void Upgrade()
+    {
+        UpgradeLaserPointer();
     }
 }

@@ -11,6 +11,10 @@ public class NonAllergicUpgrades : MonoBehaviour
     private TowerData _nonAllergicTowerData;
     [SerializeField]
     private TextMeshProUGUI _nonAllergicText;
+    [SerializeField]
+    private float _buildCostReduction = .15f;
+    [SerializeField]
+    private float _moveSpeedUpgrade = 1.1f;
     private void Start()
     {
         ChangeText();
@@ -39,18 +43,17 @@ public class NonAllergicUpgrades : MonoBehaviour
                 break;
         }
     }
-    public void Upgrade()
+    private void UpgradeNonAllergicTower()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.NonAllergicUpgradeCost && _playerUpgradeData.NonAllergicTier < _playerUpgradeData._maxTowerTier)
+        if (_playerUpgradeData.Scrap >= _playerUpgradeData.NonAllergicUpgradeCost && _playerUpgradeData.NonAllergicTier < _playerUpgradeData.MaxTowerTier)
         {
-            //_notEnoughScrap.gameObject.SetActive(false);
             switch (_playerUpgradeData.NonAllergicTier)
             {
                 case 0:
-                    _nonAllergicTowerData.BuildCost *= .15f;
+                    _nonAllergicTowerData.BuildCost *= _buildCostReduction;
                     break;
                 case 1:
-                    _nonAllergicTowerData.NonAllergicPersonMoveSpeed *= 1.1f;
+                    _nonAllergicTowerData.NonAllergicPersonMoveSpeed *= _moveSpeedUpgrade;
                     break;
                 case 2:
                     break;
@@ -60,13 +63,13 @@ public class NonAllergicUpgrades : MonoBehaviour
                     break;
             }
             _playerUpgradeData.Scrap -= _playerUpgradeData.NonAllergicUpgradeCost;
-            _playerUpgradeData.NonAllergicUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.NonAllergicUpgradeCost * _playerUpgradeData._towerUpgradeCostMultiplier);
+            _playerUpgradeData.NonAllergicUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.NonAllergicUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
             _playerUpgradeData.NonAllergicTier++;
             ChangeText();
         }
-        else if (_playerUpgradeData.Scrap < _playerUpgradeData.NonAllergicUpgradeCost && _playerUpgradeData.NonAllergicTier < _playerUpgradeData._maxTowerTier)
-        {
-            // _notEnoughScrap.gameObject.SetActive(true);
-        }
+    }
+    public void Upgrade()
+    {
+        UpgradeNonAllergicTower();
     }
 }

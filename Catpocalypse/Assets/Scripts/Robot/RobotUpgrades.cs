@@ -17,6 +17,8 @@ public class RobotUpgrades : MonoBehaviour
     private float _firerateUpgrade = .3f;
     [SerializeField]
     private TextMeshProUGUI _robotUpgradeText;
+    [SerializeField]
+    private float _upgradeCostMultiplier = 1.05f;
 
     private void Start()
     {
@@ -49,7 +51,11 @@ public class RobotUpgrades : MonoBehaviour
 
     public void Upgrade()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.RobotUpgradeCost && _playerUpgradeData.RobotTier < _playerUpgradeData._maxRobotTier)
+        UpgradeRobot();
+    }
+    private void UpgradeRobot()
+    {
+        if (_playerUpgradeData.Scrap >= _playerUpgradeData.RobotUpgradeCost && _playerUpgradeData.RobotTier < _playerUpgradeData.MaxRobotTier)
         {
             switch (_playerUpgradeData.RobotTier)
             {
@@ -71,6 +77,7 @@ public class RobotUpgrades : MonoBehaviour
             }
             _playerUpgradeData.RobotTier++;
             _playerUpgradeData.Scrap -= _playerUpgradeData.RobotUpgradeCost;
+            _playerUpgradeData.RobotUpgradeCost = (int)Mathf.Round(_playerUpgradeData.RobotUpgradeCost * _upgradeCostMultiplier);
             ChangeText();
         }
     }

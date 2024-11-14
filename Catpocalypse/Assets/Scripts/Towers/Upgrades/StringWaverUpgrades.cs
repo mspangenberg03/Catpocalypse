@@ -11,6 +11,8 @@ public class StringWaverUpgrades : MonoBehaviour
     private TowerData _stringWaverTowerData;
     [SerializeField]
     private TextMeshProUGUI _stringWaverText;
+    [SerializeField]
+    private float _distractValueUpgrade = 1.25f;
     private void Start()
     {
         ChangeText();
@@ -39,11 +41,10 @@ public class StringWaverUpgrades : MonoBehaviour
                 break;
         }
     }
-    public void Upgrade()
+    private void UpgradeStringWaver()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.StringWaverUpgradeCost && _playerUpgradeData.StringWaverTier < _playerUpgradeData._maxTowerTier)
+        if (_playerUpgradeData.Scrap >= _playerUpgradeData.StringWaverUpgradeCost && _playerUpgradeData.StringWaverTier < _playerUpgradeData.MaxTowerTier)
         {
-            //_notEnoughScrap.gameObject.SetActive(false);
             switch (_playerUpgradeData.StringWaverTier)
             {
                 case 0:
@@ -51,7 +52,7 @@ public class StringWaverUpgrades : MonoBehaviour
                 case 1:
                     break;
                 case 2:
-                    _stringWaverTowerData.DistractValue *= 1.25f;
+                    _stringWaverTowerData.DistractValue *= _distractValueUpgrade;
                     break;
                 case 3:
                     break;
@@ -59,13 +60,13 @@ public class StringWaverUpgrades : MonoBehaviour
                     break;
             }
             _playerUpgradeData.Scrap -= _playerUpgradeData.StringWaverUpgradeCost;
-            _playerUpgradeData.StringWaverUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.StringWaverUpgradeCost * _playerUpgradeData._towerUpgradeCostMultiplier);
+            _playerUpgradeData.StringWaverUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.StringWaverUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
             _playerUpgradeData.StringWaverTier++;
             ChangeText();
         }
-        else if (_playerUpgradeData.Scrap < _playerUpgradeData.StringWaverUpgradeCost && _playerUpgradeData.StringWaverTier < _playerUpgradeData._maxTowerTier)
-        {
-            //notEnoughScrap.gameObject.SetActive(true);
-        }
+    }
+    public void Upgrade()
+    {
+        UpgradeStringWaver();
     }
 }

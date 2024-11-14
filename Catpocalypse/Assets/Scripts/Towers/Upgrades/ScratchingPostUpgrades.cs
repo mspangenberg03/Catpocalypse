@@ -12,6 +12,8 @@ public class ScratchingPostUpgrades : MonoBehaviour
     private TowerData _scratchingPostTowerData;
     [SerializeField]
     private TextMeshProUGUI _scratchingPostTower;
+    [SerializeField]
+    private float _firerateUpgrade = .25f;
     private void Start()
     {
         ChangeText();
@@ -40,38 +42,36 @@ public class ScratchingPostUpgrades : MonoBehaviour
                 break;
         }
     }
-
-    public void Upgrade()
+    private void UpgradeScratchingPost()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.ScratchingPostUpgradeCost && _playerUpgradeData.ScratchingPostTier < _playerUpgradeData._maxTowerTier)
+        if (_playerUpgradeData.Scrap >= _playerUpgradeData.ScratchingPostUpgradeCost && _playerUpgradeData.ScratchingPostTier < _playerUpgradeData.MaxTowerTier)
         {
-            //_notEnoughScrap.gameObject.SetActive(false);
             switch (_playerUpgradeData.ScratchingPostTier)
             {
                 case 0:
 
                     break;
                 case 1:
-                    _scratchingPostTowerData.FireRate *= .25f;
+                    _scratchingPostTowerData.FireRate *= _firerateUpgrade;
                     break;
                 case 2:
 
                     break;
                 case 3:
-                    _playerUpgradeData._scratchingPostTierFourReached = true;
+                    _playerUpgradeData.ScratchingPostTierFourReached = true;
                     break;
                 case 4:
-                    _playerUpgradeData._scratchingPostTierFiveReached = true;
+                    _playerUpgradeData.ScratchingPostTierFiveReached = true;
                     break;
             }
             _playerUpgradeData.Scrap -= _playerUpgradeData.ScratchingPostUpgradeCost;
-            _playerUpgradeData.ScratchingPostUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.ScratchingPostUpgradeCost * _playerUpgradeData._towerUpgradeCostMultiplier);
+            _playerUpgradeData.ScratchingPostUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.ScratchingPostUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
             _playerUpgradeData.ScratchingPostTier++;
             ChangeText();
         }
-        else if (_playerUpgradeData.Scrap < _playerUpgradeData.ScratchingPostUpgradeCost && _playerUpgradeData.ScratchingPostTier < _playerUpgradeData._maxTowerTier)
-        {
-            //_notEnoughScrap.gameObject.SetActive(true);
-        }
+    }
+    public void Upgrade()
+    {
+        UpgradeScratchingPost();
     }
 }

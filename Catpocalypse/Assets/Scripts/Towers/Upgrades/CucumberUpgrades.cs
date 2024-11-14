@@ -49,9 +49,12 @@ public class CucumberUpgrades : MonoBehaviour
     }
     public void Upgrade()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.CucumberTowerUpgradeCost && _playerUpgradeData.CucumberTowerTier < _playerUpgradeData._maxTowerTier)
+        UpgradeCucumberTower();
+    }
+    private void UpgradeCucumberTower()
+    {
+        if (_playerUpgradeData.Scrap >= _playerUpgradeData.CucumberTowerUpgradeCost && _playerUpgradeData.CucumberTowerTier < _playerUpgradeData.MaxTowerTier)
         {
-            //_notEnoughScrap.gameObject.SetActive(false);
             _playerUpgradeData.Scrap -= _playerUpgradeData.CucumberTowerUpgradeCost;
 
             switch (_playerUpgradeData.CucumberTowerTier)
@@ -60,29 +63,24 @@ public class CucumberUpgrades : MonoBehaviour
                     _cucumberTowerData.FireRate *= _cucumberFirerateUpgrade;
                     break;
                 case 1:
-                    _cucumberTowerData._cucumberTowerAimingSpeed *= _aimingSpeedUpgrade;
+                    _cucumberTowerData.CucumberTowerAimingSpeed *= _aimingSpeedUpgrade;
                     break;
                 case 2:
                     _cucumberTowerData.Range *= _rangeUpgrade;
                     break;
                 case 3:
-                    _playerUpgradeData._cucumberTowerTierFourReached = true;
+                    _playerUpgradeData.CucumberTowerTierFourReached = true;
                     break;
                 case 4:
                     _cucumberTowerData.TierFiveReached = true;
                     break;
             }
 
-            _playerUpgradeData.CucumberTowerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.CucumberTowerUpgradeCost * _playerUpgradeData._towerUpgradeCostMultiplier);
+            _playerUpgradeData.CucumberTowerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.CucumberTowerUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
             _playerUpgradeData.CucumberTowerTier++;
             ChangeText();
 
         }
-        else if (_playerUpgradeData.Scrap > _playerUpgradeData.CucumberTowerUpgradeCost && _playerUpgradeData.CucumberTowerTier < _playerUpgradeData._maxTowerTier)
-        {
-            //_notEnoughScrap.gameObject.SetActive(true);
-        }
-        //ChangeText();
     }
 }
 
