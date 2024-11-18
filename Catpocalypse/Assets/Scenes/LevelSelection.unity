@@ -9716,7 +9716,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -19.449963, y: -42}
+  m_AnchoredPosition: {x: -19.44989, y: -42}
   m_SizeDelta: {x: -101.69993, y: -145.30008}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &746673189
@@ -13268,7 +13268,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35.910034, y: -90.089935}
+  m_AnchoredPosition: {x: -35.910095, y: -90.089905}
   m_SizeDelta: {x: -68.779976, y: -249.48013}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010767223
@@ -13714,7 +13714,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -22.649963, y: -42}
+  m_AnchoredPosition: {x: -22.650085, y: -42}
   m_SizeDelta: {x: -95.29993, y: -145.30008}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1061558069
@@ -18676,7 +18676,7 @@ MonoBehaviour:
   _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _scrapText: {fileID: 278926329}
   _robotUpgrade: {fileID: 1681674756}
-  _cucButton: {fileID: 110075766}
+  _cucumberButton: {fileID: 110075766}
   _yarnButton: {fileID: 1507460057}
   _nonAllergicButton: {fileID: 1853649510}
   _stringWaverButton: {fileID: 1670194860}
@@ -18770,6 +18770,7 @@ MonoBehaviour:
   _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _scratchingPostTowerData: {fileID: 11400000, guid: 51ded07837666dd48a3835e93e6815bf, type: 2}
   _scratchingPostTower: {fileID: 398279072}
+  _firerateUpgrade: 0.25
 --- !u!114 &1541960122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18801,6 +18802,7 @@ MonoBehaviour:
   _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _stringWaverTowerData: {fileID: 11400000, guid: 03bba1f7ec538254f80b66e0bc98933e, type: 2}
   _stringWaverText: {fileID: 1758858090}
+  _distractValueUpgrade: 1.25
 --- !u!114 &1541960124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18816,6 +18818,8 @@ MonoBehaviour:
   _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _nonAllergicTowerData: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
   _nonAllergicText: {fileID: 2121314642}
+  _buildCostReduction: 0.15
+  _moveSpeedUpgrade: 1.1
 --- !u!114 &1541960125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18831,6 +18835,8 @@ MonoBehaviour:
   _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _laserPointerData: {fileID: 11400000, guid: b68cea4ef97a9444093591f37642461e, type: 2}
   _laserPointerText: {fileID: 1860111844}
+  _rangeUpgrade: 1.2
+  _distractionUpgrade: 1.2
 --- !u!114 &1541960126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18846,6 +18852,7 @@ MonoBehaviour:
   _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _hairballRemovalSpeedUpgrade: 0.5
   _fortificationTier: {fileID: 1180756551}
+  _healthUpgrade: 2
 --- !u!114 &1541960127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18864,6 +18871,7 @@ MonoBehaviour:
   _launchUpgrade: 1.2
   _firerateUpgrade: 0.3
   _robotUpgradeText: {fileID: 1462166869}
+  _upgradeCostMultiplier: 1.05
 --- !u!114 &1541960128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18878,6 +18886,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _rewardUpgradeDescription: {fileID: 664385115}
+  _upgradeCostMultiplier: 1.05
+  _rewardIncrease: 0.25
 --- !u!4 &1544882562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8191474029889078268, guid: 21db29107db5be3428569a8365b5f48a, type: 3}
