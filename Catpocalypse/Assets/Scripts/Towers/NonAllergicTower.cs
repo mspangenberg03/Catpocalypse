@@ -17,7 +17,10 @@ public class NonAllergicTower : Tower
     private List<GameObject> personList;
     public bool Enabled = true;
     PlayerCutenessManager cutenessManager;
-
+    [SerializeField]
+    private int _foodTimeCooldown = 10;
+    [SerializeField]
+    private int _foodTimeDistractValue = 20;
     // Start is called before the first frame update
     private new void Start()
     {
@@ -65,8 +68,9 @@ public class NonAllergicTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        numOfPeople++;
-        radius++;
+        StartCoroutine(FoodTime());
+        //numOfPeople++;
+        //radius++;
     }
 
     public void DisableTower()
@@ -75,6 +79,20 @@ public class NonAllergicTower : Tower
         peopleSpawned = 0;
         
        
+    }
+    IEnumerator FoodTime()
+    {
+        //If there is more than one cat, activate the ability
+        if(targets.Count > 1)
+        {
+            foreach (GameObject cat in targets)
+            {
+                cat.GetComponent<CatBase>().DistractCat(_foodTimeDistractValue,gameObject.GetComponent<Tower>());
+            }
+        }
+        
+        yield return new WaitForSeconds(_foodTimeCooldown);
+        StartCoroutine(FoodTime());
     }
     IEnumerator Spawner()
     {
@@ -98,9 +116,6 @@ public class NonAllergicTower : Tower
 
             }
         }
-        
-        
-        
         StartCoroutine(Spawner());
         
     }
