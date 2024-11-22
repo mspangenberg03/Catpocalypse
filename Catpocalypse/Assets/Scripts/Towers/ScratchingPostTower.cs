@@ -57,6 +57,22 @@ public class ScratchingPostTower : Tower
     {
         if (targets[0])
         {
+            //Targets the cat with the lowest current distraction/highest HP
+            if(ISPReady)
+            {
+                float minDistractValue = 1000000000000000000;
+                Vector3 pos = new Vector3(0, 0, 0);
+                for (int i = 0; i < targets.Count; i++)
+                {
+                    //If the cat's distraction is less that
+                    if(targets[i].GetComponent<CatBase>().Distraction < minDistractValue)
+                    {
+                        minDistractValue = targets[i].GetComponent<CatBase>().Distraction;
+                        pos = targets[i].transform.position;
+                    }
+                }
+                return pos;
+            }
             return targets[0].transform.position;
         }
         return new Vector3(-100, -100, -100);
@@ -86,9 +102,7 @@ public class ScratchingPostTower : Tower
         }
         if (!ISPReady)
         {
-
             //TODO: Make the launch animation
-            
             GameObject post = Instantiate(_ScratchPost, destination, Quaternion.identity);
             post.GetComponent<ScratchingPost>().parentTower = gameObject;
             

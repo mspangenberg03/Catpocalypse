@@ -66,6 +66,11 @@ public class CatBase : MonoBehaviour
 
 
     protected float distraction = 0; //How distracted the cat is currently
+    public float Distraction
+    {
+        get { return distraction; }
+        set { distraction = value; }
+    }
     protected bool isDistracted = false; // If the cat has been defeated or not.
 
     protected PlayerHealthManager healthManager;
