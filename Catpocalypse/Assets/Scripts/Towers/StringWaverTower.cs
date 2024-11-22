@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class StringWaverTower : Tower
 {
-
+    #region String Fling Variables
+    [SerializeField]
+    private int _stringFlingDuration = 1;
+    [SerializeField]
+    private int _stringFlingCooldown = 10;
+    [SerializeField]
+    private int _stringFlingDistractionValue = 10;
+    #endregion
     // Start is called before the first frame update
     private new void Start()
     {
         base.Start();
-
         StartCoroutine(DistractCat());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 3)
@@ -36,6 +37,20 @@ public class StringWaverTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
+        StartCoroutine(StringFling());
+    }
+    IEnumerator StringFling()
+    {
+        //Slows down and distracts each cat in range
+        foreach(GameObject cat in targets)
+        {
+            cat.GetComponent<CatBase>().slowingEntities.Add(gameObject);
+            cat.GetComponent<CatBase>().DistractCat(_stringFlingDistractionValue, this);
+            yield return new WaitForSeconds(_stringFlingDuration);
+            cat.GetComponent<CatBase>().slowingEntities.Remove(gameObject);
+        }
+        yield return new WaitForSeconds(_stringFlingCooldown);
+        StartCoroutine(StringFling());
     }
     IEnumerator DistractCat()
     {
