@@ -357,13 +357,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4084459761671149348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d584c36609a9814492330d43c252cf0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bb8e7c4257266141b05e76296bddc54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _DefeatTextMessages:
-  - Catastrophe!
-  - Catinated!
-  - Cat Takeover!
+  - Cat Takeover
+  - Catastrophe
+  - Fluffed Out
+  - Meowed Down
+  - Catinated
   _RandomDefeatText: {fileID: 9114496851800993236}
   _defeatSound: {fileID: 3018071392319546795}
 --- !u!82 &3018071392319546795

@@ -56,6 +56,7 @@ public class ClickableLevelTile : MonoBehaviour
         // Prevents level selection when utilizing UI elements
         if (EventSystem.current.IsPointerOverGameObject())
         {
+            StartCoroutine(WasteTimeSoMouseUpWillNotTrigger());
             return;
         }
         SceneLoader_Async.LoadSceneAsync(_sceneToLoad);
@@ -93,5 +94,10 @@ public class ClickableLevelTile : MonoBehaviour
             _Tooltip.text = _levelName;
 
         _Tooltip.gameObject.gameObject.SetActive(state);
+    }
+
+    IEnumerator WasteTimeSoMouseUpWillNotTrigger()
+    {
+        yield return new WaitForEndOfFrame();
     }
 }

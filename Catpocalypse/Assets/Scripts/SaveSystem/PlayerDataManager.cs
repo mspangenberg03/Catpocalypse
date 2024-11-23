@@ -1,11 +1,15 @@
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerDataManager : MonoBehaviour
 {
     public static PlayerDataManager Instance { get; private set; }
 
-    private PlayerData[] _PlayerData;
+    private List<PlayerData> _PlayerData;
+    private PlayerData _trackedData;
     private int maxSlots = 3;
     private int _CurrentData;
 
@@ -18,30 +22,40 @@ public class PlayerDataManager : MonoBehaviour
         {
             Instance = this;
         }
-        LoadData();
-
         // Tell Unity to not destroy this game object when a new scene is loaded.
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        LoadData();
         _CurrentData = 0;
+        _trackedData = new PlayerData();
     }
 
     private void LoadData()
     {
-        _PlayerData = new PlayerData[maxSlots];
-        for (int i = _PlayerData.Length - 1; i >= 0; i--)
+        _PlayerData = new List<PlayerData>(maxSlots);
+        for (int i = 0; i < maxSlots; i++)
         {
             if (!LoadGame(i))
             {
-                _PlayerData[i] = new PlayerData();
-                _CurrentData = i;
+                _PlayerData.Add(new PlayerData());
             }
         }
     }
 
+    public IReadOnlyList<PlayerData> ViewPlayerData()
+    {
+        return _PlayerData.ToList().AsReadOnly();
+    }
+
     public void SaveGame(int i)
     {
-        string saveFilePath = BuildSaveFilePath(_CurrentData);
-        string savePlayerData = JsonUtility.ToJson(_PlayerData[i - 1]);
+        UpdateTimePlayed();
+        _PlayerData[i] = _trackedData;
+        string saveFilePath = BuildSaveFilePath(i);
+        string savePlayerData = JsonUtility.ToJson(_PlayerData[i]);
         File.WriteAllText(saveFilePath, savePlayerData);
 
         Debug.Log("Save file created at: " + saveFilePath);
@@ -49,11 +63,12 @@ public class PlayerDataManager : MonoBehaviour
 
     public bool LoadGame(int i)
     {
-        string saveFilePath = BuildSaveFilePath(_CurrentData);
+        string saveFilePath = BuildSaveFilePath(i);
         if (File.Exists(saveFilePath))
         {
             string loadPlayerData = File.ReadAllText(saveFilePath);
-            _PlayerData[i] = JsonUtility.FromJson<PlayerData>(loadPlayerData);
+            PlayerData loadedData = JsonUtility.FromJson<PlayerData>(loadPlayerData);
+            _PlayerData.Add(loadedData);
             _CurrentData = i;
 
             Debug.Log("Load game complete! \nLevels Completed: " + _PlayerData[i].levelsCompleted);
@@ -91,56 +106,77 @@ public class PlayerDataManager : MonoBehaviour
 
     public void SetName(string name)
     {
-        _PlayerData[_CurrentData].name = name;
+        _trackedData.name = name;
     }
 
     public void UpdateScrap(int amount)
     {
-        _PlayerData[_CurrentData].scrap += amount;
+        _trackedData.scrap += amount;
     }
     public void UpdateLevelsCompleted(int amount)
     {
-        _PlayerData[_CurrentData].levelsCompleted += amount;
+        _trackedData.levelsCompleted += amount;
     }
     public void UpdateRobotUpgrades(int amount)
     {
-        _PlayerData[_CurrentData].robotUpgrades += amount;
+        _trackedData.robotUpgrades += amount;
     }
     public void UpateFortificationUpgrades(int amount)
     {
-        _PlayerData[_CurrentData].fortificationUpgrades += amount;
+        _trackedData.fortificationUpgrades += amount;
     }
     public void UpdateLaserUpgrades(int amount)
     {
-        _PlayerData[_CurrentData].laserUpgrades += amount;
+        _trackedData.laserUpgrades += amount;
     }
     public void UpdateScratchUpgrades(int amount)
     {
-        _PlayerData[_CurrentData].scratchUpgrades += amount;
+        _trackedData.scratchUpgrades += amount;
     }
     public void UpdateNAUpgrades(int amount)
     {
-        _PlayerData[_CurrentData].nAUpgrades += amount;
+        _trackedData.nAUpgrades += amount;
     }
     public void UpdateYarnUpgrades(int amount)
     {
-        _PlayerData[_CurrentData].yarnUpgrades += amount;
+        _trackedData.yarnUpgrades += amount;
     }
     public void UpdateStringUpgrades(int amount)
     {
-        _PlayerData[_CurrentData].stringUpgrades += amount;
+        _trackedData.stringUpgrades += amount;
     }
     public void UpdateCucumberUpgrades(int amount)
     {
-        _PlayerData[_CurrentData].cucumberUpgrades += amount;
+        _trackedData.cucumberUpgrades += amount;
     }
 
-    public PlayerData CurrentData { get { return _PlayerData[_CurrentData]; } }
+    private void UpdateTimePlayed()
+    {
+        _trackedData.time = Time.realtimeSinceStartup;
+    }
+
+    public PlayerData CurrentData { get { return _trackedData; } }
 
 }
 
 public class PlayerData
 {
+    public PlayerData()
+    {
+        name = "";
+        scrap = 0;
+        levelsCompleted = 0;
+        robotUpgrades = 0;
+        fortificationUpgrades = 0;
+        laserUpgrades = 0;
+        scratchUpgrades = 0;
+        nAUpgrades = 0;
+        yarnUpgrades = 0;
+        stringUpgrades = 0;
+        cucumberUpgrades = 0;
+        time = 0;
+    }
+
     public string name;
     public int scrap;
     public int levelsCompleted;
@@ -152,5 +188,5 @@ public class PlayerData
     public int yarnUpgrades;
     public int stringUpgrades;
     public int cucumberUpgrades;
-
+    public float time;
 }

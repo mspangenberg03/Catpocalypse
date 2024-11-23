@@ -27,7 +27,7 @@ public class GameCameraController : MonoBehaviour
     [SerializeField] private Transform _CameraTargetObject;
 
     [Tooltip("This specifies the max distance the camera can be from the origin on each axis. It prevents it from moving more than the specified distance from (0,0,0) on any axis.")]
-    [SerializeField] private Vector3 _CameraMoveLimits = new Vector3(20, 20, 20);
+    [SerializeField] private Vector3 _CameraMoveLimits;
 
     [Tooltip("This property specifies which mouse button is used to drag the camera around.")]
     [SerializeField] private MouseButtons _DragMovementButton = MouseButtons.Right;
@@ -62,9 +62,9 @@ public class GameCameraController : MonoBehaviour
         _VirtualCamera = GetComponent<CinemachineVirtualCamera>();
 
         if (_CameraStartTarget != null)
+        {
             _CameraTargetObject.transform.position = _CameraStartTarget.transform.position;
-
-
+        }
         InitCamera();
     }
 
@@ -144,9 +144,9 @@ public class GameCameraController : MonoBehaviour
     /// <returns>The clamped position.</returns>
     private Vector3 ClampPosition(Vector3 position)
     {
-        return new Vector3(Mathf.Clamp(position.x, -_CameraMoveLimits.x, _CameraMoveLimits.x),
-                           Mathf.Clamp(position.y, -_CameraMoveLimits.y, _CameraMoveLimits.y),
-                           Mathf.Clamp(position.z, -_CameraMoveLimits.z, _CameraMoveLimits.z));
+        return new Vector3(Mathf.Clamp(position.x, -_CameraMoveLimits.x + _CameraStartTarget.transform.position.x, _CameraMoveLimits.x + _CameraStartTarget.transform.position.x),
+                           Mathf.Clamp(position.y, -_CameraMoveLimits.y + _CameraStartTarget.transform.position.y, _CameraMoveLimits.y + _CameraStartTarget.transform.position.y),
+                           Mathf.Clamp(position.z, -_CameraMoveLimits.z + _CameraStartTarget.transform.position.z, _CameraMoveLimits.z + _CameraStartTarget.transform.position.z));
     }
 
     private Vector3 GetCameraOffset()

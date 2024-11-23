@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,22 +16,27 @@ public class SaveLoadScreen : MonoBehaviour
 
     [SerializeField] private GameObject _SaveButton;
     [SerializeField] private GameObject _LoadButton;
-    //[SerializeField] private TMP_InputField _NameInputField;
-    [SerializeField] private TMP_Text[] _SaveFileButtons;
+    [SerializeField] private GameObject _InputPanel;
+    [SerializeField] private TMP_InputField _NameInputField;
+    [SerializeField] private GameObject[] _SaveFileButtons;
 
     private int _CurrentSaveSelected;
 
-    public void Awake()
-    {
-        //_NameInputField.DeactivateInputField();
-        this.gameObject.SetActive(false);
-        _CurrentSaveSelected = -1;
-        
-    }
-
     public void Start()
     {
-        //_NameInputField.onSubmit.AddListener((string input) => { OnSubmit(input); });
+        _InputPanel.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
+        _CurrentSaveSelected = -1;
+        IReadOnlyList<PlayerData> data = PlayerDataManager.Instance.ViewPlayerData();
+        Debug.Log(data.Count);
+        for(int i = 0; i < _SaveFileButtons.Length; i++)
+        {
+            if(!data[i].name.Equals(""))
+            {
+                _SaveFileButtons[i].GetComponent<SaveSlot>().UpdateSaveLabel(data[i]);
+            }
+            
+        }
     }
 
     public void OnSaveButton()
@@ -40,33 +46,23 @@ public class SaveLoadScreen : MonoBehaviour
             Debug.Log("No Save Slot selected.");
             return;
         }
-        /**_NameInputField.ActivateInputField();
-        if (PlayerDataManager.Instance.CurrentData.name.Equals(""))
-        {
-            _NameInputField.text = "Save " + _CurrentSaveSelected;
-        } else
-        {
-            _NameInputField.text = PlayerDataManager.Instance.CurrentData.name;
-        }
-        while(_NameInputField.IsActive())
-        {
-            new WaitForEndOfFrame();
-        }*/
-        PlayerDataManager.Instance.SaveGame(_CurrentSaveSelected);
-        _SaveFileButtons[_CurrentSaveSelected].text = PlayerDataManager.Instance.CurrentData.name;
+        _InputPanel.gameObject.SetActive(true);
+        _NameInputField.ActivateInputField();
     }
 
-    private void OnSubmit(String input)
+    public void OnSubmit()
     {
-        if (input.Equals(""))
+        if (_NameInputField.text.Equals(""))
         {
             PlayerDataManager.Instance.SetName("Save " + _CurrentSaveSelected);
         } else
         {
-            PlayerDataManager.Instance.SetName(input);
+            PlayerDataManager.Instance.SetName(_NameInputField.text);
         }
-
-        //_NameInputField.DeactivateInputField();
+        _NameInputField.DeactivateInputField();
+        _InputPanel.gameObject.SetActive(false);
+        PlayerDataManager.Instance.SaveGame(_CurrentSaveSelected);
+        _SaveFileButtons[_CurrentSaveSelected].GetComponent<SaveSlot>().UpdateSaveLabel(PlayerDataManager.Instance.CurrentData);
     }
 
     public void OnSaveFileButton(string saveFile)
@@ -88,7 +84,6 @@ public class SaveLoadScreen : MonoBehaviour
 
     }
 
-    // Opens options
     public void OnLoadButton()
     {
         if(_CurrentSaveSelected == -1)
@@ -96,13 +91,15 @@ public class SaveLoadScreen : MonoBehaviour
             Debug.Log("No Save Slot selected.");
         } else
         {
-            PlayerDataManager.Instance.LoadGame(_CurrentSaveSelected);
-            gameObject.SetActive(false);
-            SceneLoader_Async.LoadSceneAsync("LevelSelection");
+            if (PlayerDataManager.Instance.LoadGame(_CurrentSaveSelected))
+            {
+                gameObject.SetActive(false);
+                SceneLoader_Async.LoadSceneAsync("LevelSelection");
+            }
+            
         }
     }
 
-    // Closes the game
     public void OnExitButton()
     {
         this.gameObject.SetActive(false);
