@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameLabel: {fileID: 6078946276226638732}
   timeLabel: {fileID: 737543522471224223}
-  currentLevel: {fileID: 7596179603797530063}
+  levelsCompleted: {fileID: 7596179603797530063}
   defaultText: {fileID: 6677294534470979654}
 --- !u!1 &2530149814940116387
 GameObject:
@@ -1417,7 +1417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameLabel: {fileID: 8174076161171235023}
   timeLabel: {fileID: 7632296137831785861}
-  currentLevel: {fileID: 6387981047863105026}
+  levelsCompleted: {fileID: 6387981047863105026}
   defaultText: {fileID: 6735493128585767122}
 --- !u!1 &3437269757124052619
 GameObject:
@@ -1570,7 +1570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameLabel: {fileID: 1175394725229431279}
   timeLabel: {fileID: 5895784371955159728}
-  currentLevel: {fileID: 2220294085486869471}
+  levelsCompleted: {fileID: 2220294085486869471}
   defaultText: {fileID: 7389954322677825901}
 --- !u!1 &3488332534236626610
 GameObject:

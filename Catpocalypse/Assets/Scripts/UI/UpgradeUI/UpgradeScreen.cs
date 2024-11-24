@@ -51,6 +51,8 @@ public class UpgradeScreen : MonoBehaviour
         _fortButton.onClick.AddListener(() => FortificationUpgrade());
         #endregion
         ChangeScrapText();
+
+        gameObject.SetActive(false);
     }
     private void ChangeScrapText()
     {

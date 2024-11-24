@@ -32,12 +32,6 @@ public class DefeatScreen : MonoBehaviour
         _defeatSound.Play();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SelectRandomDisplayText()
     {
         int index = Random.Range(0, _DefeatTextMessages.Count);
@@ -59,6 +53,21 @@ public class DefeatScreen : MonoBehaviour
 
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         SceneLoader_Async.LoadSceneAsync("SceneManager.GetActiveScene().name");
+    }
+
+    public void OnLevelSelectClicked()
+    {
+        GameObject[] bases = GameObject.FindGameObjectsWithTag("TowerBase");
+        foreach (GameObject tb in bases)
+        {
+            if (tb.GetComponent<TowerBase>().hasTower == true)
+            {
+                tb.GetComponent<TowerBase>().DestroyTower();
+            }
+        }
+
+        //SceneManager.LoadScene("Level1");
+        SceneLoader_Async.LoadSceneAsync("LevelSelection");
     }
 
     public void OnMainMenuClicked()

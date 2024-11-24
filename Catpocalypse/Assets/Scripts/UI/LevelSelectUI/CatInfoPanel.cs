@@ -46,6 +46,7 @@ public class CatInfoPanel : MonoBehaviour
     {
         PopulateCollectionDropdown();
         ResetUI();
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame

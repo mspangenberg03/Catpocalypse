@@ -25,7 +25,7 @@ public class SaveLoadScreen : MonoBehaviour
     public void Start()
     {
         _InputPanel.gameObject.SetActive(false);
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
         _CurrentSaveSelected = -1;
         IReadOnlyList<PlayerData> data = PlayerDataManager.Instance.ViewPlayerData();
         Debug.Log(data.Count);
@@ -35,7 +35,6 @@ public class SaveLoadScreen : MonoBehaviour
             {
                 _SaveFileButtons[i].GetComponent<SaveSlot>().UpdateSaveLabel(data[i]);
             }
-            
         }
     }
 

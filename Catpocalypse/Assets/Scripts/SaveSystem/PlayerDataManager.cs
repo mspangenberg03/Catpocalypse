@@ -24,11 +24,11 @@ public class PlayerDataManager : MonoBehaviour
         }
         // Tell Unity to not destroy this game object when a new scene is loaded.
         DontDestroyOnLoad(gameObject);
+        LoadData();
     }
 
     private void Start()
     {
-        LoadData();
         _CurrentData = 0;
         _trackedData = new PlayerData();
     }

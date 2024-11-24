@@ -56,6 +56,7 @@ public class TowerInfoPanel : MonoBehaviour
     {
         PopulateCollectionDropdown();
         ResetUI();
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame

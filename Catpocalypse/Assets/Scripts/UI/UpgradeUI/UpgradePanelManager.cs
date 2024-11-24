@@ -21,19 +21,19 @@ public class UpgradePanelManager : MonoBehaviour
         {
 
             case 0:
-                _currentUpgradePanel.active = false;
-                _towerPanel.active = true;
+                _currentUpgradePanel.SetActive(false);
+                _towerPanel.SetActive(true);
                 _currentUpgradePanel = _towerPanel;
 
                 break;
             case 1:
-                _currentUpgradePanel.active = false;
-                _robotPanel.active = true;
+                _currentUpgradePanel.SetActive(false);
+                _robotPanel.SetActive(true);
                 _currentUpgradePanel = _robotPanel;
                 break;
             case 2:
-                _currentUpgradePanel.active = false;
-                _defensivePanel.active = true;
+                _currentUpgradePanel.SetActive(false);
+                _defensivePanel.SetActive(true);
                 _currentUpgradePanel = _defensivePanel;
                 break;
         }
