@@ -205,13 +205,90 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _hairballRemovalSpeed; }
         set { _hairballRemovalSpeed = value;}
     }
-    public bool _fortTierOneReached = false;
-    public bool _fortTierTwoReached = false;
-    public bool _fortTierThreeReached = false;
-    public bool _fortTierFiveReached = false;
-    public bool _scratchingPostTierFourReached = false;
-    public bool _scratchingPostTierFiveReached = false;
-    public bool _yarnThrowerTierFiveReached = false;
-    public bool _cucumberTowerTierFourReached = false;
-    
+    private bool _fortTierOneReached = false;
+    public bool FortTierOneReached
+    {
+        get { return _fortTierOneReached; }
+        set { _fortTierOneReached = value; }
+    }
+    private bool _fortTierTwoReached = false;
+    public bool FortTierTwoReached
+    {
+        get { return _fortTierTwoReached; }
+        set { _fortTierTwoReached = value; }
+    }
+    private bool _fortTierThreeReached = false;
+    public bool FortTierThreeReached
+    {
+        get { return _fortTierThreeReached; }
+        set { _fortTierThreeReached = value; }
+    }
+    private bool _fortTierFiveReached = false;
+    public bool FortTierFiveReached
+    {
+        get { return _fortTierFiveReached; }
+        set { _fortTierFiveReached = value; }
+    }
+    private bool _scratchingPostTierFourReached = false;
+    public bool ScratchingPostTierFourReached
+    {
+        get { return _scratchingPostTierFourReached; }
+        set { _scratchingPostTierFourReached = value; }
+    }
+
+    private bool _scratchingPostTierFiveReached = false;
+    public bool ScratchingPostTierFiveReached
+    {
+        get { return _scratchingPostTierFiveReached; }
+        set { _scratchingPostTierFiveReached = value; }
+    }
+
+    private bool _yarnThrowerTierFiveReached = false;
+    public bool YarnThrowerTierFiveReached
+    {
+        get { return _yarnThrowerTierFiveReached; }
+        set { _yarnThrowerTierFiveReached = value; }
+    }
+    private bool _cucumberTowerTierFourReached = false;
+    public bool CucumberTowerTierFourReached
+    {
+        get { return _cucumberTowerTierFourReached; }
+        set { _cucumberTowerTierFourReached = value; }  
+    }
+
+    [SerializeField]
+    private float _towerUpgradeCostMultiplier = 1.2f;
+    public float TowerUpgradeCostMultiplier
+    {
+        get { return _towerUpgradeCostMultiplier; }
+        set { _towerUpgradeCostMultiplier = value; }
+    }
+    [SerializeField]
+    private int _maxTowerTier = 5;
+    public int MaxTowerTier
+    {
+        get { return _maxTowerTier; }
+        set { _maxTowerTier = value;}
+    }
+    private int _maxRobotTier = 5;
+    public int MaxRobotTier
+    {
+        get { return _maxRobotTier; }
+        set { _maxRobotTier = value; }
+    }
+    [SerializeField]
+    private int _maxFortTier = 5;
+    public int MaxFortTier
+    {
+        get { return _maxFortTier; }
+        set { _maxFortTier = value; }
+    }
+    [SerializeField, Tooltip("How many reward upgrades can the player get")]
+    private int _maxRewardUpgrades;
+    public int MaxRewardUpgrades
+    {
+        get { return _maxRewardUpgrades; }
+        set { _maxRewardUpgrades = value;}
+    }
+
 }

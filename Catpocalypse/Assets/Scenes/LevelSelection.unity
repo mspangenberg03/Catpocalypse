@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1678,19 +1678,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 110075767}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
-        m_MethodName: UpgradeTower
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &110075767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7828,127 +7816,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553061585}
   m_CullTransparentMesh: 1
---- !u!1001 &553782775
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1191975552}
-    m_Modifications:
-    - target: {fileID: 2801408719995659685, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_Name
-      value: PausePanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 2801408719995659685, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4954979617875191065, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: _Panel_SaveLoadScreen
-      value: 
-      objectReference: {fileID: 553782777}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
---- !u!224 &553782776 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7438497302393599679, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-  m_PrefabInstance: {fileID: 553782775}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &553782777 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9053689597168450404, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-  m_PrefabInstance: {fileID: 553782775}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13fcd72ce7e2a2243940f85ec3bdcb54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &567633172
 GameObject:
   m_ObjectHideFlags: 0
@@ -9410,19 +9277,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 713642377}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
-        m_MethodName: UpgradeEXPReward
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &713642377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9778,7 +9633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e512cc9f18ae388418f01a503e7e8b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuPanel: {fileID: 1957906744}
+  pauseMenuPanel: {fileID: 0}
 --- !u!114 &740952135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10134,8 +9989,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
+      - m_Target: {fileID: 1541960119}
+        m_TargetAssemblyTypeName: UpgradePanelManager, Assembly-CSharp
         m_MethodName: ChangePanel
         m_Mode: 3
         m_Arguments:
@@ -12273,8 +12128,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
+      - m_Target: {fileID: 1541960119}
+        m_TargetAssemblyTypeName: UpgradePanelManager, Assembly-CSharp
         m_MethodName: ChangePanel
         m_Mode: 3
         m_Arguments:
@@ -13853,7 +13708,6 @@ RectTransform:
   - {fileID: 513196478}
   - {fileID: 713642375}
   - {fileID: 664385114}
-  - {fileID: 1840206930}
   - {fileID: 2140895930}
   - {fileID: 1180756553}
   m_Father: {fileID: 1541960114}
@@ -15080,7 +14934,6 @@ RectTransform:
   - {fileID: 1636512507}
   - {fileID: 1385941913}
   - {fileID: 1541960114}
-  - {fileID: 553782776}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -15564,19 +15417,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1221934484}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
-        m_MethodName: UpgradeTower
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &1221934484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16242,8 +16083,6 @@ MonoBehaviour:
   _Panel_CatInfo: {fileID: 1636512508}
   _Panel_TowerInfo: {fileID: 1385941914}
   _Panel_UpgradeScreen: {fileID: 1541960115}
-  _Panel_PauseMenu: {fileID: 1957906744}
-  LevelButtons: []
 --- !u!114 &1302499746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18472,19 +18311,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1507460058}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
-        m_MethodName: UpgradeTower
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &1507460058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18789,6 +18616,16 @@ GameObject:
   - component: {fileID: 1541960118}
   - component: {fileID: 1541960117}
   - component: {fileID: 1541960115}
+  - component: {fileID: 1541960119}
+  - component: {fileID: 1541960120}
+  - component: {fileID: 1541960125}
+  - component: {fileID: 1541960124}
+  - component: {fileID: 1541960123}
+  - component: {fileID: 1541960122}
+  - component: {fileID: 1541960121}
+  - component: {fileID: 1541960127}
+  - component: {fileID: 1541960126}
+  - component: {fileID: 1541960128}
   m_Layer: 5
   m_Name: Panel_UpgradeScreen
   m_TagString: Untagged
@@ -18833,35 +18670,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1541960113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5f0ae591f2b4c24690fe0edd9123ced, type: 3}
+  m_Script: {fileID: 11500000, guid: 29d2268d3fe059a4287e53f7bf188056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
-  _cucumberTowerData: {fileID: 11400000, guid: a572c91e31552ab4c9e133f4109ab9b9, type: 2}
-  _stringWaverTowerData: {fileID: 11400000, guid: 03bba1f7ec538254f80b66e0bc98933e, type: 2}
-  _scratchingPostTowerData: {fileID: 11400000, guid: 51ded07837666dd48a3835e93e6815bf, type: 2}
-  _yarnThrowerTowerData: {fileID: 11400000, guid: 9102cc67656cb6e4e99fb9c990781b2c, type: 2}
-  _nonAllergicTowerData: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
-  _laserPointerData: {fileID: 11400000, guid: b68cea4ef97a9444093591f37642461e, type: 2}
-  _robotStats: {fileID: 11400000, guid: d45909fa2c79a3744bccee556d0b08da, type: 2}
   _scrapText: {fileID: 278926329}
-  _towerUpgradeDescription: {fileID: 1610864763}
-  _rewardUpgradeDescription: {fileID: 664385115}
-  _notEnoughScrap: {fileID: 1347819532}
-  _towerUpgradeTier: {fileID: 0}
-  _stringWaverText: {fileID: 1758858090}
-  _nonAllergicText: {fileID: 2121314642}
-  _yarnThrowerText: {fileID: 28616209}
-  _scratchingPostTower: {fileID: 398279072}
-  _laserPointerText: {fileID: 1860111844}
-  _catRewardTier: {fileID: 1840206931}
-  _fortificationTier: {fileID: 1180756551}
-  _robotUpgradeText: {fileID: 1198196600}
   _robotUpgrade: {fileID: 1681674756}
-  _maxRewardUpgrades: 0
-  _towerPanel: {fileID: 905034410}
-  _defensivePanel: {fileID: 781313457}
-  _robotPanel: {fileID: 1582609356}
+  _cucButton: {fileID: 110075766}
+  _yarnButton: {fileID: 1507460057}
+  _nonAllergicButton: {fileID: 1853649510}
+  _stringWaverButton: {fileID: 1670194860}
+  _scratchingPostButton: {fileID: 1221934483}
+  _laserPointerButton: {fileID: 1910981872}
+  _fortButton: {fileID: 2140895931}
+  _rewardButton: {fileID: 713642376}
 --- !u!114 &1541960117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18900,6 +18722,162 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541960113}
   m_CullTransparentMesh: 1
+--- !u!114 &1541960119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31dd742c23d0f24408d2ed15a7bcf020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _towerPanel: {fileID: 1010767221}
+  _defensivePanel: {fileID: 1061558067}
+  _robotPanel: {fileID: 746673187}
+--- !u!114 &1541960120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7698ef0eadcb974583335dead26005f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _cucumberTowerData: {fileID: 11400000, guid: a572c91e31552ab4c9e133f4109ab9b9, type: 2}
+  _cucumberFirerateUpgrade: 0.2
+  _aimingSpeedUpgrade: 1.3
+  _rangeUpgrade: 1.4
+  _towerUpgradeDescription: {fileID: 1610864763}
+--- !u!114 &1541960121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd155cac9239d194396ddd901aaa4b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _scratchingPostTowerData: {fileID: 11400000, guid: 51ded07837666dd48a3835e93e6815bf, type: 2}
+  _scratchingPostTower: {fileID: 398279072}
+--- !u!114 &1541960122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd2fe1e5b569a2478a37e142c18e486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _yarnThrowerTowerData: {fileID: 11400000, guid: 9102cc67656cb6e4e99fb9c990781b2c, type: 2}
+  _firerateUpgrade: 1.15
+  _yarnThrowerText: {fileID: 28616209}
+--- !u!114 &1541960123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3afe60706566640bd01c7431951553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _stringWaverTowerData: {fileID: 11400000, guid: 03bba1f7ec538254f80b66e0bc98933e, type: 2}
+  _stringWaverText: {fileID: 1758858090}
+--- !u!114 &1541960124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfc8be827e263d4083b5164d803c4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _nonAllergicTowerData: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
+  _nonAllergicText: {fileID: 2121314642}
+--- !u!114 &1541960125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f968b19f7b220544688f47a46a1bef8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _laserPointerData: {fileID: 11400000, guid: b68cea4ef97a9444093591f37642461e, type: 2}
+  _laserPointerText: {fileID: 1860111844}
+--- !u!114 &1541960126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f3281cb25d5344999b6bf12d450f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _hairballRemovalSpeedUpgrade: 0.5
+  _fortificationTier: {fileID: 1180756551}
+--- !u!114 &1541960127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be8b4d834b5aab945b1facc72963bb91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _robotStats: {fileID: 11400000, guid: d45909fa2c79a3744bccee556d0b08da, type: 2}
+  _speedUpgrade: 1.15
+  _launchUpgrade: 1.2
+  _firerateUpgrade: 0.3
+  _robotUpgradeText: {fileID: 1462166869}
+--- !u!114 &1541960128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541960113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8339b0e8997ff4145853299038c61bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
+  _rewardUpgradeDescription: {fileID: 664385115}
 --- !u!4 &1544882562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8191474029889078268, guid: 21db29107db5be3428569a8365b5f48a, type: 3}
@@ -19122,8 +19100,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
+      - m_Target: {fileID: 1541960119}
+        m_TargetAssemblyTypeName: UpgradePanelManager, Assembly-CSharp
         m_MethodName: ChangePanel
         m_Mode: 3
         m_Arguments:
@@ -20261,19 +20239,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1670194861}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
-        m_MethodName: UpgradeTower
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &1670194861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21894,7 +21860,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1302499745}
         m_TargetAssemblyTypeName: LevelSelectScreen, Assembly-CSharp
-        m_MethodName: ButtonClicked_PauseMenu
+        m_MethodName: ButtonClicked_MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22593,140 +22559,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &1840206929
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1840206930}
-  - component: {fileID: 1840206932}
-  - component: {fileID: 1840206931}
-  m_Layer: 5
-  m_Name: CatRewardUpgradeTiers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1840206930
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840206929}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1061558068}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44, y: -193}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1840206931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840206929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: New Text
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1840206932
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840206929}
-  m_CullTransparentMesh: 1
 --- !u!1 &1844923862
 GameObject:
   m_ObjectHideFlags: 0
@@ -23077,19 +22909,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1853649511}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
-        m_MethodName: UpgradeTower
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &1853649511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23884,19 +23704,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1910981873}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
-        m_MethodName: UpgradeTower
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &1910981873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24406,17 +24214,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955579925}
   m_CullTransparentMesh: 1
---- !u!114 &1957906744 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4954979617875191065, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
-  m_PrefabInstance: {fileID: 553782775}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d8832a56d963942bb6cb6be2efe491, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1968319075
 GameObject:
   m_ObjectHideFlags: 0
@@ -25982,19 +25779,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2140895932}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1541960115}
-        m_TargetAssemblyTypeName: UpgradeScreen, Assembly-CSharp
-        m_MethodName: FortificationUpgrade
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &2140895932
 MonoBehaviour:
   m_ObjectHideFlags: 0
