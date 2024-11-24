@@ -15,7 +15,7 @@ public class LevelSelectScreen : MonoBehaviour
 
     public void Start()
     {
-        for (int i = PlayerDataManager.Instance.CurrentData.levelsCompleted + 1; i < LevelButtons.Count; i++)
+        for (int i = PlayerDataManager.Instance.CurrentData.levelsCompleted; i < LevelButtons.Count; i++)
         {
             LevelButtons[i].SetActive(false);
         }
