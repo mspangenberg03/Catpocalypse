@@ -12,13 +12,7 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _maxHealth; }
         set { _maxHealth = value; }
     }
-    [SerializeField]
-    private int _scrap;
-    public int Scrap
-    {
-        get { return _scrap; }
-        set { _scrap = value; }
-    }
+
     [SerializeField]
     private int _scrapReward;
     public int ScrapReward
@@ -151,54 +145,7 @@ public class PlayerUpgradeData : ScriptableObject
         get { return _index; }
         set { _index = value; }
     }
-    private int _cucumberTowerTier = 0;
-    public int CucumberTowerTier
-    {
-        get { return _cucumberTowerTier; }
-        set { _cucumberTowerTier = value; }
-    }
-    private int _yarnThrowerTier = 0;
-    public int YarnThrowerTier
-    {
-        get { return _yarnThrowerTier; }
-        set { _yarnThrowerTier = value; }
-    }
-    private int _nonAllergicTier = 0;
-    public int NonAllergicTier
-    {
-        get { return _nonAllergicTier; }
-        set { _nonAllergicTier = value; }
-    }
-    private int _stringWaverTier = 0;
-    public int StringWaverTier
-    {
-        set { _stringWaverTier = value; }
-        get { return _stringWaverTier; }
-    }
-    private int _scratchingPostTier = 0;
-    public int ScratchingPostTier
-    {
-        set { _scratchingPostTier = value; }
-        get { return _scratchingPostTier; }
-    }
-    private int _laserPointerTier = 0;
-    public int LaserPointerTier
-    {
-        get { return _laserPointerTier; }
-        set { _laserPointerTier = value;}
-    }
-    private int _robotTier = 0;
-    public int RobotTier
-    {
-        get { return _robotTier; }
-        set { _robotTier = value; }
-    }
-    private int _fortificationTier = 0;
-    public int FortificationTier
-    {
-        set { _fortificationTier = value; }
-        get { return _fortificationTier; }
-    }
+
     private float _hairballRemovalSpeed;
     public float HairballRemovalSpeed
     {

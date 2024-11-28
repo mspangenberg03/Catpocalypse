@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class LaserPointerUpgrades : MonoBehaviour
+public class LaserPointerUpgrades : UpgradeCard
 {
     [SerializeField]
     private PlayerUpgradeData _playerUpgradeData;
@@ -17,13 +17,10 @@ public class LaserPointerUpgrades : MonoBehaviour
     private float _rangeUpgrade = 1.2f;
     [SerializeField]
     private float _distractionUpgrade = 1.2f;
-    private void Start()
+
+    protected override void ChangeText()
     {
-        ChangeText();
-    }
-    private void ChangeText()
-    {
-        switch (_playerUpgradeData.LaserPointerTier)
+        switch (PlayerDataManager.Instance.CurrentData.laserUpgrades)
         {
             case 0:
                 _laserPointerText.text = "Upgrade cat drag speed by 15%\nFaster you drag the kittens out of here the better.\nKeep the cats in sight and you’ll soon win this fight!\nCost: " + _playerUpgradeData.LaserPointerUpgradeCost;
@@ -45,11 +42,11 @@ public class LaserPointerUpgrades : MonoBehaviour
                 break;
         }
     }
-    private void UpgradeLaserPointer()
+    public override bool Upgrade()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.LaserPointerUpgradeCost && _playerUpgradeData.LaserPointerTier < _playerUpgradeData.MaxTowerTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.LaserPointerUpgradeCost && PlayerDataManager.Instance.CurrentData.laserUpgrades < _playerUpgradeData.MaxTowerTier)
         {
-            switch (_playerUpgradeData.LaserPointerTier)
+            switch (PlayerDataManager.Instance.CurrentData.laserUpgrades)
             {
                 case 0:
                     break;
@@ -64,14 +61,12 @@ public class LaserPointerUpgrades : MonoBehaviour
                 case 4:
                     break;
             }
-            _playerUpgradeData.LaserPointerTier++;
-            _playerUpgradeData.Scrap -= _playerUpgradeData.LaserPointerUpgradeCost;
+            PlayerDataManager.Instance.UpdateLaserUpgrades(1);
+            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.LaserPointerUpgradeCost);
             _playerUpgradeData.LaserPointerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.LaserPointerUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
             ChangeText();
+            return true;
         }
-    }
-    public void Upgrade()
-    {
-        UpgradeLaserPointer();
+        return false;
     }
 }

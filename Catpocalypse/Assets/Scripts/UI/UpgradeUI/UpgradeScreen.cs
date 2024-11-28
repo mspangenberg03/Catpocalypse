@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class UpgradeScreen : MonoBehaviour
 {
@@ -43,9 +38,9 @@ public class UpgradeScreen : MonoBehaviour
         _robotUpgrade.onClick.AddListener(() => UpgradeRobot());
         _cucumberButton.onClick.AddListener(() => UpgradeCucumberTower());
         _yarnButton.onClick.AddListener(() => UpgradeYarnThrowerTower());
-        _nonAllergicButton.onClick.AddListener(() => UpgradeNonAllergicTower());
+        _nonAllergicButton.onClick.AddListener(() => UpgradeNonAllergicTower()  );
         _stringWaverButton.onClick.AddListener(() => UpgradeStringWaverTower());
-        _scratchingPostButton.onClick.AddListener(() =>UpgradeScratchingPostTower());
+        _scratchingPostButton.onClick.AddListener(() => UpgradeScratchingPostTower());
         _laserPointerButton.onClick.AddListener(() => UpgradeLaserPointerTower());
         _rewardButton.onClick.AddListener(() => UpgradeEXPReward());
         _fortButton.onClick.AddListener(() => FortificationUpgrade());
@@ -56,7 +51,7 @@ public class UpgradeScreen : MonoBehaviour
     }
     private void ChangeScrapText()
     {
-        _scrapText.text = "Scrap: " + _playerUpgradeData.Scrap;
+        _scrapText.text = "Scrap: " + PlayerDataManager.Instance.CurrentData.scrap;
     }
     private void UpgradeCucumberTower()
     {
@@ -67,8 +62,11 @@ public class UpgradeScreen : MonoBehaviour
     private void UpgradeYarnThrowerTower()
     {
         YarnThrowerUpgrades _yarnUpgrades = GetComponent<YarnThrowerUpgrades>();
-        _yarnUpgrades.Upgrade();
-        ChangeScrapText();
+        if (_yarnUpgrades.Upgrade())
+        {
+            ChangeScrapText();
+        }
+        
     }
     private void UpgradeStringWaverTower()
     {

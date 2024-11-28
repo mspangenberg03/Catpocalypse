@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class StringWaverUpgrades : MonoBehaviour
+public class StringWaverUpgrades : UpgradeCard
 {
     [SerializeField]
     private PlayerUpgradeData _playerUpgradeData;
@@ -13,13 +13,10 @@ public class StringWaverUpgrades : MonoBehaviour
     private TextMeshProUGUI _stringWaverText;
     [SerializeField]
     private float _distractValueUpgrade = 1.25f;
-    private void Start()
+
+    protected override void ChangeText()
     {
-        ChangeText();
-    }
-    private void ChangeText()
-    {
-        switch (_playerUpgradeData.StringWaverTier)
+        switch (PlayerDataManager.Instance.CurrentData.stringUpgrades)
         {
             case 0:
                 _stringWaverText.text = "Faster Windup: Increases the frequency of the AOE by 15%\nQuicker twitches will give kitties the stitches\nCost: " + _playerUpgradeData.StringWaverUpgradeCost;
@@ -41,11 +38,11 @@ public class StringWaverUpgrades : MonoBehaviour
                 break;
         }
     }
-    private void UpgradeStringWaver()
+    public override bool Upgrade()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.StringWaverUpgradeCost && _playerUpgradeData.StringWaverTier < _playerUpgradeData.MaxTowerTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.StringWaverUpgradeCost && PlayerDataManager.Instance.CurrentData.stringUpgrades < _playerUpgradeData.MaxTowerTier)
         {
-            switch (_playerUpgradeData.StringWaverTier)
+            switch (PlayerDataManager.Instance.CurrentData.stringUpgrades)
             {
                 case 0:
                     break;
@@ -59,14 +56,12 @@ public class StringWaverUpgrades : MonoBehaviour
                 case 4:
                     break;
             }
-            _playerUpgradeData.Scrap -= _playerUpgradeData.StringWaverUpgradeCost;
+            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.StringWaverUpgradeCost);
             _playerUpgradeData.StringWaverUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.StringWaverUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
-            _playerUpgradeData.StringWaverTier++;
+            PlayerDataManager.Instance.UpdateStringUpgrades(1);
             ChangeText();
+            return true;
         }
-    }
-    public void Upgrade()
-    {
-        UpgradeStringWaver();
+        return false;
     }
 }

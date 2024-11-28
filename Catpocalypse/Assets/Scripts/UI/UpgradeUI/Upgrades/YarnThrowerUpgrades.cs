@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class YarnThrowerUpgrades : MonoBehaviour
+public class YarnThrowerUpgrades : UpgradeCard
 {
     [SerializeField]
     private PlayerUpgradeData _playerUpgradeData;
@@ -14,13 +14,10 @@ public class YarnThrowerUpgrades : MonoBehaviour
     private float _firerateUpgrade = 1.15f;
     [SerializeField]
     private TextMeshProUGUI _yarnThrowerText;
-    private void Start()
+
+    protected override void ChangeText()
     {
-        ChangeText();
-    }
-    private void ChangeText()
-    {
-        switch (_playerUpgradeData.YarnThrowerTier)
+        switch (PlayerDataManager.Instance.CurrentData.yarnUpgrades)
         {
             case 0:
                 _yarnThrowerText.text = "Improved Spinning: Increase firing speed by 15%\nFaster you spin, sooner you win.\nCost: " + _playerUpgradeData.YarnThrowerUpgradeCost;
@@ -42,15 +39,12 @@ public class YarnThrowerUpgrades : MonoBehaviour
                 break;
         }
     }
-    public void Upgrade()
+    public override bool Upgrade()
     {
-        UpgradeYarnThrowerTower();
-    }
-    private void UpgradeYarnThrowerTower()
-    {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.YarnThrowerUpgradeCost && _playerUpgradeData.YarnThrowerTier < _playerUpgradeData.MaxTowerTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.YarnThrowerUpgradeCost 
+            && PlayerDataManager.Instance.CurrentData.yarnUpgrades < _playerUpgradeData.MaxTowerTier)
         {
-            switch (_playerUpgradeData.YarnThrowerTier)
+            switch (PlayerDataManager.Instance.CurrentData.yarnUpgrades)
             {
                 case 0:
                     _yarnThrowerTowerData.FireRate /= _firerateUpgrade;
@@ -66,10 +60,12 @@ public class YarnThrowerUpgrades : MonoBehaviour
                     break;
 
             }
-            _playerUpgradeData.Scrap -= _playerUpgradeData.YarnThrowerUpgradeCost;
+            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.YarnThrowerUpgradeCost);
             _playerUpgradeData.YarnThrowerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.YarnThrowerUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
-            _playerUpgradeData.YarnThrowerTier++;
+            PlayerDataManager.Instance.UpdateYarnUpgrades(1);
             ChangeText();
+            return true;
         }
+        return false;
     }
 }

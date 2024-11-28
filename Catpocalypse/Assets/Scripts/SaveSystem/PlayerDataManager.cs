@@ -10,6 +10,7 @@ public class PlayerDataManager : MonoBehaviour
 
     private List<PlayerData> _PlayerData;
     private PlayerData _trackedData;
+    private PlayerUpgradeData _playerUpgradeData;
     private int maxSlots = 3;
     private int _CurrentData;
 
@@ -24,13 +25,14 @@ public class PlayerDataManager : MonoBehaviour
         }
         // Tell Unity to not destroy this game object when a new scene is loaded.
         DontDestroyOnLoad(gameObject);
+        _playerUpgradeData = (PlayerUpgradeData) Resources.Load("PlayerUpgrades");
         LoadData();
     }
 
     private void Start()
     {
         _CurrentData = 0;
-        _trackedData = new PlayerData();
+        _trackedData = new PlayerData(_playerUpgradeData);
     }
 
     private void LoadData()
@@ -40,7 +42,7 @@ public class PlayerDataManager : MonoBehaviour
         {
             if (!LoadGame(i))
             {
-                _PlayerData.Add(new PlayerData());
+                _PlayerData.Add(new PlayerData(_playerUpgradeData));
             }
         }
     }
@@ -121,7 +123,7 @@ public class PlayerDataManager : MonoBehaviour
     {
         _trackedData.robotUpgrades += amount;
     }
-    public void UpateFortificationUpgrades(int amount)
+    public void UpdateFortificationUpgrades(int amount)
     {
         _trackedData.fortificationUpgrades += amount;
     }
@@ -150,6 +152,11 @@ public class PlayerDataManager : MonoBehaviour
         _trackedData.cucumberUpgrades += amount;
     }
 
+    public void UpdateRewardUpgrade(int amount)
+    {
+        _trackedData.catRewardUpgrades += amount;
+    }
+
     private void UpdateTimePlayed()
     {
         _trackedData.time = Time.realtimeSinceStartup;
@@ -159,9 +166,11 @@ public class PlayerDataManager : MonoBehaviour
 
 }
 
+
+
 public class PlayerData
 {
-    public PlayerData()
+    public PlayerData(PlayerUpgradeData data)
     {
         name = "";
         scrap = 0;
@@ -174,6 +183,8 @@ public class PlayerData
         yarnUpgrades = 0;
         stringUpgrades = 0;
         cucumberUpgrades = 0;
+        catRewardUpgrades = 0;
+        upgrades = new PlayerUpgrades(data);
         time = 0;
     }
 
@@ -188,5 +199,7 @@ public class PlayerData
     public int yarnUpgrades;
     public int stringUpgrades;
     public int cucumberUpgrades;
+    public int catRewardUpgrades;
+    public PlayerUpgrades upgrades;
     public float time;
 }

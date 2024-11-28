@@ -93,7 +93,7 @@ public class WaveManager : MonoBehaviour
             LevelCleared?.Invoke(this, EventArgs.Empty);
             if (!_scrapRewarded)
             {
-                _playerUpgradeData.Scrap += _playerUpgradeData.ScrapReward;
+                PlayerDataManager.Instance.UpdateScrap(_playerUpgradeData.ScrapReward);
                 _scrapRewarded = true;
             }
             HUD.RevealVictory();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class RewardsUpgrades : MonoBehaviour
+public class RewardsUpgrades : UpgradeCard
 {
     [SerializeField]
     private PlayerUpgradeData _playerUpgradeData;
@@ -13,14 +13,8 @@ public class RewardsUpgrades : MonoBehaviour
     private float _upgradeCostMultiplier = 1.05f;
     [SerializeField]
     private float _rewardIncrease = .25f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        ChangeText();
-    }
-
  
-    private void ChangeText()
+    protected override void ChangeText()
     {
         if (_playerUpgradeData.CurrentRewardUpgrade >= _playerUpgradeData.MaxRewardUpgrades)
         {
@@ -31,19 +25,18 @@ public class RewardsUpgrades : MonoBehaviour
             _rewardUpgradeDescription.text = "Increase the amount of money you get from distracting cats\n Cost: " + _playerUpgradeData.RewardUpgradeCost;
         }
     }
-    private void UpgradeReward()
+    public override bool Upgrade()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.RewardUpgradeCost && _playerUpgradeData.CurrentRewardUpgrade < _playerUpgradeData.MaxRewardUpgrades)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.RewardUpgradeCost &&
+            PlayerDataManager.Instance.CurrentData.catRewardUpgrades < _playerUpgradeData.MaxRewardUpgrades)
         {
             _playerUpgradeData.RewardMultiplier += _rewardIncrease;
-            _playerUpgradeData.Scrap -= _playerUpgradeData.RewardUpgradeCost;
-            _playerUpgradeData.CurrentRewardUpgrade++;
+            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.RewardUpgradeCost);
+            PlayerDataManager.Instance.UpdateRewardUpgrade(1);
             _playerUpgradeData.RewardUpgradeCost = (int)Mathf.Round(_playerUpgradeData.RewardUpgradeCost * _upgradeCostMultiplier);
             ChangeText();
+            return true;
         }
-    }
-    public void Upgrade()
-    {
-        UpgradeReward();
+        return false;
     }
 }

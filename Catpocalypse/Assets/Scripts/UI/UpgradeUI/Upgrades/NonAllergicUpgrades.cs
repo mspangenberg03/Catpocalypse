@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class NonAllergicUpgrades : MonoBehaviour
+public class NonAllergicUpgrades : UpgradeCard
 {
     [SerializeField]
     private PlayerUpgradeData _playerUpgradeData;
@@ -15,13 +15,10 @@ public class NonAllergicUpgrades : MonoBehaviour
     private float _buildCostReduction = .15f;
     [SerializeField]
     private float _moveSpeedUpgrade = 1.1f;
-    private void Start()
+
+    protected override void ChangeText()
     {
-        ChangeText();
-    }
-    private void ChangeText()
-    {
-        switch (_playerUpgradeData.NonAllergicTier)
+        switch (PlayerDataManager.Instance.CurrentData.nAUpgrades)
         {
             case 0:
                 _nonAllergicText.text = "Reduce cost to build by 15%\nNothing bad could come out from a cheap robotic workforce!\nCost: " + _playerUpgradeData.NonAllergicUpgradeCost;
@@ -43,11 +40,11 @@ public class NonAllergicUpgrades : MonoBehaviour
                 break;
         }
     }
-    private void UpgradeNonAllergicTower()
+    public override bool Upgrade()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.NonAllergicUpgradeCost && _playerUpgradeData.NonAllergicTier < _playerUpgradeData.MaxTowerTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.NonAllergicUpgradeCost && PlayerDataManager.Instance.CurrentData.nAUpgrades < _playerUpgradeData.MaxTowerTier)
         {
-            switch (_playerUpgradeData.NonAllergicTier)
+            switch (PlayerDataManager.Instance.CurrentData.nAUpgrades)
             {
                 case 0:
                     _nonAllergicTowerData.BuildCost *= _buildCostReduction;
@@ -62,14 +59,12 @@ public class NonAllergicUpgrades : MonoBehaviour
                 case 4:
                     break;
             }
-            _playerUpgradeData.Scrap -= _playerUpgradeData.NonAllergicUpgradeCost;
+            PlayerDataManager.Instance.UpdateScrap( - _playerUpgradeData.NonAllergicUpgradeCost);
             _playerUpgradeData.NonAllergicUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.NonAllergicUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
-            _playerUpgradeData.NonAllergicTier++;
+            PlayerDataManager.Instance.UpdateNAUpgrades(1);
             ChangeText();
+            return true;
         }
-    }
-    public void Upgrade()
-    {
-        UpgradeNonAllergicTower();
+        return false;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class FortificationUpgrades : MonoBehaviour
+public class FortificationUpgrades : UpgradeCard
 {
     [SerializeField]
     private PlayerUpgradeData _playerUpgradeData;
@@ -14,13 +14,10 @@ public class FortificationUpgrades : MonoBehaviour
 
     [SerializeField, Tooltip("How much the player health is upgraded by")]
     private int _healthUpgrade = 2;
-    private void Start()
+
+    protected override void ChangeText()
     {
-        ChangeText();
-    }
-    private void ChangeText()
-    {
-        switch (_playerUpgradeData.FortificationTier)
+        switch (PlayerDataManager.Instance.CurrentData.fortificationUpgrades)
         {
             case 0:
                 _fortificationTier.text = "Improved Ventilation: Improve health by another bar\nYour allergies will thank you for the enhanced airflow\nCost: " + _playerUpgradeData.FortUpgradeCost;
@@ -42,11 +39,11 @@ public class FortificationUpgrades : MonoBehaviour
                 break;
         }
     }
-    private void UpgradeFort()
+    public override bool Upgrade()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.FortUpgradeCost && _playerUpgradeData.FortificationTier < _playerUpgradeData.MaxFortTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.FortUpgradeCost && PlayerDataManager.Instance.CurrentData.fortificationUpgrades < _playerUpgradeData.MaxFortTier)
         {
-            switch (_playerUpgradeData.FortificationTier)
+            switch (PlayerDataManager.Instance.CurrentData.fortificationUpgrades)
             {
                 case 0:
                     _playerUpgradeData.MaxHealth *= _healthUpgrade;
@@ -66,14 +63,11 @@ public class FortificationUpgrades : MonoBehaviour
                     _playerUpgradeData.FortTierFiveReached = true;
                     break;
             }
-            _playerUpgradeData.FortificationTier++;
-            _playerUpgradeData.Scrap -= _playerUpgradeData.FortUpgradeCost;
+            PlayerDataManager.Instance.UpdateFortificationUpgrades(1);
+            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.FortUpgradeCost);
             ChangeText();
+            return true;
         }
-    }
-
-    public void Upgrade()
-    {
-        UpgradeFort();
+        return false;
     }
 }

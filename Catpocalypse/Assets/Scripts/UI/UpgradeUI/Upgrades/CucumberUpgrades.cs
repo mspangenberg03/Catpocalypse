@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CucumberUpgrades : MonoBehaviour
+public class CucumberUpgrades : UpgradeCard
 {
     [SerializeField]
     private PlayerUpgradeData _playerUpgradeData;
@@ -17,15 +17,10 @@ public class CucumberUpgrades : MonoBehaviour
     private float _rangeUpgrade = 1.4f;
     [SerializeField]
     private TextMeshProUGUI _towerUpgradeDescription;
-    // Start is called before the first frame update
-    void Start()
-    {
-        ChangeText();
-    }
 
-    private void ChangeText()
+    protected override void ChangeText()
     {
-        switch (_playerUpgradeData.CucumberTowerTier)
+        switch (PlayerDataManager.Instance.CurrentData.cucumberUpgrades)
         {
             case 0:
                 _towerUpgradeDescription.text = "Improved Belts: Increase fire rate by 20%\nAdditional cucumber salvos coming right in!\nCost: " + _playerUpgradeData.CucumberTowerUpgradeCost;
@@ -47,17 +42,14 @@ public class CucumberUpgrades : MonoBehaviour
                 break;
         }
     }
-    public void Upgrade()
+    public override bool Upgrade()
     {
-        UpgradeCucumberTower();
-    }
-    private void UpgradeCucumberTower()
-    {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.CucumberTowerUpgradeCost && _playerUpgradeData.CucumberTowerTier < _playerUpgradeData.MaxTowerTier)
+        if(PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.CucumberTowerUpgradeCost
+            && PlayerDataManager.Instance.CurrentData.cucumberUpgrades < _playerUpgradeData.MaxTowerTier)
         {
-            _playerUpgradeData.Scrap -= _playerUpgradeData.CucumberTowerUpgradeCost;
+            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.CucumberTowerUpgradeCost);
 
-            switch (_playerUpgradeData.CucumberTowerTier)
+            switch (PlayerDataManager.Instance.CurrentData.cucumberUpgrades)
             {
                 case 0:
                     _cucumberTowerData.FireRate *= _cucumberFirerateUpgrade;
@@ -77,10 +69,11 @@ public class CucumberUpgrades : MonoBehaviour
             }
 
             _playerUpgradeData.CucumberTowerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.CucumberTowerUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
-            _playerUpgradeData.CucumberTowerTier++;
+            PlayerDataManager.Instance.UpdateCucumberUpgrades(1);
             ChangeText();
-
+            return true;
         }
+        return false;
     }
 }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class RobotUpgrades : MonoBehaviour
+public class RobotUpgrades : UpgradeCard
 {
     [SerializeField]
     private PlayerUpgradeData _playerUpgradeData;
@@ -20,13 +20,9 @@ public class RobotUpgrades : MonoBehaviour
     [SerializeField]
     private float _upgradeCostMultiplier = 1.05f;
 
-    private void Start()
+    protected override void ChangeText()
     {
-        ChangeText();
-    }
-    private void ChangeText()
-    {
-        switch (_playerUpgradeData.RobotTier)
+        switch (PlayerDataManager.Instance.CurrentData.robotUpgrades)
         {
             case 0:
                 _robotUpgradeText.text = "Improved Tracks: Increase movement speed by 15%\nTime to roll faster for the kitty disaster\nCost: " + _playerUpgradeData.RobotUpgradeCost;
@@ -49,15 +45,11 @@ public class RobotUpgrades : MonoBehaviour
         }
     }
 
-    public void Upgrade()
+    public override bool Upgrade()
     {
-        UpgradeRobot();
-    }
-    private void UpgradeRobot()
-    {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.RobotUpgradeCost && _playerUpgradeData.RobotTier < _playerUpgradeData.MaxRobotTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.RobotUpgradeCost && PlayerDataManager.Instance.CurrentData.robotUpgrades < _playerUpgradeData.MaxRobotTier)
         {
-            switch (_playerUpgradeData.RobotTier)
+            switch (PlayerDataManager.Instance.CurrentData.robotUpgrades)
             {
                 case 0:
                     _robotStats.MaxMovementSpeed *= _speedUpgrade;
@@ -75,10 +67,12 @@ public class RobotUpgrades : MonoBehaviour
                     _robotStats.TierFiveReached = true;
                     break;
             }
-            _playerUpgradeData.RobotTier++;
-            _playerUpgradeData.Scrap -= _playerUpgradeData.RobotUpgradeCost;
+            PlayerDataManager.Instance.UpdateRobotUpgrades(1);
+            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.RobotUpgradeCost);
             _playerUpgradeData.RobotUpgradeCost = (int)Mathf.Round(_playerUpgradeData.RobotUpgradeCost * _upgradeCostMultiplier);
             ChangeText();
+            return true;
         }
+        return false;
     }
 }

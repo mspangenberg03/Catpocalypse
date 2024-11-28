@@ -20548,6 +20548,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_UpgradeScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 5567408722992371132, guid: 91b416e9534b6f24a8c90fcb77cd2c77, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -22.649902
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

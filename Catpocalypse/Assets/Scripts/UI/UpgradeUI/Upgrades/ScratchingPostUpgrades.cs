@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ScratchingPostUpgrades : MonoBehaviour
+public class ScratchingPostUpgrades : UpgradeCard
 {
     [SerializeField]
     private PlayerUpgradeData _playerUpgradeData;
@@ -14,13 +14,10 @@ public class ScratchingPostUpgrades : MonoBehaviour
     private TextMeshProUGUI _scratchingPostTower;
     [SerializeField]
     private float _firerateUpgrade = .25f;
-    private void Start()
+
+    protected override void ChangeText()
     {
-        ChangeText();
-    }
-    private void ChangeText()
-    {
-        switch (_playerUpgradeData.ScratchingPostTier)
+        switch (PlayerDataManager.Instance.CurrentData.scratchUpgrades)
         {
             case 0:
                 _scratchingPostTower.text = "Taller Towers: Increase base Cat Scratch AOE by 10%\nScratchers shall soar, and tease the kitties more!\nCost: " + _playerUpgradeData.ScratchingPostUpgradeCost;
@@ -42,11 +39,11 @@ public class ScratchingPostUpgrades : MonoBehaviour
                 break;
         }
     }
-    private void UpgradeScratchingPost()
+    public override bool Upgrade()
     {
-        if (_playerUpgradeData.Scrap >= _playerUpgradeData.ScratchingPostUpgradeCost && _playerUpgradeData.ScratchingPostTier < _playerUpgradeData.MaxTowerTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.ScratchingPostUpgradeCost && PlayerDataManager.Instance.CurrentData.scratchUpgrades < _playerUpgradeData.MaxTowerTier)
         {
-            switch (_playerUpgradeData.ScratchingPostTier)
+            switch (PlayerDataManager.Instance.CurrentData.scratchUpgrades)
             {
                 case 0:
 
@@ -64,14 +61,12 @@ public class ScratchingPostUpgrades : MonoBehaviour
                     _playerUpgradeData.ScratchingPostTierFiveReached = true;
                     break;
             }
-            _playerUpgradeData.Scrap -= _playerUpgradeData.ScratchingPostUpgradeCost;
+            PlayerDataManager.Instance.UpdateScratchUpgrades(- _playerUpgradeData.ScratchingPostUpgradeCost);
             _playerUpgradeData.ScratchingPostUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.ScratchingPostUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
-            _playerUpgradeData.ScratchingPostTier++;
+            PlayerDataManager.Instance.UpdateScratchUpgrades(1);
             ChangeText();
+            return true;
         }
-    }
-    public void Upgrade()
-    {
-        UpgradeScratchingPost();
+        return false;
     }
 }
