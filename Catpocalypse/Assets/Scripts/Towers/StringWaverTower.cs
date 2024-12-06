@@ -11,6 +11,7 @@ public class StringWaverTower : Tower
     private int _stringFlingCooldown = 10;
     [SerializeField]
     private int _stringFlingDistractionValue = 10;
+    public float _speedDebuff = 1.8f;
     #endregion
     // Start is called before the first frame update
     private new void Start()
@@ -41,16 +42,33 @@ public class StringWaverTower : Tower
     }
     IEnumerator StringFling()
     {
-        //Slows down and distracts each cat in range
-        foreach(GameObject cat in targets)
+        if(targets.Count > 0)
         {
-            cat.GetComponent<CatBase>().slowingEntities.Add(gameObject);
-            cat.GetComponent<CatBase>().DistractCat(_stringFlingDistractionValue, this);
-            yield return new WaitForSeconds(_stringFlingDuration);
+            //Slows down and distracts each cat in range
+            Debug.LogWarning("StringFling");
+            foreach (GameObject cat in targets)
+            {
+                if(cat != null)
+                {
+                    cat.GetComponent<CatBase>().slowingEntities.Add(gameObject);
+                    cat.GetComponent<CatBase>().DistractCat(_stringFlingDistractionValue, this);
+                    StartCoroutine(StringFlingDuration(cat));
+                }
+            }
+            yield return new WaitForSeconds(_stringFlingCooldown);
+        }
+
+        yield return new WaitForSeconds(0);
+        StartCoroutine(StringFling());
+    }
+    IEnumerator StringFlingDuration(GameObject cat)
+    {
+        yield return new WaitForSeconds(_stringFlingDuration);
+        if(cat != null)
+        {
             cat.GetComponent<CatBase>().slowingEntities.Remove(gameObject);
         }
-        yield return new WaitForSeconds(_stringFlingCooldown);
-        StartCoroutine(StringFling());
+       
     }
     IEnumerator DistractCat()
     {
