@@ -226,17 +226,20 @@ public class LaserPointerTower : Tower
             foreach(GameObject target in targets)
             {
                 target.GetComponent<CatBase>().stoppingEntities.Add(gameObject);
+                StartCoroutine(SuddenFlashDuration(target));
             }
-            yield return new WaitForSeconds(_suddenFlashDuration);
-            foreach (GameObject target in targets)
-            {
-                target.GetComponent<CatBase>().stoppingEntities.Remove(gameObject);
-            }
+            
+            
             yield return new WaitForSeconds(_suddenFlashCooldown);
         }
-        yield return null;
+        yield return new WaitForSeconds(0);
         StartCoroutine(SuddenFlash());
         
+    }
+    IEnumerator SuddenFlashDuration(GameObject target)
+    {
+        yield return new WaitForSeconds(_suddenFlashDuration);
+        target.GetComponent<CatBase>().stoppingEntities.Remove(gameObject);
     }
     private bool TargetCat(TargetInfo targetInfo)
     {
