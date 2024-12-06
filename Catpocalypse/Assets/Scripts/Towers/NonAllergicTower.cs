@@ -25,7 +25,7 @@ public class NonAllergicTower : Tower
     private new void Start()
     {
         base.Start();
-
+        //StartCoroutine(FoodTime());
         cutenessManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerCutenessManager>();
         //Disables the tower if it is built during the Non-Allergic Strike cuteness challenge
         if (cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.NonAllergicStrike)
@@ -68,6 +68,7 @@ public class NonAllergicTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
+        Debug.LogWarning("Upgrade called");
         StartCoroutine(FoodTime());
         //numOfPeople++;
         //radius++;
@@ -83,15 +84,17 @@ public class NonAllergicTower : Tower
     IEnumerator FoodTime()
     {
         //If there is more than one cat, activate the ability
-        if(targets.Count > 1)
+        if (targets.Count > 0)
         {
+            Debug.LogWarning("Foodtime called");
             foreach (GameObject cat in targets)
             {
                 cat.GetComponent<CatBase>().DistractCat(_foodTimeDistractValue,gameObject.GetComponent<Tower>());
             }
+            yield return new WaitForSeconds(_foodTimeCooldown);
         }
+        yield return new WaitForSeconds(0);
         
-        yield return new WaitForSeconds(_foodTimeCooldown);
         StartCoroutine(FoodTime());
     }
     IEnumerator Spawner()
