@@ -140,6 +140,7 @@ public class TowerManipulationUI : MonoBehaviour
 
         if (playerMoneyManager.SpendMoney(currentSelectedBase.tower.GetComponent<Tower>().GetUpgradeCost()))
         {
+            Debug.LogWarning("Upgrade button clicked");
             currentSelectedBase.tower.GetComponent<Tower>().Upgrade();
         }
         
