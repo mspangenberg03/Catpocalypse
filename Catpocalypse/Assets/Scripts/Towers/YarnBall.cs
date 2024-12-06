@@ -23,9 +23,9 @@ public class YarnBall : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Life());
-        if (_upgradeData.YarnThrowerTierFiveReached)
+        if (parentTower.gameObject.GetComponent<YarnBallTower>().upgraded)
         {
-            StartCoroutine(TierFive());
+            StartCoroutine(Upgrade());
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -52,17 +52,24 @@ public class YarnBall : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    IEnumerator TierFive()
+    IEnumerator Upgrade()
     {
-        GameObject _piece = Instantiate(_string, gameObject.transform.position + new Vector3(0,2,0),Quaternion.identity);
+        
+        GameObject _piece = Instantiate(_string, gameObject.transform.position + new Vector3(0, 2, 0),Quaternion.identity);
+        float angle = Mathf.Atan2((transform.position.y - _piece.transform.position.y), (transform.position.x - _piece.transform.position.x));
+        angle = Mathf.Rad2Deg * angle;
+
+        //_piece.transform.LookAt(transform,Vector3.right);
+        _piece.transform.rotation = Quaternion.Euler(0, 0, angle);
+        //Vector3.RotateTowards(_piece.transform.eulerAngles, transform.eulerAngles, 180, 180);
+        //Quaternion.RotateTowards(_piece.transform.rotation, transform.rotation, 180);
         _piece.GetComponent<YarnString>().parent = this;
-        Debug.LogWarning("String spawned");
         yield return new WaitForSeconds(_spawnInterval);
-        StartCoroutine(TierFive());
+        StartCoroutine(Upgrade());
     }
     private void OnDestroy()
     {
-        StopCoroutine(TierFive());
+        StopCoroutine(Upgrade());
     }
     IEnumerator Life()
     {
