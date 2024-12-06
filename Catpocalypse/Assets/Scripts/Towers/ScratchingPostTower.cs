@@ -64,7 +64,6 @@ public class ScratchingPostTower : Tower
                 Vector3 pos = new Vector3(0, 0, 0);
                 for (int i = 0; i < targets.Count; i++)
                 {
-                    //If the cat's distraction is less that
                     if(targets[i].GetComponent<CatBase>().Distraction < minDistractValue)
                     {
                         minDistractValue = targets[i].GetComponent<CatBase>().Distraction;
@@ -80,14 +79,7 @@ public class ScratchingPostTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        switch (towerLevel)
-        {
-     
-            case 2:
-                ISPReady = true;
-                break;
-        }
-        
+        ISPReady = true;
     }
 
 
