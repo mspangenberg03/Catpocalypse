@@ -32,6 +32,8 @@ public class ScratchingPost : MonoBehaviour
     [Min(0f)]
     private float _DurabilityRemovedByCat;
 
+    [SerializeField, Tooltip("The sphere collider of the Scratching Post")] private SphereCollider range;
+
     private List<GameObject> _Cats;
 
     private bool _Destroying = false;
@@ -41,6 +43,14 @@ public class ScratchingPost : MonoBehaviour
     public void Start()
     {
         _Cats = new List<GameObject>();
+        if(PlayerDataManager.Instance.CurrentData.scratchUpgrades > 0)
+        {
+            range.radius *= PlayerDataManager.Instance.Upgrades.ScratchingPostRangeUpgrade;
+            if(PlayerDataManager.Instance.CurrentData.scratchUpgrades > 2)
+            {
+                _Durability *= PlayerDataManager.Instance.Upgrades.ScratchingPostDurabilityUpgrade;
+            }
+        }
         StartCoroutine(DurationCountDown(_Duration));
     }
 

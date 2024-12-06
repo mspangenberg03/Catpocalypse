@@ -5,18 +5,11 @@ using UnityEngine;
 
 public class ScratchingPostUpgrades : UpgradeCard
 {
-    [SerializeField]
-    private PlayerUpgradeData _playerUpgradeData;
-
-    [SerializeField]
-    private TowerData _scratchingPostTowerData;
-    [SerializeField]
-    private TextMeshProUGUI _scratchingPostTower;
-    [SerializeField]
-    private float _firerateUpgrade = .25f;
-
     protected override void ChangeText()
     {
+        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.scratchUpgrades];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.scratchUpgrades].ToString();
+        /**
         switch (PlayerDataManager.Instance.CurrentData.scratchUpgrades)
         {
             case 0:
@@ -37,32 +30,14 @@ public class ScratchingPostUpgrades : UpgradeCard
             case 5:
                 _scratchingPostTower.text = "Scratching Post fully upgraded";
                 break;
-        }
+        }*/
     }
     public override bool Upgrade()
     {
-        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.ScratchingPostUpgradeCost && PlayerDataManager.Instance.CurrentData.scratchUpgrades < _playerUpgradeData.MaxTowerTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.scratchUpgrades] 
+            && PlayerDataManager.Instance.CurrentData.scratchUpgrades < ScrapUpgradeCost.Count)
         {
-            switch (PlayerDataManager.Instance.CurrentData.scratchUpgrades)
-            {
-                case 0:
-
-                    break;
-                case 1:
-                    _scratchingPostTowerData.FireRate *= _firerateUpgrade;
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-                    _playerUpgradeData.ScratchingPostTierFourReached = true;
-                    break;
-                case 4:
-                    _playerUpgradeData.ScratchingPostTierFiveReached = true;
-                    break;
-            }
-            PlayerDataManager.Instance.UpdateScratchUpgrades(- _playerUpgradeData.ScratchingPostUpgradeCost);
-            _playerUpgradeData.ScratchingPostUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.ScratchingPostUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
+            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.scratchUpgrades]);
             PlayerDataManager.Instance.UpdateScratchUpgrades(1);
             ChangeText();
             return true;

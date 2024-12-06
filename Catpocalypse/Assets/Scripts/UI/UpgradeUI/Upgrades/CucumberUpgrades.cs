@@ -5,21 +5,13 @@ using UnityEngine;
 
 public class CucumberUpgrades : UpgradeCard
 {
-    [SerializeField]
-    private PlayerUpgradeData _playerUpgradeData;
-    [SerializeField]
-    private TowerData _cucumberTowerData;
-    [SerializeField, Tooltip("How much the cucumber firerate is improved by")]
-    private float _cucumberFirerateUpgrade = .2f;
-    [SerializeField,Tooltip("How much the tower rotation speed is improved")]
-    private float _aimingSpeedUpgrade = 1.3f;
-    [SerializeField,Tooltip("How much the tower range is increased by")]
-    private float _rangeUpgrade = 1.4f;
-    [SerializeField]
-    private TextMeshProUGUI _towerUpgradeDescription;
+
 
     protected override void ChangeText()
     {
+        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.cucumberUpgrades];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.cucumberUpgrades].ToString();
+        /**
         switch (PlayerDataManager.Instance.CurrentData.cucumberUpgrades)
         {
             case 0:
@@ -41,34 +33,14 @@ public class CucumberUpgrades : UpgradeCard
                 _towerUpgradeDescription.text = "Cucumber Tower fully upgraded";
                 break;
         }
+        */
     }
     public override bool Upgrade()
     {
-        if(PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.CucumberTowerUpgradeCost
-            && PlayerDataManager.Instance.CurrentData.cucumberUpgrades < _playerUpgradeData.MaxTowerTier)
+        if(PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.cucumberUpgrades]
+            && PlayerDataManager.Instance.CurrentData.cucumberUpgrades < UpgradeText.Count)
         {
-            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.CucumberTowerUpgradeCost);
-
-            switch (PlayerDataManager.Instance.CurrentData.cucumberUpgrades)
-            {
-                case 0:
-                    _cucumberTowerData.FireRate *= _cucumberFirerateUpgrade;
-                    break;
-                case 1:
-                    _cucumberTowerData.CucumberTowerAimingSpeed *= _aimingSpeedUpgrade;
-                    break;
-                case 2:
-                    _cucumberTowerData.Range *= _rangeUpgrade;
-                    break;
-                case 3:
-                    _playerUpgradeData.CucumberTowerTierFourReached = true;
-                    break;
-                case 4:
-                    _cucumberTowerData.TierFiveReached = true;
-                    break;
-            }
-
-            _playerUpgradeData.CucumberTowerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.CucumberTowerUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
+            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.cucumberUpgrades]);
             PlayerDataManager.Instance.UpdateCucumberUpgrades(1);
             ChangeText();
             return true;

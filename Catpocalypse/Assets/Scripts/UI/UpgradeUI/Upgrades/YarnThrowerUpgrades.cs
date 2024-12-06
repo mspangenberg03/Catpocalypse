@@ -5,18 +5,12 @@ using UnityEngine;
 
 public class YarnThrowerUpgrades : UpgradeCard
 {
-    [SerializeField]
-    private PlayerUpgradeData _playerUpgradeData;
-    [SerializeField]
-    private TowerData _yarnThrowerTowerData;
-
-    [SerializeField,Tooltip("The upgrade to the tower firerate")]
-    private float _firerateUpgrade = 1.15f;
-    [SerializeField]
-    private TextMeshProUGUI _yarnThrowerText;
 
     protected override void ChangeText()
     {
+        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.yarnUpgrades];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.yarnUpgrades].ToString();
+        /**
         switch (PlayerDataManager.Instance.CurrentData.yarnUpgrades)
         {
             case 0:
@@ -37,31 +31,14 @@ public class YarnThrowerUpgrades : UpgradeCard
             case 5:
                 _yarnThrowerText.text = "Yarn Thrower fully upgraded";
                 break;
-        }
+        }*/
     }
     public override bool Upgrade()
     {
-        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.YarnThrowerUpgradeCost 
-            && PlayerDataManager.Instance.CurrentData.yarnUpgrades < _playerUpgradeData.MaxTowerTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.yarnUpgrades] 
+            && PlayerDataManager.Instance.CurrentData.yarnUpgrades < ScrapUpgradeCost.Count)
         {
-            switch (PlayerDataManager.Instance.CurrentData.yarnUpgrades)
-            {
-                case 0:
-                    _yarnThrowerTowerData.FireRate /= _firerateUpgrade;
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    _playerUpgradeData.YarnThrowerTierFiveReached = true;
-                    break;
-
-            }
-            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.YarnThrowerUpgradeCost);
-            _playerUpgradeData.YarnThrowerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.YarnThrowerUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
+            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.yarnUpgrades]);
             PlayerDataManager.Instance.UpdateYarnUpgrades(1);
             ChangeText();
             return true;

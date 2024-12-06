@@ -6,20 +6,15 @@ using UnityEngine;
 public class LaserPointerUpgrades : UpgradeCard
 {
     [SerializeField]
-    private PlayerUpgradeData _playerUpgradeData;
-    [SerializeField]
-    private TowerData _laserPointerData;
-
-    [SerializeField]
-    private TextMeshProUGUI _laserPointerText;
-
-    [SerializeField]
     private float _rangeUpgrade = 1.2f;
     [SerializeField]
     private float _distractionUpgrade = 1.2f;
 
     protected override void ChangeText()
     {
+        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.laserUpgrades];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.laserUpgrades].ToString();
+        /**
         switch (PlayerDataManager.Instance.CurrentData.laserUpgrades)
         {
             case 0:
@@ -40,30 +35,15 @@ public class LaserPointerUpgrades : UpgradeCard
             case 5:
                 _laserPointerText.text = "Laser Pointer fully upgraded";
                 break;
-        }
+        }*/
     }
     public override bool Upgrade()
     {
-        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.LaserPointerUpgradeCost && PlayerDataManager.Instance.CurrentData.laserUpgrades < _playerUpgradeData.MaxTowerTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.laserUpgrades] 
+            && PlayerDataManager.Instance.CurrentData.laserUpgrades < ScrapUpgradeCost.Count)
         {
-            switch (PlayerDataManager.Instance.CurrentData.laserUpgrades)
-            {
-                case 0:
-                    break;
-                case 1:
-                    _laserPointerData.Range *= _rangeUpgrade;
-                    break;
-                case 2:
-                    _laserPointerData.DistractValue *= _distractionUpgrade;
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-            }
             PlayerDataManager.Instance.UpdateLaserUpgrades(1);
-            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.LaserPointerUpgradeCost);
-            _playerUpgradeData.LaserPointerUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.LaserPointerUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
+            PlayerDataManager.Instance.UpdateScrap(ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.laserUpgrades]);
             ChangeText();
             return true;
         }

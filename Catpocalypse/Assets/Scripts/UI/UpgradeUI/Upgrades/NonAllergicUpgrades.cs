@@ -5,19 +5,12 @@ using UnityEngine;
 
 public class NonAllergicUpgrades : UpgradeCard
 {
-    [SerializeField]
-    private PlayerUpgradeData _playerUpgradeData;
-    [SerializeField]
-    private TowerData _nonAllergicTowerData;
-    [SerializeField]
-    private TextMeshProUGUI _nonAllergicText;
-    [SerializeField]
-    private float _buildCostReduction = .15f;
-    [SerializeField]
-    private float _moveSpeedUpgrade = 1.1f;
 
     protected override void ChangeText()
     {
+        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.nAUpgrades];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.nAUpgrades].ToString();
+        /**
         switch (PlayerDataManager.Instance.CurrentData.nAUpgrades)
         {
             case 0:
@@ -39,28 +32,14 @@ public class NonAllergicUpgrades : UpgradeCard
                 _nonAllergicText.text = "Non-Allergic tower fully upgraded";
                 break;
         }
+        */
     }
     public override bool Upgrade()
     {
-        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.NonAllergicUpgradeCost && PlayerDataManager.Instance.CurrentData.nAUpgrades < _playerUpgradeData.MaxTowerTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.nAUpgrades]
+            && PlayerDataManager.Instance.CurrentData.nAUpgrades < UpgradeText.Count)
         {
-            switch (PlayerDataManager.Instance.CurrentData.nAUpgrades)
-            {
-                case 0:
-                    _nonAllergicTowerData.BuildCost *= _buildCostReduction;
-                    break;
-                case 1:
-                    _nonAllergicTowerData.NonAllergicPersonMoveSpeed *= _moveSpeedUpgrade;
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-            }
-            PlayerDataManager.Instance.UpdateScrap( - _playerUpgradeData.NonAllergicUpgradeCost);
-            _playerUpgradeData.NonAllergicUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.NonAllergicUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
+            PlayerDataManager.Instance.UpdateScrap( -ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.nAUpgrades]);
             PlayerDataManager.Instance.UpdateNAUpgrades(1);
             ChangeText();
             return true;

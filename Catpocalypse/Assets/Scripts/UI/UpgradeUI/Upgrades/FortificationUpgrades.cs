@@ -5,18 +5,15 @@ using UnityEngine;
 
 public class FortificationUpgrades : UpgradeCard
 {
-    [SerializeField]
-    private PlayerUpgradeData _playerUpgradeData;
     [SerializeField,Tooltip("The upgrade for the hairball removal speed")]
     private float _hairballRemovalSpeedUpgrade = .5f;
-    [SerializeField]
-    private TextMeshProUGUI _fortificationTier;
 
     [SerializeField, Tooltip("How much the player health is upgraded by")]
     private int _healthUpgrade = 2;
 
     protected override void ChangeText()
     {
+        /**
         switch (PlayerDataManager.Instance.CurrentData.fortificationUpgrades)
         {
             case 0:
@@ -37,34 +34,17 @@ public class FortificationUpgrades : UpgradeCard
             case 5:
                 _fortificationTier.text = "Fortifications fully upgraded";
                 break;
-        }
+        }*/
+        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.fortificationUpgrades];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.fortificationUpgrades].ToString();
     }
     public override bool Upgrade()
     {
-        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.FortUpgradeCost && PlayerDataManager.Instance.CurrentData.fortificationUpgrades < _playerUpgradeData.MaxFortTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.fortificationUpgrades] 
+            && PlayerDataManager.Instance.CurrentData.fortificationUpgrades < ScrapUpgradeCost.Count)
         {
-            switch (PlayerDataManager.Instance.CurrentData.fortificationUpgrades)
-            {
-                case 0:
-                    _playerUpgradeData.MaxHealth *= _healthUpgrade;
-                    _playerUpgradeData.FortTierOneReached = true;
-                    break;
-                case 1:
-                    _playerUpgradeData.FortTierTwoReached = true;
-                    break;
-                case 2:
-                    _playerUpgradeData.FortTierThreeReached = true;
-                    break;
-                case 3:
-                    //Hairballs have not been implemented yet
-                    _playerUpgradeData.HairballRemovalSpeed *= _hairballRemovalSpeedUpgrade;
-                    break;
-                case 4:
-                    _playerUpgradeData.FortTierFiveReached = true;
-                    break;
-            }
             PlayerDataManager.Instance.UpdateFortificationUpgrades(1);
-            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.FortUpgradeCost);
+            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.fortificationUpgrades]);
             ChangeText();
             return true;
         }

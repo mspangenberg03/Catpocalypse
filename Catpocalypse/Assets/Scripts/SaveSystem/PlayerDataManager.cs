@@ -163,6 +163,7 @@ public class PlayerDataManager : MonoBehaviour
     }
 
     public PlayerData CurrentData { get { return _trackedData; } }
+    public PlayerUpgradeData Upgrades { get { return _playerUpgradeData; } }
 
 }
 
@@ -184,7 +185,6 @@ public class PlayerData
         stringUpgrades = 0;
         cucumberUpgrades = 0;
         catRewardUpgrades = 0;
-        upgrades = new PlayerUpgrades(data);
         time = 0;
     }
 
@@ -200,6 +200,5 @@ public class PlayerData
     public int stringUpgrades;
     public int cucumberUpgrades;
     public int catRewardUpgrades;
-    public PlayerUpgrades upgrades;
     public float time;
 }

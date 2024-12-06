@@ -39,13 +39,12 @@ public class WaveManager : MonoBehaviour
     private PlayerMoneyManager _PlayerMoneyManager;
     private PlayerCutenessManager _cutenessManager;
 
-    [SerializeField]
-    private PlayerUpgradeData _playerUpgradeData;
     private bool _scrapRewarded = false;
 
     [SerializeField] AudioSource _waveSound;
     [SerializeField] AudioClip _startClip;
     [SerializeField] AudioClip _endClip;
+    [SerializeField] private int _ScrapReward;
 
 
     private void Awake()
@@ -93,7 +92,7 @@ public class WaveManager : MonoBehaviour
             LevelCleared?.Invoke(this, EventArgs.Empty);
             if (!_scrapRewarded)
             {
-                PlayerDataManager.Instance.UpdateScrap(_playerUpgradeData.ScrapReward);
+                PlayerDataManager.Instance.UpdateScrap(_ScrapReward);
                 _scrapRewarded = true;
             }
             HUD.RevealVictory();

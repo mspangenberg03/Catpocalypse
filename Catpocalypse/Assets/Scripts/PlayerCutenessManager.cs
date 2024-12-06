@@ -86,7 +86,12 @@ public class PlayerCutenessManager : MonoBehaviour
 
     public void AddCuteness(int amount)
     {
-        _Cuteness = Mathf.Clamp(_Cuteness + amount, 0, _MaxCuteness);
+        float adjustedAmount = amount;
+        if(PlayerDataManager.Instance.CurrentData.fortificationUpgrades > 1)
+        {
+            adjustedAmount *= PlayerDataManager.Instance.Upgrades.CutenessResistanceUpgrade;
+        }
+        _Cuteness = Mathf.Clamp(_Cuteness + adjustedAmount, 0, _MaxCuteness);
         HUD.UpdateCutenessDisplay(_Cuteness, _MaxCuteness);
     }
 

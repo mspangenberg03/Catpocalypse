@@ -5,237 +5,105 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PlayerUpgradeData : ScriptableObject
 {
-    [SerializeField, Tooltip("The player's starting health")]
-    private int _maxHealth;
-    public int MaxHealth
-    {
-        get { return _maxHealth; }
-        set { _maxHealth = value; }
-    }
+    [SerializeField, Tooltip("How many reward upgrades can the player get")] private int _maxRewardUpgrades;
+    public int MaxRewardUpgrades { get { return _maxRewardUpgrades; } }
 
-    [SerializeField]
-    private int _scrapReward;
-    public int ScrapReward
-    {
-        get { return _scrapReward; }
-        set { _scrapReward = value; }
-    }
-    private bool _rewardUpgraded;
-    public bool IsUpgraded
-    {
-        get { return _rewardUpgraded; }
-        set { _rewardUpgraded = value; }
-    }
-    [SerializeField, Tooltip("The bonus to the cat reward")]
-    private float _rewardMultiplier;
-    public float RewardMultiplier
-    {
-        get { return _rewardMultiplier; }
-        set { _rewardMultiplier = value; }
-    }
-    [SerializeField]
-    private int _cucumberTowerUpgradeCost;
-    public int CucumberTowerUpgradeCost
-    {
-        get { return _cucumberTowerUpgradeCost; }
-        set { _cucumberTowerUpgradeCost = value; }
-    }
-    [SerializeField]
-    private int _yarnThrowerTowerUpgradeCost;
-    public int YarnThrowerUpgradeCost
-    {
-        get { return _yarnThrowerTowerUpgradeCost; }
-        set { _yarnThrowerTowerUpgradeCost = value; }
-    }
-    [SerializeField]
-    private int _scratchingPostUpgradeCost;
-    public int ScratchingPostUpgradeCost
-    {
-        set { _scratchingPostUpgradeCost = value; }
-        get { return _scratchingPostUpgradeCost; }
-    }
-    [SerializeField]
-    private int _nonAllergicUpgradeCost;
-    public int NonAllergicUpgradeCost
-    {
-        set { _nonAllergicUpgradeCost = value; }
-        get { return _nonAllergicUpgradeCost; }
-    }
-    [SerializeField]
-    private int _laserPointerUpgradeCost;
-    public int LaserPointerUpgradeCost
-    {
-        get { return _laserPointerUpgradeCost; }
-        set { _laserPointerUpgradeCost = value; }
-    }
-    [SerializeField]
-    private int _stringWaverUpgradeCost;
-    public int StringWaverUpgradeCost
-    {
-        get { return _stringWaverUpgradeCost; }
-        set { _stringWaverUpgradeCost = value; }
-    }
-    [SerializeField]
-    private int _healthUpgradeCost;
-    public int HealthUpgradeCost
-    {
-        get { return _healthUpgradeCost; }
-        set { _healthUpgradeCost = value; }
-    }
-    [SerializeField]
-    private int _rewardUpgradeCost;
-    public int RewardUpgradeCost
-    {
-        get { return _healthUpgradeCost; }
-        set { _healthUpgradeCost = value; }
-    }
-    [SerializeField]
-    private int _robotUpgradeCost;
-    public int RobotUpgradeCost
-    {
-        get { return _robotUpgradeCost; }
-        set { _robotUpgradeCost = value; }
-    }
-    [SerializeField]
-    private int _fortUpgradeCost;
-    public int FortUpgradeCost
-    {
-        set { _fortUpgradeCost = value; }
-        get { return _fortUpgradeCost; }
-    }
-    private int _currentTowerUpgrade = 0;
-    public int CurrentTowerUpgrade
-    {
-        get { return _currentTowerUpgrade; }
-        set { _currentTowerUpgrade = value; }
-    }
-    private int _currentRewardUpgrade = 0;
-    public int CurrentRewardUpgrade
-    {
-        get { return _currentRewardUpgrade; }
-        set { _currentRewardUpgrade = value; }
-    }
-    private int _currentHealthUpgrade = 0;
-    public int CurrentHealthUpgrade
-    {
-        get { return _currentHealthUpgrade; }
-        set { _currentHealthUpgrade = value; }
-    }
-    private int _currentRobotMovementUpgrade = 0;
-    public int CurrentRobotMovementUpgrade
-    {
-        set { _currentRobotMovementUpgrade = value; }
-        get { return _currentRobotMovementUpgrade; }
-    }
-    private int _currentRobotFirerateUpgrade = 0;
-    public int CurrentRobotFirerateUpgrade
-    {
-        get { return _currentRobotFirerateUpgrade; }
-        set { _currentRobotFirerateUpgrade = value; }
-    }
-    private int _currentRobotDistactionValueUpgrade = 0;
-    public int CurrentRobotDistractionValueUpgrade
-    {
-        get { return _currentRobotDistactionValueUpgrade; }
-        set { _currentRobotDistactionValueUpgrade = value; }
-    }
-    private int _index = 0;
-    public int Index
-    {
-        get { return _index; }
-        set { _index = value; }
-    }
 
-    private float _hairballRemovalSpeed;
-    public float HairballRemovalSpeed
-    {
-        get { return _hairballRemovalSpeed; }
-        set { _hairballRemovalSpeed = value;}
-    }
-    private bool _fortTierOneReached = false;
-    public bool FortTierOneReached
-    {
-        get { return _fortTierOneReached; }
-        set { _fortTierOneReached = value; }
-    }
-    private bool _fortTierTwoReached = false;
-    public bool FortTierTwoReached
-    {
-        get { return _fortTierTwoReached; }
-        set { _fortTierTwoReached = value; }
-    }
-    private bool _fortTierThreeReached = false;
-    public bool FortTierThreeReached
-    {
-        get { return _fortTierThreeReached; }
-        set { _fortTierThreeReached = value; }
-    }
-    private bool _fortTierFiveReached = false;
-    public bool FortTierFiveReached
-    {
-        get { return _fortTierFiveReached; }
-        set { _fortTierFiveReached = value; }
-    }
-    private bool _scratchingPostTierFourReached = false;
-    public bool ScratchingPostTierFourReached
-    {
-        get { return _scratchingPostTierFourReached; }
-        set { _scratchingPostTierFourReached = value; }
-    }
+    [Header("Cucumber Tower Upgrades")]
+    [SerializeField, Tooltip("How much the cucumber fire rate is improved by")] private float _CucumberFireRateUpgrade = 1.2f;
+    [SerializeField, Tooltip("How much the tower rotation speed is improved")] private float _CucumberAimingSpeedUpgrade = 1.3f;
+    [SerializeField, Tooltip("How much the tower range is increased by")] private float _CucumberRangeUpgrade = 1.4f;
+    [SerializeField, Tooltip("How much the tower range is increased by")] private float _CucumberSuperAOEUpgrade = 1.4f;
+    [SerializeField, Tooltip("How many secondary cucumbers spawn from the Nested Cucumber Upgrade")] private float _CucumberNestedUpgrade = 5;
 
-    private bool _scratchingPostTierFiveReached = false;
-    public bool ScratchingPostTierFiveReached
-    {
-        get { return _scratchingPostTierFiveReached; }
-        set { _scratchingPostTierFiveReached = value; }
-    }
+    public float CucumberFireRateUpgrade { get { return _CucumberFireRateUpgrade; } }
+    public float CucumberAimSpeedUpgrade { get { return _CucumberAimingSpeedUpgrade; } }
+    public float CucumberRangeUpgrade {  get { return _CucumberRangeUpgrade; } }
+    public float CucumberSuperAOEUpgrade { get { return _CucumberSuperAOEUpgrade; } }
+    public float CucumberNestedUpgrade {  get { return _CucumberNestedUpgrade; } }
 
-    private bool _yarnThrowerTierFiveReached = false;
-    public bool YarnThrowerTierFiveReached
-    {
-        get { return _yarnThrowerTierFiveReached; }
-        set { _yarnThrowerTierFiveReached = value; }
-    }
-    private bool _cucumberTowerTierFourReached = false;
-    public bool CucumberTowerTierFourReached
-    {
-        get { return _cucumberTowerTierFourReached; }
-        set { _cucumberTowerTierFourReached = value; }  
-    }
 
-    [SerializeField]
-    private float _towerUpgradeCostMultiplier = 1.2f;
-    public float TowerUpgradeCostMultiplier
-    {
-        get { return _towerUpgradeCostMultiplier; }
-        set { _towerUpgradeCostMultiplier = value; }
-    }
-    [SerializeField]
-    private int _maxTowerTier = 5;
-    public int MaxTowerTier
-    {
-        get { return _maxTowerTier; }
-        set { _maxTowerTier = value;}
-    }
-    private int _maxRobotTier = 5;
-    public int MaxRobotTier
-    {
-        get { return _maxRobotTier; }
-        set { _maxRobotTier = value; }
-    }
-    [SerializeField]
-    private int _maxFortTier = 5;
-    public int MaxFortTier
-    {
-        get { return _maxFortTier; }
-        set { _maxFortTier = value; }
-    }
-    [SerializeField, Tooltip("How many reward upgrades can the player get")]
-    private int _maxRewardUpgrades;
-    public int MaxRewardUpgrades
-    {
-        get { return _maxRewardUpgrades; }
-        set { _maxRewardUpgrades = value;}
-    }
+    [Header("Laser Pointer Tower Upgrades")]
+    [SerializeField, Tooltip("How much the drag speed of the laser pointer tower is increased")] private float _LaserPointerDragSpeedUpgrade = 1.15f;
+    [SerializeField, Tooltip("How much the tower range is increased by")] private float _LaserPointerRangeUpgrade = 1.2f;
+    [SerializeField, Tooltip("How much the tower distraction amount is increased by")] private float _LaserPointerDistractionUpgrade = 1.2f;
+    [SerializeField, Tooltip("How much the stun time of Sudden Flash increases by")] private float _LaserPointerFlashStunUpgrade = 2f;
+    [SerializeField, Tooltip("How many more cats a laser can target")] private int _LaserPointerNumberOfTargetsUpgrade = 1;
+
+    public float LaserPointerDragSpeedUpgrade {  get { return _LaserPointerDragSpeedUpgrade; } }
+    public float LaserRangeUpgrade { get { return _LaserPointerRangeUpgrade;  } }
+    public float LaserDistractionUpgrade {  get { return _LaserPointerDistractionUpgrade; } }
+    public float LaserPointerFlashUpgrade { get { return _LaserPointerFlashStunUpgrade; } }
+    public float LaserPointerNumberOfTargetsUpgrade { get { return LaserPointerNumberOfTargetsUpgrade; } }
+
+
+    [Header("Nonallergic Tower Upgrades")]
+    [SerializeField, Tooltip("How much the cost to build Non-Allergic Towers is reduced")] private float _NABuildCostReduction = .85f;
+    [SerializeField, Tooltip("How much a Non-Allergic Person's move speed is increased")] private float _NAMoveSpeedUpgrade = 1.1f;
+    [SerializeField, Tooltip("How much a Non-Allergic Person's distract value is increased")] private float _NADistractionUpgrade = 1.25f;
+    [SerializeField, Tooltip("How much longer Food Call lasts")] private float _NAFoodCallUpgrade = 1.3f;
+    [SerializeField, Tooltip("Number of cats a Non-Allergic Person can permanently distract")] private int _NAPermanentDistractionUpgrade = 1;
+
+    public float NABuildCostReduction {  get { return _NABuildCostReduction; } }
+    public float NAMoveSpeedUpgrade {  get { return _NAMoveSpeedUpgrade; } }
+    public float NADistractionUpgrade { get {return _NADistractionUpgrade; } }
+    public float NAFoodCallUpgrade {  get {  return _NAFoodCallUpgrade; } }
+    public float NAPermanentDistractionUpgrade { get { return _NAPermanentDistractionUpgrade; } }
+
+    [Header("Scratching Post Tower Upgrades")]
+
+    [SerializeField, Tooltip("Upgrades the radius of the scratching post")] private float _ScratchingPostRangeUpgrade = 1.1f;
+    [SerializeField, Tooltip("Upgrades how often the Scratching Post Tower Fires")] private float _ScratchingPostFireRateUpgrade = .75f;
+    [SerializeField, Tooltip("Upgrades how long a Scratching Post Tower lasts")] private float _ScratchingPostDurabilityUpgrade = 1.30f;
+    [SerializeField, Tooltip("Upgrades the amount of time a cat is stunned by the Irresistible Scratching Post")] private float _ScratchingPostStunLengthUpgrade = 2f;
+    [SerializeField, Tooltip("Upgrade gives the Scratching Posts impact damage in an AOE")] private float _ScratchingPostImpactDamageUpgrade = 5f;
+
+    public float ScratchingPostRangeUpgrade {  get { return _ScratchingPostRangeUpgrade; } }
+    public float ScratchingPostFireRateUpgrade {  get { return _ScratchingPostFireRateUpgrade; } }
+    public float ScratchingPostDurabilityUpgrade { get { return _ScratchingPostDurabilityUpgrade; } }
+    public float ScratchingPostStunLengthUpgrade { get { return _ScratchingPostStunLengthUpgrade; } }
+    public float ScratchingPostImpactDamageUpgrade {  get {  return _ScratchingPostImpactDamageUpgrade; } }
+
+    [Header("String Waver Tower Upgrades")]
+    [SerializeField, Tooltip("How much the frequency of the String Waver Tower AOE is increased")] private float _StringWaverFrequencyUpgrade = 1.15f;
+    [SerializeField, Tooltip("How much larger the range of the String Waver Tower is increased")] private float _StringWaverRangeUpgrade = 1.2f;
+    [SerializeField, Tooltip("How much the String Waver distraction value is increased")] private float _StringWaverDistractValueUpgrade = 1.25f;
+    [SerializeField, Tooltip("How much more the String Fling distraction value is increased")] private float _StringWaverStringFlingUpgrade = 1.4f;
+
+    public float StringWaverFrequencyUpgrade { get { return _StringWaverFrequencyUpgrade; } }
+    public float StringWaverRangeUpgrade {  get { return _StringWaverRangeUpgrade; } }
+    public float StringWaverDistractValueUpgrade { get { return _StringWaverDistractValueUpgrade; } }
+    public float StringWaverStringFlingUpgrade {  get { return _StringWaverStringFlingUpgrade; } }
+
+    [Header("Yarn Thrower Tower Upgrades")]
+    [SerializeField, Tooltip("How much to increase the Yarn Thrower tower fire rate")] private float _YarnThrowerFireRateUpgrade = 1.15f;
+
+    public float YarnThrowerFireRateUpgrade {  get { return _YarnThrowerFireRateUpgrade;  } }
+
+    [Header("Robot Upgrades")]
+    [SerializeField, Tooltip("The upgrade to the robot movement speed")] private float _RobotSpeedUpgrade = 1.15f;
+    [SerializeField, Tooltip("Upgrade to the robot projectile speed")] private float _RobotLaunchUpgrade = 1.2f;
+    [SerializeField, Tooltip("Upgrade to the robot fire rate")] private float _RobotFireRateUpgrade = .3f;
+
+    public float RobotSpeedUpgrade { get { return _RobotSpeedUpgrade; } }
+    public float RobotLaunchUpgrade {  get { return _RobotLaunchUpgrade; } }
+    public float RobotFireRateUpgrade { get { return _RobotFireRateUpgrade; } }
+
+    [Header("Reward Upgrades")]
+    [SerializeField, Tooltip("How much the reward for distracting cats increases by per upgrade")] private List<float> _rewardIncrease;
+    public float RewardUpgrade { get { return _rewardIncrease[PlayerDataManager.Instance.CurrentData.catRewardUpgrades]; } }
+
+    [Header("Fortification Upgrades")]
+    [SerializeField, Tooltip("The amount to increase the player's starting health by")] private int _MaxHealthUpgrade;
+    [SerializeField, Tooltip("How many non-allergic guards are spawned at the fortification")] private int _FortificationGuardNumber;
+    [SerializeField, Tooltip("Upgrades the resistance to cat cuteness a player has")] private float _CutenessResistanceUpgrade;
+    [SerializeField, Tooltip("How much faster hairballs will be removed by in seconds")] private float _HairballRemovalUpgrade;
+    [SerializeField, Tooltip("How much the Chatterbox Upgrade can distract cats")] private int _ChatterboxUpgradeDistractionAmount;
+
+    public int MaxHealthUpgrade{ get { return _MaxHealthUpgrade; }}
+    public int FortificationGuardNumber { get { return _FortificationGuardNumber;} }
+    public float CutenessResistanceUpgrade {  get { return _CutenessResistanceUpgrade; }}
+    public float HairballRemovalSpeed { get { return _HairballRemovalUpgrade; }}
+    public int ChatterboxUpgradeDistractionAmount { get { return _ChatterboxUpgradeDistractionAmount; }}
 
 }

@@ -26,18 +26,7 @@ public class RobotStats : ScriptableObject
         get { return _distractionValue; }
         set { _distractionValue = value; }
     }
-    private bool _tierFiveReached;
-    public bool TierFiveReached
-    {
-        get { return _tierFiveReached; }
-        set { _tierFiveReached = value; }
-    }
-    private bool _tierFourReached;
-    public bool TierFourReached
-    {
-        get { return _tierFourReached; }
-        set { _tierFourReached = value; }
-    }
+
     private float _launchSpeed = 10f;
     public float LaunchSpeed
     {

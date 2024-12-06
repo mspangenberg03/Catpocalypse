@@ -5,17 +5,11 @@ using UnityEngine;
 
 public class StringWaverUpgrades : UpgradeCard
 {
-    [SerializeField]
-    private PlayerUpgradeData _playerUpgradeData;
-    [SerializeField]
-    private TowerData _stringWaverTowerData;
-    [SerializeField]
-    private TextMeshProUGUI _stringWaverText;
-    [SerializeField]
-    private float _distractValueUpgrade = 1.25f;
-
     protected override void ChangeText()
     {
+        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.stringUpgrades];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.stringUpgrades].ToString();
+        /**
         switch (PlayerDataManager.Instance.CurrentData.stringUpgrades)
         {
             case 0:
@@ -36,28 +30,14 @@ public class StringWaverUpgrades : UpgradeCard
             case 5:
                 _stringWaverText.text = "String Waver fully upgraded";
                 break;
-        }
+        }*/
     }
     public override bool Upgrade()
     {
-        if (PlayerDataManager.Instance.CurrentData.scrap >= _playerUpgradeData.StringWaverUpgradeCost && PlayerDataManager.Instance.CurrentData.stringUpgrades < _playerUpgradeData.MaxTowerTier)
+        if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.stringUpgrades]
+            && PlayerDataManager.Instance.CurrentData.stringUpgrades < ScrapUpgradeCost.Count)
         {
-            switch (PlayerDataManager.Instance.CurrentData.stringUpgrades)
-            {
-                case 0:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    _stringWaverTowerData.DistractValue *= _distractValueUpgrade;
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-            }
-            PlayerDataManager.Instance.UpdateScrap(-_playerUpgradeData.StringWaverUpgradeCost);
-            _playerUpgradeData.StringWaverUpgradeCost = Mathf.RoundToInt(_playerUpgradeData.StringWaverUpgradeCost * _playerUpgradeData.TowerUpgradeCostMultiplier);
+            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.stringUpgrades]);
             PlayerDataManager.Instance.UpdateStringUpgrades(1);
             ChangeText();
             return true;
