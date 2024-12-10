@@ -9,6 +9,8 @@ public class StringWaverUpgrades : UpgradeCard
     {
         _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.stringUpgrades];
         _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.stringUpgrades].ToString();
+        _LevelTextBox.text = PlayerDataManager.Instance.CurrentData.stringUpgrades.ToString();
+        _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.stringUpgrades];
         /**
         switch (PlayerDataManager.Instance.CurrentData.stringUpgrades)
         {
@@ -32,16 +34,14 @@ public class StringWaverUpgrades : UpgradeCard
                 break;
         }*/
     }
-    public override bool Upgrade()
+    public override void Upgrade()
     {
         if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.stringUpgrades]
-            && PlayerDataManager.Instance.CurrentData.stringUpgrades < ScrapUpgradeCost.Count)
+            && PlayerDataManager.Instance.CurrentData.stringUpgrades < ScrapUpgradeCost.Count - 1)
         {
             PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.stringUpgrades]);
             PlayerDataManager.Instance.UpdateStringUpgrades(1);
             ChangeText();
-            return true;
         }
-        return false;
     }
 }

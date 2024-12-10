@@ -13,6 +13,10 @@ public class FortificationUpgrades : UpgradeCard
 
     protected override void ChangeText()
     {
+        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.fortificationUpgrades];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.fortificationUpgrades].ToString();
+        _LevelTextBox.text = PlayerDataManager.Instance.CurrentData.fortificationUpgrades.ToString();
+        _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.fortificationUpgrades];
         /**
         switch (PlayerDataManager.Instance.CurrentData.fortificationUpgrades)
         {
@@ -35,10 +39,8 @@ public class FortificationUpgrades : UpgradeCard
                 _fortificationTier.text = "Fortifications fully upgraded";
                 break;
         }*/
-        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.fortificationUpgrades];
-        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.fortificationUpgrades].ToString();
     }
-    public override bool Upgrade()
+    public override void Upgrade()
     {
         if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.fortificationUpgrades] 
             && PlayerDataManager.Instance.CurrentData.fortificationUpgrades < ScrapUpgradeCost.Count)
@@ -46,8 +48,7 @@ public class FortificationUpgrades : UpgradeCard
             PlayerDataManager.Instance.UpdateFortificationUpgrades(1);
             PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.fortificationUpgrades]);
             ChangeText();
-            return true;
+            SignalUpgrade();
         }
-        return false;
     }
 }

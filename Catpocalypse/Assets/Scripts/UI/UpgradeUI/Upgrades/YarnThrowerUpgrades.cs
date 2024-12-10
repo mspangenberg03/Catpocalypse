@@ -10,6 +10,8 @@ public class YarnThrowerUpgrades : UpgradeCard
     {
         _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.yarnUpgrades];
         _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.yarnUpgrades].ToString();
+        _LevelTextBox.text = PlayerDataManager.Instance.CurrentData.yarnUpgrades.ToString();
+        _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.yarnUpgrades];
         /**
         switch (PlayerDataManager.Instance.CurrentData.yarnUpgrades)
         {
@@ -33,16 +35,14 @@ public class YarnThrowerUpgrades : UpgradeCard
                 break;
         }*/
     }
-    public override bool Upgrade()
+    public override void Upgrade()
     {
         if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.yarnUpgrades] 
-            && PlayerDataManager.Instance.CurrentData.yarnUpgrades < ScrapUpgradeCost.Count)
+            && PlayerDataManager.Instance.CurrentData.yarnUpgrades < ScrapUpgradeCost.Count - 1)
         {
             PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.yarnUpgrades]);
             PlayerDataManager.Instance.UpdateYarnUpgrades(1);
             ChangeText();
-            return true;
         }
-        return false;
     }
 }

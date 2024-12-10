@@ -31,18 +31,18 @@ public class RobotUpgrades : UpgradeCard
         }*/
         _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.robotUpgrades];
         _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.robotUpgrades].ToString();
+        _LevelTextBox.text = PlayerDataManager.Instance.CurrentData.robotUpgrades.ToString();
+        _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.robotUpgrades];
     }
 
-    public override bool Upgrade()
+    public override void Upgrade()
     {
         if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.robotUpgrades] 
-            && PlayerDataManager.Instance.CurrentData.robotUpgrades < ScrapUpgradeCost.Count)
+            && PlayerDataManager.Instance.CurrentData.robotUpgrades < ScrapUpgradeCost.Count - 1)
         {
             PlayerDataManager.Instance.UpdateRobotUpgrades(1);
-            PlayerDataManager.Instance.UpdateScrap(-PlayerDataManager.Instance.CurrentData.robotUpgrades);
+            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.robotUpgrades]);
             ChangeText();
-            return true;
         }
-        return false;
     }
 }

@@ -174,7 +174,7 @@ public class PlayerData
     public PlayerData(PlayerUpgradeData data)
     {
         name = "";
-        scrap = 0;
+        scrap = 300;
         levelsCompleted = 0;
         robotUpgrades = 0;
         fortificationUpgrades = 0;

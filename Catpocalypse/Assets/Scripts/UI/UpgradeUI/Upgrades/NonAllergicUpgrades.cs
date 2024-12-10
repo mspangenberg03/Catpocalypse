@@ -10,6 +10,8 @@ public class NonAllergicUpgrades : UpgradeCard
     {
         _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.nAUpgrades];
         _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.nAUpgrades].ToString();
+        _LevelTextBox.text = PlayerDataManager.Instance.CurrentData.nAUpgrades.ToString();
+        _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.nAUpgrades];
         /**
         switch (PlayerDataManager.Instance.CurrentData.nAUpgrades)
         {
@@ -34,16 +36,15 @@ public class NonAllergicUpgrades : UpgradeCard
         }
         */
     }
-    public override bool Upgrade()
+    public override void Upgrade()
     {
         if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.nAUpgrades]
-            && PlayerDataManager.Instance.CurrentData.nAUpgrades < UpgradeText.Count)
+            && PlayerDataManager.Instance.CurrentData.nAUpgrades < UpgradeText.Count - 1)
         {
             PlayerDataManager.Instance.UpdateScrap( -ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.nAUpgrades]);
             PlayerDataManager.Instance.UpdateNAUpgrades(1);
             ChangeText();
-            return true;
+            SignalUpgrade();
         }
-        return false;
     }
 }
