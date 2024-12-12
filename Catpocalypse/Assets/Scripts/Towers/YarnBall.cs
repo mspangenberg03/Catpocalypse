@@ -54,15 +54,19 @@ public class YarnBall : MonoBehaviour
     }
     IEnumerator Upgrade()
     {
+        float angleH = Vector3.Angle(parentTower.transform.position,transform.position);
+        float angle = Mathf.Atan2((transform.position.y - parentTower.transform.position.y), (transform.position.x - parentTower.transform.position.x));
+        GameObject _piece = Instantiate(_string, gameObject.transform.position + new Vector3(0, 2, 0),new Quaternion(angleH,0,0,transform.rotation.w));
         
-        GameObject _piece = Instantiate(_string, gameObject.transform.position + new Vector3(0, 2, 0),Quaternion.identity);
-        float angle = Mathf.Atan2((transform.position.y - _piece.transform.position.y), (transform.position.x - _piece.transform.position.x));
-        angle = Mathf.Rad2Deg * angle;
-
-        //_piece.transform.LookAt(transform,Vector3.right);
-        _piece.transform.rotation = Quaternion.Euler(0, 0, angle);
-        //Vector3.RotateTowards(_piece.transform.eulerAngles, transform.eulerAngles, 180, 180);
-        //Quaternion.RotateTowards(_piece.transform.rotation, transform.rotation, 180);
+        //angle = Mathf.Rad2Deg * angle;
+        //Vector3 rotation = Vector3.Normalize(transform.position - _piece.transform.position);
+        //float angleH = Vector3.Angle(_piece.transform.position,transform.position);
+        
+        //_piece.transform.LookAt(rotation,Vector3.up);
+        //_piece.transform.rotation = Quaternion.Euler(0, angle, 90);
+        //_piece.transform.rotation = Quaternion.RotateTowards(_piece.transform.eulerAngles, transform.eulerAngles, 180, 180);
+       // _piece.transform.rotation = Quaternion.RotateTowards(_piece.transform.rotation, transform.rotation, 180);
+        //_piece.transform.rotation = new Quaternion(90,_piece.transform.rotation.y,_piece.transform.rotation.z,_piece.transform.rotation.w);
         _piece.GetComponent<YarnString>().parent = this;
         yield return new WaitForSeconds(_spawnInterval);
         StartCoroutine(Upgrade());
