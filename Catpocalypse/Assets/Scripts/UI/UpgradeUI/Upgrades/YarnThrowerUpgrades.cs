@@ -10,39 +10,25 @@ public class YarnThrowerUpgrades : UpgradeCard
     {
         _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.yarnUpgrades];
         _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.yarnUpgrades].ToString();
-        _LevelTextBox.text = PlayerDataManager.Instance.CurrentData.yarnUpgrades.ToString();
+        _LevelTextBox.text = (PlayerDataManager.Instance.CurrentData.yarnUpgrades + 1).ToString();
         _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.yarnUpgrades];
-        /**
-        switch (PlayerDataManager.Instance.CurrentData.yarnUpgrades)
-        {
-            case 0:
-                _yarnThrowerText.text = "Improved Spinning: Increase firing speed by 15%\nFaster you spin, sooner you win.\nCost: " + _playerUpgradeData.YarnThrowerUpgradeCost;
-                break;
-            case 1:
-                _yarnThrowerText.text = "N/A\nCost: " + _playerUpgradeData.YarnThrowerUpgradeCost;
-                break;
-            case 2:
-                _yarnThrowerText.text = "N/A\nCost: " + _playerUpgradeData.YarnThrowerUpgradeCost;
-                break;
-            case 3:
-                _yarnThrowerText.text = "N/A\nCost: " + _playerUpgradeData.YarnThrowerUpgradeCost;
-                break;
-            case 4:
-                _yarnThrowerText.text = "Mega Balls: Yarn balls now roll across the entire map, distracting all cats that they come into contact with.\nEven Indiana Jones couldn’t resist this one\nCost: " + _playerUpgradeData.YarnThrowerUpgradeCost;
-                break;
-            case 5:
-                _yarnThrowerText.text = "Yarn Thrower fully upgraded";
-                break;
-        }*/
     }
     public override void Upgrade()
     {
         if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.yarnUpgrades] 
-            && PlayerDataManager.Instance.CurrentData.yarnUpgrades < ScrapUpgradeCost.Count - 1)
+            && PlayerDataManager.Instance.CurrentData.yarnUpgrades < ScrapUpgradeCost.Count)
         {
             PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.yarnUpgrades]);
             PlayerDataManager.Instance.UpdateYarnUpgrades(1);
-            ChangeText();
+            if (PlayerDataManager.Instance.CurrentData.yarnUpgrades == ScrapUpgradeCost.Count)
+            {
+                MaxUpgradeReached();
+            }
+            else
+            {
+                ChangeText();
+            }
+            SignalUpgrade();
         }
     }
 }

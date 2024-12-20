@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 
 public abstract class UpgradeCard : MonoBehaviour
 {
-    [SerializeField] protected TowerData _UpgradeData;
     [SerializeField] protected TextMeshProUGUI _UpgradeTextBox;
     [SerializeField] protected TextMeshProUGUI _FlavorTextBox;
     [SerializeField] protected TextMeshProUGUI _UpgradeCostTextBox;
@@ -32,5 +31,12 @@ public abstract class UpgradeCard : MonoBehaviour
     protected abstract void ChangeText();
 
     public abstract void Upgrade();
+
+    protected void MaxUpgradeReached()
+    {
+        _FlavorTextBox.gameObject.SetActive(false);
+        _UpgradeCostTextBox.gameObject.SetActive(false);
+        _UpgradeTextBox.text = "Maximum Upgrades Reached";
+    }
 
 }

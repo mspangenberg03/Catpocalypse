@@ -53,14 +53,7 @@ public class HUD : MonoBehaviour
 
     private void Awake()
     {
-        // If an instance has already been created, then log error message and destroy self.
-        if (Instance != null)
-        {
-            Debug.LogError("An instance of HUD already exists! So this one destroyed itself.");
-            Destroy(gameObject);
-        }
-
-
+        
         _RobotController = FindAnyObjectByType<RobotController>();
         if (_RobotController != null)
             _RobotController.OnBatteryLevelChanged += UpdateRobotBatteryLevelDisplay;

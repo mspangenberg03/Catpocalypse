@@ -15,7 +15,7 @@ public class LaserPointerUpgrades : UpgradeCard
     {
         _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.laserUpgrades];
         _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.laserUpgrades].ToString();
-        _LevelTextBox.text = PlayerDataManager.Instance.CurrentData.laserUpgrades.ToString();
+        _LevelTextBox.text = (PlayerDataManager.Instance.CurrentData.laserUpgrades + 1).ToString();
         _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.laserUpgrades];
     }
     public override void Upgrade()
@@ -25,7 +25,14 @@ public class LaserPointerUpgrades : UpgradeCard
         {
             PlayerDataManager.Instance.UpdateLaserUpgrades(1);
             PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.laserUpgrades]);
-            ChangeText();
+            if (PlayerDataManager.Instance.CurrentData.laserUpgrades == ScrapUpgradeCost.Count)
+            {
+                MaxUpgradeReached();
+            }
+            else
+            {
+                ChangeText();
+            }
             SignalUpgrade();
         }
     }

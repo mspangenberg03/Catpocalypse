@@ -57,7 +57,10 @@ public class WaveManager : MonoBehaviour
         }
 
         Instance = this;
+    }
 
+    private void Start()
+    {
         _PlayerMoneyManager = FindObjectOfType<PlayerMoneyManager>();
         _cutenessManager = GameObject.FindGameObjectWithTag("Goal").GetComponent<PlayerCutenessManager>();
 
@@ -213,6 +216,12 @@ public class WaveManager : MonoBehaviour
     private void OnWaveEnded(object sender, EventArgs e)
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        CatBase.OnCatDied -= OnCatDied;
+        CatBase.OnCatReachGoal -= OnCatReachGoal;
     }
 
 
