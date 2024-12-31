@@ -86,7 +86,7 @@ public class LaserPointerTower : Tower
     private new void Start()
     {
         base.Start();
-
+        ApplyScrapUpgrades();
         // Find the path junction that is near this tower.
         _PathJunction = FindAssociatedPathJunction();
         if (_PathJunction == null)
@@ -98,6 +98,29 @@ public class LaserPointerTower : Tower
         // Spawn the arrow that is used to show the selected path.
         _Arrow = Instantiate(arrowPrefab, _PathJunction.transform.position + (Vector3.up * 1f), Quaternion.identity, SelectedPathIndicatorsParent);
         _Arrow.gameObject.SetActive(false);
+    }
+
+    protected override void ApplyScrapUpgrades()
+    {
+        if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 0)
+        {
+            
+            if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 1)
+            {
+                range.radius *= PlayerDataManager.Instance.Upgrades.LaserRangeUpgrade;
+                if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 2)
+                {
+                    distractValue *= PlayerDataManager.Instance.Upgrades.LaserDistractionUpgrade;
+                    if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 3)
+                    {
+                        if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 4)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -164,44 +187,47 @@ public class LaserPointerTower : Tower
     {
         foreach (GameObject target in targets)
         {
-            CatBase cat = target.GetComponent<CatBase>();
-
-            if (cat.NextWayPoint == null)
+            if(target != null)
             {
-                continue;
-            }
+                CatBase cat = target.GetComponent<CatBase>();
 
-            if (_ActiveLasersCount >= MaxLasers)
-                break;
-
-
-            // Create a TargetInfo for this cat.
-            TargetInfo targetInfo = new TargetInfo();
-            targetInfo.TargetCat = cat;
-
-            // This bypasses the check below, since that code will always fail if the laser tower is not placed near a path junction.
-            // If there is no nearby path junction, this code runs first, and immediately targets another cat as long as there is at
-            // least one inactive laser available.
-            if (_PathJunction == null)
-            {
-                TargetCat(targetInfo);
-                continue;
-            }
-            else
-            {
-                // Is this cat before the path junction point associated with this tower?
-                WayPointUtils.WayPointCompareResults result = WayPointUtils.CompareWayPointPositions(cat.NextWayPoint, _PathJunction);
-
-                //Debug.Log($"Result: {result}    CatNextWaypoint: \"{cat.NextWayPoint.name}\"    JunctionWayPoint: \"{_PathJunction.name}\"");
-
-                if (result == WayPointUtils.WayPointCompareResults.A_IsBeforeB ||
-                    result == WayPointUtils.WayPointCompareResults.A_And_B_AreSamePoint)
+                if (cat.NextWayPoint == null)
                 {
-                    if (cat.NextWayPoint == PathJunction)
-                        targetInfo.IsApproachingJunction = true;
+                    continue;
+                }
 
+                if (_ActiveLasersCount >= MaxLasers)
+                    break;
+
+
+                // Create a TargetInfo for this cat.
+                TargetInfo targetInfo = new TargetInfo();
+                targetInfo.TargetCat = cat;
+
+                // This bypasses the check below, since that code will always fail if the laser tower is not placed near a path junction.
+                // If there is no nearby path junction, this code runs first, and immediately targets another cat as long as there is at
+                // least one inactive laser available.
+                if (_PathJunction == null)
+                {
                     TargetCat(targetInfo);
+                    continue;
+                }
+                else
+                {
+                    // Is this cat before the path junction point associated with this tower?
+                    WayPointUtils.WayPointCompareResults result = WayPointUtils.CompareWayPointPositions(cat.NextWayPoint, _PathJunction);
 
+                    //Debug.Log($"Result: {result}    CatNextWaypoint: \"{cat.NextWayPoint.name}\"    JunctionWayPoint: \"{_PathJunction.name}\"");
+
+                    if (result == WayPointUtils.WayPointCompareResults.A_IsBeforeB ||
+                        result == WayPointUtils.WayPointCompareResults.A_And_B_AreSamePoint)
+                    {
+                        if (cat.NextWayPoint == PathJunction)
+                            targetInfo.IsApproachingJunction = true;
+
+                        TargetCat(targetInfo);
+
+                    }
                 }
             }
 

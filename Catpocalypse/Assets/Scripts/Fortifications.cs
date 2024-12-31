@@ -22,23 +22,15 @@ public class Fortifications : MonoBehaviour
     void Start()
     {
         targets = new List<GameObject>();
-        if (upgradeData._fortTierOneReached)
-        {
-            FortificationTierOne();
-        }
-        if (upgradeData._fortTierTwoReached) 
+        if (PlayerDataManager.Instance.CurrentData.fortificationUpgrades > 1) 
         { 
             FortificationTierTwo(); 
         }
-        if(upgradeData._fortTierFiveReached)
+        if(PlayerDataManager.Instance.CurrentData.fortificationUpgrades > 4)
         {
             
             FortificationTierFive();
         }
-
-    }
-    private void FortificationTierOne()
-    {
 
     }
     private void FortificationTierTwo()

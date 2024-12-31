@@ -9,8 +9,31 @@ public class StringWaverTower : Tower
     private new void Start()
     {
         base.Start();
-
+        ApplyScrapUpgrades();
         StartCoroutine(DistractCat());
+    }
+
+    protected override void ApplyScrapUpgrades()
+    {
+        if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 0)
+        {
+            fireRate *= PlayerDataManager.Instance.Upgrades.StringWaverFrequencyUpgrade;
+            if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 1)
+            {
+                range.radius *= PlayerDataManager.Instance.Upgrades.StringWaverRangeUpgrade;
+                if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 2)
+                {
+                    distractValue *= PlayerDataManager.Instance.Upgrades.StringWaverDistractValueUpgrade;
+                    if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 3)
+                    {
+                        if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 4)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // Update is called once per frame

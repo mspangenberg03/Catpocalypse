@@ -7,6 +7,7 @@ public class NonAllergicTower : Tower
     [SerializeField, Tooltip("The number of people the tower spawns"),Min(1)]
     private int numOfPeople;
     private int peopleSpawned;
+    [SerializeField, Tooltip("The speed of the spawned people")] private float personSpeed;
     [SerializeField, Tooltip("List of potential locations for the people to spawn")]
     private List<Transform> spawnPoints;
     [SerializeField, Tooltip("The Non-Allergic people that the tower spawns")]
@@ -18,10 +19,13 @@ public class NonAllergicTower : Tower
     public bool Enabled = true;
     PlayerCutenessManager cutenessManager;
 
+
     // Start is called before the first frame update
     private new void Start()
     {
         base.Start();
+
+        ApplyScrapUpgrades();
 
         cutenessManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerCutenessManager>();
         //Disables the tower if it is built during the Non-Allergic Strike cuteness challenge
@@ -46,6 +50,31 @@ public class NonAllergicTower : Tower
         }
         
     }
+
+
+    protected override void ApplyScrapUpgrades()
+    {
+        if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 0)
+        {
+            // Placeholder for any future changes
+            if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 1)
+            {
+                // Placeholder
+                if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 2)
+                {
+                    personSpeed *= PlayerDataManager.Instance.Upgrades.NAMoveSpeedUpgrade;
+                    if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 3)
+                    {
+                        if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 4)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     //Gets closest navigation waypoint to the tower
     private GameObject GetClosestWaypoint()
     {

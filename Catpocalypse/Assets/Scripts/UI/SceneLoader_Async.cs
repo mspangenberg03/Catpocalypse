@@ -161,6 +161,8 @@ public class SceneLoader_Async : MonoBehaviour
             // If both options are enabled, the loading screen will close either when the user presses any button or when the delay expires, so whichever happens first.
             while (true)                   
             {
+                // TODO : Create a fade-in, fade-out text stating press any button to continue
+
                 // If _WaitForButtonPressToCloseLoadingScreen is enabled, then wait until the user presses any button before closing the loading screen.
                 if (_WaitForButtonPressToCloseLoadingScreen && ReceivedInput)
                 {

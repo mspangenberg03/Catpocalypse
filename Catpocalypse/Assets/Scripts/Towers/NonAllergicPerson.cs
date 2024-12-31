@@ -19,6 +19,8 @@ public class NonAllergicPerson : MonoBehaviour
     private int effectLength;
     [SerializeField, Tooltip("How often the person pets the cat")]
     private int petRate;
+    [SerializeField, Tooltip("How fast a Non-Allergic person moves")]
+    private float speed;
 
     [SerializeField]
     private AudioSource _personSound;
@@ -31,7 +33,11 @@ public class NonAllergicPerson : MonoBehaviour
         fort = transform.parent.gameObject.GetComponent<Fortifications>();
         catsInRange = new List<GameObject>();
         animator = GetComponent<Animation>();
-        agent.speed = tower.towerStats.NonAllergicPersonMoveSpeed;
+        agent.speed = speed;
+        if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 1)
+        {
+            agent.speed *= PlayerDataManager.Instance.Upgrades.NAMoveSpeedUpgrade;
+        }
     }
    
     // Update is called once per frame
@@ -176,7 +182,10 @@ public class NonAllergicPerson : MonoBehaviour
         }
         if (fort != null)
         {
-             
+            if (other.gameObject.GetInstanceID() == fort.gameObject.GetInstanceID())
+            {
+                RemoveTarget();
+            }
         }
         
         

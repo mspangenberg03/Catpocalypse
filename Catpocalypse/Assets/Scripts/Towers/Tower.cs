@@ -252,6 +252,12 @@ public class Tower : MonoBehaviour
     {
 
     }
+
+    protected virtual void ApplyScrapUpgrades()
+    {
+
+    }
+
     public virtual void Upgrade()
     {
         towerLevel++;

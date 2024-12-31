@@ -39,13 +39,12 @@ public class WaveManager : MonoBehaviour
     private PlayerMoneyManager _PlayerMoneyManager;
     private PlayerCutenessManager _cutenessManager;
 
-    [SerializeField]
-    private PlayerUpgradeData _playerUpgradeData;
     private bool _scrapRewarded = false;
 
     [SerializeField] AudioSource _waveSound;
     [SerializeField] AudioClip _startClip;
     [SerializeField] AudioClip _endClip;
+    [SerializeField] private int _ScrapReward;
 
 
     private void Awake()
@@ -58,7 +57,10 @@ public class WaveManager : MonoBehaviour
         }
 
         Instance = this;
+    }
 
+    private void Start()
+    {
         _PlayerMoneyManager = FindObjectOfType<PlayerMoneyManager>();
         _cutenessManager = GameObject.FindGameObjectWithTag("Goal").GetComponent<PlayerCutenessManager>();
 
@@ -93,7 +95,7 @@ public class WaveManager : MonoBehaviour
             LevelCleared?.Invoke(this, EventArgs.Empty);
             if (!_scrapRewarded)
             {
-                _playerUpgradeData.Scrap += _playerUpgradeData.ScrapReward;
+                PlayerDataManager.Instance.UpdateScrap(_ScrapReward);
                 _scrapRewarded = true;
             }
             HUD.RevealVictory();
@@ -157,8 +159,8 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
-            _waveSound.clip = _endClip;
-            _waveSound.Play();
+            //_waveSound.clip = _endClip;
+            //_waveSound.Play();
             Debug.LogWarning("End wave sound played");
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
                 HUD.RevealVictory();
@@ -214,6 +216,12 @@ public class WaveManager : MonoBehaviour
     private void OnWaveEnded(object sender, EventArgs e)
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        CatBase.OnCatDied -= OnCatDied;
+        CatBase.OnCatReachGoal -= OnCatReachGoal;
     }
 
 

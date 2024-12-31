@@ -60,21 +60,10 @@ public class CucumberTower : Tower
     private new void Start()
     {
         base.Start();
-
+        ApplyScrapUpgrades();
         StartCoroutine(Aim());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        //If it can fire and there are cats in range
-        if (canFire && targets.Count != 0)
-        {
-            Fire();
-        }
-        */
-    }
     private void OnTriggerEnter(Collider other)
     {
         //Adds cats to the target list as they get in range
@@ -89,6 +78,29 @@ public class CucumberTower : Tower
         if (other.gameObject.CompareTag("Cat"))
         {
             targets.Remove(other.gameObject);
+        }
+    }
+
+    protected override void ApplyScrapUpgrades()
+    {
+        if(PlayerDataManager.Instance.CurrentData.cucumberUpgrades > 0)
+        {
+            fireRate *= PlayerDataManager.Instance.Upgrades.CucumberFireRateUpgrade;
+            if (PlayerDataManager.Instance.CurrentData.cucumberUpgrades > 1)
+            {
+                _AimSpeed *= PlayerDataManager.Instance.Upgrades.CucumberAimSpeedUpgrade;
+                if (PlayerDataManager.Instance.CurrentData.cucumberUpgrades > 2)
+                {
+                    range.radius *= PlayerDataManager.Instance.Upgrades.CucumberRangeUpgrade;
+                    if (PlayerDataManager.Instance.CurrentData.cucumberUpgrades > 3)
+                    {
+                        if (PlayerDataManager.Instance.CurrentData.cucumberUpgrades > 4)
+                        {
+
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -176,7 +188,7 @@ public class CucumberTower : Tower
 
             // First get the horizontal rotation angle.
             float angleH = CalculateSignedAngle(_CurrentAimDirection, targetDirection, Vector3.up);
-            float rotAmount = towerStats._cucumberTowerAimingSpeed * Time.deltaTime;
+            float rotAmount = _AimSpeed * Time.deltaTime;
 
             if (angleH < 0)
                 rotAmount *= -1;
