@@ -4,22 +4,43 @@ using UnityEngine;
 
 public class StringWaverTower : Tower
 {
-    #region String Fling Variables
-    [SerializeField]
-    private int _stringFlingDuration = 1;
-    [SerializeField]
-    private int _stringFlingCooldown = 10;
-    [SerializeField]
-    private int _stringFlingDistractionValue = 10;
-    public float _speedDebuff = 1.8f;
-    #endregion
+
     // Start is called before the first frame update
     private new void Start()
     {
         base.Start();
+        ApplyScrapUpgrades();
         StartCoroutine(DistractCat());
     }
 
+    protected override void ApplyScrapUpgrades()
+    {
+        if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 0)
+        {
+            fireRate *= PlayerDataManager.Instance.Upgrades.StringWaverFrequencyUpgrade;
+            if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 1)
+            {
+                range.radius *= PlayerDataManager.Instance.Upgrades.StringWaverRangeUpgrade;
+                if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 2)
+                {
+                    distractValue *= PlayerDataManager.Instance.Upgrades.StringWaverDistractValueUpgrade;
+                    if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 3)
+                    {
+                        if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 4)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 3)
@@ -38,37 +59,6 @@ public class StringWaverTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        StartCoroutine(StringFling());
-    }
-    IEnumerator StringFling()
-    {
-        if(targets.Count > 0)
-        {
-            //Slows down and distracts each cat in range
-            Debug.LogWarning("StringFling");
-            foreach (GameObject cat in targets)
-            {
-                if(cat != null)
-                {
-                    cat.GetComponent<CatBase>().slowingEntities.Add(gameObject);
-                    cat.GetComponent<CatBase>().DistractCat(_stringFlingDistractionValue, this);
-                    StartCoroutine(StringFlingDuration(cat));
-                }
-            }
-            yield return new WaitForSeconds(_stringFlingCooldown);
-        }
-
-        yield return new WaitForSeconds(0);
-        StartCoroutine(StringFling());
-    }
-    IEnumerator StringFlingDuration(GameObject cat)
-    {
-        yield return new WaitForSeconds(_stringFlingDuration);
-        if(cat != null)
-        {
-            cat.GetComponent<CatBase>().slowingEntities.Remove(gameObject);
-        }
-       
     }
     IEnumerator DistractCat()
     {

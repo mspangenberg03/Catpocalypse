@@ -8,9 +8,6 @@ using UnityEngine;
 public class PlayerMoneyManager : MonoBehaviour
 {
     [SerializeField] private float _Money = 200f;
-
-    [SerializeField]
-    private PlayerUpgradeData _UpgradeData;
     [SerializeField]
     private AudioSource _moneySound;
     private void Start()
@@ -32,7 +29,7 @@ public class PlayerMoneyManager : MonoBehaviour
             return;
         }
 
-        _Money += (amount * _UpgradeData.RewardMultiplier);
+        _Money += (amount * PlayerDataManager.Instance.Upgrades.RewardUpgrade);
         _moneySound.Play();
         HUD.UpdatePlayerMoneyDisplay(_Money);
     }

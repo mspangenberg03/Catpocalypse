@@ -507,7 +507,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1813662333780721587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73578a958f5c6ff48afaa675e213e693, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f6a96b94d8565d48a15e3e480eddab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _PlayerHealthBar: {fileID: 5383017726213735109}
@@ -522,6 +522,9 @@ MonoBehaviour:
   _RobotPowerLevelLabel: {fileID: 8769541406704296570}
   _DefeatScreen: {fileID: 0}
   _VictoryScreen: {fileID: 0}
+  _TogglePauseButton: {fileID: 0}
+  _PauseImage: {fileID: 0}
+  _PlayImage: {fileID: 0}
 --- !u!1 &2118523500727573093
 GameObject:
   m_ObjectHideFlags: 0

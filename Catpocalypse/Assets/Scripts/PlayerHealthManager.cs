@@ -14,13 +14,13 @@ public class PlayerHealthManager : MonoBehaviour
     public List<AudioClip> sounds = new List<AudioClip>();
     private AudioSource healthAudio;
 
-    [SerializeField]
-    private PlayerUpgradeData _playerUpgrades;
-
 
     private void Start()
     {
-        maxHealth = _playerUpgrades.MaxHealth;
+        if(PlayerDataManager.Instance.CurrentData.fortificationUpgrades > 0)
+        {
+            maxHealth *= PlayerDataManager.Instance.Upgrades.MaxHealthUpgrade;
+        }
         health = maxHealth;
         healthAudio = GetComponent<AudioSource>();
         HUD.UpdatePlayerHealthDisplay(health, maxHealth);

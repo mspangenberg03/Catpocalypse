@@ -16,9 +16,32 @@ public class YarnBallTower : Tower
     private new void Start()
     {
         base.Start();
-
+        ApplyScrapUpgrades();
         // Start the projectile throwing coroutine
         StartCoroutine(ThrowProjectiles());
+    }
+
+    protected override void ApplyScrapUpgrades()
+    {
+        if (PlayerDataManager.Instance.CurrentData.yarnUpgrades > 0)
+        {
+            fireRate *= PlayerDataManager.Instance.Upgrades.YarnThrowerFireRateUpgrade;
+            if (PlayerDataManager.Instance.CurrentData.yarnUpgrades > 1)
+            {
+
+                if (PlayerDataManager.Instance.CurrentData.yarnUpgrades > 2)
+                {
+
+                    if (PlayerDataManager.Instance.CurrentData.yarnUpgrades > 3)
+                    {
+                        if (PlayerDataManager.Instance.CurrentData.yarnUpgrades > 4)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
     }
 
     IEnumerator DistractCat(GameObject cat)

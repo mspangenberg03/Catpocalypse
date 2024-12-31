@@ -7,6 +7,7 @@ public class NonAllergicTower : Tower
     [SerializeField, Tooltip("The number of people the tower spawns"),Min(1)]
     private int numOfPeople;
     private int peopleSpawned;
+    [SerializeField, Tooltip("The speed of the spawned people")] private float personSpeed;
     [SerializeField, Tooltip("List of potential locations for the people to spawn")]
     private List<Transform> spawnPoints;
     [SerializeField, Tooltip("The Non-Allergic people that the tower spawns")]
@@ -17,15 +18,15 @@ public class NonAllergicTower : Tower
     private List<GameObject> personList;
     public bool Enabled = true;
     PlayerCutenessManager cutenessManager;
-    [SerializeField]
-    private int _foodTimeCooldown = 10;
-    [SerializeField]
-    private int _foodTimeDistractValue = 20;
+
+
     // Start is called before the first frame update
     private new void Start()
     {
         base.Start();
-        //StartCoroutine(FoodTime());
+
+        ApplyScrapUpgrades();
+
         cutenessManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerCutenessManager>();
         //Disables the tower if it is built during the Non-Allergic Strike cuteness challenge
         if (cutenessManager.CurrentCutenessChallenge == PlayerCutenessManager.CutenessChallenges.NonAllergicStrike)
@@ -49,6 +50,31 @@ public class NonAllergicTower : Tower
         }
         
     }
+
+
+    protected override void ApplyScrapUpgrades()
+    {
+        if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 0)
+        {
+            // Placeholder for any future changes
+            if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 1)
+            {
+                // Placeholder
+                if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 2)
+                {
+                    personSpeed *= PlayerDataManager.Instance.Upgrades.NAMoveSpeedUpgrade;
+                    if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 3)
+                    {
+                        if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 4)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     //Gets closest navigation waypoint to the tower
     private GameObject GetClosestWaypoint()
     {
@@ -68,10 +94,8 @@ public class NonAllergicTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        Debug.LogWarning("Upgrade called");
-        StartCoroutine(FoodTime());
-        //numOfPeople++;
-        //radius++;
+        numOfPeople++;
+        radius++;
     }
 
     public void DisableTower()
@@ -80,22 +104,6 @@ public class NonAllergicTower : Tower
         peopleSpawned = 0;
         
        
-    }
-    IEnumerator FoodTime()
-    {
-        //If there is more than one cat, activate the ability
-        if (targets.Count > 0)
-        {
-            Debug.LogWarning("Foodtime called");
-            foreach (GameObject cat in targets)
-            {
-                cat.GetComponent<CatBase>().DistractCat(_foodTimeDistractValue,gameObject.GetComponent<Tower>());
-            }
-            yield return new WaitForSeconds(_foodTimeCooldown);
-        }
-        yield return new WaitForSeconds(0);
-        
-        StartCoroutine(FoodTime());
     }
     IEnumerator Spawner()
     {
@@ -119,6 +127,9 @@ public class NonAllergicTower : Tower
 
             }
         }
+        
+        
+        
         StartCoroutine(Spawner());
         
     }

@@ -15,5 +15,5 @@ MonoBehaviour:
   distractValue: 8
   fireRate: 1
   buildCost: 125
-  upgradeCost: 0
+  upgradeCost: 175
   range: 7.5

@@ -34,6 +34,19 @@ public class ScratchingPostTower : Tower
     private new void Start()
     {
         base.Start();
+        ApplyScrapUpgrades();
+    }
+
+    protected override void ApplyScrapUpgrades()
+    {
+        if (PlayerDataManager.Instance.CurrentData.scratchUpgrades > 1)
+        {
+            fireRate *= PlayerDataManager.Instance.Upgrades.ScratchingPostFireRateUpgrade;
+            if (PlayerDataManager.Instance.CurrentData.scratchUpgrades > 4)
+            {
+                
+            }
+        }
     }
 
     public void Update()

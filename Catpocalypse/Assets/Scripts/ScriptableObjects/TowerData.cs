@@ -59,24 +59,5 @@ public class TowerData : ScriptableObject
             return range;
         }
     }
-    private bool _tierFiveReached = false;
-    public bool TierFiveReached
-    {
-        set { _tierFiveReached = value; }
-        get { return _tierFiveReached; }
-    }
-    private float _nonAllergicPersonMoveSpeed = 5;
-    public float NonAllergicPersonMoveSpeed
-    {
-        get { return _nonAllergicPersonMoveSpeed; }
-        set { _nonAllergicPersonMoveSpeed = value; } 
-    }
-    [SerializeField]
-    private float _cucumberTowerAimingSpeed = 30f;
-    public float CucumberTowerAimingSpeed
-    {
-        get { return _cucumberTowerAimingSpeed; }
-        set { _cucumberTowerAimingSpeed = value; }
-    }
 
 }

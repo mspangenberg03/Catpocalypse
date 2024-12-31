@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 
 /// <summary>
@@ -52,11 +53,22 @@ public class ClickableLevelTile : MonoBehaviour
 
     private void OnMouseUp()
     {
+        // Prevents level selection when utilizing UI elements
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            StartCoroutine(WasteTimeSoMouseUpWillNotTrigger());
+            return;
+        }
         SceneLoader_Async.LoadSceneAsync(_sceneToLoad);
     }
 
     private void OnMouseEnter()
     {
+        // Prevents level selection when utilizing UI elements
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (_EnableToolTip || _AlwaysShowToolTip)
             EnableToolTip(true);
         else
@@ -65,6 +77,11 @@ public class ClickableLevelTile : MonoBehaviour
 
     private void OnMouseExit()
     {
+        // Prevents level selection when utilizing UI elements
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (_AlwaysShowToolTip)
             EnableToolTip(true);
         else
@@ -77,5 +94,10 @@ public class ClickableLevelTile : MonoBehaviour
             _Tooltip.text = _levelName;
 
         _Tooltip.gameObject.gameObject.SetActive(state);
+    }
+
+    IEnumerator WasteTimeSoMouseUpWillNotTrigger()
+    {
+        yield return new WaitForEndOfFrame();
     }
 }

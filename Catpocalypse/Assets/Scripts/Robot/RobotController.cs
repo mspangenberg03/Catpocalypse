@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Cinemachine;
+using UnityEngine.SocialPlatforms;
 
 public class RobotController : MonoBehaviour
 {
@@ -111,6 +112,10 @@ public class RobotController : MonoBehaviour
     private float _BatteryTimer;
     private float _ProjectileTimer;
 
+    private float _MaxSpeedAdjustment;
+    private float _LaunchAdjustment;
+    private float _FireRateAdjustment;
+
 
 
 
@@ -133,15 +138,16 @@ public class RobotController : MonoBehaviour
         _RobotVirtualCamera = transform.Find(ROBOT_CAMERA_GAMEOBJECT_NAME).GetComponent<CinemachineVirtualCamera>();
         _WaveManager = FindObjectOfType<WaveManager>();
 
+        // Set starting values for potential upgradable values
+        _MaxSpeedAdjustment = 1;
+        _LaunchAdjustment = 1;
+        _FireRateAdjustment = 1;
+
         // Disable the robot's camera to force it to start with the main game camera.
         _RobotVirtualCamera.enabled = false;
 
         // Start the robot fully charged.
         _CurrentBatteryCharge = _BatteryMaxCapacity;
-        if (_stats.TierFourReached)
-        {
-            StartCoroutine(DistractCatsInRange());
-        }
 
         // Deactivate the robot.
         DeactivateRobot();
@@ -153,8 +159,34 @@ public class RobotController : MonoBehaviour
         // Register the robot's camera with the camera manager.
         CameraManager.Instance.RegisterCamera(_RobotVirtualCamera, CameraTypes.RobotCamera);
 
+        ApplyScrapUpgrades();
+
         // Fire the battery charge level changed event to make sure the HUD shows the correct starting value.
         OnBatteryLevelChanged?.Invoke(this, new RobotBatteryEventArgs(BatteryChargePercentage));
+    }
+
+    protected void ApplyScrapUpgrades()
+    {
+        if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 0)
+        {
+            _MaxSpeedAdjustment *= PlayerDataManager.Instance.Upgrades.RobotSpeedUpgrade;
+            if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 1)
+            {
+                _LaunchAdjustment *= PlayerDataManager.Instance.Upgrades.RobotLaunchUpgrade;
+                if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 2)
+                {
+                    _FireRateAdjustment *= PlayerDataManager.Instance.Upgrades.RobotFireRateUpgrade;
+                    if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 3)
+                    {
+                        StartCoroutine(DistractCatsInRange());
+                        if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 4)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -222,7 +254,7 @@ public class RobotController : MonoBehaviour
 
 
         _ProjectileTimer += Time.deltaTime;
-        if (PlayerInputManager.Robot_FireProjectile && _ProjectileTimer >= _stats.FireRate)
+        if (PlayerInputManager.Robot_FireProjectile && _ProjectileTimer >= (_stats.FireRate *= _FireRateAdjustment))
         {
             // Reset the projectile cooldown timer.
             _ProjectileTimer = 0f;
@@ -245,7 +277,7 @@ public class RobotController : MonoBehaviour
         if (movementInput.y < -_UserInputThreshold || movementInput.y > _UserInputThreshold)
         {
             // We have some input, so move the robot.
-            _CurrentMovementSpeed = movementInput.y * _stats.MaxMovementSpeed;
+            _CurrentMovementSpeed = movementInput.y * (_stats.MaxMovementSpeed * _MaxSpeedAdjustment);
         }
 
         // Do we have a non-zero input for the left/right axis?
@@ -374,7 +406,7 @@ public class RobotController : MonoBehaviour
         
         // Create a new projectile and launch it.
         GameObject projectile = Instantiate(prefab, _ProjectileLaunchPoint.position, Quaternion.identity);
-        projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectile.GetComponent<RobotProjectile>().LaunchSpeed;
+        projectile.GetComponent<Rigidbody>().velocity = transform.forward * (projectile.GetComponent<RobotProjectile>().LaunchSpeed * _LaunchAdjustment);
     }
 
     /// <summary>
