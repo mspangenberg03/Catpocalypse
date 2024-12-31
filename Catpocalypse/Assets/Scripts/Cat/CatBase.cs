@@ -318,7 +318,7 @@ public class CatBase : MonoBehaviour
         }
         else if (count == 1)
         {
-            Debug.Log(NextWayPoint.NextWayPoints[0]);
+            //Debug.Log(NextWayPoint.NextWayPoints[0]);
             _NextWayPoint = _NextWayPoint.NextWayPoints[0];
         }
         else // count is greater than 1

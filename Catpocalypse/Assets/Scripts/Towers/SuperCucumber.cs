@@ -10,24 +10,22 @@ public class SuperCucumber : MonoBehaviour
     private GameObject cucumber;
     private List<GameObject> catsInRange;
     //true if the cucumber was spawned by a tier 5 cucumber tower
-    public bool _isSubCuc;
+    //public bool _isSubCuc;
     // Start is called before the first frame update
+    [SerializeField]
+    private int _numberOfCucumbers = 5;
     void Start()
     {
         catsInRange = new List<GameObject>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Cat")
         {
-            DistractCats();
-            Destroy(gameObject);
+            SpawnCucumbers();
+            //DistractCats();
+            
         }
     }
     private void OnTriggerEnter(Collider collision)
@@ -54,5 +52,18 @@ public class SuperCucumber : MonoBehaviour
         {
             cat.GetComponent<CatBase>().DistractCat(parentTower.GetComponent<Tower>().towerStats.DistractValue,parentTower.GetComponent<Tower>());
         }
+    }
+    void SpawnCucumbers()
+    {
+        Debug.Log("SpawnCucumbers called");
+        for(int i = 0; i < _numberOfCucumbers; i++)
+        {
+            GameObject subCucumber = Instantiate(cucumber, new Vector3(gameObject.transform.position.x, 40, transform.position.z), Quaternion.identity, null);
+            subCucumber.GetComponent<Cucumber>().parentTower = parentTower;
+            Debug.Log("Cucumber fired");
+            subCucumber.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-180,180), Random.Range(-180, 180), Random.Range(-180, 180)));
+        }
+        //yield return null;
+        Destroy(gameObject);
     }
 }
