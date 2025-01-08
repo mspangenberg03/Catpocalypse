@@ -30,6 +30,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Button _StartWaveButton;
     [SerializeField] private TextMeshProUGUI _WaveNumberLabel;
     [SerializeField] private TextMeshProUGUI _CatsRemainingLabel;
+    [SerializeField] private Image _CatsRemainingBar;
 
     [Header("Player Money Display Refs")]
     [SerializeField] private TextMeshProUGUI _PlayerMoneyLabel;
@@ -124,8 +125,9 @@ public class HUD : MonoBehaviour
         Instance.CutenessBarLabel.text = $"";
     }
 
-    public static void UpdateWaveInfoDisplay(int waveNumber, int catsRemaining)
+    public static void UpdateWaveInfoDisplay(int waveNumber, int catsRemaining, int totalCatsInWave)
     {
+        Instance._CatsRemainingBar.fillAmount = Mathf.Clamp01(totalCatsInWave - catsRemaining / totalCatsInWave);
         Instance.WaveNumberLabel.text = $"{waveNumber}";
         Instance.CatsRemainingLabel.text = $"{catsRemaining}";
     }

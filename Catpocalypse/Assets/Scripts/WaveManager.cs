@@ -133,7 +133,7 @@ public class WaveManager : MonoBehaviour
         _CatsReachedGoal = 0;
 
         HUD.ShowWaveDisplay();
-        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
+        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave, TotalCatsInWave);
     }
 
     public void StopAllSpawning()
@@ -151,7 +151,7 @@ public class WaveManager : MonoBehaviour
         _CatsDistracted++;
         _TotalCatsDistracted++;
 
-        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
+        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave, TotalCatsInWave);
 
         if (_CatsRemainingInWave < 1)
         {
@@ -174,7 +174,7 @@ public class WaveManager : MonoBehaviour
         _CatsReachedGoal++;
         _TotalCatsReachedGoal++;
 
-        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
+        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave, TotalCatsInWave);
 
         if (_CatsRemainingInWave < 1)
         {
