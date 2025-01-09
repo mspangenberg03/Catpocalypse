@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class StringWaverTower : Tower
 {
-
+    float stringFlingDistractValue = 5;
+    int stringFlingSlowingDuration = 1;
+    int stringFlingCooldown = 20;
     // Start is called before the first frame update
     private new void Start()
     {
@@ -59,6 +61,34 @@ public class StringWaverTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
+        StartCoroutine(StringFling());
+    }
+    IEnumerator StringFling()
+    {
+        if (targets.Count > 0) 
+        {
+            foreach (GameObject cat in targets)
+            {
+                cat.GetComponent<CatBase>().DistractCat(stringFlingDistractValue, gameObject.GetComponent<Tower>());
+                cat.GetComponent<CatBase>().slowingEntities.Add(gameObject);
+            }
+            yield return new WaitForSeconds(stringFlingSlowingDuration);
+            foreach (GameObject cat in targets)
+            {
+                cat.GetComponent<CatBase>().slowingEntities.Remove(gameObject);
+            }
+            StartCoroutine(StringFlingCooldown());
+        }
+        else //Starts the coroutine again if there were no cats to distract
+        {
+            StartCoroutine(StringFling());
+        }
+        
+    }
+    IEnumerator StringFlingCooldown()
+    {
+        yield return new WaitForSeconds(stringFlingCooldown);
+        StartCoroutine(StringFling());
     }
     IEnumerator DistractCat()
     {

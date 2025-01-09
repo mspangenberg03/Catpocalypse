@@ -73,7 +73,7 @@ public class ScratchingPostTower : Tower
             //Targets the cat with the lowest current distraction/highest HP
             if(ISPReady)
             {
-                float minDistractValue = 1000000000000000000;
+                float minDistractValue = 1000000000000000000; //The minimum distraction value, set to an arbitrary value to start
                 Vector3 pos = new Vector3(0, 0, 0);
                 for (int i = 0; i < targets.Count; i++)
                 {

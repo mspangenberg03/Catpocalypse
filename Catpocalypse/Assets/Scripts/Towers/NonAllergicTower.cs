@@ -18,6 +18,8 @@ public class NonAllergicTower : Tower
     private List<GameObject> personList;
     public bool Enabled = true;
     PlayerCutenessManager cutenessManager;
+    private int foodTimeCooldown = 30;
+    private float foodTimeDistractValue = 40f;
 
 
     // Start is called before the first frame update
@@ -94,8 +96,27 @@ public class NonAllergicTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        numOfPeople++;
-        radius++;
+        FoodTime();
+    }
+    void FoodTime()
+    {
+        if(targets.Count > 0)
+        {
+            foreach(GameObject cat in targets)
+            {
+                cat.GetComponent<CatBase>().DistractCat(foodTimeDistractValue, gameObject.GetComponent<Tower>());
+            }
+            StartCoroutine(FoodTimeCooldown());
+        }
+        else
+        {
+            FoodTime();
+        }
+    }
+    IEnumerator FoodTimeCooldown()
+    {
+        yield return new WaitForSeconds(foodTimeCooldown);
+        FoodTime();
     }
 
     public void DisableTower()
