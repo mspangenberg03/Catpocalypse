@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class StringWaverTower : Tower
 {
-    float stringFlingDistractValue = 5;
-    int stringFlingSlowingDuration = 1;
-    int stringFlingCooldown = 20;
+    [Header("String Fling variables")]
+    [SerializeField,Tooltip("How much the String Fling ability distracts cats")]
+    private float stringFlingDistractValue = 5;
+    [SerializeField,Tooltip("How long the String Fling slowing effect lasts")]
+    private int stringFlingSlowingDuration = 1;
+    [SerializeField,Tooltip("How long the String Fling ability takes to cooldown")]
+    private int stringFlingCooldown = 20;
+    public float _speedDebuff = 1.8f;
     // Start is called before the first frame update
     private new void Start()
     {
+        
         base.Start();
         ApplyScrapUpgrades();
         StartCoroutine(DistractCat());
