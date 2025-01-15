@@ -12,6 +12,7 @@ public class YarnString : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DetectCollision();
         StartCoroutine(StringLifespan());
     }
     private void OnTriggerEnter(Collider other)
@@ -26,5 +27,14 @@ public class YarnString : MonoBehaviour
     {
         yield return new WaitForSeconds(_stringDuration);
         Destroy(gameObject);
+    }
+    //Detects cats colliding with
+    void DetectCollision()
+    {
+        Collider[] cats = Physics.OverlapSphere(gameObject.transform.position, GetComponent<CapsuleCollider>().radius,3,QueryTriggerInteraction.Collide);
+        foreach (Collider cat in cats)
+        {
+            cat.gameObject.GetComponent<CatBase>().DistractCat(_distractValue, parent.parentTower);
+        }
     }
 }
