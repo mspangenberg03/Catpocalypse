@@ -49,17 +49,17 @@ public class SuperCucumber : MonoBehaviour
             catsInRange.Remove(other.gameObject);
         }
     }
-    private void DistractCats()
-    {
-        foreach(GameObject cat in catsInRange)
-        {
-            if(cat != null)
-            {
-                cat.GetComponent<CatBase>().DistractCat(parentTower.GetComponent<Tower>().towerStats.DistractValue,parentTower.GetComponent<Tower>());
-            }
+    //private void DistractCats()
+    //{
+    //    foreach(GameObject cat in catsInRange)
+    //    {
+    //        if(cat != null)
+    //        {
+    //            cat.GetComponent<CatBase>().DistractCat(parentTower.GetComponent<Tower>().towerStats.DistractValue,parentTower.GetComponent<Tower>());
+    //        }
             
-        }
-    }
+    //    }
+    //}
     void SpawnCucumbers()
     {
         Debug.Log("SpawnCucumbers called");
@@ -68,7 +68,6 @@ public class SuperCucumber : MonoBehaviour
             GameObject subCucumber = Instantiate(cucumber, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity, null);
             subCucumber.GetComponent<Rigidbody>().AddForce(new(Random.Range(-_launchForce, _launchForce), Random.Range(-_launchForce, _launchForce), Random.Range(-_launchForce, _launchForce)), ForceMode.Impulse);
             subCucumber.GetComponent<SubCucumber>().parentTower = parentTower;
-            Debug.Log("SubCucumber spawned");
         }
         //yield return null;
         Destroy(gameObject);
