@@ -14,6 +14,9 @@ public class SuperCucumber : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     private int _numberOfCucumbers = 5;
+
+    [SerializeField, Tooltip("Sub Cucumber launch force")]
+    private int _launchForce = 5;
     void Start()
     {
         catsInRange = new List<GameObject>();
@@ -63,7 +66,7 @@ public class SuperCucumber : MonoBehaviour
         for(int i = 0; i < _numberOfCucumbers; i++)
         {
             GameObject subCucumber = Instantiate(cucumber, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity, null);
-            subCucumber.GetComponent<Rigidbody>().AddForce(new(Random.Range(-5, 5), Random.Range(-5, 5), Random.Range(-5, 5)), ForceMode.Impulse);
+            subCucumber.GetComponent<Rigidbody>().AddForce(new(Random.Range(-_launchForce, _launchForce), Random.Range(-_launchForce, _launchForce), Random.Range(-_launchForce, _launchForce)), ForceMode.Impulse);
             subCucumber.GetComponent<SubCucumber>().parentTower = parentTower;
             Debug.Log("SubCucumber spawned");
         }
