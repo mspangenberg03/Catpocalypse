@@ -62,10 +62,10 @@ public class SuperCucumber : MonoBehaviour
         Debug.Log("SpawnCucumbers called");
         for(int i = 0; i < _numberOfCucumbers; i++)
         {
-            GameObject subCucumber = Instantiate(cucumber, new Vector3(gameObject.transform.position.x, 40, transform.position.z), Quaternion.identity, null);
-            subCucumber.GetComponent<Cucumber>().parentTower = parentTower;
-            Debug.Log("Cucumber fired");
-            subCucumber.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-180,180), Random.Range(-180, 180), Random.Range(-180, 180)));
+            GameObject subCucumber = Instantiate(cucumber, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity, null);
+            subCucumber.GetComponent<Rigidbody>().AddForce(new(Random.Range(-5, 5), Random.Range(-5, 5), Random.Range(-5, 5)), ForceMode.Impulse);
+            subCucumber.GetComponent<SubCucumber>().parentTower = parentTower;
+            Debug.Log("SubCucumber spawned");
         }
         //yield return null;
         Destroy(gameObject);
