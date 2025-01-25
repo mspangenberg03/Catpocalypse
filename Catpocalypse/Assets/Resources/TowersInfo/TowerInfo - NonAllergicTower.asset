@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 5
   DisplayName: 'Non-Allergic Tower '
-  Icon: {fileID: 21300000, guid: e0f5d8108489ae44087d64280c836401, type: 3}
+  Icon: {fileID: 21300000, guid: fbef068844dcd93469cb7ab3dedd8346, type: 3}
   Cost: 200
   Damage: 2
   Range: 2

@@ -33,7 +33,7 @@ public class WaveManager : MonoBehaviour
     private float _SecondsSinceLevelStart;
     private float _SecondsSinceWaveStart;
 
-    private int _WaveNumber = 0;
+    private int _WaveNumber = 1;
     private bool _WaveInProgress = false;
 
     private PlayerMoneyManager _PlayerMoneyManager;
@@ -78,7 +78,6 @@ public class WaveManager : MonoBehaviour
                 _TotalWavesInLevel = spawner.GetComponent<CatSpawner>().NumberOfWaves;
             }
         }
-
         HUD.HideWaveDisplay();
     }
 
@@ -116,7 +115,6 @@ public class WaveManager : MonoBehaviour
         _waveSound.clip = _startClip;
         _waveSound.Play();
         Debug.Log("Start wave sound played");
-        _WaveNumber++;
 
 
         FindAllSpawners();
@@ -133,7 +131,7 @@ public class WaveManager : MonoBehaviour
         _CatsReachedGoal = 0;
 
         HUD.ShowWaveDisplay();
-        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave, TotalCatsInWave);
+        HUD.UpdateWaveInfoDisplay(TotalCatsInWave - _CatsRemainingInWave, TotalCatsInWave);
     }
 
     public void StopAllSpawning()
@@ -151,20 +149,25 @@ public class WaveManager : MonoBehaviour
         _CatsDistracted++;
         _TotalCatsDistracted++;
 
-        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave, TotalCatsInWave);
+        HUD.UpdateWaveInfoDisplay(TotalCatsInWave - _CatsRemainingInWave, TotalCatsInWave);
 
         if (_CatsRemainingInWave < 1)
         {
             HUD.HideWaveDisplay();
             _WaveInProgress = false;
-
             WaveEnded?.Invoke(this, EventArgs.Empty);
             //_waveSound.clip = _endClip;
             //_waveSound.Play();
             Debug.LogWarning("End wave sound played");
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
+            {
                 HUD.RevealVictory();
-           
+            } else if (_WaveNumber <= _TotalWavesInLevel)
+            {
+                HUD.UpdateWaveNumberDisplay(++_WaveNumber);
+            }
+
+
             //_winSound.
         }
     }
@@ -174,7 +177,7 @@ public class WaveManager : MonoBehaviour
         _CatsReachedGoal++;
         _TotalCatsReachedGoal++;
 
-        HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave, TotalCatsInWave);
+        HUD.UpdateWaveInfoDisplay(TotalCatsInWave - _CatsRemainingInWave, TotalCatsInWave);
 
         if (_CatsRemainingInWave < 1)
         {
@@ -189,9 +192,11 @@ public class WaveManager : MonoBehaviour
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
             {
                 HUD.RevealVictory();
-                
             }
-                
+            else if (_WaveNumber <= _TotalWavesInLevel)
+            {
+                HUD.UpdateWaveNumberDisplay(++_WaveNumber);
+            }
         }
     }
 

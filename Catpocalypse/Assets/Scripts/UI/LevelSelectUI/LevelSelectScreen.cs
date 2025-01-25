@@ -15,7 +15,7 @@ public class LevelSelectScreen : MonoBehaviour
 
     public void Start()
     {
-        for (int i = PlayerDataManager.Instance.CurrentData.levelsCompleted; i < LevelButtons.Count; i++)
+        for (int i = PlayerDataManager.Instance.CurrentData.levelsCompleted + 1; i < LevelButtons.Count; i++)
         {
             LevelButtons[i].SetActive(false);
         }
@@ -43,17 +43,12 @@ public class LevelSelectScreen : MonoBehaviour
         // Display the tower info panel.
         _Panel_CatInfo.gameObject.SetActive(true);
         _Panel_CatInfo.ResetUI();
-
-        // Hide the level select panel.
-        gameObject.SetActive(false);
     }
     public void ButtonClicked_UpgradeScreen()
     {
         if (_Panel_UpgradeScreen.gameObject.activeSelf)
             return;
         _Panel_UpgradeScreen.gameObject.SetActive(true);
-        // Hide the level select panel.
-        gameObject.SetActive(false);
     }
     public void ButtonClicked_ViewTowerInfo()
     {
@@ -65,9 +60,6 @@ public class LevelSelectScreen : MonoBehaviour
         // Display the tower info panel.
         _Panel_TowerInfo.gameObject.SetActive(true);
         _Panel_TowerInfo.ResetUI();
-
-        // Hide the level select panel.
-        gameObject.SetActive(false);
     }
 
     public void ButtonClicked_TutorialLevel()

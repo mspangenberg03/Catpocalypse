@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1218595535987209008, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.54619247
+      objectReference: {fileID: 0}
     - target: {fileID: 2144671582590641055, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_Name
       value: Full In-Game UI
@@ -226,6 +230,10 @@ PrefabInstance:
     - target: {fileID: 3710513992412699833, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleRobotButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805400973462491656, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -52
       objectReference: {fileID: 0}
     - target: {fileID: 4990386211989650139, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2889,7 +2897,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Money: 300
-  _UpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _moneySound: {fileID: 879432572}
 --- !u!82 &879432572
 AudioSource:
@@ -3027,7 +3034,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 74282c5711146a8448e6df0c6db4a79e, type: 3}
   - {fileID: 8300000, guid: 3dd04f8bb94523547979cff309295023, type: 3}
   - {fileID: 8300000, guid: 262481edf4d55284db99f37e8882f190, type: 3}
-  _playerUpgrades: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
 --- !u!54 &879432575
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6140,10 +6146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208426c70451e414c938e16f1d7aa683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _waveSound: {fileID: 1775685800}
   _startClip: {fileID: 8300000, guid: 2e2cd0131acc3d7498be60e3c8d0c627, type: 3}
   _endClip: {fileID: 8300000, guid: 037f9cb74e93f0a4590f21e81de3d8c7, type: 3}
+  _ScrapReward: 0
 --- !u!114 &1775685798
 MonoBehaviour:
   m_ObjectHideFlags: 0
