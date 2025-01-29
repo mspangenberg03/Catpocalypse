@@ -56,7 +56,7 @@ public class YarnBall : MonoBehaviour
     {
         float angleH = Vector3.Angle(parentTower.transform.position,transform.position);
         float angle = Mathf.Atan2((transform.position.y - parentTower.transform.position.y), (transform.position.x - parentTower.transform.position.x));
-        GameObject _piece = Instantiate(_string, gameObject.transform.position + new Vector3(0, 2, 0),new Quaternion(angleH,0,0,transform.rotation.w));
+        GameObject _piece = Instantiate(_string, gameObject.transform.position + new Vector3(0, 2, 0),Quaternion.identity);
         
         //angle = Mathf.Rad2Deg * angle;
         //Vector3 rotation = Vector3.Normalize(transform.position - _piece.transform.position);

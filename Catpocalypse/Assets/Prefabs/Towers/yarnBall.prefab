@@ -151,7 +151,7 @@ MonoBehaviour:
   _landingSound: {fileID: 3297402704763253595}
   _upgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _string: {fileID: 4812996862812258411, guid: a0a2a20d94b3e2a4a97432746d993462, type: 3}
-  _spawnInterval: 0.1
+  _spawnInterval: 0.01
   _lifespan: 5
 --- !u!82 &3297402704763253595
 AudioSource:
