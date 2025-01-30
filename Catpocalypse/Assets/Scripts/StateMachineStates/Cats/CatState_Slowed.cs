@@ -40,10 +40,18 @@ public class CatState_Slowed : CatState_Base
             if (obj != null)
             {
                 ScratchingPost post = obj.GetComponent<ScratchingPost>();
-                if (post.speedDebuff > modifier)
+                if (post != null)
                 {
-                    modifier = post.speedDebuff;
+                    if (post.speedDebuff > modifier)
+                    {
+                        modifier = post.speedDebuff;
+                    }
                 }
+                if(obj.GetComponent<StringWaverTower>() != null)
+                {
+                    modifier = obj.GetComponent<StringWaverTower>()._speedDebuff;
+                }
+                
             }
         }
         _parent.GetComponent<NavMeshAgent>().speed = cat.speed / modifier;

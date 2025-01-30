@@ -932,7 +932,7 @@ GameObject:
   - component: {fileID: 78743773}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -4361,7 +4361,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 74282c5711146a8448e6df0c6db4a79e, type: 3}
   - {fileID: 8300000, guid: 3dd04f8bb94523547979cff309295023, type: 3}
   - {fileID: 8300000, guid: 262481edf4d55284db99f37e8882f190, type: 3}
-  _playerUpgrades: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
 --- !u!54 &439936116
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4508,7 +4507,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Money: 600
-  _UpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _moneySound: {fileID: 0}
 --- !u!82 &439936123
 AudioSource:
@@ -13182,10 +13180,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208426c70451e414c938e16f1d7aa683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerUpgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _waveSound: {fileID: 1626300302}
   _startClip: {fileID: 8300000, guid: 2e2cd0131acc3d7498be60e3c8d0c627, type: 3}
   _endClip: {fileID: 8300000, guid: 037f9cb74e93f0a4590f21e81de3d8c7, type: 3}
+  _ScrapReward: 0
 --- !u!4 &1626300300
 Transform:
   m_ObjectHideFlags: 0
@@ -17326,6 +17324,22 @@ PrefabInstance:
     - target: {fileID: 3033275683341089311, guid: ace814ecf95e4f141b4c39ec3368d1b4, type: 3}
       propertyPath: m_Name
       value: Robot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014394368999711592, guid: ace814ecf95e4f141b4c39ec3368d1b4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00000023841858
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014394368999711592, guid: ace814ecf95e4f141b4c39ec3368d1b4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014394368999711592, guid: ace814ecf95e4f141b4c39ec3368d1b4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.0000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014394368999711592, guid: ace814ecf95e4f141b4c39ec3368d1b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.08155233
       objectReference: {fileID: 0}
     - target: {fileID: 8825530725394727717, guid: ace814ecf95e4f141b4c39ec3368d1b4, type: 3}
       propertyPath: m_LocalPosition.x

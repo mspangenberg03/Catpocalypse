@@ -61,6 +61,10 @@ public class LaserPointerTower : Tower
     /// A value of -1 means the cat will randomly select a direction for itself, since the rally point is before the junction point, which means it does not specify which way to go.
     /// </summary>
     private int _CurrentJunctionDirectionIndex = -1;
+    [SerializeField]
+    private float _suddenFlashDuration = .5f;
+    [SerializeField]
+    private float _suddenFlashCooldown = 20f;
 
 
 
@@ -234,7 +238,35 @@ public class LaserPointerTower : Tower
         } // end foreach
 
     }
-
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        Debug.Log("Laser pointer upgraded");
+        StartCoroutine(SuddenFlash());
+    }
+    IEnumerator SuddenFlash()
+    {
+        if (targets.Count > 0)
+        {
+            Debug.LogWarning("Sudden flash called");
+            foreach(GameObject target in targets)
+            {
+                target.GetComponent<CatBase>().stoppingEntities.Add(gameObject);
+                StartCoroutine(SuddenFlashDuration(target));
+            }
+            
+            
+            yield return new WaitForSeconds(_suddenFlashCooldown);
+        }
+        yield return new WaitForSeconds(0);
+        StartCoroutine(SuddenFlash());
+        
+    }
+    IEnumerator SuddenFlashDuration(GameObject target)
+    {
+        yield return new WaitForSeconds(_suddenFlashDuration);
+        target.GetComponent<CatBase>().stoppingEntities.Remove(gameObject);
+    }
     private bool TargetCat(TargetInfo targetInfo)
     {
         int laserIndex = GetIndexOfFirstInactiveLaser();
@@ -698,6 +730,7 @@ public class LaserPointerTower : Tower
         {
             TargetInfo.ReachedNextWayPoint = true;
         }
+       
 
     }
 }

@@ -194,7 +194,7 @@ MonoBehaviour:
   numberOfTargets: 0
   targets: []
   towerLevel: 1
-  upgradeCost: 150
+  upgradeCost: 0
   _cutenessChallengeActive: 0
   fireRate: 1
   towerStats: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
@@ -207,6 +207,8 @@ MonoBehaviour:
   - {fileID: 7795286003647554525}
   person: {fileID: 3328012633065954755, guid: 5ed7c0ae560f6b74382cccb1ec070559, type: 3}
   Enabled: 1
+  _foodTimeCooldown: 10
+  _foodTimeDistractValue: 20
 --- !u!135 &1191784202885657848
 SphereCollider:
   m_ObjectHideFlags: 0
