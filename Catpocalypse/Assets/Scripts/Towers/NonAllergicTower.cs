@@ -104,7 +104,10 @@ public class NonAllergicTower : Tower
         {
             foreach(GameObject cat in targets)
             {
-                cat.GetComponent<CatBase>().DistractCat(foodTimeDistractValue, gameObject.GetComponent<Tower>());
+                if(cat != null)
+                {
+                    cat.GetComponent<CatBase>().DistractCat(foodTimeDistractValue, gameObject.GetComponent<Tower>());
+                }
             }
             StartCoroutine(FoodTimeCooldown());
         }

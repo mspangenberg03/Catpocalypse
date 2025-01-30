@@ -75,8 +75,11 @@ public class StringWaverTower : Tower
         {
             foreach (GameObject cat in targets)
             {
-                cat.GetComponent<CatBase>().DistractCat(stringFlingDistractValue, gameObject.GetComponent<Tower>());
-                cat.GetComponent<CatBase>().slowingEntities.Add(gameObject);
+                if(cat != null)
+                {
+                    cat.GetComponent<CatBase>().DistractCat(stringFlingDistractValue, gameObject.GetComponent<Tower>());
+                    cat.GetComponent<CatBase>().slowingEntities.Add(gameObject);
+                }
             }
             yield return new WaitForSeconds(stringFlingSlowingDuration);
             foreach (GameObject cat in targets)
