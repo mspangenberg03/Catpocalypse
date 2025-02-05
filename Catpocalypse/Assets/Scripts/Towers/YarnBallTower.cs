@@ -11,6 +11,7 @@ public class YarnBallTower : Tower
     [SerializeField] private float throwRange = 5f;
     private bool canThrow = true;
     private float sizeMultiplier = 1;
+    public bool upgraded = false;
 
     private new void Start()
     {
@@ -144,11 +145,12 @@ public class YarnBallTower : Tower
     }
     public override void Upgrade()
     {
-        base.Upgrade();
-        switch(towerLevel)
+        if (!upgraded)
         {
-            
+            base.Upgrade();
+            upgraded = true;
         }
+       
     }
     GameObject FindTargetByLayer(string Cat)
     {

@@ -66,6 +66,11 @@ public class CatBase : MonoBehaviour
 
 
     protected float distraction = 0; //How distracted the cat is currently
+    public float Distraction
+    {
+        get { return distraction; }
+        set { distraction = value; }
+    }
     protected bool isDistracted = false; // If the cat has been defeated or not.
 
     protected PlayerHealthManager healthManager;
@@ -308,7 +313,7 @@ public class CatBase : MonoBehaviour
         }
         else if (count == 1)
         {
-            Debug.Log(NextWayPoint.NextWayPoints[0]);
+            //Debug.Log(NextWayPoint.NextWayPoints[0]);
             _NextWayPoint = _NextWayPoint.NextWayPoints[0];
         }
         else // count is greater than 1

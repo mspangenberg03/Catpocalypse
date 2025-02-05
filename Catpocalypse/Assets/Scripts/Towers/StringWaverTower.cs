@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class StringWaverTower : Tower
 {
-
+    [Header("String Fling variables")]
+    [SerializeField,Tooltip("How much the String Fling ability distracts cats")]
+    private float stringFlingDistractValue = 5;
+    [SerializeField,Tooltip("How long the String Fling slowing effect lasts")]
+    private int stringFlingSlowingDuration = 1;
+    [SerializeField,Tooltip("How long the String Fling ability takes to cooldown")]
+    private int stringFlingCooldown = 20;
+    public float _speedDebuff = 1.8f;
     // Start is called before the first frame update
     private new void Start()
     {
+        
         base.Start();
         ApplyScrapUpgrades();
         StartCoroutine(DistractCat());
@@ -59,6 +67,37 @@ public class StringWaverTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
+        StartCoroutine(StringFling());
+    }
+    IEnumerator StringFling()
+    {
+        if (targets.Count > 0) 
+        {
+            foreach (GameObject cat in targets)
+            {
+                if(cat != null)
+                {
+                    cat.GetComponent<CatBase>().DistractCat(stringFlingDistractValue, gameObject.GetComponent<Tower>());
+                    cat.GetComponent<CatBase>().slowingEntities.Add(gameObject);
+                }
+            }
+            yield return new WaitForSeconds(stringFlingSlowingDuration);
+            foreach (GameObject cat in targets)
+            {
+                cat.GetComponent<CatBase>().slowingEntities.Remove(gameObject);
+            }
+            StartCoroutine(StringFlingCooldown());
+        }
+        else //Starts the coroutine again if there were no cats to distract
+        {
+            StartCoroutine(StringFling());
+        }
+        
+    }
+    IEnumerator StringFlingCooldown()
+    {
+        yield return new WaitForSeconds(stringFlingCooldown);
+        StartCoroutine(StringFling());
     }
     IEnumerator DistractCat()
     {

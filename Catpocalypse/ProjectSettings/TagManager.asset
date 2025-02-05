@@ -16,6 +16,7 @@ TagManager:
   - Tower
   - TowerRangeOutline
   - FortificationRange
+  - YarnString
   layers:
   - Default
   - TransparentFX
