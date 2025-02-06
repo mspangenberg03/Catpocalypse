@@ -19,6 +19,8 @@ MonoBehaviour:
   SpawnRate: 0
   HP: 6
   PayOnDistraction: 0
+  Icon: {fileID: 21300000, guid: 21a0fa6d09ef41145803b25f2162f0b0, type: 3}
+  CatImage: {fileID: 21300000, guid: 21a0fa6d09ef41145803b25f2162f0b0, type: 3}
   Special: None
   Description: A normal cat that is wearing a box to avoid distractions as much as
     possible.
