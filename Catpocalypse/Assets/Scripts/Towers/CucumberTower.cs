@@ -49,6 +49,7 @@ public class CucumberTower : Tower
     
     private bool canSCBeFired = false;
     private bool firingSC = false;
+    private ParticleSystem _particle;
     private new void Awake()
     {
         base.Awake();
@@ -62,6 +63,7 @@ public class CucumberTower : Tower
         base.Start();
         ApplyScrapUpgrades();
         StartCoroutine(Aim());
+        _particle = spawn.gameObject.GetComponent<ParticleSystem>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -148,7 +150,7 @@ public class CucumberTower : Tower
             StartCoroutine(SuperCucumber());
         }
         _towerSound.Play();
-
+        _particle.Play();
 
         StartCoroutine(Reload());
 
