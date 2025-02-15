@@ -8,13 +8,8 @@ using TMPro;
 
 public class TowerInfoPanel : MonoBehaviour
 {
-    [Header("General")]
 
-    [Tooltip("This is a reference to the parent of this panel. It is only used so that when you close this panel, it can reopen the main level select panel.")]
-    [SerializeField] GameObject _ParentPanel;
-
-
-    [Header("Info Pane Settings")]
+    [Header("Info Panel Settings")]
 
     [SerializeField] TextMeshProUGUI _Text_DisplayName;
     [SerializeField] TextMeshProUGUI _Text_Cost;
@@ -29,22 +24,13 @@ public class TowerInfoPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI _Text_Description;
     [SerializeField] Image _Image_Icon;
 
-
-
-    [Header("Tower Selection Pane Settings")]
-    
-    [SerializeField] TMP_Dropdown _Dropdown_TowerSelection;
-
     [Space(10)]
 
     [Tooltip("This list controls which towers are displayed in this window. The tower info displayed by this panel is pulled from the scriptable objects in this list.")]
     [SerializeField] List<TowerInfo> _TowerInfoList;
-
-
+    [SerializeField] ToggleGroup group;
 
     private TowerInfoCollection _TowerInfoCollection;
-
-
 
     private void Awake()
     {
@@ -54,40 +40,17 @@ public class TowerInfoPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PopulateCollectionDropdown();
         ResetUI();
         gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnSelectedTowerChanged(TowerTypes tower)
     {
-        
-    }
-
-    private void PopulateCollectionDropdown()
-    {
-        _Dropdown_TowerSelection.options.Clear();
-
-
-        // Spawn a button for each tower type in the list.
-        for (int i = 0; i < _TowerInfoCollection.Count; i++)
-        {
-            TowerInfo info = _TowerInfoCollection.GetTowerInfo(i);
-            _Dropdown_TowerSelection.options.Add(new TMP_Dropdown.OptionData(info.DisplayName));
-        }
-    }
-
-    public void OnSelectedTowerChanged()
-    {
-        UpdateUI(_TowerInfoCollection.GetTowerInfo(_Dropdown_TowerSelection.value));
+        UpdateUI(_TowerInfoCollection.GetTowerInfo(tower));
     }
 
     public void ButtonClicked_Close()
     {
-        // This is commented out since the level select dialog is no longer being used, but I left it in the scene for now.
-        //_ParentPanel?.gameObject.SetActive(true);
-
         gameObject.SetActive(false);
     }
 
@@ -113,9 +76,16 @@ public class TowerInfoPanel : MonoBehaviour
 
     public void ResetUI()
     {
-        _Dropdown_TowerSelection.value = 0;
-        _Dropdown_TowerSelection.RefreshShownValue();
-
         UpdateUI(_TowerInfoCollection.GetTowerInfo(0));
     }
+
+    /**
+     * This section  is the listed methods that toggles reference when updating the Tower Information UI
+     */
+    public void OnCucumberToggle() { OnSelectedTowerChanged(TowerTypes.CucumberThrower); }
+    public void OnLaserToggle() { OnSelectedTowerChanged(TowerTypes.LaserPointer); }
+    public void OnNonAllergicToggle() { OnSelectedTowerChanged(TowerTypes.NonAllergic); }
+    public void OnScratchingPostToggle() { OnSelectedTowerChanged(TowerTypes.ScratchingPost); }
+    public void OnStringWaverToggle() { OnSelectedTowerChanged(TowerTypes.StringWaver); }
+    public void OnYarnThrowerToggle() { OnSelectedTowerChanged(TowerTypes.YarnBall); }
 }

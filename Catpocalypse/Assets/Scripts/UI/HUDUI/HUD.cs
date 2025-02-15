@@ -22,20 +22,31 @@ public class HUD : MonoBehaviour
     [SerializeField] private Image _PlayerHealthBar;
     [SerializeField] private TextMeshProUGUI _PlayerHealthBarLabel;
 
+    // Temporarily commented out until further notice
+    /**
     [Header("Cuteness Bar Refs")]
     [SerializeField] private Image _CutenessBar;
     [SerializeField] private TextMeshProUGUI _CutenessBarLabel;
+    */
+
+    [Header("Message Bar Refs")]
+    [SerializeField] private GameObject _MessageBar;
+    [SerializeField] private TextMeshProUGUI _MessageHeaderLabel;
+    [SerializeField] private TextMeshProUGUI _MessageLabel;
+
 
     [Header("Wave Info Display Refs")]
     [SerializeField] private Button _StartWaveButton;
     [SerializeField] private TextMeshProUGUI _WaveNumberLabel;
     [SerializeField] private TextMeshProUGUI _CatsRemainingLabel;
+    [SerializeField] private Image _CatsRemainingBar;
 
     [Header("Player Money Display Refs")]
     [SerializeField] private TextMeshProUGUI _PlayerMoneyLabel;
 
     [Header("Robot Display Refs")]
     [SerializeField] private Button _ToggleRobotButton;
+    [SerializeField] private Image _RobotRechargeImage;
     [SerializeField] private TextMeshProUGUI _RobotPowerLevelLabel;
 
     [Header("Level End Panels")]
@@ -43,9 +54,8 @@ public class HUD : MonoBehaviour
     [SerializeField] private GameObject _VictoryScreen;
 
     [Header("Game Speed Controls")]
-    [SerializeField] private Button _TogglePauseButton;
-    [SerializeField] private Sprite _PauseImage;
-    [SerializeField] private Sprite _PlayImage;
+    [SerializeField] private Button _PauseButton;
+    [SerializeField] private Button _NormalSpeedButton;
     
 
     private RobotController _RobotController;
@@ -60,7 +70,9 @@ public class HUD : MonoBehaviour
 
         Instance = this;
 
-        TogglePauseButton.gameObject.SetActive(false);
+        _PauseButton.gameObject.SetActive(false);
+        _NormalSpeedButton.gameObject.SetActive(false);
+        _MessageBar.SetActive(false);
     }
 
     private void Start()
@@ -106,10 +118,19 @@ public class HUD : MonoBehaviour
         }
     }
 
+    private void UpdateMessageBar(string header, string message)
+    {
+        _MessageHeaderLabel.text = header;
+        _MessageLabel.text = message;
+    }
+
     private void OnDestroy()
     {
         if (_RobotController != null)
             _RobotController.OnBatteryLevelChanged -= UpdateRobotBatteryLevelDisplay;
+        
+        // Handles the instance of a player exiting the game while paused, then returning and the game is still paused.
+        ShowPauseButton();
     }
 
     public static void UpdatePlayerHealthDisplay(float currentHP, float maxHP)
@@ -117,27 +138,33 @@ public class HUD : MonoBehaviour
         Instance.PlayerHealthBar.fillAmount = Mathf.Clamp01(currentHP / maxHP);
         Instance.PlayerHealthBarLabel.text = $"";
     }
-
+    /** Disabled until further notice
     public static void UpdateCutenessDisplay(float currentCuteness, float maxCuteness)
     {
         Instance.CutenessBar.fillAmount = Mathf.Clamp01(currentCuteness / maxCuteness);
         Instance.CutenessBarLabel.text = $"";
+    }*/
+
+    public static void UpdateWaveInfoDisplay(float catsDefeated, float totalCatsInWave)
+    {
+        Instance._CatsRemainingBar.fillAmount = Mathf.Clamp01(catsDefeated / totalCatsInWave);
+        Instance.CatsRemainingLabel.text = $"{(totalCatsInWave - catsDefeated)}";
     }
 
-    public static void UpdateWaveInfoDisplay(int waveNumber, int catsRemaining)
+    public static void UpdateWaveNumberDisplay(int waveNumber)
     {
         Instance.WaveNumberLabel.text = $"{waveNumber}";
-        Instance.CatsRemainingLabel.text = $"{catsRemaining}";
     }
 
     public static void UpdatePlayerMoneyDisplay(float playerMoney)
     {
-        Instance.PlayerMoneyLabel.text = $"${playerMoney:N2}";
+        Instance.PlayerMoneyLabel.text = $"{playerMoney:N2}";
     }
 
     public static void UpdateRobotBatteryLevelDisplay(object sender, RobotBatteryEventArgs e)
     {
         if (Instance.RobotPowerLevelLabel != null)
+            Instance._RobotRechargeImage.fillAmount = e.NewBatteryLevel;
             Instance.RobotPowerLevelLabel.text = $"{(e.NewBatteryLevel * 100):F0}%";
     }
 
@@ -148,14 +175,14 @@ public class HUD : MonoBehaviour
             return;
 
 
-        Instance.WaveNumberLabel.gameObject.SetActive(false);
         Instance.CatsRemainingLabel.gameObject.SetActive(false);
         
         // The button state should always be the opposite of the labels' state.
         Instance.StartWaveButton.gameObject.SetActive(true);
 
         // The pause button should only be available when a wave is running
-        Instance._TogglePauseButton.gameObject.SetActive(false);
+        Instance._NormalSpeedButton.gameObject.SetActive(false);
+        Instance._PauseButton.gameObject.SetActive(false);
     }
 
     public static void ShowWaveDisplay()
@@ -165,7 +192,6 @@ public class HUD : MonoBehaviour
 
 
         // Clear the text labels, so the player won't potentially see an old value before it updates.
-        Instance.WaveNumberLabel.text = "";
         Instance.CatsRemainingLabel.text = "";
 
         Instance.WaveNumberLabel.gameObject.SetActive(true);
@@ -175,7 +201,12 @@ public class HUD : MonoBehaviour
         Instance._StartWaveButton.gameObject.SetActive(false);
 
         // The pause button should only be available when a wave is running
-        Instance._TogglePauseButton.gameObject.SetActive(true);
+        ShowPauseButton();
+    }
+
+    public static void CloseMessageBar()
+    {
+        Instance._MessageBar.SetActive(false);
     }
 
     public static void RevealVictory()
@@ -183,7 +214,7 @@ public class HUD : MonoBehaviour
         Instance._StartWaveButton.gameObject.SetActive(false);
         Instance.WaveNumberLabel.gameObject.SetActive(false);
         Instance.CatsRemainingLabel.gameObject.SetActive(false);
-        Instance._TogglePauseButton.gameObject.SetActive(false);
+        Instance._PauseButton.gameObject.SetActive(false);
 
         Instance._VictoryScreen.SetActive(true);
     }
@@ -193,32 +224,39 @@ public class HUD : MonoBehaviour
         Instance._StartWaveButton.gameObject.SetActive(false);
         Instance.WaveNumberLabel.gameObject.SetActive(false);
         Instance.CatsRemainingLabel.gameObject.SetActive(false);
-        Instance._TogglePauseButton.gameObject.SetActive(false);
+        Instance._PauseButton.gameObject.SetActive(false);
 
         Instance._DefeatScreen.SetActive(true);
     }
 
-    public static void TogglePauseGame()
+    public static void ShowPauseButton()
     {
-        if(Time.timeScale == 0)
-        {
-            Instance._TogglePauseButton.image.sprite = Instance._PauseImage;
-            Time.timeScale = 1;
-        } else
-        {
-            Instance._TogglePauseButton.image.sprite = Instance._PlayImage;
+        Instance._NormalSpeedButton.gameObject.SetActive(false);
+        Instance._PauseButton.gameObject.SetActive(true);
+        Time.timeScale = 1;
+    }
 
-            Time.timeScale = 0;
-        }
+    public static void ShowPlayButton()
+    {
+        Instance._NormalSpeedButton.gameObject.SetActive(true);
+        Instance._PauseButton.gameObject.SetActive(false);
+        Time.timeScale = 0;
+    }
+
+    public static void ShowMessage(string header, string message)
+    {
+        Instance.UpdateMessageBar(header, message);
+        Instance.MessageBar.gameObject.SetActive(true);
     }
 
 
     public Image PlayerHealthBar { get { return _PlayerHealthBar; } }
     public TextMeshProUGUI PlayerHealthBarLabel { get { return _PlayerHealthBarLabel; } }
 
+    /** Cuteness System Currently Disabled
     public Image CutenessBar { get { return _CutenessBar; } }
     public TextMeshProUGUI CutenessBarLabel { get { return _CutenessBarLabel; } }
-
+    */
 
     public Button StartWaveButton { get { return _StartWaveButton; } }
     public TextMeshProUGUI WaveNumberLabel { get { return _WaveNumberLabel; } }
@@ -228,6 +266,5 @@ public class HUD : MonoBehaviour
 
     public TextMeshProUGUI RobotPowerLevelLabel { get { return _RobotPowerLevelLabel; } }
     public Button ToggleRobotButton { get { return _ToggleRobotButton; } }
-
-    public Button TogglePauseButton { get { return _TogglePauseButton; } }
+    public GameObject MessageBar { get { return _MessageBar; } }
 }

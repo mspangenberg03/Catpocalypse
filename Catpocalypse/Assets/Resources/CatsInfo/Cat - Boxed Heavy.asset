@@ -19,6 +19,8 @@ MonoBehaviour:
   SpawnRate: 0
   HP: 0
   PayOnDistraction: 0
+  Icon: {fileID: 21300000, guid: 397661f96a686944085e7f500a98015c, type: 3}
+  CatImage: {fileID: 21300000, guid: 397661f96a686944085e7f500a98015c, type: 3}
   Special: None
   Description: A heavy cat that is wearing a box to avoid distractions as much as
     possible.

@@ -198,7 +198,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 100
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8148985274260696171
 MonoBehaviour:
@@ -216,14 +216,14 @@ MonoBehaviour:
   buildCost: 200
   refundPercentage: 0.85
   range: {fileID: 560913167619528523}
-  radius: 40
-  distractValue: 90
+  radius: 20
+  distractValue: 80
   numberOfTargets: 0
   targets: []
   towerLevel: 1
   upgradeCost: 0
   _cutenessChallengeActive: 0
-  fireRate: 3.5
+  fireRate: 2.4
   towerStats: {fileID: 11400000, guid: 9102cc67656cb6e4e99fb9c990781b2c, type: 2}
   _towerSound: {fileID: 8294513549241816052}
   yarnBallPrefab: {fileID: 7418905643246593257, guid: 543c1eeb918fd8a40b8e656f6691db55, type: 3}

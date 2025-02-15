@@ -169,7 +169,7 @@ MonoBehaviour:
   towerLevel: 1
   upgradeCost: 0
   _cutenessChallengeActive: 0
-  fireRate: 3
+  fireRate: 3.2
   towerStats: {fileID: 11400000, guid: 03bba1f7ec538254f80b66e0bc98933e, type: 2}
   _towerSound: {fileID: 2024988410660856447}
   _stringFlingDuration: 1

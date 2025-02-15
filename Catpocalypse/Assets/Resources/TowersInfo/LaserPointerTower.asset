@@ -16,4 +16,4 @@ MonoBehaviour:
   fireRate: 0
   buildCost: 150
   upgradeCost: 100
-  range: 80
+  range: 1
