@@ -19,6 +19,8 @@ MonoBehaviour:
   SpawnRate: 2
   HP: 1
   PayOnDistraction: 4
+  Icon: {fileID: 21300000, guid: ca59e465edcc49143bf6aea698629109, type: 3}
+  CatImage: {fileID: 21300000, guid: ca59e465edcc49143bf6aea698629109, type: 3}
   Special: This cat has bursts of speed which make it faster.
   Description: A light cat that is wearing a box to avoid distractions as much as
     possible.

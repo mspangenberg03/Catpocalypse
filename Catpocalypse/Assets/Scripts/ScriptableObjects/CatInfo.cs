@@ -14,6 +14,8 @@ public class CatInfo : ScriptableObject
     public Ratings SpawnRate;
     public Ratings HP;
     public Ratings PayOnDistraction;
+    public Sprite Icon;
+    public Sprite CatImage;
 
     [Space(10)]
     [TextArea(4, 10)]

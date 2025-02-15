@@ -77,7 +77,7 @@ public class PlayerCutenessManager : MonoBehaviour
     {
         WaveManager.Instance.WaveEnded += OnWaveEnded;
 
-        HUD.UpdateCutenessDisplay(_Cuteness, _MaxCuteness);
+        //Currently disabled HUD.UpdateCutenessDisplay(_Cuteness, _MaxCuteness);
     }
     private void Update()
     {
@@ -92,7 +92,7 @@ public class PlayerCutenessManager : MonoBehaviour
             adjustedAmount *= PlayerDataManager.Instance.Upgrades.CutenessResistanceUpgrade;
         }
         _Cuteness = Mathf.Clamp(_Cuteness + adjustedAmount, 0, _MaxCuteness);
-        HUD.UpdateCutenessDisplay(_Cuteness, _MaxCuteness);
+        //Currently Disabled HUD.UpdateCutenessDisplay(_Cuteness, _MaxCuteness);
     }
 
     private void OnWaveEnded(object sender, EventArgs e)
@@ -104,7 +104,7 @@ public class PlayerCutenessManager : MonoBehaviour
             _CurrentCutenessChallenge = CutenessChallenges.None;
         }
         
-
+        /** All  cuteness features currently disabled
         // Did the bar get maxed during the previous wave?
         if (_Cuteness >= _MaxCuteness)
         {            
@@ -119,7 +119,7 @@ public class PlayerCutenessManager : MonoBehaviour
 
             // Randomly select a cuteness challenge for the next wave.
             SelectCutenessChallenge();
-        }
+        } */
     }
         
     private void SelectCutenessChallenge()

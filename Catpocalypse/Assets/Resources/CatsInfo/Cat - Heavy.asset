@@ -19,6 +19,8 @@ MonoBehaviour:
   SpawnRate: 2
   HP: 6
   PayOnDistraction: 5
+  Icon: {fileID: 21300000, guid: 397661f96a686944085e7f500a98015c, type: 3}
+  CatImage: {fileID: 21300000, guid: 397661f96a686944085e7f500a98015c, type: 3}
   Special: The thick fur this cat has gives it extra protection and it's not as afraid
     of cucumbers. Brave and proud.
   Description: The "Tombili" class heavy cats are known for their hefty bodies. These

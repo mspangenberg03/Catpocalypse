@@ -102,6 +102,8 @@ public class TowerSelectorUI : MonoBehaviour
         //Debug.Log($"World: {selected.transform.position}    Screen: {position}");
 
         GetComponent<RectTransform>().position = position;
+
+        //TODO: If Position is to the left or right of screen, ensure the ring "faces" the correct side of the screen.
     }
 
     private void PositionButtonsAroundRing()
@@ -110,14 +112,14 @@ public class TowerSelectorUI : MonoBehaviour
         Vector2 bottomPoint = new Vector2(0, -_ButtonsRadius);
 
         int buttonCount = _ButtonsParent.transform.childCount;
-        float angleBetweenButtons = 360f / buttonCount;
+        float angleBetweenButtons = 120f / buttonCount;
 
         Quaternion rotation = Quaternion.identity;
         for (int i = 0; i < buttonCount; i++)
         {
             Transform curButton = _ButtonsParent.transform.GetChild(i);
 
-            rotation.eulerAngles = new Vector3(0, 0, i * angleBetweenButtons);
+            rotation.eulerAngles = new Vector3(0, 0, 45 + (i * angleBetweenButtons));
             curButton.position = transform.position + (rotation * bottomPoint);
         }
     }

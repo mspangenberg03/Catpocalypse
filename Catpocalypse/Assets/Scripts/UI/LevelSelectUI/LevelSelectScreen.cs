@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelectScreen : MonoBehaviour
 {
-    [SerializeField] CatInfoPanel _Panel_CatInfo;
+    [SerializeField] CatInfoPanelNew CatInfoPanel;
     [SerializeField] TowerInfoPanel _Panel_TowerInfo;
     [SerializeField] UpgradeScreen _Panel_UpgradeScreen;
     [SerializeField] PauseMenu _Panel_PauseMenu;
@@ -15,7 +15,7 @@ public class LevelSelectScreen : MonoBehaviour
 
     public void Start()
     {
-        for (int i = PlayerDataManager.Instance.CurrentData.levelsCompleted; i < LevelButtons.Count; i++)
+        for (int i = PlayerDataManager.Instance.CurrentData.levelsCompleted + 1; i < LevelButtons.Count; i++)
         {
             LevelButtons[i].SetActive(false);
         }
@@ -36,24 +36,18 @@ public class LevelSelectScreen : MonoBehaviour
     public void ButtonClicked_ViewCatInfo()
     {
         // Just return if the dialog is already open.
-        if (_Panel_CatInfo.gameObject.activeSelf)
+        if (CatInfoPanel.gameObject.activeSelf)
             return;
 
 
         // Display the tower info panel.
-        _Panel_CatInfo.gameObject.SetActive(true);
-        _Panel_CatInfo.ResetUI();
-
-        // Hide the level select panel.
-        gameObject.SetActive(false);
+        CatInfoPanel.gameObject.SetActive(true);
     }
     public void ButtonClicked_UpgradeScreen()
     {
         if (_Panel_UpgradeScreen.gameObject.activeSelf)
             return;
         _Panel_UpgradeScreen.gameObject.SetActive(true);
-        // Hide the level select panel.
-        gameObject.SetActive(false);
     }
     public void ButtonClicked_ViewTowerInfo()
     {
@@ -65,9 +59,6 @@ public class LevelSelectScreen : MonoBehaviour
         // Display the tower info panel.
         _Panel_TowerInfo.gameObject.SetActive(true);
         _Panel_TowerInfo.ResetUI();
-
-        // Hide the level select panel.
-        gameObject.SetActive(false);
     }
 
     public void ButtonClicked_TutorialLevel()

@@ -25,7 +25,7 @@ public class RobotController : MonoBehaviour
 
     [Tooltip("How fast the tank turns in degrees per second.")]
     [SerializeField, Min(1f)]
-    private float _MaxTurnSpeed = 40f;
+    private float _MaxTurnSpeed = 30f;
 
     [Tooltip("The minimum user input value required to make the robot move.")]
     [SerializeField, Range(0f, 1f)]
@@ -37,7 +37,7 @@ public class RobotController : MonoBehaviour
 
     [Tooltip("How fast the steering returns to the neutral position (in degrees per second) when the player stops pressing a left/right button.")]
     [SerializeField, Min(0f)]
-    private float _TurningDecelerationRate = 20f;
+    private float _TurningDecelerationRate = 30f;
 
     [Tooltip("If set to true, the steering is inverted when the robot is moving backwards.")]
     [SerializeField]

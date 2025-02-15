@@ -53,6 +53,10 @@ public class TowerManipulationUI : MonoBehaviour
         if(!inUse)
         {
             this.gameObject.SetActive(false);
+            return;
+        } else
+        {
+            UpdatePosition();
         }
 
         _TimeSinceLastRallyPointSet += Time.deltaTime;
@@ -92,6 +96,21 @@ public class TowerManipulationUI : MonoBehaviour
         {
             // The left mouse button is not being pressed.
         }
+    }
+
+    private void UpdatePosition()
+    {
+        RectTransform rectTrans = GetComponent<RectTransform>();
+
+        TowerBase selected = TowerBase.SelectedTowerBase;
+        if (selected == null)
+            return;
+
+        Vector2 position = Camera.main.WorldToScreenPoint(selected.transform.position);
+        position[1] -= 60;
+        //Debug.Log($"World: {selected.transform.position}    Screen: {position}");
+
+        GetComponent<RectTransform>().position = position ;
     }
 
     void OnEnable()

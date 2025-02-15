@@ -5,10 +5,12 @@ public class PauseMenu : MonoBehaviour
 {
 
     [SerializeField] SaveLoadScreen _Panel_SaveLoadScreen;
+    private float _SavedGameSpeed;
 
     public void Awake()
     {
         this.gameObject.SetActive(false);
+        _SavedGameSpeed = 0f;
     }
 
     /// <summary>
@@ -16,6 +18,7 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void OnPauseGame()
     {
+        _SavedGameSpeed= Time.timeScale;
         Time.timeScale = 0f;
         this.gameObject.SetActive(true);
     }
@@ -49,7 +52,7 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void OnResumeGame()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = _SavedGameSpeed;
         this.gameObject.SetActive(false);
     }
 
