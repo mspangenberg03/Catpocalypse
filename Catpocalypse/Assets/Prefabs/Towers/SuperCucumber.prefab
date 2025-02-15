@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96dff3384dae6c04f80027db097785dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfCucumbers: 4
   target: {fileID: 0}
   parentTower: {fileID: 0}
-  cucumber: {fileID: 6603149977634291862, guid: 356491f32b54d504ab168c5639033d23, type: 3}
+  cucumber: {fileID: 6603149977634291862, guid: 907ea9a42f32d1e4182b23da8c469eb5, type: 3}
+  _numberOfCucumbers: 5

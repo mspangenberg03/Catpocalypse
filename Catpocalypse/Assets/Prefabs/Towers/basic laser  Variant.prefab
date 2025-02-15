@@ -263,6 +263,8 @@ MonoBehaviour:
   arrowPrefab: {fileID: 4243881067050464554, guid: 6115cbf542c30d64881177fe59736afa, type: 3}
   laserSpawn: {fileID: 9041661084162585967}
   _PathJunctionDetectionRadius: 10
+  _suddenFlashDuration: 0.5
+  _suddenFlashCooldown: 20
 --- !u!114 &6927777109867232014
 MonoBehaviour:
   m_ObjectHideFlags: 0
