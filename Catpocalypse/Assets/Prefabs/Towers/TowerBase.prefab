@@ -85,7 +85,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,9 +143,9 @@ MonoBehaviour:
   usable: 0
   towerSelectorUI: {fileID: 0}
   towerManipulationUI: {fileID: 0}
-  towerHovered: {fileID: 2100000, guid: 9e5d08001e24f7c4d9aa051980dbf44a, type: 2}
-  towerNotHovered: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  towerSelected: {fileID: 2100000, guid: d13ae1e4a36dc29439d97e1e419b3fc7, type: 2}
+  towerHovered: {fileID: 2100000, guid: 1c2820df48870814c9261147a5da3cc9, type: 2}
+  towerNotHovered: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
+  towerSelected: {fileID: 2100000, guid: 4d3e1109689de914291eb54016a6134e, type: 2}
   towerSpawn: {fileID: 7923978849907019929}
   hasTower: 0
   hoveredOver: 0
@@ -218,7 +218,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (4)
@@ -296,7 +296,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (6)
@@ -374,7 +374,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (10)
@@ -452,7 +452,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (11)
@@ -530,7 +530,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (13)
@@ -608,7 +608,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (15)
@@ -686,7 +686,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (2)
@@ -764,7 +764,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (9)
@@ -842,7 +842,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 30e4ef8220a87b34abad10ecca4e1d02, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dc0ef6f16506d584ca266a3000656f39, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: 30e4ef8220a87b34abad10ecca4e1d02, type: 3}
       propertyPath: m_Name
       value: Flower 2 (1)
@@ -1082,6 +1082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerRangeOutline
       objectReference: {fileID: 0}
+    - target: {fileID: 8294801571307824134, guid: 9a4edc3c4acc3be4a9609c0c074d55ba, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 161b69b673f4ba541844f13b5523e563, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1155,7 +1159,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (1)
@@ -1233,7 +1237,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (16)
@@ -1311,7 +1315,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (8)
@@ -1389,7 +1393,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3
@@ -1467,7 +1471,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (12)
@@ -1545,7 +1549,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (3)
@@ -1623,7 +1627,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (7)
@@ -1701,7 +1705,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 30e4ef8220a87b34abad10ecca4e1d02, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dc0ef6f16506d584ca266a3000656f39, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: 30e4ef8220a87b34abad10ecca4e1d02, type: 3}
       propertyPath: m_Name
       value: Flower 2 (2)
@@ -1779,7 +1783,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (14)
@@ -1857,7 +1861,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0fad8d435cb11ca4196c05a333835f95, type: 2}
+      objectReference: {fileID: 2100000, guid: 0cbb3698be711f449ae92669767e5bc9, type: 2}
     - target: {fileID: 919132149155446097, guid: d38a87592e76ee64d959a6dd8fe74fa4, type: 3}
       propertyPath: m_Name
       value: Flower 3 (5)
