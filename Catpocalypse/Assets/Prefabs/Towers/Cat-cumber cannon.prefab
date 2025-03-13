@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1408640794488987656}
   - component: {fileID: 5974911135293739282}
   - component: {fileID: 36390395575481880}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FireParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3819,7 +3819,7 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 0
+    enabled: 1
     ratio: 0
     light: {fileID: 0}
     randomDistribution: 1
@@ -5116,7 +5116,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -9710,7 +9710,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.35, y: 1.93, z: 3.74}
+  m_Size: {x: 2.61, y: 1.93, z: 3.74}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8103954396231344456
 MonoBehaviour:
