@@ -3,7 +3,37 @@ guid: 92475fdda1027844da085762cce52397
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: 825c83aada38bc54989be49a1ea44ebc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Face
+    second: {fileID: 2100000, guid: 2594707918ec6bf498acf4976252dbd3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hat color 1
+    second: {fileID: 2100000, guid: 0ec5d9c7ccff57b4db96f02f78aa0736, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hat color 2
+    second: {fileID: 2100000, guid: 1daaacccd120e3c40857a886789172ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: inner ear
+    second: {fileID: 2100000, guid: 92e617d5625828d41baa360ae6eb1901, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wiskers
+    second: {fileID: 2100000, guid: 5149960bb07418e418d951e7c7eff152, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
