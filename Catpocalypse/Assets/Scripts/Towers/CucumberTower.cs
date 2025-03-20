@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CucumberTower : Tower
 {
@@ -9,6 +10,10 @@ public class CucumberTower : Tower
     [SerializeField] GameObject superCucumberPrefab;
     [SerializeField]
     private Transform spawn;
+    [SerializeField]
+    private GameObject postProcess;
+    [SerializeField]
+    private Transform fireSpawn;
 
 
     [Header("Aiming Settings")]
@@ -49,6 +54,9 @@ public class CucumberTower : Tower
     
     private bool canSCBeFired = false;
     private bool firingSC = false;
+    private ParticleSystem _particle;
+    private ParticleSystem _fire;
+    
     private new void Awake()
     {
         base.Awake();
@@ -62,6 +70,8 @@ public class CucumberTower : Tower
         base.Start();
         ApplyScrapUpgrades();
         StartCoroutine(Aim());
+        _particle = spawn.gameObject.GetComponent<ParticleSystem>();
+        _fire = fireSpawn.gameObject.GetComponent<ParticleSystem>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -148,7 +158,9 @@ public class CucumberTower : Tower
             StartCoroutine(SuperCucumber());
         }
         _towerSound.Play();
-
+        _particle.Play();
+        _fire.Play();
+        //postProcess.GetComponent<Volume>()
 
         StartCoroutine(Reload());
 
