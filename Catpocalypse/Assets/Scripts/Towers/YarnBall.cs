@@ -12,16 +12,20 @@ public class YarnBall : MonoBehaviour
     private PlayerUpgradeData _upgradeData;
 
     [SerializeField]
-    private GameObject _string;
-
-    [SerializeField]
     private float _spawnInterval = 2f;
 
     [SerializeField]
     private float _lifespan = 5;
 
+    [SerializeField]
+    private int _stringDamageDelay;
+
+    private ParticleSystem _particles;
+    [SerializeField]
+    private float _stringDistraction = 1f;
     private void Start()
     {
+        _particles = GetComponent<ParticleSystem>();
         StartCoroutine(Life());
         if (parentTower.gameObject.GetComponent<YarnBallTower>().upgraded)
         {
@@ -54,22 +58,9 @@ public class YarnBall : MonoBehaviour
     }
     IEnumerator Upgrade()
     {
-        float angleH = Vector3.Angle(parentTower.transform.position,transform.position);
-        float angle = Mathf.Atan2((transform.position.y - parentTower.transform.position.y), (transform.position.x - parentTower.transform.position.x));
-        GameObject _piece = Instantiate(_string, gameObject.transform.position + new Vector3(0, 2, 0),Quaternion.identity);
-        
-        //angle = Mathf.Rad2Deg * angle;
-        //Vector3 rotation = Vector3.Normalize(transform.position - _piece.transform.position);
-        //float angleH = Vector3.Angle(_piece.transform.position,transform.position);
-        
-        //_piece.transform.LookAt(rotation,Vector3.up);
-        //_piece.transform.rotation = Quaternion.Euler(0, angle, 90);
-        //_piece.transform.rotation = Quaternion.RotateTowards(_piece.transform.eulerAngles, transform.eulerAngles, 180, 180);
-       // _piece.transform.rotation = Quaternion.RotateTowards(_piece.transform.rotation, transform.rotation, 180);
-        //_piece.transform.rotation = new Quaternion(90,_piece.transform.rotation.y,_piece.transform.rotation.z,_piece.transform.rotation.w);
-        _piece.GetComponent<YarnString>().parent = this;
+        _particles.Play();  
         yield return new WaitForSeconds(_spawnInterval);
-        StartCoroutine(Upgrade());
+        //StartCoroutine(Upgrade());
     }
     private void OnDestroy()
     {
@@ -79,5 +70,27 @@ public class YarnBall : MonoBehaviour
     {
         yield return new WaitForSeconds(_lifespan);
         Destroy(gameObject);
+    }
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("Cat"))
+        {
+            if (!other.GetComponent<CatBase>()._affectedByParticles)
+            {
+                other.GetComponent<CatBase>().DistractCat(_stringDistraction, parentTower);
+                other.GetComponent<CatBase>()._affectedByParticles = true;
+                StartCoroutine(ParticleDelay(other));
+            }
+            
+        }
+    }
+    IEnumerator ParticleDelay(GameObject cat)
+    {
+        yield return new WaitForSeconds(_stringDamageDelay);
+        if (cat != null)
+        {
+            cat.GetComponent<CatBase>()._affectedByParticles = false;
+        }
+        
     }
 }

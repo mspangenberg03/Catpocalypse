@@ -98,6 +98,8 @@ public class CatBase : MonoBehaviour
     private PlayerUpgradeData _upgradeData;
     [SerializeField]
     private int _cutenessReduction = 2;
+
+    public bool _affectedByParticles = false;
     // Start is called before the first frame update
     void Start()    
     {
