@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerDataManager : MonoBehaviour
@@ -162,6 +163,20 @@ public class PlayerDataManager : MonoBehaviour
         _trackedData.time = Time.realtimeSinceStartup;
     }
 
+    public void UpdateMasterVolume(float amount)
+    {
+        _trackedData._MasterVolume = amount;
+    }
+
+    public void UpdateMusicVolume(float amount)
+    {
+        _trackedData._MusicVolume = amount;
+    }
+    public void UpdateSFXVolume(float amount)
+    {
+        _trackedData._SFXVolume = amount;
+    }
+
     public PlayerData CurrentData { get { return _trackedData; } }
     public PlayerUpgradeData Upgrades { get { return _playerUpgradeData; } }
 
@@ -201,4 +216,13 @@ public class PlayerData
     public int cucumberUpgrades;
     public int catRewardUpgrades;
     public float time;
+
+    //Settings
+    public float _MasterVolume;
+    public float _MusicVolume;
+    public float _SFXVolume;
+    public int _ResolutionSize;
+    public bool _MouseXInvert;
+    public bool _MouseYInvert;
+    public float _MouseSensitivity;
 }

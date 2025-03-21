@@ -1,15 +1,29 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance;
+
     private AudioSource audioSource;
-    public Slider volumeSlider;
-    public AudioClip soundEffect;
+    public Slider masterSlider;
+    public Slider musicSlider;
+    public Slider SFXSlider;
+    [SerializeField] private AudioClip soundEffect;
+
     private bool isSliderBeingMoved = false;
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Debug.LogError("There is already a WaveManager in this scene. Self destructing!");
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
         audioSource = GetComponent<AudioSource>();
 
         if (audioSource == null)
@@ -19,15 +33,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if (volumeSlider != null)
+    private void Start() { 
+
+        if (masterSlider != null && musicSlider != null && SFXSlider!= null)
         {
-            volumeSlider.value = 1.0f;
-            volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+          
+            musicSlider.value = 1.0f;
+            SFXSlider.value = 1.0f;
+            masterSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
+            musicSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+            SFXSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
 
             // Add listener for the slider's OnPointerUp event
-            volumeSlider.onValueChanged.AddListener(OnSliderPointerUp);
+            masterSlider.onValueChanged.AddListener(OnSliderPointerUp);
+            musicSlider.onValueChanged.AddListener(OnSliderPointerUp);
+            SFXSlider.onValueChanged.AddListener(OnSliderPointerUp);
         }
         else
         {
@@ -35,7 +55,33 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void OnVolumeChanged(float volume)
+    private void OnMasterVolumeChanged(float volume)
+    {
+        // Check if audioSource is not null before accessing it
+        if (audioSource != null)
+        {
+            // Set the audio volume based on the slider value
+            audioSource.volume = volume;
+
+            // Set the flag to indicate that the slider is being moved
+            isSliderBeingMoved = true;
+        }
+    }
+
+    private void OnMusicVolumeChanged(float volume)
+    {
+        // Check if audioSource is not null before accessing it
+        if (audioSource != null)
+        {
+            // Set the audio volume based on the slider value
+            audioSource.volume = volume;
+
+            // Set the flag to indicate that the slider is being moved
+            isSliderBeingMoved = true;
+        }
+    }
+
+    private void OnSFXVolumeChanged(float volume)
     {
         // Check if audioSource is not null before accessing it
         if (audioSource != null)
@@ -67,4 +113,9 @@ public class AudioManager : MonoBehaviour
             isSliderBeingMoved = false;
         }
     }
+
+    public float MusicVolume { get { return masterSlider.value * musicSlider.value; } }
+    public float SFXVolume { get { return masterSlider.value * SFXSlider.value; } }
+
+
 }

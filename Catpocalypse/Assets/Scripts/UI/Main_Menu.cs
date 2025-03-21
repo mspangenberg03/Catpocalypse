@@ -6,6 +6,9 @@ public class Main_Menu : MonoBehaviour
     [SerializeField]
     private SaveLoadScreen _LoadScreen;
 
+    [SerializeField]
+    private GameObject _SettingsScreen;
+
     // Starts the game
     public void OnPlayButton()
     {
@@ -21,7 +24,7 @@ public class Main_Menu : MonoBehaviour
     public void OnOptionsButton()
     {
         //SceneManager.LoadScene("Options");
-        SceneLoader_Async.LoadSceneAsync("Options");
+        _SettingsScreen.SetActive(true);
     }
 
     // Closes the game

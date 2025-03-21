@@ -14,8 +14,6 @@ public class WaveManager : MonoBehaviour
     public event EventHandler WaveEnded;
     public event EventHandler LevelCleared;
 
-
-
     public static WaveManager Instance;
 
     private int _TotalWavesInLevel;
