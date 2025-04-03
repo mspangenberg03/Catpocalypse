@@ -14,8 +14,6 @@ public class WaveManager : MonoBehaviour
     public event EventHandler WaveEnded;
     public event EventHandler LevelCleared;
 
-
-
     public static WaveManager Instance;
 
     private int _TotalWavesInLevel;
@@ -113,6 +111,7 @@ public class WaveManager : MonoBehaviour
         }
         _WaveInProgress = true;
         _waveSound.clip = _startClip;
+        _waveSound.volume = PlayerDataManager.Instance.CurrentData._SFXVolume;
         _waveSound.Play();
         Debug.Log("Start wave sound played");
 
@@ -157,6 +156,7 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
             WaveEnded?.Invoke(this, EventArgs.Empty);
             //_waveSound.clip = _endClip;
+            //_waveSound.volume = PlayerDataManager.Instance.CurrentData._SFXVolume;
             //_waveSound.Play();
             Debug.LogWarning("End wave sound played");
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
@@ -187,6 +187,7 @@ public class WaveManager : MonoBehaviour
             WaveEnded?.Invoke(this, EventArgs.Empty);
 
             _waveSound.clip = _endClip;
+            _waveSound.volume = PlayerDataManager.Instance.CurrentData._SFXVolume;
             _waveSound.Play();
             Debug.LogWarning("End wave sound played");
             if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)

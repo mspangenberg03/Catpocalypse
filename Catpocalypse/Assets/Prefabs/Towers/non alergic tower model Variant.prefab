@@ -298,6 +298,7 @@ MonoBehaviour:
   towerStats: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
   _towerSound: {fileID: 3087859885152949134}
   numOfPeople: 2
+  personSpeed: 0
   spawnPoints:
   - {fileID: 7363447290433283373}
   - {fileID: 3724858387742417922}
@@ -305,8 +306,6 @@ MonoBehaviour:
   - {fileID: 2672334961176683715}
   person: {fileID: 3328012633065954755, guid: 5ed7c0ae560f6b74382cccb1ec070559, type: 3}
   Enabled: 1
-  _foodTimeCooldown: 10
-  _foodTimeDistractValue: 20
 --- !u!135 &8149626471105804532
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -379,7 +378,7 @@ AudioSource:
   m_GameObject: {fileID: 6743936227986489721}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1225898714331292944, guid: a7ebd638a92664440a6c330ef8e2bf76, type: 2}
   m_audioClip: {fileID: 8300000, guid: de2fc7b1f4bd8514b8c4f06adf2d3db7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
