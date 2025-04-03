@@ -50,6 +50,7 @@ public class YarnBall : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        _landingSound.volume = PlayerDataManager.Instance.CurrentData._SFXVolume;
         _landingSound.Play();
         if (collision.gameObject.layer == 11)
         {

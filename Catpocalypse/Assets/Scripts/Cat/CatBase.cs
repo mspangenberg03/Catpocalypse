@@ -361,9 +361,7 @@ public class CatBase : MonoBehaviour
     {
         agent.speed = 0;
         int index = Random.Range(0, purrs.Count - 1);
-
         catAudio.clip = purrs[index];
-        catAudio.volume = AudioManager.Instance.SFXVolume;
         catAudio.Play();
         yield return new WaitForSeconds(0.5f);
 

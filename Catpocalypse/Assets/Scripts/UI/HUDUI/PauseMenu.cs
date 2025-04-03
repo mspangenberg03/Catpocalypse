@@ -5,6 +5,7 @@ public class PauseMenu : MonoBehaviour
 {
 
     [SerializeField] SaveLoadScreen _Panel_SaveLoadScreen;
+    [SerializeField] GameObject _Panel_Settings;
     private float _SavedGameSpeed;
 
     public void Awake()
@@ -44,6 +45,18 @@ public class PauseMenu : MonoBehaviour
 
         // Display the SaveLoadScreen panel.
         _Panel_SaveLoadScreen.ShowLoadScreen();
+
+    }
+
+    public void ButtonClicked_Settings()
+    {
+        if (_Panel_Settings.activeSelf)
+        {
+            return;
+        }
+
+        // Display the SaveLoadScreen panel.
+        _Panel_Settings.SetActive(true);
 
     }
 

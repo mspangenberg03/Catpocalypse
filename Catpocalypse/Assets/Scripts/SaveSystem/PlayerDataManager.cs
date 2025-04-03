@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,12 +29,30 @@ public class PlayerDataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         _playerUpgradeData = (PlayerUpgradeData) Resources.Load("PlayerUpgrades");
         LoadData();
+        _CurrentData = 0;
+        if (_PlayerData.Count > 0)
+        {
+            _trackedData = _PlayerData[0];
+            int currentSaveSlot = _CurrentData;
+            foreach (PlayerData playerData in _PlayerData)
+            {
+                if (playerData.date > _trackedData.date)
+                {
+                    _trackedData.date = playerData.date;
+                    _CurrentData = currentSaveSlot;
+                }
+                currentSaveSlot++;
+            }
+        }
+        else
+        {
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
     }
 
     private void Start()
     {
-        _CurrentData = 0;
-        _trackedData = new PlayerData(_playerUpgradeData);
+        
     }
 
     private void LoadData()
@@ -56,6 +75,7 @@ public class PlayerDataManager : MonoBehaviour
     public void SaveGame(int i)
     {
         UpdateTimePlayed();
+        UpdateDatePlayed();
         _PlayerData[i] = _trackedData;
         string saveFilePath = BuildSaveFilePath(i);
         string savePlayerData = JsonUtility.ToJson(_PlayerData[i]);
@@ -73,7 +93,6 @@ public class PlayerDataManager : MonoBehaviour
             PlayerData loadedData = JsonUtility.FromJson<PlayerData>(loadPlayerData);
             _PlayerData.Add(loadedData);
             _CurrentData = i;
-
             Debug.Log("Load game complete! \nLevels Completed: " + _PlayerData[i].levelsCompleted);
             return true;
         }
@@ -163,6 +182,11 @@ public class PlayerDataManager : MonoBehaviour
         _trackedData.time = Time.realtimeSinceStartup;
     }
 
+    private void UpdateDatePlayed()
+    {
+        _trackedData.date = DateTime.Now;
+    }
+
     public void UpdateMasterVolume(float amount)
     {
         _trackedData._MasterVolume = amount;
@@ -175,6 +199,31 @@ public class PlayerDataManager : MonoBehaviour
     public void UpdateSFXVolume(float amount)
     {
         _trackedData._SFXVolume = amount;
+    }
+
+    public void UpdateResolutionSize(int amount)
+    {
+        _trackedData._ResolutionSize = amount;
+    }
+
+    public void UpdateWindowed(bool value)
+    {
+        _trackedData.windowed = value;
+    }
+
+    public void UpdateXInversion(bool value)
+    {
+        _trackedData._MouseXInvert = value;
+    }
+
+    public void UpdateYInversion(bool value)
+    {
+        _trackedData._MouseYInvert = value;
+    }
+
+    public void UpdateMouseSensitivity(float amount)
+    {
+        _trackedData._MouseSensitivity = amount;
     }
 
     public PlayerData CurrentData { get { return _trackedData; } }
@@ -201,7 +250,15 @@ public class PlayerData
         cucumberUpgrades = 0;
         catRewardUpgrades = 0;
         time = 0;
-    }
+        date = DateTime.Now;
+        _MasterVolume = 1f;
+        _MusicVolume = 1f;
+        _SFXVolume = 1f;
+        _ResolutionSize = 0;
+        _MouseXInvert = false;
+        _MouseYInvert = false;
+        _MouseSensitivity = 0.5f;
+}
 
     public string name;
     public int scrap;
@@ -216,12 +273,14 @@ public class PlayerData
     public int cucumberUpgrades;
     public int catRewardUpgrades;
     public float time;
+    public DateTime date;
 
     //Settings
     public float _MasterVolume;
     public float _MusicVolume;
     public float _SFXVolume;
     public int _ResolutionSize;
+    public bool windowed;
     public bool _MouseXInvert;
     public bool _MouseYInvert;
     public float _MouseSensitivity;

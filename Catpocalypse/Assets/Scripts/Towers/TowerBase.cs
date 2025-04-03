@@ -49,10 +49,6 @@ public class TowerBase : MonoBehaviour
     // The RallyPoint GameObject.
     protected GameObject _RallyPointGameObject;
 
-
-
-
-
     private void Awake()
     {
         hasTower = false;

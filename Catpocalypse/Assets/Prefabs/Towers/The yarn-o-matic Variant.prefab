@@ -172,9 +172,9 @@ MonoBehaviour:
   fireRate: 3.2
   towerStats: {fileID: 11400000, guid: 03bba1f7ec538254f80b66e0bc98933e, type: 2}
   _towerSound: {fileID: 2024988410660856447}
-  _stringFlingDuration: 1
-  _stringFlingCooldown: 10
-  _stringFlingDistractionValue: 50
+  stringFlingDistractValue: 5
+  stringFlingSlowingDuration: 1
+  stringFlingCooldown: 20
   _speedDebuff: 1.8
 --- !u!23 &-7781672691193921089
 MeshRenderer:
@@ -240,7 +240,7 @@ AudioSource:
   m_GameObject: {fileID: 8043389372904318211}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1225898714331292944, guid: a7ebd638a92664440a6c330ef8e2bf76, type: 2}
   m_audioClip: {fileID: 8300000, guid: 9566248ec424f7942916ecd25eeb1d88, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
