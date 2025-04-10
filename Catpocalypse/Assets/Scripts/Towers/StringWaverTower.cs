@@ -12,6 +12,8 @@ public class StringWaverTower : Tower
     [SerializeField,Tooltip("How long the String Fling ability takes to cooldown")]
     private int stringFlingCooldown = 20;
     public float _speedDebuff = 1.8f;
+    private bool _canStringFling = false;
+    private bool _stringFlingUnlocked = false;
     // Start is called before the first frame update
     private new void Start()
     {
@@ -53,8 +55,7 @@ public class StringWaverTower : Tower
     {
         if(other.gameObject.layer == 3)
         {
-            targets.Add(other.gameObject);
-            
+            targets.Add(other.gameObject);            
         }
     }
     private void OnTriggerExit(Collider other)
@@ -67,37 +68,68 @@ public class StringWaverTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        StartCoroutine(StringFling());
+        _canStringFling = true;
+        _stringFlingUnlocked = true;
+        StringFling(targets);
     }
-    IEnumerator StringFling()
+    private void StringFling(List<GameObject> catsInRange)
     {
-        if (targets.Count > 0) 
+        GameObject[] cats = catsInRange.ToArray();
+        if (catsInRange.Count > 0) 
         {
-            foreach (GameObject cat in targets)
+            Debug.Log("String Fling called");
+            _canStringFling = false;
+            for (int i = 0; i < cats.Length;i++)
             {
-                if(cat != null)
+                if(cats[i] != null)
                 {
-                    cat.GetComponent<CatBase>().DistractCat(stringFlingDistractValue, gameObject.GetComponent<Tower>());
-                    cat.GetComponent<CatBase>().slowingEntities.Add(gameObject);
+                    cats[i].GetComponent<CatBase>().DistractCat(stringFlingDistractValue, gameObject.GetComponent<Tower>());
+                    cats[i].GetComponent<CatBase>().slowingEntities.Add(gameObject);
+                }
+                else
+                {
+                    Debug.LogError("Cat is null");
                 }
             }
-            yield return new WaitForSeconds(stringFlingSlowingDuration);
-            foreach (GameObject cat in targets)
-            {
-                cat.GetComponent<CatBase>().slowingEntities.Remove(gameObject);
-            }
+            StartCoroutine(UnslowCats(catsInRange));
             StartCoroutine(StringFlingCooldown());
         }
-        else //Starts the coroutine again if there were no cats to distract
+        else
         {
-            StartCoroutine(StringFling());
+            StartCoroutine(RecallStringFling());
         }
         
+    }
+    IEnumerator UnslowCats(List<GameObject> catsInRange)
+    {
+        GameObject[] catList = targets.ToArray();
+        
+        yield return new WaitForSeconds(stringFlingSlowingDuration);
+        for(int i = 0;i<catList.Length;i++)
+        {
+            if (catList[i] != null)
+            {
+                catList[i].GetComponent<CatBase>().slowingEntities.Remove(gameObject);
+            }
+            else
+            {
+                Debug.LogError("Unslow cat is null");
+                //targets.Remove(cat);
+            }
+
+        }
     }
     IEnumerator StringFlingCooldown()
     {
         yield return new WaitForSeconds(stringFlingCooldown);
-        StartCoroutine(StringFling());
+        _canStringFling = true;
+        StringFling(targets);
+    }
+    IEnumerator RecallStringFling()
+    {
+
+        yield return new WaitForSeconds(.5f);
+        StringFling(targets);
     }
     IEnumerator DistractCat()
     {

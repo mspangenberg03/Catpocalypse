@@ -172,9 +172,9 @@ MonoBehaviour:
   fireRate: 3.2
   towerStats: {fileID: 11400000, guid: 03bba1f7ec538254f80b66e0bc98933e, type: 2}
   _towerSound: {fileID: 2024988410660856447}
-  _stringFlingDuration: 1
-  _stringFlingCooldown: 10
-  _stringFlingDistractionValue: 50
+  stringFlingDistractValue: 50
+  stringFlingSlowingDuration: 1
+  stringFlingCooldown: 10
   _speedDebuff: 1.8
 --- !u!23 &-7781672691193921089
 MeshRenderer:
