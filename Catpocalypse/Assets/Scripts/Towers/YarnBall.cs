@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class YarnBall : MonoBehaviour
@@ -17,20 +18,20 @@ public class YarnBall : MonoBehaviour
     [SerializeField]
     private float _lifespan = 5;
 
-    [SerializeField]
-    private int _stringDamageDelay;
+
 
     private ParticleSystem _particles;
-    [SerializeField]
-    private float _stringDistraction = 1f;
+
     private void Start()
     {
-        _particles = GetComponent<ParticleSystem>();
+        _particles = transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+        _particles.gameObject.GetComponent<YarnParticles>().parentTower = parentTower;
         StartCoroutine(Life());
         if (parentTower.gameObject.GetComponent<YarnBallTower>().upgraded)
         {
             StartCoroutine(Upgrade());
         }
+        
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -53,6 +54,9 @@ public class YarnBall : MonoBehaviour
         _landingSound.Play();
         if (collision.gameObject.layer == 11)
         {
+            _particles.gameObject.GetComponent<YarnParticles>().Linger(2);
+            _particles.gameObject.transform.parent = null;
+            //GameObject part = Instantiate(_particles, transform.position, Quaternion.identity, null);
             Destroy(gameObject);
         }
     }
@@ -69,28 +73,9 @@ public class YarnBall : MonoBehaviour
     IEnumerator Life()
     {
         yield return new WaitForSeconds(_lifespan);
+        _particles.gameObject.GetComponent<YarnParticles>().Linger(2);
+        _particles.gameObject.transform.parent = null;
         Destroy(gameObject);
     }
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("Cat"))
-        {
-            if (!other.GetComponent<CatBase>()._affectedByParticles)
-            {
-                other.GetComponent<CatBase>().DistractCat(_stringDistraction, parentTower);
-                other.GetComponent<CatBase>()._affectedByParticles = true;
-                StartCoroutine(ParticleDelay(other));
-            }
-            
-        }
-    }
-    IEnumerator ParticleDelay(GameObject cat)
-    {
-        yield return new WaitForSeconds(_stringDamageDelay);
-        if (cat != null)
-        {
-            cat.GetComponent<CatBase>()._affectedByParticles = false;
-        }
-        
-    }
+   
 }
