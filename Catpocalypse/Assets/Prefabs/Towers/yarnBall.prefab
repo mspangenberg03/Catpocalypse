@@ -61,7 +61,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -135,7 +135,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 4
+  m_Radius: 1.96
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1457698527591907605
 MonoBehaviour:
@@ -153,7 +153,7 @@ MonoBehaviour:
   _landingSound: {fileID: 3297402704763253595}
   _upgradeData: {fileID: 11400000, guid: d79b3b0863d5db3499cb14a42c4db040, type: 2}
   _spawnInterval: 0.01
-  _lifespan: 5
+  _lifespan: 0.5
   _stringDamageDelay: 2
   _stringDistraction: 10
 --- !u!82 &3297402704763253595
