@@ -18,7 +18,8 @@ public class YarnBall : MonoBehaviour
     [SerializeField]
     private float _lifespan = 5;
 
-
+    [SerializeField, Tooltip("How long the particles stick around after the yarn ball despawns")]
+    private int _lingerTime = 2;
 
     private ParticleSystem _particles;
 
@@ -55,7 +56,7 @@ public class YarnBall : MonoBehaviour
         _landingSound.Play();
         if (collision.gameObject.layer == 11)
         {
-            _particles.gameObject.GetComponent<YarnParticles>().Linger(2);
+            _particles.gameObject.GetComponent<YarnParticles>().Linger(_lingerTime);
             _particles.gameObject.transform.parent = null;
             //GameObject part = Instantiate(_particles, transform.position, Quaternion.identity, null);
             Destroy(gameObject);
@@ -74,7 +75,7 @@ public class YarnBall : MonoBehaviour
     IEnumerator Life()
     {
         yield return new WaitForSeconds(_lifespan);
-        _particles.gameObject.GetComponent<YarnParticles>().Linger(2);
+        _particles.gameObject.GetComponent<YarnParticles>().Linger(_lingerTime);
         _particles.gameObject.transform.parent = null;
         Destroy(gameObject);
     }
