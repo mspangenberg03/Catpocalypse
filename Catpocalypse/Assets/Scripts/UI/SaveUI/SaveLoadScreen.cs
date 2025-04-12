@@ -28,7 +28,7 @@ public class SaveLoadScreen : MonoBehaviour
         gameObject.SetActive(false);
         _CurrentSaveSelected = -1;
         IReadOnlyList<PlayerData> data = PlayerDataManager.Instance.ViewPlayerData();
-        Debug.Log(data.Count);
+        //Debug.Log(data.Count);
         for(int i = 0; i < _SaveFileButtons.Length; i++)
         {
             if(!data[i].name.Equals(""))

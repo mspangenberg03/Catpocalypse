@@ -22,7 +22,8 @@ public class PlayerInputManager : MonoBehaviour
 
 
     private RobotController _Robot;
-
+    private int _X_Invert = 1;
+    private int _Y_Invert = 1;
 
 
     private void Awake()
@@ -43,7 +44,14 @@ public class PlayerInputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (PlayerDataManager.Instance.CurrentData._MouseXInvert)
+        {
+            _X_Invert = -1;
+        }
+        if (PlayerDataManager.Instance.CurrentData._MouseYInvert)
+        {
+            _Y_Invert= -1;
+        }
     }
 
     // Update is called once per frame
@@ -78,9 +86,11 @@ public class PlayerInputManager : MonoBehaviour
             // The robot is present, so update it's user input values appropriately based on whether it is activated or not.
             if (_Robot.IsActive)
             {
+                float mouseSensitivity = PlayerDataManager.Instance.CurrentData._MouseSensitivity;
                 // The robot is active, so set the PanCamera value to zero to disable movement of the main game camera while piloting the robot.
                 Robot_FireProjectile = _Robot_FireProjectileAction.WasPerformedThisFrame();
-                Robot_Movement = _Robot_MovementAction.ReadValue<Vector2>();
+                Vector2 currentCameraMovement = _Robot_MovementAction.ReadValue<Vector2>();
+                Robot_Movement = new Vector2(currentCameraMovement.x, currentCameraMovement.y);
                 Robot_ToggleControl = _Robot_ToggleControlAction.WasPerformedThisFrame();
                 PanCamera = Vector2.zero;
             }
@@ -101,6 +111,15 @@ public class PlayerInputManager : MonoBehaviour
         pauseMenuPanel.OnPauseGame();
     }
 
+    public void InvertX()
+    {
+        _X_Invert *= -1;
+    }
+
+    public void InvertY()
+    {
+        _Y_Invert *= -1;
+    }
 
 
     public bool IsInitialized { get; private set; }
