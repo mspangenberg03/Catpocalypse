@@ -54,7 +54,8 @@ public class LaserPointerTower : Tower
 
     private List<LaserInfo> _Lasers;
     private int _ActiveLasersCount; // The number of lasers that are currently active
-
+    private int level = 1;
+    private bool suddenFlashUnlocked = false;
     /// <summary>
     /// This holds the index of the next way point cats should visit upon reaching the path junction.
     /// It depends upon where the Rally Point has been positioned.
@@ -108,7 +109,6 @@ public class LaserPointerTower : Tower
     {
         if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 0)
         {
-            
             if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 1)
             {
                 range.radius *= PlayerDataManager.Instance.Upgrades.LaserRangeUpgrade;
@@ -241,8 +241,15 @@ public class LaserPointerTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        Debug.Log("Laser pointer upgraded");
-        StartCoroutine(SuddenFlash());
+        if (!suddenFlashUnlocked)
+        {
+            StartCoroutine(SuddenFlash());
+        }
+        if (level < 4)
+        {
+            MaxLasers++;
+        }
+        level++;
     }
     IEnumerator SuddenFlash()
     {
