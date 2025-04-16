@@ -12,7 +12,7 @@ public class LaserPointerTower : Tower
     // This is the same idea, but for laser end point objects that laser towers instantiate.
     public static Transform LaserEndPointsParent;
 
-        
+
 
     [SerializeField]
     private GameObject laserPrefab; // The laser prefab to be copied
@@ -21,6 +21,8 @@ public class LaserPointerTower : Tower
     [Tooltip("The max number of simulateous lasers this tower can have.")]
     [SerializeField, Min(1)]
     private int MaxLasers = 1; // The number of lasers a tower can instantiate
+    
+    private int currentMaxLasers = 1;
     [SerializeField]
     private GameObject arrowPrefab;
 
@@ -130,7 +132,7 @@ public class LaserPointerTower : Tower
     // Update is called once per frame
     void Update()
     {
-        if(_Lasers.Count < MaxLasers)
+        if(_Lasers.Count < currentMaxLasers)
         {
             StartCoroutine(SpawnLasers());
         }
@@ -142,7 +144,7 @@ public class LaserPointerTower : Tower
         //if (_ActiveLasersCount > 0)
             LaserControl();
 
-        if (_ActiveLasersCount < MaxLasers)
+        if (_ActiveLasersCount < currentMaxLasers)
             SelectTargets();
 
         
@@ -200,7 +202,7 @@ public class LaserPointerTower : Tower
                     continue;
                 }
 
-                if (_ActiveLasersCount >= MaxLasers)
+                if (_ActiveLasersCount >= currentMaxLasers)
                     break;
 
 
@@ -245,9 +247,9 @@ public class LaserPointerTower : Tower
         {
             StartCoroutine(SuddenFlash());
         }
-        if (level < 4)
+        if (currentMaxLasers < MaxLasers)
         {
-            MaxLasers++;
+            currentMaxLasers++;
         }
         level++;
     }
@@ -545,7 +547,7 @@ public class LaserPointerTower : Tower
     // Spawns the laser and sets its position to the top of the tower
     IEnumerator SpawnLasers()
     {
-        for (int i = _Lasers.Count; i < MaxLasers; i++)
+        for (int i = _Lasers.Count; i < currentMaxLasers; i++)
         {
             LaserInfo newLaser = new LaserInfo();
 
