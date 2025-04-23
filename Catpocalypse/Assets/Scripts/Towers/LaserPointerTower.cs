@@ -255,13 +255,14 @@ public class LaserPointerTower : Tower
     }
     IEnumerator SuddenFlash()
     {
+        GameObject[] cats = targets.ToArray();
         if (targets.Count > 0)
         {
             Debug.LogWarning("Sudden flash called");
-            foreach(GameObject target in targets)
+            for(int i = 0; i < cats.Length; i++) 
             {
-                target.GetComponent<CatBase>().stoppingEntities.Add(gameObject);
-                StartCoroutine(SuddenFlashDuration(target));
+                cats[i].GetComponent<CatBase>().stoppingEntities.Add(gameObject);
+                StartCoroutine(SuddenFlashDuration(cats[i]));
             }
             
             
