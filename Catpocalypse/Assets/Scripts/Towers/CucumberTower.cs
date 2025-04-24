@@ -46,6 +46,9 @@ public class CucumberTower : Tower
     private Vector3 _CurrentAimDirection;
 
     private float reloadTime = 2f;
+    private float startingReloadTime = 2f;
+    private float rangeIncrease = 1f;
+    private float reloadPercent = .15f;
 
     public bool buffCats;
 
@@ -225,10 +228,19 @@ public class CucumberTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        StartCoroutine(SuperCucumber());
-        canSCBeFired = true;
-        
-        
+        if(towerLevel == 1)
+        {
+            StartCoroutine(SuperCucumber());
+            canSCBeFired = true;
+        }
+        else
+        {
+            reloadTime = reloadTime - (startingReloadTime * reloadPercent);
+            range.radius += rangeIncrease;
+        }
+
+
+
     }
     private Vector3 CalculateTargetPoint(GameObject target)
     {
