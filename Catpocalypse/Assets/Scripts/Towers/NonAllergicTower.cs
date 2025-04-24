@@ -18,8 +18,12 @@ public class NonAllergicTower : Tower
     private List<GameObject> personList;
     public bool Enabled = true;
     PlayerCutenessManager cutenessManager;
+    [SerializeField,Tooltip("How long it takes for the foodtime ability to cooldown")]
     private int foodTimeCooldown = 30;
+    [SerializeField,Tooltip("How much Foodtime distracts cats")]
+
     private float foodTimeDistractValue = 40f;
+    private bool foodTimeUnlocked = false;
 
 
     // Start is called before the first frame update
@@ -96,25 +100,37 @@ public class NonAllergicTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        FoodTime();
+        if (!foodTimeUnlocked)
+        {
+            foodTimeUnlocked = true;
+            FoodTime();
+        }
+       
     }
     void FoodTime()
     {
+        GameObject[] cats = targets.ToArray();
         if(targets.Count > 0)
         {
-            foreach(GameObject cat in targets)
+            for(int i = 0;i<cats.Length;i++)
             {
-                if(cat != null)
+                if(cats[i] != null)
                 {
-                    cat.GetComponent<CatBase>().DistractCat(foodTimeDistractValue, gameObject.GetComponent<Tower>());
+                    Debug.LogWarning("Cat distracted by Foodtime");
+                    cats[i].GetComponent<CatBase>().DistractCat(foodTimeDistractValue, gameObject.GetComponent<Tower>());
                 }
             }
             StartCoroutine(FoodTimeCooldown());
         }
         else
         {
-            FoodTime();
+            StartCoroutine(FoodTimeRecall());
         }
+    }
+    IEnumerator FoodTimeRecall()
+    {
+        yield return new WaitForSeconds(1);
+        FoodTime();
     }
     IEnumerator FoodTimeCooldown()
     {
