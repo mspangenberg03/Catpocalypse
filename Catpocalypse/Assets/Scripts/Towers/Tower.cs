@@ -66,6 +66,8 @@ public class Tower : MonoBehaviour
     [SerializeField]
     public AudioSource _towerSound;
 
+    [SerializeField]
+    public int maxLevel = 4;
     public float FireRate
     {
         set 
