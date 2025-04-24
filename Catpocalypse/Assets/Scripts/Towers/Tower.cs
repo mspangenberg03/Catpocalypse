@@ -41,7 +41,7 @@ public class Tower : MonoBehaviour
 
 
     protected StateMachine _stateMachine;
-    public int towerLevel = 1;
+    public int towerLevel = 0;
     [SerializeField] private float upgradeCost;
     public bool _cutenessChallengeActive = false;
     PlayerCutenessManager _cutenessManager;
