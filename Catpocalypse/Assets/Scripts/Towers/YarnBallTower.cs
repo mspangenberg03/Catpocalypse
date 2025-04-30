@@ -12,11 +12,12 @@ public class YarnBallTower : Tower
     private bool canThrow = true;
     private float sizeMultiplier = 1;
     public bool upgraded = false;
-
+    private float yarnFirerate;
     private new void Start()
     {
         base.Start();
         ApplyScrapUpgrades();
+        yarnFirerate = towerStats.FireRate;
         // Start the projectile throwing coroutine
         StartCoroutine(ThrowProjectiles());
     }
@@ -70,7 +71,7 @@ public class YarnBallTower : Tower
                     canThrow = false; // Set to false after throwing, prevent further throws until reset
 
                     // Wait for a specified time before allowing another throw
-                    yield return new WaitForSeconds(towerStats.FireRate); // Adjust the delay as needed
+                    yield return new WaitForSeconds(yarnFirerate); // Adjust the delay as needed
 
                     canThrow = true; // Set back to true to allow another throw
                 }
@@ -145,10 +146,14 @@ public class YarnBallTower : Tower
     }
     public override void Upgrade()
     {
-        if (!upgraded)
+        if (towerLevel == 1)
         {
             base.Upgrade();
             upgraded = true;
+        }
+        else
+        {
+            yarnFirerate *= 1.15f;
         }
        
     }
