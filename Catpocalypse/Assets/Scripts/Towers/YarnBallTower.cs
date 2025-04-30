@@ -13,9 +13,11 @@ public class YarnBallTower : Tower
     private float sizeMultiplier = 1;
     public bool upgraded = false;
     private float yarnFirerate;
+    private float startingRange;
     private new void Start()
     {
         base.Start();
+        startingRange = range.radius;
         ApplyScrapUpgrades();
         yarnFirerate = towerStats.FireRate;
         // Start the projectile throwing coroutine
@@ -154,6 +156,7 @@ public class YarnBallTower : Tower
         else
         {
             yarnFirerate *= 1.15f;
+            range.radius = range.radius + (startingRange * .15f);
         }
        
     }
