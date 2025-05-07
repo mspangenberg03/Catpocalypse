@@ -100,7 +100,7 @@ public class ScratchingPost : MonoBehaviour
             for (int i = 1; i < parentTower.GetComponent<ScratchingPostTower>().towerLevel; i++)
             {
                 _Durability++;
-                range.radius = range.radius + (startingRange * .15f);
+                range.radius = range.radius + (startingRange * parentTower.GetComponent<ScratchingPostTower>()._towerUpgradesData.rangeUpgradePercent);
             }
         }
         

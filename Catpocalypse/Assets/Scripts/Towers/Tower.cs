@@ -68,6 +68,9 @@ public class Tower : MonoBehaviour
 
     [SerializeField]
     public int maxLevel = 4;
+
+    [SerializeField]
+    public TowerUpgradesData _towerUpgradesData;
     public float FireRate
     {
         set 

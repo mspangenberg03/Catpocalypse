@@ -249,7 +249,7 @@ public class LaserPointerTower : Tower
         }
         else
         {
-            range.radius = range.radius + (towerStats.Range * rangeUpgradeMultiplier);
+            range.radius = range.radius + (towerStats.Range * _towerUpgradesData.rangeUpgradePercent);
         }
         if (currentMaxLasers < MaxLasers)
         {

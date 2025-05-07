@@ -78,8 +78,8 @@ public class StringWaverTower : Tower
         }
         else
         {
-            firerate = firerate - (towerStats.FireRate * .15f);
-            range.radius = range.radius + (towerStats.Range * 1.25f);
+            firerate = firerate - (towerStats.FireRate * _towerUpgradesData.fireRateUpgradePercent);
+            range.radius = range.radius + (towerStats.Range * _towerUpgradesData.rangeUpgradePercent);
         }
        
     }

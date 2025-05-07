@@ -47,8 +47,6 @@ public class CucumberTower : Tower
 
     private float reloadTime = 2f;
     private float startingReloadTime = 2f;
-    private float rangeIncrease = 1f;
-    private float reloadPercent = .15f;
 
     public bool buffCats;
 
@@ -235,8 +233,8 @@ public class CucumberTower : Tower
         }
         else
         {
-            reloadTime = reloadTime - (startingReloadTime * reloadPercent);
-            range.radius += rangeIncrease;
+            reloadTime = reloadTime - (startingReloadTime * _towerUpgradesData.fireRateUpgradePercent);
+            range.radius = range.radius + (towerStats.Range * _towerUpgradesData.rangeUpgradePercent);
         }
 
 

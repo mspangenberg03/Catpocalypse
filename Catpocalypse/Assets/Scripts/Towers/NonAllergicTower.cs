@@ -108,7 +108,7 @@ public class NonAllergicTower : Tower
         }
         else
         {
-            range.radius += .2f;
+            range.radius = range.radius + (towerStats.Range * _towerUpgradesData.rangeUpgradePercent);
         }
        
     }

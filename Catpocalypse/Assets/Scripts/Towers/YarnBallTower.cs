@@ -155,8 +155,8 @@ public class YarnBallTower : Tower
         }
         else
         {
-            yarnFirerate *= 1.15f;
-            range.radius = range.radius + (startingRange * .15f);
+            yarnFirerate = yarnFirerate +(towerStats.FireRate * _towerUpgradesData.fireRateUpgradePercent);
+            range.radius = range.radius + (startingRange * _towerUpgradesData.rangeUpgradePercent);
         }
        
     }
