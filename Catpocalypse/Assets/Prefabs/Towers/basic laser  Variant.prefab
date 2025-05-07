@@ -257,6 +257,8 @@ MonoBehaviour:
   fireRate: 0
   towerStats: {fileID: 11400000, guid: b68cea4ef97a9444093591f37642461e, type: 2}
   _towerSound: {fileID: 873177639890731166}
+  maxLevel: 4
+  _towerUpgradesData: {fileID: 11400000, guid: 870fc4eb337212a488316a8adf682fac, type: 2}
   laserPrefab: {fileID: 5513968051566747971, guid: b91d010c08c2b284bb79cc19087d05df, type: 3}
   laserEndPointPrefab: {fileID: 6133470768189819576, guid: 2ebd2f586f92cd84b9cabdbdccc3eb68, type: 3}
   MaxLasers: 4

@@ -100,10 +100,15 @@ public class NonAllergicTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        if (!foodTimeUnlocked)
+        numOfPeople++;
+        if (towerLevel == 1)
         {
             foodTimeUnlocked = true;
             FoodTime();
+        }
+        else
+        {
+            range.radius = range.radius + (towerStats.Range * _towerUpgradesData.rangeUpgradePercent);
         }
        
     }

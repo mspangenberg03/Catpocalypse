@@ -172,6 +172,8 @@ MonoBehaviour:
   fireRate: 3.2
   towerStats: {fileID: 11400000, guid: 03bba1f7ec538254f80b66e0bc98933e, type: 2}
   _towerSound: {fileID: 2024988410660856447}
+  maxLevel: 4
+  _towerUpgradesData: {fileID: 11400000, guid: 9b871f45baf73c4418d800e0ad5836da, type: 2}
   stringFlingDistractValue: 5
   stringFlingSlowingDuration: 1
   stringFlingCooldown: 20

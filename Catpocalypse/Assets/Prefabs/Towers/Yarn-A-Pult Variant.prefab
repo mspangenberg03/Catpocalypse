@@ -309,6 +309,8 @@ MonoBehaviour:
   fireRate: 2.4
   towerStats: {fileID: 11400000, guid: 9102cc67656cb6e4e99fb9c990781b2c, type: 2}
   _towerSound: {fileID: 8294513549241816052}
+  maxLevel: 4
+  _towerUpgradesData: {fileID: 11400000, guid: 57d4536f7f0d22f4a8c6f033b14c5f08, type: 2}
   yarnBallPrefab: {fileID: 7418905643246593257, guid: 543c1eeb918fd8a40b8e656f6691db55, type: 3}
   throwPointPrefab: {fileID: 6487241590536661003, guid: 65a6a48719aa20248aa2a9a05f5b1519, type: 3}
   ballShotgunPrefab: {fileID: 0}

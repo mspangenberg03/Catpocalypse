@@ -156,7 +156,7 @@ public class TowerManipulationUI : MonoBehaviour
     public void OnUpgradeButtonClicked()
     {
         ExitEditRallyPointMode();
-        if (playerMoneyManager.SpendMoney(currentSelectedBase.tower.GetComponent<Tower>().GetUpgradeCost()))
+        if (currentSelectedBase.tower.GetComponent<Tower>().towerLevel < currentSelectedBase.tower.GetComponent<Tower>().maxLevel && playerMoneyManager.SpendMoney(currentSelectedBase.tower.GetComponent<Tower>().GetUpgradeCost()))
         {
             currentSelectedBase.tower.GetComponent<Tower>().Upgrade();
         }

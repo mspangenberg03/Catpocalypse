@@ -46,7 +46,7 @@ public class LaserPointerTower : Tower
     [Min(0f)]
     private float _DistanceInFrontOfTargetToAimFor = 2f;
 
-
+    private float rangeUpgradeMultiplier = .15f;
     // This holds a reference to the nearest node that has more than one possible next node.
     private WayPoint _PathJunction;
 
@@ -243,15 +243,19 @@ public class LaserPointerTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        if (!suddenFlashUnlocked)
+        if (towerLevel == 1)
         {
             StartCoroutine(SuddenFlash());
+        }
+        else
+        {
+            range.radius = range.radius + (towerStats.Range * _towerUpgradesData.rangeUpgradePercent);
         }
         if (currentMaxLasers < MaxLasers)
         {
             currentMaxLasers++;
         }
-        level++;
+        //level++;
     }
     IEnumerator SuddenFlash()
     {

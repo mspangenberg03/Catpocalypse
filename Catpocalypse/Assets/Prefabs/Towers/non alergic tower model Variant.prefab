@@ -297,6 +297,8 @@ MonoBehaviour:
   fireRate: 1
   towerStats: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
   _towerSound: {fileID: 3087859885152949134}
+  maxLevel: 4
+  _towerUpgradesData: {fileID: 11400000, guid: 028949faf55f5784c828c4add00253df, type: 2}
   numOfPeople: 2
   personSpeed: 0
   spawnPoints:
@@ -306,6 +308,8 @@ MonoBehaviour:
   - {fileID: 2672334961176683715}
   person: {fileID: 3328012633065954755, guid: 5ed7c0ae560f6b74382cccb1ec070559, type: 3}
   Enabled: 1
+  foodTimeCooldown: 30
+  foodTimeDistractValue: 40
 --- !u!135 &8149626471105804532
 SphereCollider:
   m_ObjectHideFlags: 0
