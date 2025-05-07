@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a3a2d9118b468449f38ac35c4852f7, type: 3}
   m_Name: CucmberUpgrade
   m_EditorClassIdentifier: 
-  rangeUpgradePercent: 0
-  fireRateUpgradePercent: 0
+  rangeUpgradePercent: 0.15
+  fireRateUpgradePercent: 0.15
