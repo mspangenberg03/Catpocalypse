@@ -16,5 +16,4 @@ MonoBehaviour:
   fireRate: 0
   buildCost: 150
   upgradeCost: 100
-  range: 0
-  _cucumberTowerAimingSpeed: 30
+  range: 1

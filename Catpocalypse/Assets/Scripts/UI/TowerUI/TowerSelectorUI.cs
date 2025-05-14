@@ -42,6 +42,9 @@ public class TowerSelectorUI : MonoBehaviour
 
     private TowerInfoCollection _TowerInfoCollection;
 
+    private string _BuildFailedHeader;
+    private string _BuildFailedMessage;
+
 
     private void Awake()
     {
@@ -65,6 +68,8 @@ public class TowerSelectorUI : MonoBehaviour
         PositionButtonsAroundRing();
 
         ConnectTowerButtonMouseOverEvents();
+        _BuildFailedHeader = "Build Failed!";
+        _BuildFailedMessage = "We don't have enough funds to build that tower!";
     }
 
     private void Update()
@@ -235,7 +240,7 @@ public class TowerSelectorUI : MonoBehaviour
             if (gameObject.activeSelf == false)
                 gameObject.SetActive(true);
 
-            StartCoroutine(RevealNotEnoughFundsScreen());
+            HUD.ShowMessage(_BuildFailedHeader, _BuildFailedMessage);
         }
 
     }
@@ -248,13 +253,6 @@ public class TowerSelectorUI : MonoBehaviour
         gameObject.SetActive(false);
 
         inUse = false;
-    }
-
-    private IEnumerator RevealNotEnoughFundsScreen()
-    {
-        notEnoughFundsScreen.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        notEnoughFundsScreen.SetActive(false);
     }
 
     public void CheckIfClickedOutsideUI()

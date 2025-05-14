@@ -15,7 +15,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class HUD : MonoBehaviour
 {
-    public static HUD Instance;
+    private static HUD Instance;
 
 
     [Header("Health Bar Refs")]
@@ -247,6 +247,8 @@ public class HUD : MonoBehaviour
     {
         Instance.UpdateMessageBar(header, message);
         Instance.MessageBar.gameObject.SetActive(true);
+        Instance._MessageHeaderLabel.gameObject.SetActive(true);
+        Instance._MessageLabel.gameObject.SetActive(true);
     }
 
 

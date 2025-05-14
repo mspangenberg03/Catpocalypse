@@ -90,7 +90,8 @@ public class Tower : MonoBehaviour
         range.radius = radius;
         RangeRadius = range.radius;
         
-        FindDefaultRallyPoint();        
+        FindDefaultRallyPoint();
+        upgradeCost = towerStats.UpgradeCost;
     }
 
     protected void Start()
