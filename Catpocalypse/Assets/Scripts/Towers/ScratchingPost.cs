@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,12 +28,14 @@ public class ScratchingPost : MonoBehaviour
     [Min(0f)]
     private float _Durability;
 
+
     [Tooltip("The amount of Durability removed per cat per tick")]
     [SerializeField]
     [Min(0f)]
     private float _DurabilityRemovedByCat;
 
     [SerializeField, Tooltip("The sphere collider of the Scratching Post")] private SphereCollider range;
+    private float startingRange;
 
     private List<GameObject> _Cats;
 
@@ -42,6 +45,7 @@ public class ScratchingPost : MonoBehaviour
 
     public void Start()
     {
+        startingRange = range.radius;
         _Cats = new List<GameObject>();
         if(PlayerDataManager.Instance.CurrentData.scratchUpgrades > 0)
         {
@@ -52,6 +56,7 @@ public class ScratchingPost : MonoBehaviour
             }
         }
         StartCoroutine(DurationCountDown(_Duration));
+        ApplyUpgrades();
     }
 
     public void Update()
@@ -88,7 +93,18 @@ public class ScratchingPost : MonoBehaviour
             other.GetComponent<CatBase>().slowingEntities.Remove(gameObject);
         }
     }
-
+    public void ApplyUpgrades()
+    {
+        if (parentTower.GetComponent<ScratchingPostTower>().towerLevel >1)
+        {
+            for (int i = 1; i < parentTower.GetComponent<ScratchingPostTower>().towerLevel; i++)
+            {
+                _Durability++;
+                range.radius = range.radius + (startingRange * parentTower.GetComponent<ScratchingPostTower>()._towerUpgradesData.rangeUpgradePercent);
+            }
+        }
+        
+    }
     private void RemoveDurability()
     {
         _Durability -= _DurabilityRemovedByCat;

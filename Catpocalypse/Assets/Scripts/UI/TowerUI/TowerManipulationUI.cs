@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -37,7 +34,9 @@ public class TowerManipulationUI : MonoBehaviour
 
     private float _TimeSinceLastRallyPointSet;
 
-
+    private string _FailedUpgradeHeader;
+    private string _NotEnoughFundsMessage;
+    private string _TowerMaxLevelMessage;
 
     public void Start()
     {
@@ -46,6 +45,9 @@ public class TowerManipulationUI : MonoBehaviour
             inUse = false;
             this.gameObject.SetActive(false);
         }
+        _FailedUpgradeHeader = "Upgrade Failed!";
+        _NotEnoughFundsMessage = "Not Enough Funds!";
+        _TowerMaxLevelMessage = "Tower is already max level!";
     }
 
     private void Update()
@@ -156,11 +158,20 @@ public class TowerManipulationUI : MonoBehaviour
     public void OnUpgradeButtonClicked()
     {
         ExitEditRallyPointMode();
-        if (playerMoneyManager.SpendMoney(currentSelectedBase.tower.GetComponent<Tower>().GetUpgradeCost()))
+        if (currentSelectedBase.tower.towerLevel < currentSelectedBase.tower.maxLevel)
         {
-            currentSelectedBase.tower.GetComponent<Tower>().Upgrade();
+            if(playerMoneyManager.SpendMoney(currentSelectedBase.tower.GetUpgradeCost()))
+            {
+                currentSelectedBase.tower.Upgrade();
+            } else
+            {
+                HUD.ShowMessage(_FailedUpgradeHeader, _NotEnoughFundsMessage);
+            }   
+        } 
+        else
+        {
+            HUD.ShowMessage(_FailedUpgradeHeader, _TowerMaxLevelMessage);
         }
-        
         this.gameObject.SetActive(false);
     }
 

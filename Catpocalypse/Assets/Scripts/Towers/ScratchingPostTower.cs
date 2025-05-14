@@ -92,7 +92,12 @@ public class ScratchingPostTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        ISPReady = true;
+        if(towerLevel == 1)
+        {
+            ISPReady = true;
+        }
+        //The other upgrades are applied in the scratching post script
+       
     }
 
 

@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94636f7f71f6e549bb280b005aa28bd, type: 3}
-  m_Name: Non-Allergic Tower
+  m_Script: {fileID: 11500000, guid: 41a3a2d9118b468449f38ac35c4852f7, type: 3}
+  m_Name: YarnThrowerUpgrade
   m_EditorClassIdentifier: 
-  distractValue: 10
-  fireRate: 2
-  buildCost: 200
-  upgradeCost: 250
-  range: 11.82
+  rangeUpgradePercent: 0.15
+  fireRateUpgradePercent: 0.15

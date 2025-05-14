@@ -537,6 +537,8 @@ MonoBehaviour:
   fireRate: 1
   towerStats: {fileID: 11400000, guid: 51ded07837666dd48a3835e93e6815bf, type: 2}
   _towerSound: {fileID: 4849312198556398980}
+  maxLevel: 4
+  _towerUpgradesData: {fileID: 11400000, guid: b766c4a49e6546645bbb5eabe1f35815, type: 2}
   _ScratchPost: {fileID: 354219167358990314, guid: 6a929441a3700c840922c525efb7ecc3, type: 3}
   _IrScratchPost: {fileID: 354219167358990314, guid: 8ae07f1517e833d42b835dc0ccc97f2a, type: 3}
   postCount: 0

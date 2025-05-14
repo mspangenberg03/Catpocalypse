@@ -14,6 +14,7 @@ public class StringWaverTower : Tower
     public float _speedDebuff = 1.8f;
     private bool _canStringFling = false;
     private bool _stringFlingUnlocked = false;
+    private float firerate;
     // Start is called before the first frame update
     private new void Start()
     {
@@ -21,6 +22,7 @@ public class StringWaverTower : Tower
         base.Start();
         ApplyScrapUpgrades();
         StartCoroutine(DistractCat());
+        firerate = towerStats.FireRate;
     }
 
     protected override void ApplyScrapUpgrades()
@@ -68,9 +70,18 @@ public class StringWaverTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
-        _canStringFling = true;
-        _stringFlingUnlocked = true;
-        StringFling(targets);
+        if(towerLevel == 1)
+        {
+            _canStringFling = true;
+            _stringFlingUnlocked = true;
+            StringFling(targets);
+        }
+        else
+        {
+            firerate = firerate - (towerStats.FireRate * _towerUpgradesData.fireRateUpgradePercent);
+            range.radius = range.radius + (towerStats.Range * _towerUpgradesData.rangeUpgradePercent);
+        }
+       
     }
     private void StringFling(List<GameObject> catsInRange)
     {
@@ -113,7 +124,7 @@ public class StringWaverTower : Tower
             }
             else
             {
-                Debug.LogError("Unslow cat is null");
+                //Debug.LogError("Unslow cat is null");
                 //targets.Remove(cat);
             }
 
@@ -139,18 +150,6 @@ public class StringWaverTower : Tower
         if (cats.Count > 0) 
         {
             _towerSound.Play();
-            //GameObject cat = cats.Current;
-            //Debug.LogWarning(cat);
-            //do
-            //{
-            //    if (targets.Contains(cat) && cat != null)
-            //    {
-            //        cat.GetComponent<CatBase>().DistractCat(distractValue, this.gameObject.GetComponent<Tower>());
-
-
-            //    }
-            //} while (cats.MoveNext());
-            //foreach (GameObject cat1 in cats)
             for(int i = 0; i< cats.Count; i++) 
             {
                 if (cats[i] != null && i < cats.Count)
@@ -161,7 +160,7 @@ public class StringWaverTower : Tower
                 }
             }
         }
-        yield return new WaitForSeconds(towerStats.FireRate);
+        yield return new WaitForSeconds(firerate);
         StartCoroutine(DistractCat());
     }
 }

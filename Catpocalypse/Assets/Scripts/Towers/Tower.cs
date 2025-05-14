@@ -41,7 +41,7 @@ public class Tower : MonoBehaviour
 
 
     protected StateMachine _stateMachine;
-    public int towerLevel = 1;
+    public int towerLevel = 0;
     [SerializeField] private float upgradeCost;
     public bool _cutenessChallengeActive = false;
     PlayerCutenessManager _cutenessManager;
@@ -66,6 +66,11 @@ public class Tower : MonoBehaviour
     [SerializeField]
     public AudioSource _towerSound;
 
+    [SerializeField]
+    public int maxLevel = 4;
+
+    [SerializeField]
+    public TowerUpgradesData _towerUpgradesData;
     public float FireRate
     {
         set 
@@ -85,7 +90,8 @@ public class Tower : MonoBehaviour
         range.radius = radius;
         RangeRadius = range.radius;
         
-        FindDefaultRallyPoint();        
+        FindDefaultRallyPoint();
+        upgradeCost = towerStats.UpgradeCost;
     }
 
     protected void Start()
