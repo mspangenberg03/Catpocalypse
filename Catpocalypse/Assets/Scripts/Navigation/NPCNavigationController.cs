@@ -110,7 +110,6 @@ public class NPCNavigationController: MonoBehaviour
 
     public void SetTargetLocation(Vector3 location)
     {
-        Debug.Log("")
         WayPoint target = WaveManager.Instance.WayPointUtils.FindNearestWayPointTo(location);
         foreach(WayPoint waypoint in WaveManager.Instance.WayPointUtils.GetPath(_nextWayPoint, target))
         {
