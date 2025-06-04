@@ -1,26 +1,22 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 
 public class WayPoint : MonoBehaviour
 {
     public List<WayPoint> NextWayPoints = new List<WayPoint>();
-
-
+    public List<WayPoint> PrevWayPoints = new List<WayPoint>();
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        if (NextWayPoints.Count > 0)
+        {
+            foreach (WayPoint wayPoint in NextWayPoints)
+            {
+                wayPoint.PrevWayPoints.Add(this);
+            }
+        }
     }
 
     private void OnDrawGizmos()
@@ -66,5 +62,25 @@ public class WayPoint : MonoBehaviour
             Gizmos.DrawLine(midPoint, leftCorner);
             Gizmos.DrawLine(rightCorner, leftCorner);
         }
+    }
+
+    public override bool Equals(object other)
+    {
+        if (other == null || other.GetType() != this.GetType())
+        {
+            Debug.LogError("Wrong Object Type");
+            return false;
+        }
+        WayPoint otherPoint = (WayPoint)other;
+        if (this.transform.Equals(otherPoint.transform))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return transform.GetHashCode();
     }
 }

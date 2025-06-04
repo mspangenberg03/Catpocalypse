@@ -5,7 +5,7 @@ using UnityEngine;
 public class NonAllergicTower : Tower
 {
     [SerializeField, Tooltip("The number of people the tower spawns"),Min(1)]
-    private int numOfPeople;
+    private int maxNumOfPeople;
     private int peopleSpawned;
     [SerializeField, Tooltip("The speed of the spawned people")] private float personSpeed;
     [SerializeField, Tooltip("List of potential locations for the people to spawn")]
@@ -13,7 +13,7 @@ public class NonAllergicTower : Tower
     [SerializeField, Tooltip("The Non-Allergic people that the tower spawns")]
     private GameObject person;
     private GameObject[] waypoints;
-    private GameObject closestWaypoint;
+    private WayPoint closestWaypoint;
     private Transform spawnPoint;
     private List<GameObject> personList;
     public bool Enabled = true;
@@ -39,12 +39,14 @@ public class NonAllergicTower : Tower
         {
             Enabled = false;
         }
-        waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
-        StartCoroutine(Spawner());
         peopleSpawned = 0;
-        closestWaypoint = GetClosestWaypoint();
+        if (FindNearestWayPoint(out WayPoint closestPoint))
+        {
+            closestWaypoint = closestPoint;
+        }
         personList = new List<GameObject>();
         float dist = 100000;
+
         foreach(Transform spawn in spawnPoints)
         {
 
@@ -54,8 +56,11 @@ public class NonAllergicTower : Tower
                 dist = Vector3.Distance(spawn.position, closestWaypoint.transform.position);
             }
         }
-        
+        Debug.Log("I should be spawning");
+        StartCoroutine(Spawner());
     }
+
+    
 
 
     protected override void ApplyScrapUpgrades()
@@ -81,26 +86,10 @@ public class NonAllergicTower : Tower
         }
     }
 
-    //Gets closest navigation waypoint to the tower
-    private GameObject GetClosestWaypoint()
-    {
-        GameObject waypoint = null;
-        float distance = 10000000;
-        foreach(GameObject point in waypoints)
-        {
-            if(Vector3.Distance(transform.position,point.transform.position) < distance)
-            {
-                distance = Vector3.Distance(transform.position, point.transform.position);
-                waypoint = point;
-            }
-        }
-        return waypoint;
-    }
-
     public override void Upgrade()
     {
         base.Upgrade();
-        numOfPeople++;
+        maxNumOfPeople++;
         if (towerLevel == 1)
         {
             foodTimeUnlocked = true;
@@ -155,17 +144,16 @@ public class NonAllergicTower : Tower
         yield return new WaitForSeconds(towerStats.FireRate);
         if (Enabled)
         {
-            if (peopleSpawned >= numOfPeople)
+            if (peopleSpawned >= maxNumOfPeople)
             {
 
                 StopCoroutine(Spawner());
             }
-            if (peopleSpawned < numOfPeople)
+            else
             {
 
                 GameObject newPerson = Instantiate(person, _RallyPoint, Quaternion.identity, gameObject.transform);
                 _towerSound.Play();
-                Debug.LogWarning("Person spawned");
                 //personList.Add(newPerson);
 
                 peopleSpawned++;
@@ -179,5 +167,5 @@ public class NonAllergicTower : Tower
         
     }
 
-    public int ActiveUnits {  get { return numOfPeople; } }
+    public int ActiveUnits {  get { return peopleSpawned; } }
 }

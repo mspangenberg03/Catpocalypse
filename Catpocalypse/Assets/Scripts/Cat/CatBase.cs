@@ -3,14 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.UI;
 using TMPro;
 
 // This fixes the ambiguity between System.Random and UnityEngine.Random by
 // telling it to use the Unity one.
 using Random = UnityEngine.Random;
-using UnityEngine.UIElements;
 
 
 [RequireComponent(typeof(StateMachine))]
@@ -21,11 +18,6 @@ public class CatBase : MonoBehaviour
     // This event is static so we don't need to subscribe the money manager to every cat instance's OnCatDied event.
     public static event EventHandler OnCatDied;
     public static event EventHandler OnCatReachGoal;
-    
-
-    public event EventHandler<CatReachedNextWayPointEventArgs> OnCatReachedNextWayPoint;
-    
-
     
     public CatTypes _catType;
     [Tooltip("The cuteness value is how much this type of cat increases the cuteness meter.")]
@@ -49,12 +41,8 @@ public class CatBase : MonoBehaviour
     [Min(0f)]
     public float speed;
     
-    [Min(0f)]
-    [Tooltip("This sets how close the cat must get to the next WayPoint to consider itself to have arrived there. This causes it to then target the next WayPoint (or a randomly selected one if the current WayPoint has multiple next points set in the Inspector.")]
-    [SerializeField] protected float _WayPointArrivedDistance = 1f;
-    
     [Tooltip("Controls the cat's navigation")]
-    public NavMeshAgent agent;
+    public NPCNavigationController NavController;
 
     [Tooltip("How much money to player gets for distracting this type of cat.")]
     [SerializeField] protected float distractReward = 50;
@@ -63,20 +51,10 @@ public class CatBase : MonoBehaviour
     [SerializeField] protected float _DistractednessMeterHeightAboveCat = 2f;
     [SerializeField] protected GameObject _DistractednessMeterPrefab;
 
-
-
     protected float distraction = 0; //How distracted the cat is currently
-    public float Distraction
-    {
-        get { return distraction; }
-        set { distraction = value; }
-    }
     protected bool isDistracted = false; // If the cat has been defeated or not.
 
     protected PlayerHealthManager healthManager;
-
-    protected float _DistanceFromNextWayPoint = 0f;
-    protected WayPoint _NextWayPoint;
 
     protected GameObject _DistractednessMeterGO;
     protected UnityEngine.UI.Image _DistractednessMeterBarImage;
@@ -110,13 +88,8 @@ public class CatBase : MonoBehaviour
 
         catAudio.clip = sounds[index];
         catAudio.Play();
-        agent = GetComponent<NavMeshAgent>();
-        speed = agent.speed;
+        speed = NavController.agent.speed;
         healthManager = GameObject.FindGameObjectWithTag("Goal").gameObject.GetComponent<PlayerHealthManager>();
-
-        // Find the closest WayPoint and start moving there.
-        FindNearestWayPoint();
-        agent.SetDestination(_NextWayPoint.transform.position);
 
 
         if (_stateMachine == null)
@@ -174,31 +147,6 @@ public class CatBase : MonoBehaviour
             Distracted();
             return;
         }
-        if (_NextWayPoint != null)
-        {
-            _DistanceFromNextWayPoint = Vector3.Distance(transform.position, _NextWayPoint.transform.position);
-
-            if (HasReachedDestination())
-            {
-                OnCatReachedNextWayPoint?.Invoke(this,
-                    new CatReachedNextWayPointEventArgs
-                    {
-                        Cat = this
-                    });
-
-                GetNextWaypoint();
-
-                // Check for null in case we are already at the last WayPoint, as GetNextWayPoint()
-                // returns null if there is no next WayPoint.
-                if (_NextWayPoint != null)
-                    agent.SetDestination(_NextWayPoint.transform.position);
-            }
-        }
-        else
-        {
-            _DistanceFromNextWayPoint = 0f;
-        }
-
 
         _DistractednessMeterGO.SetActive(ShowDistractednessBar);
     }
@@ -305,61 +253,10 @@ public class CatBase : MonoBehaviour
 
     }
 
-    protected void GetNextWaypoint()
-    {
-        int count = _NextWayPoint.NextWayPoints.Count;
-
-        if (count == 0)
-        {
-            _NextWayPoint = null;
-        }
-        else if (count == 1)
-        {
-            //Debug.Log(NextWayPoint.NextWayPoints[0]);
-            _NextWayPoint = _NextWayPoint.NextWayPoints[0];
-        }
-        else // count is greater than 1
-        {
-            // The current waypoint has multiple next waypoints, so we will
-            // select one at random.
-            _NextWayPoint = _NextWayPoint.NextWayPoints[Random.Range(0, count)];
-        }
-
-    }
-
-    protected void FindNearestWayPoint()
-    {
-        float minDistance = float.MaxValue;
-        WayPoint nearestWayPoint = null;
-
-        foreach (WayPoint wayPoint in FindObjectsByType<WayPoint>(FindObjectsSortMode.None))
-        {
-            float distance = Vector3.Distance(transform.position, wayPoint.transform.position);
-
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                nearestWayPoint = wayPoint;
-            }
-        }
-
-
-        _NextWayPoint = nearestWayPoint;
-        
-    }
-
-    public bool HasReachedDestination()
-    {
-        return _DistanceFromNextWayPoint <= _WayPointArrivedDistance &&
-               agent.pathStatus <= NavMeshPathStatus.PathComplete;
-    }
-
-
-
     public int Cuteness { get { return _CutenessValue; } }
     IEnumerator Sound()
     {
-        agent.speed = 0;
+        NavController.agent.speed = 0;
         int index = Random.Range(0, purrs.Count - 1);
         catAudio.clip = purrs[index];
         catAudio.Play();
@@ -367,23 +264,8 @@ public class CatBase : MonoBehaviour
 
         KillCat(1);
     }
-   
 
+    public float Distraction { get { return distraction; } set { distraction = value; } }
     public float DistractionReward { get { return distractReward; } }
     public bool IsDead { get; private set; }
-    public WayPoint NextWayPoint 
-    { 
-        get { return _NextWayPoint; } 
-        set
-        { 
-            _NextWayPoint = value; 
-        }
-    }
-
-    public float WayPointArrivedDistance { get { return _WayPointArrivedDistance; } }
-}
-
-public class CatReachedNextWayPointEventArgs : EventArgs
-{
-    public CatBase Cat;
 }
