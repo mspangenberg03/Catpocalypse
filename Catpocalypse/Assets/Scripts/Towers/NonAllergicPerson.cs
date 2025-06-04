@@ -25,6 +25,9 @@ public class NonAllergicPerson : MonoBehaviour
     [SerializeField]
     private AudioSource _personSound;
 
+    [Tooltip("Controls the NPC's navigation")]
+    public NPCNavigationController NavController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +41,7 @@ public class NonAllergicPerson : MonoBehaviour
         {
             agent.speed *= PlayerDataManager.Instance.Upgrades.NAMoveSpeedUpgrade;
         }
+        
     }
    
     // Update is called once per frame
@@ -52,21 +56,7 @@ public class NonAllergicPerson : MonoBehaviour
             }
             if (target != null && tower.targets.Contains(target.gameObject))
             {
-                if (!isPetting)
-                {
-                    if (CatDistance(target.gameObject) <= 2)
-                    {
-                        target.stoppingEntities.Add(gameObject);
-                        _personSound.Play();
-                        StartCoroutine(PetCat(effectLength));
-
-                    }
-                    else
-                    {
-                        agent.SetDestination(target.transform.position);
-                    }
-
-                }
+                CatTargetingHelper();
             }
             //If the person has a target that is not in the list, the person does not have a target
             if (target != null && !tower.targets.Contains(target.gameObject))
@@ -84,21 +74,7 @@ public class NonAllergicPerson : MonoBehaviour
             }
             if (target != null && fort.targets.Contains(target.gameObject))
             {
-                if (!isPetting)
-                {
-                    if (CatDistance(target.gameObject) <= 2)
-                    {
-                        target.stoppingEntities.Add(gameObject);
-                        _personSound.Play();
-                        StartCoroutine(PetCat(effectLength));
-
-                    }
-                    else
-                    {
-                        agent.SetDestination(target.transform.position);
-                    }
-
-                }
+                CatTargetingHelper();
             }
             //If the person has a target that is not in the list, the person does not have a target
             if (target != null && !fort.targets.Contains(target.gameObject))
@@ -133,7 +109,7 @@ public class NonAllergicPerson : MonoBehaviour
 
             }
         }
-        if (fort != null)
+        else if (fort != null)
         {
             foreach (GameObject cat in fort.targets)
             {
@@ -158,6 +134,7 @@ public class NonAllergicPerson : MonoBehaviour
         {
             target.isATarget = true;
             agent.SetDestination(target.transform.position);
+            Debug.Log("Chasing a cat");
         }
     }
     //Finds the distance between the person and the cat
@@ -168,6 +145,31 @@ public class NonAllergicPerson : MonoBehaviour
         float yDist =  Mathf.Pow(transform.position.x - cat.transform.position.x, 2);
         distance = Mathf.Sqrt(xDist + yDist);
         return distance;
+    }
+
+    private void CatTargetingHelper()
+    {
+        if (!isPetting)
+        {
+            float distance = CatDistance(target.gameObject);
+            if ( distance <= 2)
+            {
+                target.stoppingEntities.Add(gameObject);
+                _personSound.Play();
+                StartCoroutine(PetCat(effectLength));
+
+            }
+            else
+            {
+                SetMovementTarget();
+            }
+
+        }
+    }
+
+    private void SetMovementTarget()
+    {
+        agent.SetDestination(target.transform.position);
     }
     
     private void OnTriggerExit(Collider other)
@@ -225,7 +227,6 @@ public class NonAllergicPerson : MonoBehaviour
         {
             fort.targets.Remove(target.gameObject);
         }
-        Debug.Log("Removing target " + target);
         StopAllCoroutines();
         if (target != null)
         {

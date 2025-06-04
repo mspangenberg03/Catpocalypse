@@ -708,7 +708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectLength: 25
   petRate: 1
-  speed: 0
+  speed: 5
   _personSound: {fileID: 9172074808698999897}
 --- !u!23 &5603169663319034318
 MeshRenderer:

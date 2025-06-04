@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4258398137405455121}
   - component: {fileID: 4483574012576929532}
   - component: {fileID: 4271309147003016060}
+  - component: {fileID: -705044849001712320}
   m_Layer: 3
   m_Name: NormalCat
   m_TagString: Cat
@@ -125,8 +126,7 @@ MonoBehaviour:
   distractionThreshold: 100
   damageToPlayer: 2
   speed: 0
-  _WayPointArrivedDistance: 4
-  agent: {fileID: 0}
+  NavController: {fileID: -705044849001712320}
   distractReward: 8
   _DistractednessMeterHeightAboveCat: 8
   _DistractednessMeterPrefab: {fileID: 3512654570813597946, guid: e633f4d5486c0f542b4af3b4ecb326ae, type: 3}
@@ -284,6 +284,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllowUnknownStates: 0
+--- !u!114 &-705044849001712320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589074876568128993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0760ac38ef6c51439504cf1bd752a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _WayPointArrivedDistance: 1
+  agent: {fileID: 4388902454001029155}
 --- !u!1001 &2985846187281833752
 PrefabInstance:
   m_ObjectHideFlags: 0

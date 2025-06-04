@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5570907850504849197}
   - component: {fileID: 8672021303309095243}
   - component: {fileID: 6837119006567958781}
+  - component: {fileID: -1474306262221267380}
   m_Layer: 3
   m_Name: Card board catNormal1 Variant
   m_TagString: Cat
@@ -90,8 +91,7 @@ MonoBehaviour:
   distractionThreshold: 200
   damageToPlayer: 5
   speed: 0
-  _WayPointArrivedDistance: 2
-  agent: {fileID: -2116463544244376725, guid: 87b750aa9cfe0c1498a2348ee619a2ce, type: 3}
+  NavController: {fileID: -1474306262221267380}
   distractReward: 50
   _DistractednessMeterHeightAboveCat: 2
   _DistractednessMeterPrefab: {fileID: 3512654570813597946, guid: e633f4d5486c0f542b4af3b4ecb326ae, type: 3}
@@ -284,6 +284,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-1474306262221267380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2914954983465273623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0760ac38ef6c51439504cf1bd752a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _WayPointArrivedDistance: 1
+  agent: {fileID: 2074363123680958709}
 --- !u!1001 &8179961966997294007
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 
 /// <summary>
@@ -26,7 +22,7 @@ public class WayPointUtilsTester : MonoBehaviour
     {
         if (_WayPointA != null && _WayPointB != null)
         {
-            WayPointUtils.WayPointCompareResults result = WayPointUtils.CompareWayPointPositions(_WayPointA, _WayPointB);
+            WayPointUtils.WayPointCompareResults result = WaveManager.Instance.WayPointUtils.CompareWayPointPositions(_WayPointA, _WayPointB);
             Debug.Log($"WayPointTest Result = {result}");
         }
         else

@@ -1,11 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-
 using UnityEngine;
-using UnityEngine.InputSystem.XR.Haptics;
-using static UnityEngine.Rendering.DebugUI;
 
 
 [RequireComponent(typeof(StateMachine))]
@@ -71,19 +66,6 @@ public class Tower : MonoBehaviour
 
     [SerializeField]
     public TowerUpgradesData _towerUpgradesData;
-    public float FireRate
-    {
-        set 
-        { 
-            fireRate = value;
-        }
-        get 
-        { 
-            return fireRate; 
-        }
-    }
-
-
 
     protected void Awake()
     {
@@ -280,16 +262,6 @@ public class Tower : MonoBehaviour
         gameObject.GetComponent<Renderer>().material = gameObject.GetComponentInParent<TowerBase>().towerNotHovered;
     }
 
-    void OnMouseUpAsButton()
-    {
-
-        if (enabled)
-        {
-            
-
-        }
-    }
-
     private void OnCatDied(object sender, EventArgs e)
     {
         OnTargetHasDied((GameObject) sender);
@@ -334,7 +306,7 @@ public class Tower : MonoBehaviour
     /// </summary>
     /// <param name="wayPoint">This out parameter returns the nearest WayPoint within the tower's range, or null if none was found.</param>
     /// <returns>True if the nearest WayPoint was found, or false if none were in range.</returns>
-    private bool FindNearestWayPoint(out WayPoint wayPoint)
+    protected bool FindNearestWayPoint(out WayPoint wayPoint)
     {
         _WayPointsInRange.Clear();
         wayPoint = null;
@@ -437,7 +409,7 @@ public class Tower : MonoBehaviour
         {
             _RallyPoint = newRallyPoint;
 
-            _ClosestWayPointToRP = WayPointUtils.FindNearestWayPointTo(_RallyPoint);
+            _ClosestWayPointToRP = WaveManager.Instance.WayPointUtils.FindNearestWayPointTo(_RallyPoint);
 
             OnRallyPointChanged();
         }
@@ -456,6 +428,7 @@ public class Tower : MonoBehaviour
 
     public float BuildCost { get { return buildCost; } }
     public float DistractValue { set { distractValue = value; } get { return distractValue; } }
+    public float FireRate { set { fireRate = value; } get { return fireRate; } }
     public bool IsTargetDetectionEnabled { get { return range.enabled; } }
 
     public TowerBase ParentTowerBase { get; set; }

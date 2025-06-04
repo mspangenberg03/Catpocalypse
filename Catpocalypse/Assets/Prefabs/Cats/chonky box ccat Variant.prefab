@@ -234,6 +234,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31cce6d45ec1f8e4db15560b3b017c9b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1699814510724812543}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31cce6d45ec1f8e4db15560b3b017c9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -351561568029942122}
   m_SourcePrefab: {fileID: 100100000, guid: 31cce6d45ec1f8e4db15560b3b017c9b, type: 3}
 --- !u!1 &5902274439958871315 stripped
 GameObject:
@@ -292,8 +295,7 @@ MonoBehaviour:
   distractionThreshold: 300
   damageToPlayer: 5
   speed: 0
-  _WayPointArrivedDistance: 2
-  agent: {fileID: -2116463544244376725, guid: 87b750aa9cfe0c1498a2348ee619a2ce, type: 3}
+  NavController: {fileID: -351561568029942122}
   distractReward: 50
   _DistractednessMeterHeightAboveCat: 2
   _DistractednessMeterPrefab: {fileID: 3512654570813597946, guid: e633f4d5486c0f542b4af3b4ecb326ae, type: 3}
@@ -486,3 +488,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-351561568029942122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902274439958871315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0760ac38ef6c51439504cf1bd752a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _WayPointArrivedDistance: 1
+  agent: {fileID: 6060268370008954500}
