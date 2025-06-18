@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 /// <summary>
@@ -44,6 +42,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] AudioClip _endClip;
     [SerializeField] private int _ScrapReward;
 
+    private WayPointUtils _WayPointUtils;
+
 
     private void Awake()
     {
@@ -53,15 +53,14 @@ public class WaveManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
+        _WayPointUtils = new WayPointUtils();
     }
 
     private void Start()
     {
         _PlayerMoneyManager = FindObjectOfType<PlayerMoneyManager>();
         _cutenessManager = GameObject.FindGameObjectWithTag("Goal").GetComponent<PlayerCutenessManager>();
-
         CatBase.OnCatDied += OnCatDied;
         CatBase.OnCatReachGoal += OnCatReachGoal;
         _CatSpawners = new List<CatSpawner>();
@@ -77,6 +76,7 @@ public class WaveManager : MonoBehaviour
             }
         }
         HUD.HideWaveDisplay();
+        _WayPointUtils.Init();
     }
 
     private void Update()
@@ -247,5 +247,6 @@ public class WaveManager : MonoBehaviour
     public float SecondsElapsedSinceLevelStarted { get { return _SecondsSinceLevelStart; } }
     public float SecondsElapsedSinceWaveStarted { get { return _SecondsSinceWaveStart; } }
 
+    public WayPointUtils WayPointUtils { get { return _WayPointUtils; } }
 }
 

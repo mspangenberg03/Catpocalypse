@@ -1,7 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static NPCNavigationController;
 
 
 public class LaserPointerTower : Tower
@@ -141,8 +141,8 @@ public class LaserPointerTower : Tower
         {
             _towerSound.Stop();
         }
-        //if (_ActiveLasersCount > 0)
-            LaserControl();
+
+        LaserControl();
 
         if (_ActiveLasersCount < currentMaxLasers)
             SelectTargets();
@@ -197,7 +197,7 @@ public class LaserPointerTower : Tower
             {
                 CatBase cat = target.GetComponent<CatBase>();
 
-                if (cat.NextWayPoint == null)
+                if (cat.NavController.NextWayPoint == null)
                 {
                     continue;
                 }
@@ -221,14 +221,14 @@ public class LaserPointerTower : Tower
                 else
                 {
                     // Is this cat before the path junction point associated with this tower?
-                    WayPointUtils.WayPointCompareResults result = WayPointUtils.CompareWayPointPositions(cat.NextWayPoint, _PathJunction);
-
+                    WayPointUtils.WayPointCompareResults result = WaveManager.Instance.WayPointUtils.CompareWayPointPositions(cat.NavController.NextWayPoint, _PathJunction);
+                    
                     //Debug.Log($"Result: {result}    CatNextWaypoint: \"{cat.NextWayPoint.name}\"    JunctionWayPoint: \"{_PathJunction.name}\"");
 
                     if (result == WayPointUtils.WayPointCompareResults.A_IsBeforeB ||
                         result == WayPointUtils.WayPointCompareResults.A_And_B_AreSamePoint)
                     {
-                        if (cat.NextWayPoint == PathJunction)
+                        if (cat.NavController.NextWayPoint == PathJunction)
                             targetInfo.IsApproachingJunction = true;
 
                         TargetCat(targetInfo);
@@ -312,7 +312,7 @@ public class LaserPointerTower : Tower
             if (info == null)
                 continue;
 
-            WayPoint nextWaypoint = info.TargetCat.NextWayPoint;
+            WayPoint nextWaypoint = info.TargetCat.NavController.NextWayPoint;
 
             // If IsApproachingJunction is false but the cat's next point is the path junction associated
             // with this tower, then set that flag to true now.
@@ -329,7 +329,7 @@ public class LaserPointerTower : Tower
                 // If the index is -1, then don't set the next index. This allows the cat to select it's own path in this case.
                 // This may or may not mean an error has occurred. Check the Unity console for warnings/errors.
                 if (index >= 0)
-                    info.TargetCat.NextWayPoint = PathJunction.NextWayPoints[_Lasers[i].NextWayPointIndex];
+                    info.TargetCat.NavController.NextWayPoint = PathJunction.NextWayPoints[_Lasers[i].NextWayPointIndex];
             }
         }
     }
@@ -440,7 +440,7 @@ public class LaserPointerTower : Tower
                 // If the cat has arrived at the waypoint closest to the rally point, then deactivate the laser so it will be available to target another cat.
                 float distance = _ClosestWayPointToRP != null ? Vector3.Distance(targetInfo.TargetCat.transform.position, _ClosestWayPointToRP.transform.position)
                                                                 : float.MaxValue;
-                if (distance <= targetInfo.TargetCat.WayPointArrivedDistance)
+                if (distance <= targetInfo.TargetCat.NavController.WayPointArrivedDistance)
                 {
                     targets.Remove(targetInfo.TargetCat.gameObject);
                     DeactivateLaser(i);
@@ -606,10 +606,10 @@ public class LaserPointerTower : Tower
     protected override void OnRallyPointChanged()
     {
         // Find the closest waypoint to the new rally point.
-        WayPoint closestWayPoint = WayPointUtils.FindNearestWayPointTo(_RallyPoint);
+        WayPoint closestWayPoint = WaveManager.Instance.WayPointUtils.FindNearestWayPointTo(_RallyPoint);
 
         // Find out if that waypoint is before or after the path junction near this tower.
-        WayPointUtils.WayPointCompareResults result = WayPointUtils.CompareWayPointPositions(closestWayPoint, _PathJunction);
+        WayPointUtils.WayPointCompareResults result = WaveManager.Instance.WayPointUtils.CompareWayPointPositions(closestWayPoint, _PathJunction);
 
         if (result == WayPointUtils.WayPointCompareResults.A_IsBeforeB || 
             result == WayPointUtils.WayPointCompareResults.A_And_B_AreSamePoint)
@@ -623,7 +623,7 @@ public class LaserPointerTower : Tower
             for (int i = 0; i < _PathJunction.NextWayPoints.Count; i++)
             {
                 // Find out if that waypoint is before or after the first waypoint in the first path branch from the path junction near this tower.
-                WayPointUtils.WayPointCompareResults branchResult = WayPointUtils.CompareWayPointPositions(_PathJunction.NextWayPoints[i], closestWayPoint);
+                WayPointUtils.WayPointCompareResults branchResult = WaveManager.Instance.WayPointUtils.CompareWayPointPositions(_PathJunction.NextWayPoints[i], closestWayPoint);
 
                 // Is the nearest node in the first path branch?
                 if (branchResult == WayPointUtils.WayPointCompareResults.A_IsBeforeB ||
@@ -713,7 +713,7 @@ public class LaserPointerTower : Tower
             SweepTimer = 2f;
             
             TargetInfo = targetInfo;
-            TargetInfo.TargetCat.OnCatReachedNextWayPoint += OnTargetReachedNextWayPoint;
+            TargetInfo.TargetCat.NavController.OnTargetReachedNextWayPoint += OnTargetReachedNextWayPoint;
         }
 
         public void Deactivate()
@@ -733,14 +733,14 @@ public class LaserPointerTower : Tower
             // Unsubscribe from the event if the cat still exists.
             if (TargetInfo != null && TargetInfo.TargetCat != null)
             {
-                TargetInfo.TargetCat.OnCatReachedNextWayPoint -= OnTargetReachedNextWayPoint;
+                TargetInfo.TargetCat.NavController.OnTargetReachedNextWayPoint -= OnTargetReachedNextWayPoint;
             }
 
             TargetInfo = null;
 
         }
 
-        private void OnTargetReachedNextWayPoint(object sender, CatReachedNextWayPointEventArgs e)
+        private void OnTargetReachedNextWayPoint(object sender, ReachedNextWayPointEventArgs e)
         {
             TargetInfo.ReachedNextWayPoint = true;
         }

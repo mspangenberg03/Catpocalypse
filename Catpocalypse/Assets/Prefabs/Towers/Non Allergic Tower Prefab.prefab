@@ -201,7 +201,7 @@ MonoBehaviour:
   _towerSound: {fileID: 518502783032453055}
   maxLevel: 4
   _towerUpgradesData: {fileID: 11400000, guid: 028949faf55f5784c828c4add00253df, type: 2}
-  numOfPeople: 2
+  maxNumOfPeople: 2
   personSpeed: 0
   spawnPoints:
   - {fileID: 737399380378500220}
