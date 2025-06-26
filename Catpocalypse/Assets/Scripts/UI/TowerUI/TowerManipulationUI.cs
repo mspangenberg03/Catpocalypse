@@ -65,15 +65,19 @@ public class TowerManipulationUI : MonoBehaviour
 
         if (Mouse.current.leftButton.isPressed)
         {
+            //Debug.Log("MousePressed");
             if (currentSelectedBase.hasTower && IsInEditRallyPointMode)
             {
+                //Debug.Log("Has tower and in edit mode");
                 // Do a ray cast to find the point in the world the user clicked on.
                 Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
                 {
+                    //Debug.Log("physics raycast");
                     // Is this position within range of the tower and on a path?
                     if (ValidateNewRallyPoint(hit))
                     {
+                        Debug.Log("validate new rallypoint");
                         currentSelectedBase.tower.SetRallyPoint(new Vector3(hit.point.x, 0f, hit.point.z));
                         currentSelectedBase.ShowRallyPoint();
 
@@ -246,15 +250,25 @@ public class TowerManipulationUI : MonoBehaviour
 
         // Is this point on a path?
         int layerMask = 1 << hit.collider.gameObject.layer;
+        Debug.Log($"Layer Mask: {layerMask}, hit.collider: {hit.collider.gameObject.layer}");
         if ((layerMask & LayerMask.GetMask("Pathing")) == 0)
+        {
             return false;
+        }
+           
 
 
         // Is this point within range of the tower?
         if (distance <= currentSelectedBase.tower.RangeRadius)
+        {
             return true;
+        }
+
         else
+        {
             return false;
+        }
+            
     }
 
     /// <summary>
