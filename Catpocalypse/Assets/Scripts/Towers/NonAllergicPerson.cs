@@ -49,6 +49,11 @@ public class NonAllergicPerson : MonoBehaviour
     {
         if(tower != null)
         {
+            //Sets destination to rallypoint if there are no targets
+            if(tower.targets.Count == 0 && transform.position != tower.GetRallyPoint())
+            {
+                agent.destination = tower.GetRallyPoint();
+            }
             //If there are cats in range and the person does not have a target, find a target
             if (tower.targets.Count > 0 && target == null)
             {
