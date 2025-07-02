@@ -100,6 +100,12 @@ public class SceneLoader_Async : MonoBehaviour
         }
         else
         {
+            try
+            {
+                Instance.LoadScene_Async("CutScene" + sceneToLoad);
+            } catch (Exception ex) {
+                Debug.LogException(ex);
+            }
             Instance.LoadScene_Async(sceneToLoad);
         }
     }
