@@ -232,6 +232,10 @@ public class NonAllergicPerson : MonoBehaviour
         {
             fort.targets.Remove(target.gameObject);
         }
+        if(tower != null)
+        {
+            tower.targets.Remove(target.gameObject);
+        }
         StopAllCoroutines();
         if (target != null)
         {
