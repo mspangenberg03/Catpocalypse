@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NonAllergicTower : Tower
@@ -138,6 +139,15 @@ public class NonAllergicTower : Tower
         peopleSpawned = 0;
         
        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        //Debug.LogWarning($"other.gameObject: {other.gameObject}");
+        if (personList.Contains(other.gameObject)) 
+        {
+            //Debug.LogWarning("Person left range of tower");
+            //other.gameObject.GetComponent<NonAllergicPerson>()
+        }
     }
     IEnumerator Spawner()
     {
