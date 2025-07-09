@@ -50,8 +50,8 @@ public class HUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _RobotPowerLevelLabel;
 
     [Header("Level End Panels")]
-    [SerializeField] private GameObject _DefeatScreen;
-    [SerializeField] private GameObject _VictoryScreen;
+    [SerializeField] private DefeatScreen _DefeatScreen;
+    [SerializeField] private VictoryScreen _VictoryScreen;
 
     [Header("Game Speed Controls")]
     [SerializeField] private Button _PauseButton;
@@ -99,7 +99,7 @@ public class HUD : MonoBehaviour
     /// <param name="testVictoryScreen"></param>
     private void TestRandomWinLoseText(bool testVictoryScreen = true)
     {
-        GameObject screen = testVictoryScreen ? _VictoryScreen : _DefeatScreen;
+        GameObject screen = testVictoryScreen ? _VictoryScreen.gameObject : _DefeatScreen.gameObject;
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -216,7 +216,7 @@ public class HUD : MonoBehaviour
         Instance.CatsRemainingLabel.gameObject.SetActive(false);
         Instance._PauseButton.gameObject.SetActive(false);
 
-        Instance._VictoryScreen.SetActive(true);
+        Instance._VictoryScreen.Show();
     }
 
     public static void RevealDefeat()
@@ -226,7 +226,7 @@ public class HUD : MonoBehaviour
         Instance.CatsRemainingLabel.gameObject.SetActive(false);
         Instance._PauseButton.gameObject.SetActive(false);
 
-        Instance._DefeatScreen.SetActive(true);
+        Instance._DefeatScreen.Show();
     }
 
     public static void ShowPauseButton()

@@ -20,9 +20,12 @@ public class VictoryScreen : MonoBehaviour
     [SerializeField]
     private AudioSource _victorySound;
 
+    private bool _HasShown = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        _HasShown = false;
         gameObject.SetActive(false);
     }
 
@@ -31,7 +34,6 @@ public class VictoryScreen : MonoBehaviour
         // Select a random display text every time this panel is opened.
         SelectRandomDisplayText();
         _victorySound.Play();
-        PlayerDataManager.Instance.UpdateLevelsCompleted(1);
     }
 
     private void SelectRandomDisplayText()
@@ -73,6 +75,7 @@ public class VictoryScreen : MonoBehaviour
 
     public void Show()
     {
+        PlayerDataManager.Instance.UpdateLevelsCompleted(1);
         gameObject.SetActive(true);
     }
 
