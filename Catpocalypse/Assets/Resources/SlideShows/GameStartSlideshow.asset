@@ -18,7 +18,7 @@ MonoBehaviour:
   _fadeColor: {r: 0, g: 0, b: 0, a: 1}
   _fadeSlideShowInAndOut: 1
   _advancementMode: 0
-  _sceneToLoadOnSlideShowComplete: 
+  _sceneToLoadOnSlideShowComplete: Tutorial
   _slides:
   - _displayTime: 5
     _backgroundColor: {r: 0, g: 0, b: 0, a: 1}

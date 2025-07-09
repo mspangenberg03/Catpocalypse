@@ -63,8 +63,7 @@ public class LevelSelectScreen : MonoBehaviour
 
     public void ButtonClicked_TutorialLevel()
     {
-        SceneLoader_Async.LoadSceneAsync("TutorialSlideShow");
-        SceneLoader_Async.LoadSceneAsync("Tutorial");
+        //SceneLoader_Async.LoadSceneAsync("Tutorial");
     }
 
     public void ButtonClicked_Level1()

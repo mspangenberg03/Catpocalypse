@@ -29,6 +29,6 @@ public class StorySlideShowScene : MonoBehaviour
 
     private void OnSlideShowStopped(object sender, SlideShowPlayerEventArgs e)
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneLoader_Async.LoadSceneAsync("Tutorial");
     }
 }
