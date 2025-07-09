@@ -24,10 +24,8 @@ MonoBehaviour:
   UpgradeCost: 3
   Upgrade: 
   Special: Ball Shotgun
-  Description: 'The Yarn Ball tower shoots a yarn ball very fast towards a cat, which
-    makes it chase it. This distracts the cat a lot.
-
-
-    Kitties love yarn balls,
-    so let''s exploit that by firing speedy yarn balls at them so they''ll have to
-    chase them off the garden in awe!'
+  Description: "This tower shoots a yarn ball very fast towards a cat, which makes
+    it chase it. A huge and fast yarn is the perfect distraction tool for hardy cats!\n\r\nStrengths:
+    Highest Distraction! Perfect for sturdy cats.\r\nWeakness: Somewhat slow to fire,
+    low range.\n\nKitties love yarn balls, so let's exploit that by firing speedy
+    yarn balls at them so they'll have to chase them off the garden in awe!\r"

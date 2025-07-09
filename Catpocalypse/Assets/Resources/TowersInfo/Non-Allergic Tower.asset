@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Non-Allergic Tower
   m_EditorClassIdentifier: 
   distractValue: 10
-  fireRate: 2
+  fireRate: 4
   buildCost: 200
   upgradeCost: 250
-  range: 11.82
+  range: 10

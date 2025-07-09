@@ -19,16 +19,21 @@ MonoBehaviour:
   Damage: 3
   Range: 4
   AOE_Range: 0
-  FireRate: 2
+  FireRate: 4
   CoolDown: 1
   UpgradeCost: 3
   Upgrade: Adds more cucumbers
   Special: Cheap
-  Description: 'The standard tower, it launches cucumbers to scare the more cowardly
-    cats while the braver cats play with them! Each launched cucumber can somewhat
-    distract a single cat.
+  Description: 'The standard tower, it launches cucumbers at the nearest cat and
+    scares them on contact. Braver cats are not so easily scared though!
 
 
-    Science can never tell why cats got bamboozled by
-    cucumbers, but since they are, launching cucumbers at them will surely distract
-    them from everything!'
+    Strength:
+    Consistent, Single Targets.
+
+    Weakness: Tough Cats.
+
+
+    Science can never
+    tell why cats got bamboozled by cucumbers, but since they are, launching cucumbers
+    at them will surely distract them from everything!'
