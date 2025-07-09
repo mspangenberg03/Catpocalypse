@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6115,7 +6115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae4bba34f5e84d4684c69211b6ae49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelName: Level 2
+  _levelName: Level2
   _sceneToLoad: Level2
   _Tooltip: {fileID: 1742631105}
   _EnableToolTip: 1
@@ -9759,7 +9759,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1893781212}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9995702
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

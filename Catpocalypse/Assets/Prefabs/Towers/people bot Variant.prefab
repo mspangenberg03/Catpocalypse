@@ -709,8 +709,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e605d2cc970259e408f1a5efc7edcc2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectLength: 25
-  petRate: 1
+  effectLength: 2
+  petRate: 4
   speed: 5
   _personSound: {fileID: 9172074808698999897}
   NavController: {fileID: 0}

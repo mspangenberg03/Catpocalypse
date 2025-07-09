@@ -27,7 +27,14 @@ MonoBehaviour:
   Description: 'This tower launches itself as a rocket near the cats, slowing all
     cats as they get tempted to rub themselves on it!
 
+    
 
-    Cats love scratches and
-    can never say no to them. These scratch-post projectiles should keep them pinned
-    on contact!'
+    Strengths: AOE
+    Slow and distraction!
+
+    Weakness: Only one projectile, slow cooldown, low
+    distraction value.
+
+
+    Cats love scratches and can never say no to them. These
+    scratch-post projectiles should keep them pinned on contact!'
