@@ -300,13 +300,13 @@ MonoBehaviour:
   refundPercentage: 0.85
   range: {fileID: 560913167619528523}
   radius: 20
-  distractValue: 80
+  distractValue: 85
   numberOfTargets: 0
   targets: []
   towerLevel: 1
   upgradeCost: 0
   _cutenessChallengeActive: 0
-  fireRate: 2.4
+  fireRate: 1.9
   towerStats: {fileID: 11400000, guid: 9102cc67656cb6e4e99fb9c990781b2c, type: 2}
   _towerSound: {fileID: 8294513549241816052}
   maxLevel: 4
