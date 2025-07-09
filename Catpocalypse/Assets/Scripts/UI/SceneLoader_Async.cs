@@ -113,7 +113,12 @@ public class SceneLoader_Async : MonoBehaviour
             return;
         }
 
-        // Select a randome message.
+        // Get build index and check if scene exists 
+        if (!IsSceneInBuild(sceneToLoad))
+        {
+            throw new NullReferenceException($"\"{sceneToLoad}\" does not exist");
+        }
+        // Select a random message.
         int index = Random.Range(0, _LoadingScreenMessages.Count);
 
         // Display the randomly selected message.
@@ -194,5 +199,20 @@ public class SceneLoader_Async : MonoBehaviour
     private void OnAnyInput(InputControl control)
     {
         ReceivedInput = true;
+    }
+
+    private bool IsSceneInBuild(string sceneName)
+    {
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+        for (int i = 0; i < sceneCount; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneFileName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+            if (string.Equals(sceneFileName, sceneName, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
