@@ -12,9 +12,8 @@ public class NonAllergicPerson : MonoBehaviour
     private Fortifications fort;
     private bool isPetting = false; //Is the person petting a cat
     private CatBase target;
-    private List<GameObject> catsInRange; //The cats that are in range of the collider
     private Animation animator;
-
+   
     [SerializeField, Tooltip("How long the person pets the cats"), Min(1)]
     private int effectLength;
     [SerializeField, Tooltip("How often the person pets the cat")]
@@ -34,7 +33,6 @@ public class NonAllergicPerson : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         tower = transform.parent.gameObject.GetComponent<NonAllergicTower>();
         fort = transform.parent.gameObject.GetComponent<Fortifications>();
-        catsInRange = new List<GameObject>();
         animator = GetComponent<Animation>();
         agent.speed = speed;
         if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 1)
@@ -50,7 +48,7 @@ public class NonAllergicPerson : MonoBehaviour
         if(tower != null)
         {
             //Sets destination to rallypoint if there are no targets
-            if(tower.targets.Count == 0 && transform.position != tower.GetRallyPoint())
+            if(tower.targets.Count == 0 && agent.destination != tower.GetRallyPoint())
             {
                 agent.destination = tower.GetRallyPoint();
             }
@@ -67,7 +65,7 @@ public class NonAllergicPerson : MonoBehaviour
             if (target != null && !tower.targets.Contains(target.gameObject))
             {
                 RemoveTarget();
-
+                StopTargetingCat();
             }
         }
         if (fort != null)
@@ -139,7 +137,6 @@ public class NonAllergicPerson : MonoBehaviour
         {
             target.isATarget = true;
             agent.SetDestination(target.transform.position);
-            Debug.Log("Chasing a cat");
         }
     }
     //Finds the distance between the person and the cat
@@ -147,7 +144,7 @@ public class NonAllergicPerson : MonoBehaviour
     {
         float distance = 0f;
         float xDist = Mathf.Pow(transform.position.x - cat.transform.position.x,2);
-        float yDist =  Mathf.Pow(transform.position.x - cat.transform.position.x, 2);
+        float yDist =  Mathf.Pow(transform.position.z - cat.transform.position.z, 2);
         distance = Mathf.Sqrt(xDist + yDist);
         return distance;
     }
@@ -185,6 +182,7 @@ public class NonAllergicPerson : MonoBehaviour
             if (other.gameObject.GetInstanceID() == tower.gameObject.GetInstanceID())
             {
                 RemoveTarget();
+                StopTargetingCat();
             }
         }
         if (fort != null)
@@ -237,16 +235,20 @@ public class NonAllergicPerson : MonoBehaviour
             tower.targets.Remove(target.gameObject);
         }
         StopAllCoroutines();
+        StopTargetingCat();
+        isPetting = false;
+        
+    }
+    private void StopTargetingCat()
+    {
         if (target != null)
         {
             target.isATarget = false;
             target.stoppingEntities.Remove(gameObject);
             target = null;
-            
+            agent.destination = tower.GetRallyPoint();
+
         }
         isPetting = false;
-        
     }
-
-
 }
