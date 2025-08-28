@@ -8,18 +8,24 @@ public class Tower : MonoBehaviour
 {
     [Tooltip("This field gives us an easy way to find the TowerInfo object that corresponds to this tower.")]
     [SerializeField] TowerTypes towerTypeTag;
-    [SerializeField,Min(1)] protected float buildCost;
 
+    [SerializeField,Min(1)]
+    protected float buildCost;
+    
     [Tooltip("This is the percentage of the cost that is refunded when the player destroys the tower.")]
     [Range(0f, 1f)]
-    [SerializeField] protected float refundPercentage = 0.85f;
+    [SerializeField]
+    protected float refundPercentage = 0.85f;
 
     [Tooltip("This SphereCollider defines the range of the tower.")]
-    [SerializeField] protected SphereCollider range;
-
-    [SerializeField] protected float radius;
-    [SerializeField, Min(1)] protected float distractValue;
-    [SerializeField] protected int numberOfTargets;
+    [SerializeField]
+    protected SphereCollider range;
+    [SerializeField]
+    protected float radius;
+    [SerializeField, Min(1)]
+    protected float distractValue;
+    [SerializeField]
+    protected int numberOfTargets;
 
     protected Vector3 targetDirection;
     public List<GameObject> targets;
@@ -35,7 +41,8 @@ public class Tower : MonoBehaviour
     public bool _cutenessChallengeActive = false;
     PlayerCutenessManager _cutenessManager;
 
-    [SerializeField] protected float fireRate;
+    [SerializeField]
+    protected float fireRate;
 
     // This just caches the default rally point position for this tower.
     protected Vector3 _DefaultRallyPoint;
@@ -49,17 +56,23 @@ public class Tower : MonoBehaviour
     // The closest waypoint to the Rally Point. Will be null if no WayPoints are within the tower's range.
     protected WayPoint _ClosestWayPointToRP;
 
-    [SerializeField] public TowerData towerStats;
-    [SerializeField] public AudioSource _towerSound;
-    [SerializeField] public int maxLevel = 4;
-    [SerializeField] public TowerUpgradesData _towerUpgradesData;
-    [SerializeField] private Animator _Animator;
+    [SerializeField]
+    public TowerData towerStats;
+    [SerializeField]
+    public AudioSource _towerSound;
 
+    [SerializeField]
+    public int maxLevel = 4;
+
+    [SerializeField]
+    public TowerUpgradesData _towerUpgradesData;
 
     protected void Awake()
     {
         range.radius = radius;
         RangeRadius = range.radius;
+        
+        FindDefaultRallyPoint();
         upgradeCost = towerStats.UpgradeCost;
     }
 
@@ -84,7 +97,6 @@ public class Tower : MonoBehaviour
         {
             gameObject.GetComponent<CucumberTower>().buffCats = true;
         }
-        FindDefaultRallyPoint();
     }
     
     protected void OnEnable()
@@ -447,5 +459,4 @@ public class Tower : MonoBehaviour
     }
 
     public TowerTypes TowerTypeTag { get { return towerTypeTag; } }
-    public Animator Animator {  get {  return _Animator; } }
 }

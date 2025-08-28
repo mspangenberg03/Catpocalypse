@@ -19,14 +19,11 @@ public class CatState_Stopped : CatState_Base
     public override void OnEnter()
     {
         _parent.gameObject.GetComponent<NavMeshAgent>().speed = 0;
-        _parentCat.Animator.SetBool("Stopped", true);
-
     }
 
     public override void OnExit()
     {
-        _parent.gameObject.GetComponent<NavMeshAgent>().speed = _parentCat.speed;
-        _parentCat.Animator.SetBool("Stopped", false);
+        _parent.gameObject.GetComponent<NavMeshAgent>().speed = _parent.GetComponent<CatBase>().speed;
     }
 
     public override void OnUpdate()

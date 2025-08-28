@@ -89,10 +89,13 @@ public class TowerSpawn : MonoBehaviour
     {
         if(towerBase.tower == null)
         {
-            towerBase.tower = Instantiate(laserPointerTowerPrefab, transform, false).GetComponent<Tower>();
+            towerBase.tower = Instantiate(laserPointerTowerPrefab, transform, true).GetComponent<Tower>();
             towerBase.tower.ParentTowerBase = towerBase;
+
             LaserPointerTower laserPointerTower = laserPointerTowerPrefab.GetComponent<LaserPointerTower>();
             towerBase.refundVal = laserPointerTower.BuildCost * laserPointerTower.GetRefundPercentage();
+
+            towerBase.tower.transform.position = transform.position;
             towerBase.hasTower = true;
         }
 
@@ -102,10 +105,12 @@ public class TowerSpawn : MonoBehaviour
     {
         if (towerBase.tower == null)
         {
-            towerBase.tower = Instantiate(scratchPostTowerPrefab, transform, false).GetComponent<Tower>();
+            towerBase.tower = Instantiate(scratchPostTowerPrefab, transform, true).GetComponent<Tower>();
 
             ScratchingPostTower scratchingPostTower = scratchPostTowerPrefab.GetComponent<ScratchingPostTower>();
             towerBase.refundVal = scratchingPostTower.towerStats.BuildCost * scratchingPostTower.GetRefundPercentage();
+
+            towerBase.tower.transform.position = transform.position;
             towerBase.tower.ParentTowerBase = towerBase;
             towerBase.hasTower = true;
         }
@@ -116,9 +121,12 @@ public class TowerSpawn : MonoBehaviour
     {
         if (towerBase.tower == null)
         {
-            towerBase.tower = Instantiate(cucumberTowerPrefab, transform, false).GetComponent<Tower>();
+            towerBase.tower = Instantiate(cucumberTowerPrefab, transform, true).GetComponent<Tower>();
+
             CucumberTower cucumberTower = cucumberTowerPrefab.GetComponent<CucumberTower>();
             towerBase.refundVal = cucumberTower.towerStats.BuildCost * cucumberTower.GetRefundPercentage();
+
+            towerBase.tower.transform.position = transform.position;
             towerBase.tower.ParentTowerBase = towerBase;
             towerBase.hasTower = true;
         }
@@ -129,9 +137,12 @@ public class TowerSpawn : MonoBehaviour
     {
         if (towerBase.tower == null)
         {
-            towerBase.tower = Instantiate(stringWaverTowerPrefab, transform, false).GetComponent<Tower>();
+            towerBase.tower = Instantiate(stringWaverTowerPrefab, transform, true).GetComponent<Tower>();
+
             StringWaverTower stringWaverTower = stringWaverTowerPrefab.GetComponent<StringWaverTower>();
             towerBase.refundVal = stringWaverTower.towerStats.BuildCost * stringWaverTower.GetRefundPercentage();
+
+            towerBase.tower.transform.position = transform.position;
             towerBase.tower.ParentTowerBase = towerBase;
             towerBase.hasTower = true;
         }
@@ -142,9 +153,12 @@ public class TowerSpawn : MonoBehaviour
     {
         if (towerBase.tower == null)
         {
-            towerBase.tower = Instantiate(yarnBallTowerPrefab, transform, false).GetComponent<Tower>();
+            towerBase.tower = Instantiate(yarnBallTowerPrefab, transform, true).GetComponent<Tower>();
+
             YarnBallTower yarnBallTower = yarnBallTowerPrefab.GetComponent<YarnBallTower>();
             towerBase.refundVal = yarnBallTower.towerStats.BuildCost * yarnBallTower.GetRefundPercentage();
+
+            towerBase.tower.transform.position = transform.position;
             towerBase.tower.ParentTowerBase = towerBase;
             towerBase.hasTower = true;
         }
@@ -156,9 +170,12 @@ public class TowerSpawn : MonoBehaviour
     {
         if (towerBase.tower == null)
         {
-            towerBase.tower = Instantiate(nonAllergicPrefab, transform, false).GetComponent<Tower>();
+            towerBase.tower = Instantiate(nonAllergicPrefab, transform).GetComponent<Tower>();
+
             NonAllergicTower nonAllergic = nonAllergicPrefab.GetComponent<NonAllergicTower>();
             towerBase.refundVal = nonAllergic.towerStats.BuildCost * nonAllergic.GetRefundPercentage();
+
+            towerBase.tower.transform.position = new Vector3(towerBase.tower.transform.position.x + 0.5f, transform.position.y, transform.position.z - 0.5f);
             towerBase.tower.ParentTowerBase = towerBase;
             towerBase.hasTower = true;
         }
