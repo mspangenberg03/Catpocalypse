@@ -33,6 +33,9 @@ public class CatBase : MonoBehaviour
         set { distractionThreshold = value; }
     }
 
+    [Tooltip("How much money to player gets for distracting this type of cat.")]
+    [SerializeField] protected float distractReward = 50;
+
     [Min(0f)]
     [SerializeField] protected float damageToPlayer = 2f; //How much health the cat takes from the player
 
@@ -40,12 +43,11 @@ public class CatBase : MonoBehaviour
     [Tooltip("The Cat Speed")]
     [Min(0f)]
     public float speed;
-    
+
     [Tooltip("Controls the cat's navigation")]
     public NPCNavigationController NavController;
 
-    [Tooltip("How much money to player gets for distracting this type of cat.")]
-    [SerializeField] protected float distractReward = 50;
+    [SerializeField] private Animator _Animator;
 
     [Header("Distractedness Meter")]
     [SerializeField] protected float _DistractednessMeterHeightAboveCat = 2f;
@@ -72,12 +74,12 @@ public class CatBase : MonoBehaviour
     private StateMachine _stateMachine;
     public bool spedUp = false;
 
-    [SerializeField]
-    private PlayerUpgradeData _upgradeData;
-    [SerializeField]
-    private int _cutenessReduction = 2;
+    [SerializeField] private PlayerUpgradeData _upgradeData;
+
+    [SerializeField] private int _cutenessReduction = 2;
 
     public bool _affectedByParticles = false;
+
     // Start is called before the first frame update
     void Start()    
     {
@@ -100,6 +102,8 @@ public class CatBase : MonoBehaviour
 
             InitStateMachine();
         }
+
+        _Animator = GetComponent<Animator>();
     }
 
     /// <summary>
@@ -268,4 +272,5 @@ public class CatBase : MonoBehaviour
     public float Distraction { get { return distraction; } set { distraction = value; } }
     public float DistractionReward { get { return distractReward; } }
     public bool IsDead { get; private set; }
+    public Animator Animator { get { return _Animator; } }
 }

@@ -17,7 +17,7 @@ public class CatState_Moving : CatState_Base
 
     public override void OnEnter()
     {
-        base.OnEnter(); 
+        base.OnEnter();
     }
 
     public override void OnExit()

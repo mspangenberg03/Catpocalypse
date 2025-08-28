@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerBaseCorner
       objectReference: {fileID: 0}
+    - target: {fileID: 1182513441486452027, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
+      propertyPath: towerNotHovered
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b282ef9a26c17443a73406f70e910be, type: 2}
     - target: {fileID: 3753089515166587938, guid: eb060bb96e8b3af44919fdea4c2b05b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.14

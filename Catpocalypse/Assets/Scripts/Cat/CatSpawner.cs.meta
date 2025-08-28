@@ -3,7 +3,14 @@ guid: 4ff1850133f72ce4392fb1774ddc064a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _SpawnPoint1: {instanceID: 0}
+  - _NormalCat: {fileID: 1589074876568128993, guid: 572ce69c6cf5e804a91d52f0edc3c4c7, type: 3}
+  - _HeavyCat: {instanceID: 0}
+  - _LightCat: {instanceID: 0}
+  - _NormalBoxCat: {instanceID: 0}
+  - _HeavyBoxCat: {instanceID: 0}
+  - _CutenessManager: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
