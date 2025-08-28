@@ -9,18 +9,18 @@ public class TowerState_Active_Base : TowerState_Base
     public TowerState_Active_Base(Tower parent)
         : base(parent)
     {
-
+        
     }
 
 
     public override void OnEnter()
     {
-        
+        _parentTower.Animator.SetBool("Active", true);
     }
 
     public override void OnExit()
     {
-        
+        _parentTower.Animator.SetBool("Active", true);
     }
 
     public override void OnUpdate()

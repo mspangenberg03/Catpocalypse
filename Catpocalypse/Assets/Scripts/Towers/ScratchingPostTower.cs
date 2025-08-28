@@ -115,7 +115,6 @@ public class ScratchingPostTower : Tower
             //TODO: Make the launch animation
             GameObject post = Instantiate(_ScratchPost, destination, Quaternion.identity);
             post.GetComponent<ScratchingPost>().parentTower = gameObject;
-            
         }
         else
         {

@@ -14,13 +14,13 @@ public class TowerState_Idle_Base : TowerState_Base
 
 
     public override void OnEnter()
-    { 
-
+    {
+        _parentTower.Animator.SetBool("Idle", true);
     }
 
     public override void OnExit()
     {
-
+        _parentTower.Animator.SetBool("Idle", false);
     }
 
     public override void OnUpdate()
