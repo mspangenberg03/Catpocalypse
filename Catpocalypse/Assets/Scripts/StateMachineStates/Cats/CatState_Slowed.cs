@@ -19,13 +19,11 @@ public class CatState_Slowed : CatState_Base
     public override void OnEnter()
     {
         UpdateSlowedModifier();
-        _parentCat.Animator.SetBool("Slowed", true);
     }
 
     public override void OnExit()
     {
-        _parent.gameObject.GetComponent<NavMeshAgent>().speed = _parentCat.speed;
-        _parentCat.Animator.SetBool("Slowed", false);
+        _parent.gameObject.GetComponent<NavMeshAgent>().speed = _parent.GetComponent<CatBase>().speed;
     }
 
     public override void OnUpdate()
