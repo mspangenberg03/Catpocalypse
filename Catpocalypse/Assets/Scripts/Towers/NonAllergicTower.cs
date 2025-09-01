@@ -148,6 +148,8 @@ public class NonAllergicTower : Tower
             //Debug.LogWarning("Person left range of tower");
             //other.gameObject.GetComponent<NonAllergicPerson>()
         }
+        if(targets.Contains(other.gameObject))
+            targets.Remove(other.gameObject);
     }
     IEnumerator Spawner()
     {
