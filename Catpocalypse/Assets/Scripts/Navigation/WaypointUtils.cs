@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using UnityEngine;
 
 
@@ -16,9 +17,7 @@ public class WayPointUtils
     private List<WayPoint> _AllWayPointsInScene; // Holds all waypoints in the scene.
     private List<WayPoint> _StartWayPoints; // Holds way points that are not referenced by any otherway points.
     private List<WayPoint> _EndWayPoints; // Holds waypoints that do not have any next way points set.
-    private List<WayPoint> _OrphanedPoints; // Holds waypoints that are not referenced by any otherway points, and do not have any next waypoints set either.
-
-    private bool _IsInitialized;
+    private List<WayPoint> _OrphanedPoints; // Holds waypoints that are not referenced by any otherway points, and do not have any next waypoints set either. 
 
     public enum WayPointCompareResults
     {
@@ -97,7 +96,6 @@ public class WayPointUtils
 
         FindAllShortestPaths();
         //Debug.Log($"Total paths found: { _WayPointPaths.Count}");
-        _IsInitialized = true;
     }
 
     /// <summary>
@@ -230,6 +228,8 @@ public class WayPointUtils
                     WalkPathInfo clonedPath = walkPath.Clone();
                     clonedPath.VisitedPoints.Add(wayPoint);
                     clonedPath.DistanceTraveled += Vector3.Distance(currentWayPoint.transform.position, wayPoint.transform.position);
+                    clonedPath.A = clonedPath.StartPoint;
+                    clonedPath.B = wayPoint;
                     Endpoints endpoints = new Endpoints(walkPath.StartPoint, wayPoint);
                     if(_WayPointPaths.TryGetValue(endpoints, out WalkPathInfo existingPath))
                     {
@@ -255,6 +255,8 @@ public class WayPointUtils
                     WalkPathInfo clonedPath = walkPath.Clone();
                     clonedPath.VisitedPoints.Add(wayPoint);
                     clonedPath.DistanceTraveled += Vector3.Distance(currentWayPoint.transform.position, wayPoint.transform.position);
+                    clonedPath.A = clonedPath.StartPoint;
+                    clonedPath.B = wayPoint;
                     Endpoints endpoints = new Endpoints(walkPath.StartPoint, wayPoint);
                     if (_WayPointPaths.TryGetValue(endpoints, out WalkPathInfo existingPath))
                     {
@@ -445,7 +447,7 @@ public class WayPointUtils
         }
     }
 
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -464,130 +466,46 @@ public class WayPointUtils
             return WayPointCompareResults.B_IsNull;
         else if (a == b)
             return WayPointCompareResults.A_And_B_AreSamePoint;
-        return WayPointCompareResults.NoPathConnectsA_To_B;
-        /**
-        List<WalkPathInfo> results = new List<WalkPathInfo>();
 
+        WalkPathInfo closestPath = null;
 
-        if (!_IsInitialized)
-            //Init();
-
-
-        // Start walking through the waypoints from each starting point.
-        foreach (WayPoint startPoint in _StartWayPoints)
+        foreach (WayPoint startWayPoint in _StartWayPoints)
         {
-            WalkPathInfo walkPathInfo = new WalkPathInfo()
+            Endpoints pathPoints = new Endpoints(startWayPoint, a);
+            _WayPointPaths.TryGetValue(pathPoints, out WalkPathInfo path);
+            if (path != null)
             {
-                StartPoint = startPoint,
-                A = a,
-                B = b,
-            };
-
-
-            // Call the recursive path walking function to walk the path and record info along the way.
-            results.AddRange(WalkWaypointPath(walkPathInfo));
-
-        } // end foreach startPoint
-
-
-        // Now we need to check the results.
-        foreach (WalkPathInfo result in results)
-        {
-            //result.DEBUG_PrintWalkPathInfo();
-
-            // Did this particular path cross both waypoints A and B before it terminated?
-            if (result.VisitedA && result.VisitedB)
-            {
-                if (result.DistanceToA < result.DistanceToB)
-                    return WayPointCompareResults.A_IsBeforeB;
-                else if (result.DistanceToA > result.DistanceToB)
-                    return WayPointCompareResults.A_IsAfterB;
-            }
-        } // end foreach.
-
-
-        // None of the paths traversed visited both waypoints A and B, so return 0 to indicate that we didn't see any paths connecting them.
-        return WayPointCompareResults.NoPathConnectsA_To_B;
-    */
-    }
-    /**
-    /// <summary>
-    /// This recursive function starts at the specified start point, and then walks the path
-    /// until it reaches a dead end or a junction. If it reaches a junction, it will call itself
-    /// for each path branch. It will also return if it encounters a waypoint that has already
-    /// been visited to prevent any scenario where it could get stuck going in circles forever.
-    /// </summary>
-    /// <param name="walkPathInfo">An object containing data that needs to persist between the recursive calls of this function.</param>
-    /// <returns>A list of WalkPathInfos (one for each possible path encountered).</returns>
-    private List<WalkPathInfo> WalkWaypointPath(WalkPathInfo walkPathInfo)
-    {
-        List<WalkPathInfo> results = new List<WalkPathInfo>();
-
-        WayPoint currentPoint = walkPathInfo.StartPoint;
-
-        while (true)
-        {
-            walkPathInfo.DistanceTraveled++;
-
-            // If this point has already been visited, then simply return.
-            if (walkPathInfo.VisitedPoints.Contains(currentPoint))
-            {
-                results.Add(walkPathInfo);
-                break;
-            }
-
-            walkPathInfo.VisitedPoints.Add(currentPoint);
-
-            // Is the current waypoint A or B?
-            if (currentPoint == walkPathInfo.A)
-            {
-                walkPathInfo.VisitedA = true;
-                walkPathInfo.DistanceToA = walkPathInfo.DistanceTraveled;
-            }
-            else if (currentPoint == walkPathInfo.B)
-            {
-                walkPathInfo.VisitedB = true;
-                walkPathInfo.DistanceToB = walkPathInfo.DistanceTraveled;
-            }
-
-
-            // If the current waypoint is a deadend, or if both waypoints A and B have
-            // been visited, then break out of this loop.
-            if (currentPoint.NextWayPoints.Count <= 0 ||
-                (walkPathInfo.VisitedA && walkPathInfo.VisitedB))
-            {
-                results.Add(walkPathInfo);
-                break;
-            }
-
-
-            // If the current point is a junction point, then call this function once for each
-            // path branch, and then break out of this loop.
-            if (currentPoint.NextWayPoints.Count > 1)
-            {
-                foreach (WayPoint nextPoint in currentPoint.NextWayPoints)
+                if (closestPath == null)
                 {
-                    WalkPathInfo clone = walkPathInfo.Clone();
-                    clone.StartPoint = nextPoint;
-
-                    results.AddRange(WalkWaypointPath(clone));
-                } // end foreach
-
-                break;
+                    closestPath = path;
+                }
+                else
+                {
+                    if (closestPath.DistanceTraveled > path.DistanceTraveled)
+                    {
+                        closestPath = path;
+                    }
+                }
             }
-
-
-            // If this waypoint has multiple next waypoints, that was already handled above.
-            // The same is true if it has none. So here we just need to move our pointer to
-            // the next waypoint in line.
-            currentPoint = currentPoint.NextWayPoints[0];
-
-        } // end while
-
-
-        // Debug.Log($"Results Count: {results.Count}");
-
-        return results;
+        }
+        if (closestPath == null)
+        {
+            return WayPointCompareResults.NoPathConnectsA_To_B;
+        }
+        if (closestPath.VisitedPoints.Contains(b))
+        {
+            return WayPointCompareResults.A_IsAfterB;
+        }
+        Endpoints pathPointB = new Endpoints(b, closestPath.B);
+        _WayPointPaths.TryGetValue(pathPointB, out WalkPathInfo pathB);
+        if (pathB == null)
+        {
+            return WayPointCompareResults.NoPathConnectsA_To_B;
+        }
+        if (pathB.VisitedPoints.Contains(a))
+        {
+            return WayPointCompareResults.A_IsBeforeB;
+        }
+        return WayPointCompareResults.NoPathConnectsA_To_B;
     }
-    */
 }

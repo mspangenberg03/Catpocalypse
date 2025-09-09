@@ -48,7 +48,7 @@ public class LaserPointerTower : Tower
 
     private float rangeUpgradeMultiplier = .15f;
     // This holds a reference to the nearest node that has more than one possible next node.
-    private WayPoint _PathJunction;
+    [SerializeField] private WayPoint _PathJunction;
 
     // This is the arrow used to show which direction is currently selected while in the tower manipulation UI.
     private GameObject _Arrow;
@@ -56,7 +56,6 @@ public class LaserPointerTower : Tower
 
     private List<LaserInfo> _Lasers;
     private int _ActiveLasersCount; // The number of lasers that are currently active
-    private int level = 1;
     private bool suddenFlashUnlocked = false;
     /// <summary>
     /// This holds the index of the next way point cats should visit upon reaching the path junction.
@@ -228,12 +227,17 @@ public class LaserPointerTower : Tower
                     if (result == WayPointUtils.WayPointCompareResults.A_IsBeforeB ||
                         result == WayPointUtils.WayPointCompareResults.A_And_B_AreSamePoint)
                     {
-                        if (cat.NavController.NextWayPoint == PathJunction)
-                            targetInfo.IsApproachingJunction = true;
-
-                        TargetCat(targetInfo);
-
+                        if(_ClosestWayPointToRP != null)
+                        {
+                            Debug.Log($"Directing Cats to {_ClosestWayPointToRP}");
+                            cat.NavController.SetTargetLocation(_ClosestWayPointToRP);
+                        } else
+                        {
+                            Debug.Log($"Closest waypoint is null");
+                            break;
+                        }
                     }
+                    TargetCat(targetInfo);
                 }
             }
 
@@ -393,6 +397,8 @@ public class LaserPointerTower : Tower
                 break;
             }
         } // end for i
+
+        cat.NavController.SetTargetLocationToGoal();
 
     }
 
