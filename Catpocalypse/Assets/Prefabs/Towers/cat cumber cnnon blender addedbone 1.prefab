@@ -4986,17 +4986,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerTypeTag: 2
-  buildCost: 100
+  buildCost: 135
   refundPercentage: 0.85
   range: {fileID: 8155455745535888111}
   radius: 17
-  distractValue: 30
+  distractValue: 20
   numberOfTargets: 0
   targets: []
   towerLevel: 1
   upgradeCost: 200
   _cutenessChallengeActive: 0
-  fireRate: 0.55
+  fireRate: 1.2
   towerStats: {fileID: 11400000, guid: a572c91e31552ab4c9e133f4109ab9b9, type: 2}
   _towerSound: {fileID: 5135486971448524475, guid: cc1818080d9e1d74eacb86aa718088c2, type: 3}
   maxLevel: 4

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94636f7f71f6e549bb280b005aa28bd, type: 3}
   m_Name: YarnThrowerTower
   m_EditorClassIdentifier: 
-  distractValue: 80
-  fireRate: 1.9
-  buildCost: 200
+  distractValue: 65
+  fireRate: 3.2
+  buildCost: 150
   upgradeCost: 350
   range: 10

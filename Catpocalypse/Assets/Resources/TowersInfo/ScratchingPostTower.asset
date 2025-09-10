@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distractValue: 3
   fireRate: 4
-  buildCost: 125
+  buildCost: 160
   upgradeCost: 175
   range: 15

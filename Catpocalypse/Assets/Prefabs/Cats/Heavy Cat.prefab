@@ -592,8 +592,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _catType: 2
   _CutenessValue: 3
-  distractionThreshold: 150
-  distractReward: 22
+  distractionThreshold: 400
+  distractReward: 28
   damageToPlayer: 3
   speed: 2.42
   NavController: {fileID: 709844487360081861}

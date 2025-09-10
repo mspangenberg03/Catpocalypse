@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: WaveEnd_EveryWaveButFinal_30Money
   m_EditorClassIdentifier: 
   _Type: 0
-  _Amount: 30
-  _Limit: 1
-  _Description: The player is rewarded 30 money at the end of every wave except the
+  _Amount: 35
+  _Limit: 0
+  _Description: The player is rewarded 35 money at the end of every wave except the
     final one.
   _Conditions:
   - _Value1: 5
