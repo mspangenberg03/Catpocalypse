@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Scratching Post Tower
   Classification: Support/AOE
   Icon: {fileID: 21300000, guid: 19a3f3d98c5c8534fa64c336259adef7, type: 3}
-  Cost: 125
+  Cost: 160
   Damage: 2
   Range: 3
   AOE_Range: 1

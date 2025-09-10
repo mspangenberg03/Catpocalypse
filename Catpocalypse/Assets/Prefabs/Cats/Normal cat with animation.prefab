@@ -545,7 +545,7 @@ MonoBehaviour:
   _catType: 1
   _CutenessValue: 5
   distractionThreshold: 100
-  distractReward: 8
+  distractReward: 15
   damageToPlayer: 2
   speed: 0
   NavController: {fileID: 5518614768956298615}

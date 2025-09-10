@@ -212,11 +212,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerTypeTag: 1
-  buildCost: 125
-  refundPercentage: 0.85
+  buildCost: 160
+  refundPercentage: 1
   range: {fileID: 5069534529187621119}
   radius: 15
-  distractValue: 3
+  distractValue: 20
   numberOfTargets: 0
   targets: []
   towerLevel: 1

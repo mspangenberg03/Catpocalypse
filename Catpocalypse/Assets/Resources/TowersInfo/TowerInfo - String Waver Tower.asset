@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: String Waver Tower
   Classification: DPS/AOE
   Icon: {fileID: 21300000, guid: d510c03442b95164a98d001fadb3015f, type: 3}
-  Cost: 200
+  Cost: 175
   Damage: 4
   Range: 2
   AOE_Range: 1

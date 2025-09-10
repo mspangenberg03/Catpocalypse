@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Yarn Ball Tower
   Classification: DPS
   Icon: {fileID: 21300000, guid: a89a30f511667484da7d5a5b74e77231, type: 3}
-  Cost: 200
+  Cost: 150
   Damage: 5
   Range: 1
   AOE_Range: 0

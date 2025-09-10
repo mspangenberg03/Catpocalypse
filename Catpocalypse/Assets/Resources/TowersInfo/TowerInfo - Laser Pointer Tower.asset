@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Laser Pointer Tower
   Classification: Support/CC
   Icon: {fileID: 21300000, guid: 78740ddda3c962e4b988b0d61dc945a7, type: 3}
-  Cost: 150
+  Cost: 200
   Damage: 2
   Range: 4
   AOE_Range: 0
