@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: 'Non-Allergic Tower '
   Classification: Support/CC
   Icon: {fileID: 21300000, guid: fbef068844dcd93469cb7ab3dedd8346, type: 3}
-  Cost: 200
+  Cost: 185
   Damage: 2
   Range: 3
   AOE_Range: 1

@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Cucumber Tower
   Classification: DPS
   Icon: {fileID: 21300000, guid: 38d91e7a9b20ee14cb321d6ae6e078c0, type: 3}
-  Cost: 100
+  Cost: 125
   Damage: 3
   Range: 3
   AOE_Range: 0
