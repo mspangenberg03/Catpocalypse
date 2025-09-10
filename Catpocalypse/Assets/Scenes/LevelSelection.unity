@@ -6458,7 +6458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserPointerTowerPrefab: {fileID: 7182634298414620965, guid: 33a96b3b972bb83498205a54fb7c7da9, type: 3}
   scratchingPostTowerPrefab: {fileID: 1254490976779792569, guid: e773ab17325c9a7428190c14e794b5d7, type: 3}
-  cucumberTowerPrefab: {fileID: 8837913168520748913, guid: b22cd305e1ded1045b3dff20571e09ad, type: 3}
+  cucumberTowerPrefab: {fileID: 4005010671770162013, guid: bfe4334c1e4c3c54886a90609ba4c102, type: 3}
   stringWaverTowerPrefab: {fileID: 8302100752434070475, guid: 46a7766a63e9a284dbfc9a9111911ea2, type: 3}
   yarnBallTowerPrefab: {fileID: 6866161764830985498, guid: fa0307703c5c62741b8e7a11d64db026, type: 3}
   naTowerPrefab: {fileID: 8416910387943309860, guid: d559539c6bfb1024599ed3ae53bf900f, type: 3}
@@ -7894,6 +7894,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4137747137220010625, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4222055971852467177, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7908,6 +7912,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4222055971852467177, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4243777923591600416, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370198480281755813, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
@@ -8238,6 +8246,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7543106943805710931, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7732866853730115341, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8292,6 +8304,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7833788490322189636, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932699848061278082, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7941237205858716218, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
@@ -8430,7 +8446,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8855417493058034193, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8961030069522502325, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098991838729151697, guid: 771cdb66188243c4ba9270a5efae48a0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -9758,7 +9782,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1893781213}
   m_HandleRect: {fileID: 1893781212}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

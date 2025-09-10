@@ -10,13 +10,14 @@ using TMPro;
 public class TowerInfoPopupUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _TitleText;
-    [SerializeField] private TextMeshProUGUI _DescriptionText;
+    [SerializeField] private TextMeshProUGUI _ClassificationText;
+    [SerializeField] private Image _Icon;
     [SerializeField] private TextMeshProUGUI _CostText;
     [SerializeField] private TextMeshProUGUI _DamageText;
     [SerializeField] private TextMeshProUGUI _RangeText;
     [SerializeField] private TextMeshProUGUI _AOE_Text;
-    [SerializeField] private TextMeshProUGUI _FireRateText;
     [SerializeField] private TextMeshProUGUI _SpecialText;
+    [SerializeField] private List<TextMeshProUGUI> _AbilityList;
 
 
 
@@ -35,14 +36,13 @@ public class TowerInfoPopupUI : MonoBehaviour
 
     public void UpdatePopupUI(TowerInfo towerInfo)
     {
-        //_Icon.sprite = towerInfo.Icon;
+        _Icon.sprite = towerInfo.Icon;
         _TitleText.text = towerInfo.DisplayName;
-        _DescriptionText.text = towerInfo.Description;
+        _ClassificationText.text = towerInfo.Classification;
         _CostText.text = $"${towerInfo.Cost}";
         _DamageText.text = Utils.InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(Ratings), towerInfo.Damage));
         _RangeText.text = Utils.InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(Sizes), towerInfo.Range));
         _AOE_Text.text = Utils.InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(Sizes), towerInfo.AOE_Range));
-        _FireRateText.text = Utils.InsertSpacesBeforeCapitalLetters(Enum.GetName(typeof(Ratings), towerInfo.FireRate));
         _SpecialText.text = towerInfo.Special;
     }
 

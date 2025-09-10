@@ -116,7 +116,7 @@ public class CucumberTower : Tower
     private Vector3 _TargetPoint;
     private Vector3 _Direction;
     private void Fire(GameObject target)
-    {                     
+    {
         // Calculate distance between tower and target point.
         float distance = Vector3.Distance(transform.position, _TargetPoint);
 
