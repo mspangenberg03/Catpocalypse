@@ -20,7 +20,7 @@ public class TowerState_Active_Base : TowerState_Base
 
     public override void OnExit()
     {
-        _parentTower.Animator.SetBool("Active", true);
+        _parentTower.Animator.SetBool("Active", false);
     }
 
     public override void OnUpdate()

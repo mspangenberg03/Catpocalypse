@@ -293,10 +293,11 @@ MonoBehaviour:
   _catType: 5
   _CutenessValue: 5
   distractionThreshold: 300
+  distractReward: 50
   damageToPlayer: 5
   speed: 0
   NavController: {fileID: -351561568029942122}
-  distractReward: 50
+  _Animator: {fileID: 0}
   _DistractednessMeterHeightAboveCat: 2
   _DistractednessMeterPrefab: {fileID: 3512654570813597946, guid: e633f4d5486c0f542b4af3b4ecb326ae, type: 3}
   sounds:
@@ -387,7 +388,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0

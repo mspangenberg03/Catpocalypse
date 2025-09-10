@@ -9,15 +9,17 @@ public class TowerInfo : ScriptableObject
 {
     public TowerTypes TowerType;
     public string DisplayName;
+    public string Classification;
     public Sprite Icon;
     public float Cost;
     public Ratings Damage;
-    public Sizes Range;
-    public Sizes AOE_Range;
+    public Ratings Range;
+    public TargetTypes AOE_Range;
     public Ratings FireRate;
     public Ratings CoolDown;
     public Ratings UpgradeCost;
     public string Upgrade;
+    public List<string> Abilities;
 
     [Space(10)]
     [TextArea(4, 10)]
