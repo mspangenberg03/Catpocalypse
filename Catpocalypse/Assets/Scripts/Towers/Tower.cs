@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -283,6 +284,9 @@ public class Tower : MonoBehaviour
 
             _ClosestWayPointToRP = wayPoint;
 
+            // Defaults towers to look at the default Rally Point
+            Vector3 rallyPointposition = new Vector3(_DefaultRallyPoint.x, transform.position.y, _DefaultRallyPoint.z);
+            this.transform.LookAt(rallyPointposition);
 
             return true;
         }
