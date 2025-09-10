@@ -151,9 +151,9 @@ public class HUD : MonoBehaviour
         Instance.CatsRemainingLabel.text = $"{(totalCatsInWave - catsDefeated)}";
     }
 
-    public static void UpdateWaveNumberDisplay(int waveNumber)
+    public static void UpdateWaveNumberDisplay(int waveNumber, int totalWaves)
     {
-        Instance.WaveNumberLabel.text = $"{waveNumber}";
+        Instance.WaveNumberLabel.text = $"{waveNumber}/{totalWaves}";
     }
 
     public static void UpdatePlayerMoneyDisplay(float playerMoney)
