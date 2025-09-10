@@ -75,6 +75,7 @@ public class WaveManager : MonoBehaviour
                 _TotalWavesInLevel = spawner.GetComponent<CatSpawner>().NumberOfWaves;
             }
         }
+        HUD.UpdateWaveNumberDisplay(_WaveNumber, _TotalWavesInLevel);
         HUD.HideWaveDisplay();
         _WayPointUtils.Init();
     }
@@ -164,7 +165,7 @@ public class WaveManager : MonoBehaviour
                 HUD.RevealVictory();
             } else if (_WaveNumber <= _TotalWavesInLevel)
             {
-                HUD.UpdateWaveNumberDisplay(++_WaveNumber);
+                HUD.UpdateWaveNumberDisplay(++_WaveNumber, _TotalWavesInLevel);
             }
 
 
@@ -196,7 +197,7 @@ public class WaveManager : MonoBehaviour
             }
             else if (_WaveNumber <= _TotalWavesInLevel)
             {
-                HUD.UpdateWaveNumberDisplay(++_WaveNumber);
+                HUD.UpdateWaveNumberDisplay(++_WaveNumber, _TotalWavesInLevel);
             }
         }
     }

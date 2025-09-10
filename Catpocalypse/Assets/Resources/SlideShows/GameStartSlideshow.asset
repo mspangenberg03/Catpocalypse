@@ -22,7 +22,7 @@ MonoBehaviour:
   _slides:
   - _displayTime: 5
     _backgroundColor: {r: 0, g: 0, b: 0, a: 1}
-    _image: {fileID: 21300000, guid: ff1414b33feaa25449a1d5ab8d1992d8, type: 3}
+    _image: {fileID: 21300000, guid: 722ecb2e6ab4d3e42ab89f5f10be7c99, type: 3}
     _ImageScreenAlignment: 4
     _imageDisplayMode: 1
     _preserveAspectRatio: 1
@@ -44,7 +44,7 @@ MonoBehaviour:
     _fadeOutTimeOverride: -1
   - _displayTime: 5
     _backgroundColor: {r: 0, g: 0, b: 0, a: 1}
-    _image: {fileID: 21300000, guid: 4c200147a7cf0a349a455ed6a3ace041, type: 3}
+    _image: {fileID: 21300000, guid: c3d4606249aab314f84e3917519295dc, type: 3}
     _ImageScreenAlignment: 4
     _imageDisplayMode: 1
     _preserveAspectRatio: 1
