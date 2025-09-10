@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11de09fcc572514980e99381947260d, type: 3}
+  m_Name: GameStartSlideshow
+  m_EditorClassIdentifier: 
+  _defaultFadeInTime: 0.6
+  _defaultFadeOutTime: 0.6
+  _defaultTransitionDuration: 1
+  _fadeColor: {r: 0, g: 0, b: 0, a: 1}
+  _fadeSlideShowInAndOut: 1
+  _advancementMode: 0
+  _sceneToLoadOnSlideShowComplete: Tutorial
+  _slides:
+  - _displayTime: 5
+    _backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    _image: {fileID: 21300000, guid: 722ecb2e6ab4d3e42ab89f5f10be7c99, type: 3}
+    _ImageScreenAlignment: 4
+    _imageDisplayMode: 1
+    _preserveAspectRatio: 1
+    _customImageDisplaySize: {x: 100, y: 100}
+    _transitionType: 1
+    _transitionDurationOverride: -1
+    _fadeInTimeOverride: -1
+    _fadeOutTimeOverride: -1
+  - _displayTime: 5
+    _backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    _image: {fileID: 21300000, guid: 0d65b5d286a88e04081c4c787a866542, type: 3}
+    _ImageScreenAlignment: 4
+    _imageDisplayMode: 1
+    _preserveAspectRatio: 1
+    _customImageDisplaySize: {x: 100, y: 100}
+    _transitionType: 1
+    _transitionDurationOverride: -1
+    _fadeInTimeOverride: -1
+    _fadeOutTimeOverride: -1
+  - _displayTime: 5
+    _backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    _image: {fileID: 21300000, guid: c3d4606249aab314f84e3917519295dc, type: 3}
+    _ImageScreenAlignment: 4
+    _imageDisplayMode: 1
+    _preserveAspectRatio: 1
+    _customImageDisplaySize: {x: 100, y: 100}
+    _transitionType: 1
+    _transitionDurationOverride: -1
+    _fadeInTimeOverride: -1
+    _fadeOutTimeOverride: -1

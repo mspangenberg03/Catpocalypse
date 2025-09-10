@@ -14,21 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 2
   DisplayName: Cucumber Tower
+  Classification: DPS
   Icon: {fileID: 21300000, guid: 38d91e7a9b20ee14cb321d6ae6e078c0, type: 3}
-  Cost: 100
+  Cost: 125
   Damage: 3
-  Range: 4
+  Range: 3
   AOE_Range: 0
-  FireRate: 2
+  FireRate: 4
   CoolDown: 1
   UpgradeCost: 3
   Upgrade: Adds more cucumbers
-  Special: Cheap
-  Description: 'The standard tower, it launches cucumbers to scare the more cowardly
-    cats while the braver cats play with them! Each launched cucumber can somewhat
-    distract a single cat.
+  Abilities:
+  - Cheap
+  - Projectile
+  Special: Cheap and consistent single target distraction
+  Description: 'The standard tower, it launches cucumbers at the nearest cat and
+    scares them on contact. Braver cats are not so easily scared though!
 
 
-    Science can never tell why cats got bamboozled by
-    cucumbers, but since they are, launching cucumbers at them will surely distract
-    them from everything!'
+    Strength:
+    Consistent, Single Targets.
+
+    Weakness: Tough Cats.
+
+
+    Science can never
+    tell why cats got bamboozled by cucumbers, but since they are, launching cucumbers
+    at them will surely distract them from everything!'

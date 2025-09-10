@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94636f7f71f6e549bb280b005aa28bd, type: 3}
   m_Name: ScratchingPostTower
   m_EditorClassIdentifier: 
-  distractValue: 8
-  fireRate: 1
-  buildCost: 125
+  distractValue: 3
+  fireRate: 4
+  buildCost: 160
   upgradeCost: 175
-  range: 7.5
+  range: 15

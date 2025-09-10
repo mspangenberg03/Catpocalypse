@@ -14,14 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 5
   DisplayName: 'Non-Allergic Tower '
+  Classification: Support/CC
   Icon: {fileID: 21300000, guid: fbef068844dcd93469cb7ab3dedd8346, type: 3}
-  Cost: 200
+  Cost: 185
   Damage: 2
-  Range: 2
-  AOE_Range: 2
-  FireRate: 1
+  Range: 3
+  AOE_Range: 1
+  FireRate: 2
   CoolDown: 4
   UpgradeCost: 4
   Upgrade: Spawns more minions
-  Special: Spawns minions to distract cats
-  Description: Call upon your non-allergic friends to help fend off the cats
+  Abilities:
+  - Stun
+  - Patrols
+  Special: The non-allergic briefly stuns cats with a hug when they touch them.
+  Description: "By recruiting non-allergic citizens and financing a new cat-face,
+    we give a place for them to go out and snuggle with these tiny monstrosities
+    while we stay far away from them!\r\n\r\nStrengths: Stuns and distracts cats
+    with hugs!\r\nWeakness: Low walking speed, can only stop one cat per citizen.\n\nI-i-it\u2019s
+    not like we\u2019re jealous of them being able to hug cats...i-idiot!"

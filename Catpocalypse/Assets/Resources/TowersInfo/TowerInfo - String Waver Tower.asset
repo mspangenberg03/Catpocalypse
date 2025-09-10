@@ -14,20 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerType: 3
   DisplayName: String Waver Tower
+  Classification: DPS/AOE
   Icon: {fileID: 21300000, guid: d510c03442b95164a98d001fadb3015f, type: 3}
-  Cost: 200
-  Damage: 5
+  Cost: 175
+  Damage: 4
   Range: 2
-  AOE_Range: 6
+  AOE_Range: 1
   FireRate: 0
-  CoolDown: 6
+  CoolDown: 1
   UpgradeCost: 0
   Upgrade: 
-  Special: High AOE damage
+  Abilities:
+  - Damage Aura
+  - Circle AOE
+  Special: The string waver constantly waves around dealing medium DPS in a small
+    area
   Description: 'The string waver tower makes a ball of yarn and waves it in an hypnotic
     pattern, causing distraction per second to nearby cats while it''s waving the
     ball.
 
 
-    A cat can watch a granny weave for hours. We don''t have any granny
-    towers, but this string weaver would do just fine to distract nearby felines!'
+
+    Strengths: High AOE distraction!
+
+    Weakness: Low AOE range, fast
+    cats will dash through it!
+
+
+    A cat can watch a granny weave for hours. We
+    don''t have any granny towers, but this string weaver would do just fine to distract
+    nearby felines!'

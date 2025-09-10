@@ -55,8 +55,8 @@ public class CucumberTower : Tower
     
     private bool canSCBeFired = false;
     private bool firingSC = false;
-    private ParticleSystem _particle;
-    private ParticleSystem _fire;
+    [SerializeField] private ParticleSystem _particle;
+    [SerializeField] private ParticleSystem _fire;
     
     private new void Awake()
     {
@@ -71,8 +71,6 @@ public class CucumberTower : Tower
         base.Start();
         ApplyScrapUpgrades();
         StartCoroutine(Aim());
-        _particle = spawn.gameObject.GetComponent<ParticleSystem>();
-        _fire = fireSpawn.gameObject.GetComponent<ParticleSystem>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -118,7 +116,7 @@ public class CucumberTower : Tower
     private Vector3 _TargetPoint;
     private Vector3 _Direction;
     private void Fire(GameObject target)
-    {                     
+    {
         // Calculate distance between tower and target point.
         float distance = Vector3.Distance(transform.position, _TargetPoint);
 
@@ -138,7 +136,7 @@ public class CucumberTower : Tower
         // Spawn the cucumber.
         if (!firingSC)
         {
-
+            Debug.Log("Firing Cucumber");
             GameObject proj = Instantiate(cucumberPrefab, spawn.transform.position, Quaternion.identity);
             Cucumber cucumber = proj.gameObject.GetComponent<Cucumber>();
             cucumber.target = target;
@@ -201,6 +199,7 @@ public class CucumberTower : Tower
 
             // First get the horizontal rotation angle.
             float angleH = CalculateSignedAngle(_CurrentAimDirection, targetDirection, Vector3.up);
+            //Debug.Log($"_CurrentAimDirection: {_CurrentAimDirection}, targetDirection: {targetDirection}, Vector Up: {Vector3.up}");
             float rotAmount = _AimSpeed * Time.deltaTime;
 
             if (angleH < 0)
@@ -208,7 +207,8 @@ public class CucumberTower : Tower
 
             transform.Rotate(new Vector3(0, rotAmount, 0));
             _CurrentAimDirection = transform.forward;
-
+            _CurrentAimDirection.y = targetDirection.y;
+            Debug.Log($"angleH: {angleH}\n_AimThreshold: {_AimThreshold}");
             if (Mathf.Abs(angleH) <= _AimThreshold)
             {
                 Fire(target);

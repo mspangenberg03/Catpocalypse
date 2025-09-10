@@ -15,12 +15,12 @@ public class CatState_Idle_Base : CatState_Base
 
     public override void OnEnter()
     {
-
+        
     }
 
     public override void OnExit()
     {
-
+        
     }
 
     public override void OnUpdate()

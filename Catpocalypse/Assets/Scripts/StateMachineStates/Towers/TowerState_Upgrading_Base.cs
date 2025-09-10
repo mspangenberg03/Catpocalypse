@@ -15,11 +15,13 @@ public class TowerState_Upgrading_Base : TowerState_Base
     public override void OnEnter()
     {
         _parentTower.DisableTargetDetection();
+        _parentTower.Animator.SetBool("Upgrade", true);
     }
 
     public override void OnExit()
     {
-
+        _parentTower.EnableTargetDetection();
+        _parentTower.Animator.SetBool("Upgrade", false);
     }
 
     public override void OnUpdate()

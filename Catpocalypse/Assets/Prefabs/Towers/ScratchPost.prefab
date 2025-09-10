@@ -53,7 +53,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 4
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3728119725389862461
 MonoBehaviour:
@@ -67,8 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f200fc7a8d7a432478ec111a963b48a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedDebuff: 2.4
-  _Duration: 8
+  speedDebuff: 2.8
+  _Duration: 2
   _DurationTickTime: 1
   _Durability: 20
   _DurabilityRemovedByCat: 1

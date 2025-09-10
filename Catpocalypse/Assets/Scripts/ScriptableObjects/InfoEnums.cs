@@ -24,16 +24,20 @@ public enum TowerTypes
     NonAllergic,
 }
 
+public enum TargetTypes 
+{
+    SingleTarget,
+    MultiTarget,
+}
+
 public enum Ratings
 {
     None,
-    VeryLow,
-    Low,
-    SomewhatLow,
-    Average,
-    SomewhatHigh,
-    High,
-    VeryHigh,
+    F,
+    D,
+    C,
+    B,
+    A,
 }
 
 public enum Sizes
