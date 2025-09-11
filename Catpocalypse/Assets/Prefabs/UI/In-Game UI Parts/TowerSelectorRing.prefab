@@ -152,7 +152,7 @@ MonoBehaviour:
   cucumberTowerPrefab: {fileID: 4005010671770162013, guid: bfe4334c1e4c3c54886a90609ba4c102, type: 3}
   stringWaverTowerPrefab: {fileID: 8302100752434070475, guid: 46a7766a63e9a284dbfc9a9111911ea2, type: 3}
   yarnBallTowerPrefab: {fileID: 6866161764830985498, guid: fa0307703c5c62741b8e7a11d64db026, type: 3}
-  naTowerPrefab: {fileID: 8416910387943309860, guid: d559539c6bfb1024599ed3ae53bf900f, type: 3}
+  naTowerPrefab: {fileID: 8416910387943309860, guid: 364053e7134f89143853c3fc17f53eda, type: 3}
 --- !u!1 &7440417097142809241
 GameObject:
   m_ObjectHideFlags: 0
