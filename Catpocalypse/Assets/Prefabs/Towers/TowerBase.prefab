@@ -1033,6 +1033,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 7469279766281948507, guid: fdd664e1dfed8c74a81d92e310a79b44, type: 3}
+      propertyPath: nonAllergicPrefab
+      value: 
+      objectReference: {fileID: 8416910387943309860, guid: 364053e7134f89143853c3fc17f53eda, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
