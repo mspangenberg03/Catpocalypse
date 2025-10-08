@@ -66,18 +66,19 @@ public class NonAllergicTower : Tower
 
     protected override void ApplyScrapUpgrades()
     {
-        if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 0)
+        int purchasedUpgrades = PlayerDataManager.Instance.GetNAUpgrades();
+        if (purchasedUpgrades > 0)
         {
             // Placeholder for any future changes
-            if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 1)
+            if (purchasedUpgrades > 1)
             {
                 // Placeholder
-                if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 2)
+                if (purchasedUpgrades > 2)
                 {
                     personSpeed *= PlayerDataManager.Instance.Upgrades.NAMoveSpeedUpgrade;
-                    if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 3)
+                    if (purchasedUpgrades > 3)
                     {
-                        if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 4)
+                        if (purchasedUpgrades > 4)
                         {
 
                         }

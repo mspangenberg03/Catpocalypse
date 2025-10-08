@@ -27,18 +27,19 @@ public class StringWaverTower : Tower
 
     protected override void ApplyScrapUpgrades()
     {
-        if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 0)
+        int purchasedUpgrades = PlayerDataManager.Instance.GetStringUpgrades();
+        if (purchasedUpgrades > 0)
         {
             fireRate *= PlayerDataManager.Instance.Upgrades.StringWaverFrequencyUpgrade;
-            if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 1)
+            if (purchasedUpgrades > 1)
             {
                 range.radius *= PlayerDataManager.Instance.Upgrades.StringWaverRangeUpgrade;
-                if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 2)
+                if (purchasedUpgrades > 2)
                 {
                     distractValue *= PlayerDataManager.Instance.Upgrades.StringWaverDistractValueUpgrade;
-                    if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 3)
+                    if (purchasedUpgrades > 3)
                     {
-                        if (PlayerDataManager.Instance.CurrentData.stringUpgrades > 4)
+                        if (purchasedUpgrades > 4)
                         {
 
                         }

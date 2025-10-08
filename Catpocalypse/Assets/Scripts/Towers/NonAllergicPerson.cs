@@ -35,7 +35,7 @@ public class NonAllergicPerson : MonoBehaviour
         fort = transform.parent.gameObject.GetComponent<Fortifications>();
         animator = GetComponent<Animation>();
         agent.speed = speed;
-        if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 1)
+        if (PlayerDataManager.Instance.GetNAUpgrades() > 1)
         {
             agent.speed *= PlayerDataManager.Instance.Upgrades.NAMoveSpeedUpgrade;
         }
@@ -226,11 +226,11 @@ public class NonAllergicPerson : MonoBehaviour
 
     private void RemoveTarget()
     {
-        if (fort != null)
+        if (fort != null && target != null)
         {
             fort.targets.Remove(target.gameObject);
         }
-        if(tower != null)
+        if(tower != null && target != null)
         {
             tower.targets.Remove(target.gameObject);
         }

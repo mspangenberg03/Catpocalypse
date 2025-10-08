@@ -34,8 +34,10 @@ public class WaveManager : MonoBehaviour
 
     private PlayerMoneyManager _PlayerMoneyManager;
     private PlayerCutenessManager _cutenessManager;
+    private PlayerHealthManager _HealthManager;
 
     private bool _scrapRewarded = false;
+    private bool _Initialized = false;
 
     [SerializeField] AudioSource _waveSound;
     [SerializeField] AudioClip _startClip;
@@ -49,28 +51,32 @@ public class WaveManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogError("There is already a WaveManager in this scene. Self destructing!");
             Destroy(gameObject);
             return;
+        } else
+        {
+            CatBase.OnCatDied += OnCatDied;
+            CatBase.OnCatReachGoal += OnCatReachGoal;
         }
         Instance = this;
         _WayPointUtils = new WayPointUtils();
+        _WaveNumber = 1;
+        _SecondsSinceLevelStart = 0;
     }
 
     private void Start()
     {
         _PlayerMoneyManager = FindObjectOfType<PlayerMoneyManager>();
         _cutenessManager = GameObject.FindGameObjectWithTag("Goal").GetComponent<PlayerCutenessManager>();
-        CatBase.OnCatDied += OnCatDied;
-        CatBase.OnCatReachGoal += OnCatReachGoal;
+        _HealthManager = GameObject.FindObjectOfType<PlayerHealthManager>();
         _CatSpawners = new List<CatSpawner>();
         GameObject[] spawners = GameObject.FindGameObjectsWithTag("CatSpawnPoint");
 
-        foreach(GameObject spawner in spawners)
+        foreach (GameObject spawner in spawners)
         {
             CatSpawner catSpawner = spawner.GetComponent<CatSpawner>();
             _CatSpawners.Add(spawner.GetComponent<CatSpawner>());
-            if(spawner.GetComponent<CatSpawner>().NumberOfWaves > _TotalWavesInLevel)
+            if (spawner.GetComponent<CatSpawner>().NumberOfWaves > _TotalWavesInLevel)
             {
                 _TotalWavesInLevel = spawner.GetComponent<CatSpawner>().NumberOfWaves;
             }
@@ -78,6 +84,7 @@ public class WaveManager : MonoBehaviour
         HUD.UpdateWaveNumberDisplay(_WaveNumber, _TotalWavesInLevel);
         HUD.HideWaveDisplay();
         _WayPointUtils.Init();
+        _Initialized = true;
     }
 
     private void Update()
@@ -88,7 +95,7 @@ public class WaveManager : MonoBehaviour
             _SecondsSinceWaveStart += Time.deltaTime;
 
 
-        if (!_WaveInProgress && WaveNumber == _TotalWavesInLevel)
+        if (_Initialized && !_WaveInProgress && WaveNumber > _TotalWavesInLevel)
         {
             LevelCleared?.Invoke(this, EventArgs.Empty);
             if (!_scrapRewarded)
@@ -97,6 +104,8 @@ public class WaveManager : MonoBehaviour
                 _scrapRewarded = true;
             }
             HUD.RevealVictory();
+            _Initialized = false;
+            _WaveNumber = 1;
         }
     }
 
@@ -112,7 +121,7 @@ public class WaveManager : MonoBehaviour
         }
         _WaveInProgress = true;
         _waveSound.clip = _startClip;
-        _waveSound.volume = PlayerDataManager.Instance.CurrentData._SFXVolume;
+        _waveSound.volume = PlayerDataManager.Instance.GetSFXVolume();
         _waveSound.Play();
         Debug.Log("Start wave sound played");
 
@@ -160,9 +169,10 @@ public class WaveManager : MonoBehaviour
             //_waveSound.volume = PlayerDataManager.Instance.CurrentData._SFXVolume;
             //_waveSound.Play();
             Debug.LogWarning("End wave sound played");
-            if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
+            if (_Initialized && _WaveNumber >= _TotalWavesInLevel && !_HealthManager.IsPlayerDead)
             {
                 HUD.RevealVictory();
+                _Initialized = false;
             } else if (_WaveNumber <= _TotalWavesInLevel)
             {
                 HUD.UpdateWaveNumberDisplay(++_WaveNumber, _TotalWavesInLevel);
@@ -188,12 +198,13 @@ public class WaveManager : MonoBehaviour
             WaveEnded?.Invoke(this, EventArgs.Empty);
 
             _waveSound.clip = _endClip;
-            _waveSound.volume = PlayerDataManager.Instance.CurrentData._SFXVolume;
+            _waveSound.volume = PlayerDataManager.Instance.GetSFXVolume();
             _waveSound.Play();
             Debug.LogWarning("End wave sound played");
-            if (_WaveNumber >= _TotalWavesInLevel && !FindObjectOfType<PlayerHealthManager>().IsPlayerDead)
+            if (_Initialized &&_WaveNumber > _TotalWavesInLevel && !_HealthManager.IsPlayerDead)
             {
                 HUD.RevealVictory();
+                _Initialized = false;
             }
             else if (_WaveNumber <= _TotalWavesInLevel)
             {
@@ -222,13 +233,21 @@ public class WaveManager : MonoBehaviour
 
     private void OnWaveEnded(object sender, EventArgs e)
     {
-
+        if (_Initialized && _WaveNumber > _TotalWavesInLevel && !_HealthManager.IsPlayerDead)
+        {
+            HUD.RevealVictory();
+            _Initialized = false;
+        }
     }
 
     private void OnDestroy()
     {
         CatBase.OnCatDied -= OnCatDied;
         CatBase.OnCatReachGoal -= OnCatReachGoal;
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 
 
@@ -249,5 +268,7 @@ public class WaveManager : MonoBehaviour
     public float SecondsElapsedSinceWaveStarted { get { return _SecondsSinceWaveStart; } }
 
     public WayPointUtils WayPointUtils { get { return _WayPointUtils; } }
+
+    public bool Initialized {  get { return _Initialized; } }
 }
 

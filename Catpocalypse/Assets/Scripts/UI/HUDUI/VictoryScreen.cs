@@ -53,8 +53,7 @@ public class VictoryScreen : MonoBehaviour
                 tb.GetComponent<TowerBase>().DestroyTower();
             }
         }
-
-        //SceneManager.LoadScene("Level1");
+        PlayerDataManager.Instance.UpdateLevelsCompleted(1);
         SceneLoader_Async.LoadSceneAsync("LevelSelection");
     }
 
@@ -68,14 +67,12 @@ public class VictoryScreen : MonoBehaviour
                 tb.GetComponent<TowerBase>().DestroyTower();
             }
         }
-
-        //SceneManager.LoadScene("MainMenu");
+        PlayerDataManager.Instance.UpdateLevelsCompleted(1);
         SceneLoader_Async.LoadSceneAsync("MainMenu");
     }
 
     public void Show()
     {
-        PlayerDataManager.Instance.UpdateLevelsCompleted(1);
         gameObject.SetActive(true);
     }
 

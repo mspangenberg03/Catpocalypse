@@ -50,7 +50,7 @@ public class RobotProjectile : MonoBehaviour
         if (collision.gameObject.tag == "Cat")
         {
             CatBase target = collision.gameObject.GetComponent<CatBase>();
-            if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 4)
+            if (PlayerDataManager.Instance.GetRobotUpgrades() > 4)
             {
                 StartCoroutine(Stun(target));
             }

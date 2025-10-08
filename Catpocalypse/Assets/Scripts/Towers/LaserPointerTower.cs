@@ -33,7 +33,7 @@ public class LaserPointerTower : Tower
     [Tooltip("This sets the radius that the tower will search for the nearest path junction within.")]
     [Min(1f)]
     [SerializeField]
-    private float _PathJunctionDetectionRadius = 10f;
+    private float _PathJunctionDetectionRadius = 50f;
     
     [Header("Laser End Point")]
     [Tooltip("The laser sweeps back and forth across the path, and this value sets how wide the laser's sweep is.")]
@@ -108,17 +108,18 @@ public class LaserPointerTower : Tower
 
     protected override void ApplyScrapUpgrades()
     {
-        if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 0)
+        int purchasedUpgrade = PlayerDataManager.Instance.GetLaserUpgrades();
+        if (purchasedUpgrade > 0)
         {
-            if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 1)
+            if (purchasedUpgrade > 1)
             {
                 range.radius *= PlayerDataManager.Instance.Upgrades.LaserRangeUpgrade;
-                if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 2)
+                if (purchasedUpgrade > 2)
                 {
                     distractValue *= PlayerDataManager.Instance.Upgrades.LaserDistractionUpgrade;
-                    if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 3)
+                    if (purchasedUpgrade > 3)
                     {
-                        if (PlayerDataManager.Instance.CurrentData.laserUpgrades > 4)
+                        if (purchasedUpgrade > 4)
                         {
 
                         }
@@ -407,7 +408,7 @@ public class LaserPointerTower : Tower
         WayPoint closestWayPoint = null;
         float closestDistance = float.MaxValue;
 
-        foreach (Collider collider in Physics.OverlapSphere(transform.position, _PathJunctionDetectionRadius, LayerMask.GetMask("WayPoints")))
+        foreach (Collider collider in Physics.OverlapSphere(transform.position, range.radius * range.transform.lossyScale.x, LayerMask.GetMask("WayPoints")))
         {
             //Debug.Log("Found way point in range: " + collider.name);
             WayPoint p = collider.GetComponent<WayPoint>();

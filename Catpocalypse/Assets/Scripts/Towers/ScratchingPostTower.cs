@@ -39,10 +39,11 @@ public class ScratchingPostTower : Tower
 
     protected override void ApplyScrapUpgrades()
     {
-        if (PlayerDataManager.Instance.CurrentData.scratchUpgrades > 1)
+        int purchasedUpgrades = PlayerDataManager.Instance.GetScratchUpgrades();
+        if (purchasedUpgrades > 1)
         {
             fireRate *= PlayerDataManager.Instance.Upgrades.ScratchingPostFireRateUpgrade;
-            if (PlayerDataManager.Instance.CurrentData.scratchUpgrades > 4)
+            if (purchasedUpgrades > 4)
             {
                 
             }

@@ -39,12 +39,12 @@ public class AudioManager : MonoBehaviour
     private void Start() { 
         if (masterSlider != null && musicSlider != null && SFXSlider!= null)
         {
-            masterMixer.SetFloat("masterVolume", Mathf.Log(PlayerDataManager.Instance.CurrentData._MusicVolume) * 20);
-            masterMixer.SetFloat("musicVolume", Mathf.Log(PlayerDataManager.Instance.CurrentData._SFXVolume) * 20);
-            masterMixer.SetFloat("SFXVolume", Mathf.Log(PlayerDataManager.Instance.CurrentData._MasterVolume) * 20);
-            musicSlider.value = PlayerDataManager.Instance.CurrentData._MusicVolume;
-            SFXSlider.value = PlayerDataManager.Instance.CurrentData._SFXVolume;
-            masterSlider.value = PlayerDataManager.Instance.CurrentData._MasterVolume;
+            masterMixer.SetFloat("masterVolume", Mathf.Log(PlayerDataManager.Instance.GetMusicVolume()) * 20);
+            masterMixer.SetFloat("musicVolume", Mathf.Log(PlayerDataManager.Instance.GetSFXVolume()) * 20);
+            masterMixer.SetFloat("SFXVolume", Mathf.Log(PlayerDataManager.Instance.GetMasterVolume()) * 20);
+            musicSlider.value = PlayerDataManager.Instance.GetMusicVolume();
+            SFXSlider.value = PlayerDataManager.Instance.GetSFXVolume();
+            masterSlider.value = PlayerDataManager.Instance.GetMasterVolume();
             masterSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
             musicSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
             SFXSlider.onValueChanged.AddListener(OnSFXVolumeChanged);

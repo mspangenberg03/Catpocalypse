@@ -17,7 +17,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     private void Start()
     {
-        if(PlayerDataManager.Instance.CurrentData.fortificationUpgrades > 0)
+        if(PlayerDataManager.Instance.GetFortificationUpgrades() > 0)
         {
             maxHealth *= PlayerDataManager.Instance.Upgrades.MaxHealthUpgrade;
         }

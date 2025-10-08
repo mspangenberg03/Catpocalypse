@@ -6,12 +6,12 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerDataManager : MonoBehaviour
+public class PlayerDataManager: MonoBehaviour
 {
     public static PlayerDataManager Instance { get; private set; }
 
     private List<PlayerData> _PlayerData;
-    private PlayerData _trackedData;
+    private PlayerData _trackedData = new PlayerData(null);
     private PlayerUpgradeData _playerUpgradeData;
     private int maxSlots = 3;
     private int _CurrentData;
@@ -126,107 +126,430 @@ public class PlayerDataManager : MonoBehaviour
         return Application.persistentDataPath + "/PlayerData" + i + ".json";
     }
 
+    #region Update Methods
     public void SetName(string name)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.name = name;
     }
 
     public void UpdateScrap(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.scrap += amount;
     }
     public void UpdateLevelsCompleted(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.levelsCompleted += amount;
     }
     public void UpdateRobotUpgrades(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.robotUpgrades += amount;
     }
     public void UpdateFortificationUpgrades(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.fortificationUpgrades += amount;
     }
     public void UpdateLaserUpgrades(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.laserUpgrades += amount;
     }
     public void UpdateScratchUpgrades(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.scratchUpgrades += amount;
     }
     public void UpdateNAUpgrades(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.nAUpgrades += amount;
     }
     public void UpdateYarnUpgrades(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.yarnUpgrades += amount;
     }
     public void UpdateStringUpgrades(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.stringUpgrades += amount;
     }
     public void UpdateCucumberUpgrades(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.cucumberUpgrades += amount;
     }
 
     public void UpdateRewardUpgrade(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.catRewardUpgrades += amount;
     }
 
     private void UpdateTimePlayed()
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.time = Time.realtimeSinceStartup;
     }
 
     private void UpdateDatePlayed()
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.date = DateTime.Now;
     }
 
     public void UpdateMasterVolume(float amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData._MasterVolume = amount;
     }
 
     public void UpdateMusicVolume(float amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData._MusicVolume = amount;
     }
     public void UpdateSFXVolume(float amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData._SFXVolume = amount;
     }
 
     public void UpdateResolutionSize(int amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData._ResolutionSize = amount;
     }
 
     public void UpdateWindowed(bool value)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData.windowed = value;
     }
 
     public void UpdateXInversion(bool value)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData._MouseXInvert = value;
     }
 
     public void UpdateYInversion(bool value)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData._MouseYInvert = value;
     }
 
     public void UpdateMouseSensitivity(float amount)
     {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
         _trackedData._MouseSensitivity = amount;
     }
+    #endregion
 
-    public PlayerData CurrentData { get { return _trackedData; } }
+    #region Get Methods
+    public string GetName()
+    {
+        if( _trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.name;
+    }
+
+    public int GetScrap()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.scrap;
+    }
+    public int GetLevelsCompleted()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.levelsCompleted;
+    }
+    public int GetRobotUpgrades()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.robotUpgrades;
+    }
+    public int GetFortificationUpgrades()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.fortificationUpgrades;
+    }
+    public int GetLaserUpgrades()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.laserUpgrades;
+    }
+    public int GetScratchUpgrades()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.scratchUpgrades;
+    }
+    public int GetNAUpgrades()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.nAUpgrades;
+    }
+    public int GetYarnUpgrades()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.yarnUpgrades;
+    }
+    public int GetStringUpgrades()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.stringUpgrades;
+    }
+    public int GetCucumberUpgrades()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.cucumberUpgrades;
+    }
+
+    public int GetRewardUpgrade()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.catRewardUpgrades;
+    }
+
+    public float GetTimePlayed()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.time;
+    }
+
+    public DateTime GetDatePlayed()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.date;
+    }
+
+    public float GetMasterVolume()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData._MasterVolume;
+    }
+
+    public float GetMusicVolume()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData._MusicVolume;
+    }
+    public float GetSFXVolume()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData._SFXVolume;
+    }
+
+    public int GetResolutionSize()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData._ResolutionSize;
+    }
+
+    public bool GetWindowed()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData.windowed;
+    }
+
+    public bool GetXInversion()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData._MouseXInvert;
+    }
+
+    public bool GetYInversion()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData._MouseYInvert;
+    }
+
+    public float GetMouseSensitivity()
+    {
+        if (_trackedData == null)
+        {
+            Debug.LogWarning("No current save data used, initialized filler data to prevent crash");
+            _trackedData = new PlayerData(_playerUpgradeData);
+        }
+        return _trackedData._MouseSensitivity;
+    }
+    #endregion
+    //private PlayerData CurrentData { get { return _trackedData; } }
     public PlayerUpgradeData Upgrades { get { return _playerUpgradeData; } }
 
 }

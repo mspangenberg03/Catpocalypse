@@ -12,8 +12,8 @@ public class DisplayOptionsManager : MonoBehaviour
 
     void Start()
     {
-        resolutions.SetValueWithoutNotify(PlayerDataManager.Instance.CurrentData._ResolutionSize);
-        windowedToggle.SetIsOnWithoutNotify(PlayerDataManager.Instance.CurrentData.windowed);
+        resolutions.SetValueWithoutNotify(PlayerDataManager.Instance.GetResolutionSize());
+        windowedToggle.SetIsOnWithoutNotify(PlayerDataManager.Instance.GetWindowed());
         resolutions.onValueChanged.AddListener(OnResolutionChange);
         windowedToggle.onValueChanged.AddListener(OnWindowedChange);
     }
@@ -21,7 +21,7 @@ public class DisplayOptionsManager : MonoBehaviour
     private void OnResolutionChange(int resolution)
     {
         PlayerDataManager.Instance.UpdateResolutionSize(resolution);
-        Screen.SetResolution(1920, 1080, PlayerDataManager.Instance.CurrentData.windowed);
+        Screen.SetResolution(1920, 1080, PlayerDataManager.Instance.GetWindowed());
     }
 
     private void OnWindowedChange(bool windowed)

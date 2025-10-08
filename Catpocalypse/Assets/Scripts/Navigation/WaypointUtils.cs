@@ -262,7 +262,7 @@ public class WayPointUtils
                     {
                         if (existingPath.DistanceTraveled > clonedPath.DistanceTraveled)
                         {
-                            _WayPointPaths.Add(endpoints, clonedPath);
+                            _WayPointPaths[endpoints] = clonedPath;
                         }
                     }
                     else
