@@ -11,21 +11,27 @@ public class FortificationUpgrades : UpgradeCard
     [SerializeField, Tooltip("How much the player health is upgraded by")]
     private int _healthUpgrade = 2;
 
+    protected void Start()
+    {
+        base.Start();
+        upgradeLevel = PlayerDataManager.Instance.GetFortificationUpgrades();
+    }
+
     protected override void ChangeText()
     {
-        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.fortificationUpgrades];
-        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.fortificationUpgrades].ToString();
-        _LevelTextBox.text = (PlayerDataManager.Instance.CurrentData.fortificationUpgrades + 1).ToString();
-        _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.fortificationUpgrades];
+        _UpgradeTextBox.text = UpgradeText[upgradeLevel];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[upgradeLevel].ToString();
+        _LevelTextBox.text = (upgradeLevel + 1).ToString();
+        _FlavorTextBox.text = _FlavorText[upgradeLevel];
     }
     public override void Upgrade()
     {
-        if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.fortificationUpgrades] 
-            && PlayerDataManager.Instance.CurrentData.fortificationUpgrades < ScrapUpgradeCost.Count)
+        if (PlayerDataManager.Instance.GetScrap() >= ScrapUpgradeCost[upgradeLevel] 
+            && upgradeLevel < ScrapUpgradeCost.Count)
         {
             PlayerDataManager.Instance.UpdateFortificationUpgrades(1);
-            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.fortificationUpgrades]);
-            if (PlayerDataManager.Instance.CurrentData.fortificationUpgrades == ScrapUpgradeCost.Count)
+            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[upgradeLevel]);
+            if (upgradeLevel == ScrapUpgradeCost.Count)
             {
                 MaxUpgradeReached();
             }

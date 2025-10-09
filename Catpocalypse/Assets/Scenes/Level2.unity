@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2782,7 +2781,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: a0b46e5988763684cb525842f320861e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e740e8e8446b24d4699701a1c453b662, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &593804775
 PrefabInstance:
@@ -4878,6 +4877,7 @@ Terrain:
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
+  m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
@@ -5890,6 +5890,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6518220593020863747, guid: 107f43c1b8164be4eaad302fcb109ec4, type: 3}
   m_PrefabInstance: {fileID: 1192033223}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1202383295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1202383297}
+  - component: {fileID: 1202383296}
+  m_Layer: 0
+  m_Name: PlayerSaveData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1202383296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202383295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e5c16edae635c41957d3861769678d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1202383297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202383295}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12.9328575, y: 2.4324555, z: 21.41173}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1207766302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8195,6 +8239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CatSpawnerPod Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 9052982228436301773, guid: 7a855c25df8f35d44a7d94816cc077e4, type: 3}
+      propertyPath: m_TagString
+      value: CatSpawnPoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9322,7 +9370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4216561399455437625, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 340
       objectReference: {fileID: 0}
     - target: {fileID: 4216561399455437625, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_SizeDelta.y
@@ -11130,6 +11178,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!114 &1966234262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12202,12 +12251,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!4 &2127988436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 90c9eb7936b790c4d8ecdcdf0ba2f36c, type: 3}
@@ -12233,3 +12282,4 @@ SceneRoots:
   - {fileID: 1076348818}
   - {fileID: 1730101682}
   - {fileID: 1630747262}
+  - {fileID: 1202383297}

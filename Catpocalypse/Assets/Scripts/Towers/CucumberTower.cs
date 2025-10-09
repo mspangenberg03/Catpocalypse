@@ -92,18 +92,19 @@ public class CucumberTower : Tower
 
     protected override void ApplyScrapUpgrades()
     {
-        if(PlayerDataManager.Instance.CurrentData.cucumberUpgrades > 0)
+        int purchasedUpgrades = PlayerDataManager.Instance.GetCucumberUpgrades();
+        if(purchasedUpgrades > 0)
         {
             fireRate *= PlayerDataManager.Instance.Upgrades.CucumberFireRateUpgrade;
-            if (PlayerDataManager.Instance.CurrentData.cucumberUpgrades > 1)
+            if (purchasedUpgrades > 1)
             {
                 _AimSpeed *= PlayerDataManager.Instance.Upgrades.CucumberAimSpeedUpgrade;
-                if (PlayerDataManager.Instance.CurrentData.cucumberUpgrades > 2)
+                if (purchasedUpgrades > 2)
                 {
                     range.radius *= PlayerDataManager.Instance.Upgrades.CucumberRangeUpgrade;
-                    if (PlayerDataManager.Instance.CurrentData.cucumberUpgrades > 3)
+                    if (purchasedUpgrades > 3)
                     {
-                        if (PlayerDataManager.Instance.CurrentData.cucumberUpgrades > 4)
+                        if (purchasedUpgrades > 4)
                         {
 
                         }
@@ -136,7 +137,6 @@ public class CucumberTower : Tower
         // Spawn the cucumber.
         if (!firingSC)
         {
-            Debug.Log("Firing Cucumber");
             GameObject proj = Instantiate(cucumberPrefab, spawn.transform.position, Quaternion.identity);
             Cucumber cucumber = proj.gameObject.GetComponent<Cucumber>();
             cucumber.target = target;
@@ -148,7 +148,6 @@ public class CucumberTower : Tower
         //If firing a super cucumber
         else
         {
-            Debug.Log("SuperCuc fired");
             GameObject proj = Instantiate(superCucumberPrefab, spawn.transform.position, Quaternion.identity);
             SuperCucumber cucumber = proj.gameObject.GetComponent<SuperCucumber>();
             cucumber.target = target;
@@ -208,7 +207,6 @@ public class CucumberTower : Tower
             transform.Rotate(new Vector3(0, rotAmount, 0));
             _CurrentAimDirection = transform.forward;
             _CurrentAimDirection.y = targetDirection.y;
-            Debug.Log($"angleH: {angleH}\n_AimThreshold: {_AimThreshold}");
             if (Mathf.Abs(angleH) <= _AimThreshold)
             {
                 Fire(target);

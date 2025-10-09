@@ -45,7 +45,7 @@ public class TowerSpawn : MonoBehaviour
             case 4:
                 return yarnBallTowerPrefab.GetComponent<YarnBallTower>().towerStats.BuildCost;
             case 5:
-                if (PlayerDataManager.Instance.CurrentData.nAUpgrades > 0)
+                if (PlayerDataManager.Instance.GetNAUpgrades() > 0)
                 {
                     return nonAllergicPrefab.GetComponent<NonAllergicTower>().towerStats.BuildCost * PlayerDataManager.Instance.Upgrades.NABuildCostReduction;
                 }

@@ -5,22 +5,27 @@ using UnityEngine;
 
 public class RobotUpgrades : UpgradeCard
 {
+
+    protected void Start()
+    {
+        base.Start();
+        upgradeLevel = PlayerDataManager.Instance.GetRobotUpgrades();
+    }
     protected override void ChangeText()
     {
-        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.robotUpgrades];
-        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.robotUpgrades].ToString();
-        _LevelTextBox.text = PlayerDataManager.Instance.CurrentData.robotUpgrades.ToString();
-        _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.robotUpgrades];
+        _UpgradeTextBox.text = UpgradeText[upgradeLevel];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[upgradeLevel].ToString();
+        _LevelTextBox.text = upgradeLevel.ToString();
+        _FlavorTextBox.text = _FlavorText[upgradeLevel];
     }
 
     public override void Upgrade()
     {
-        if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.robotUpgrades] 
-            && PlayerDataManager.Instance.CurrentData.robotUpgrades < ScrapUpgradeCost.Count)
+        if (PlayerDataManager.Instance.GetScrap() >= ScrapUpgradeCost[upgradeLevel] && upgradeLevel < ScrapUpgradeCost.Count)
         {
             PlayerDataManager.Instance.UpdateRobotUpgrades(1);
-            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.robotUpgrades]);
-            if (PlayerDataManager.Instance.CurrentData.robotUpgrades == ScrapUpgradeCost.Count)
+            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[upgradeLevel]);
+            if (upgradeLevel == ScrapUpgradeCost.Count)
             {
                 MaxUpgradeReached();
             }

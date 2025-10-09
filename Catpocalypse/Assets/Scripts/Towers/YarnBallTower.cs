@@ -26,18 +26,19 @@ public class YarnBallTower : Tower
 
     protected override void ApplyScrapUpgrades()
     {
-        if (PlayerDataManager.Instance.CurrentData.yarnUpgrades > 0)
+        int purchasedUpgrades = PlayerDataManager.Instance.GetYarnUpgrades();
+        if (purchasedUpgrades > 0)
         {
             fireRate *= PlayerDataManager.Instance.Upgrades.YarnThrowerFireRateUpgrade;
-            if (PlayerDataManager.Instance.CurrentData.yarnUpgrades > 1)
+            if (purchasedUpgrades > 1)
             {
 
-                if (PlayerDataManager.Instance.CurrentData.yarnUpgrades > 2)
+                if (purchasedUpgrades > 2)
                 {
 
-                    if (PlayerDataManager.Instance.CurrentData.yarnUpgrades > 3)
+                    if (purchasedUpgrades > 3)
                     {
-                        if (PlayerDataManager.Instance.CurrentData.yarnUpgrades > 4)
+                        if (purchasedUpgrades > 4)
                         {
 
                         }

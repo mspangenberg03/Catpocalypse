@@ -167,19 +167,20 @@ public class RobotController : MonoBehaviour
 
     protected void ApplyScrapUpgrades()
     {
-        if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 0)
+        int purchasedUpgrades = PlayerDataManager.Instance.GetRobotUpgrades();
+        if (purchasedUpgrades > 0)
         {
             _MaxSpeedAdjustment *= PlayerDataManager.Instance.Upgrades.RobotSpeedUpgrade;
-            if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 1)
+            if (purchasedUpgrades > 1)
             {
                 _LaunchAdjustment *= PlayerDataManager.Instance.Upgrades.RobotLaunchUpgrade;
-                if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 2)
+                if (purchasedUpgrades > 2)
                 {
                     _FireRateAdjustment *= PlayerDataManager.Instance.Upgrades.RobotFireRateUpgrade;
-                    if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 3)
+                    if (purchasedUpgrades > 3)
                     {
                         StartCoroutine(DistractCatsInRange());
-                        if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 4)
+                        if (purchasedUpgrades > 4)
                         {
 
                         }
