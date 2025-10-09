@@ -6461,7 +6461,7 @@ MonoBehaviour:
   cucumberTowerPrefab: {fileID: 4005010671770162013, guid: bfe4334c1e4c3c54886a90609ba4c102, type: 3}
   stringWaverTowerPrefab: {fileID: 8302100752434070475, guid: 46a7766a63e9a284dbfc9a9111911ea2, type: 3}
   yarnBallTowerPrefab: {fileID: 6866161764830985498, guid: fa0307703c5c62741b8e7a11d64db026, type: 3}
-  naTowerPrefab: {fileID: 8416910387943309860, guid: d559539c6bfb1024599ed3ae53bf900f, type: 3}
+  naTowerPrefab: {fileID: 8416910387943309860, guid: 364053e7134f89143853c3fc17f53eda, type: 3}
 --- !u!1 &873202203
 GameObject:
   m_ObjectHideFlags: 0
@@ -9827,7 +9827,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1893781212}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999547
+  m_Size: 0.9781745
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16800,7 +16800,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000110369445}
+  m_AnchoredPosition: {x: 0, y: 0.00070542016}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &105248309705562578
