@@ -278,14 +278,15 @@ public class RobotController : MonoBehaviour
         {
             // We have some input, so move the robot.
             _CurrentMovementSpeed = movementInput.y * (_stats.MaxMovementSpeed * _MaxSpeedAdjustment);
+           
         }
-
-        // Do we have a non-zero input for the left/right axis?
-        if (movementInput.x < -_UserInputThreshold || movementInput.x > _UserInputThreshold)
+        // Do we have a non-zero input for the left/right axis, and is the robot moving?
+        if ((movementInput.x < -_UserInputThreshold || movementInput.x > _UserInputThreshold) && _CurrentMovementSpeed != 0)
         {
             // We have some input, so turn the robot.
             _CurrentTurnSpeed = movementInput.x * _MaxTurnSpeed;
         }
+
 
 
         Quaternion q = transform.rotation;

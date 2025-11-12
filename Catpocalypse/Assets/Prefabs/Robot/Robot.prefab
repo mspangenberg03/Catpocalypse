@@ -398,10 +398,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MaxTurnSpeed: 40
   _UserInputThreshold: 0.1
-  _MovementDecelerationRate: 3
+  _MovementDecelerationRate: 5
   _TurningDecelerationRate: 100
   _InvertSteeringWhenInReverse: 1
-  _AllowActivationBetweenWaves: 0
+  _AllowActivationBetweenWaves: 1
   _BatteryMaxCapacity: 100
   _BatteryDrainPerSecond: 0.5
   _BatteryRechargePerSecond: 0.25
@@ -438,7 +438,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
@@ -561,7 +561,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
