@@ -52,7 +52,7 @@ public class RobotProjectile : MonoBehaviour
         {
             CatBase target = collision.gameObject.GetComponent<CatBase>();
             Debug.LogError($"target: {target}");
-            if (PlayerDataManager.Instance.CurrentData.robotUpgrades > 4)
+            if (PlayerDataManager.Instance.GetRobotUpgrades() > 4)
             {
                 StartCoroutine(Stun(target));
             }
