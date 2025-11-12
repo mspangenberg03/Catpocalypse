@@ -11,21 +11,26 @@ public class LaserPointerUpgrades : UpgradeCard
     [SerializeField]
     private float _distractionUpgrade = 1.2f;
 
+    protected void Start()
+    {
+        base.Start();
+        upgradeLevel = PlayerDataManager.Instance.GetLaserUpgrades();
+    }
+
     protected override void ChangeText()
     {
-        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.laserUpgrades];
-        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.laserUpgrades].ToString();
-        _LevelTextBox.text = (PlayerDataManager.Instance.CurrentData.laserUpgrades + 1).ToString();
-        _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.laserUpgrades];
+        _UpgradeTextBox.text = UpgradeText[upgradeLevel];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[upgradeLevel].ToString();
+        _LevelTextBox.text = (upgradeLevel + 1).ToString();
+        _FlavorTextBox.text = _FlavorText[upgradeLevel];
     }
     public override void Upgrade()
     {
-        if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.laserUpgrades] 
-            && PlayerDataManager.Instance.CurrentData.laserUpgrades < ScrapUpgradeCost.Count)
+        if (    PlayerDataManager.Instance.GetScrap() >= ScrapUpgradeCost[upgradeLevel] && upgradeLevel < ScrapUpgradeCost.Count)
         {
             PlayerDataManager.Instance.UpdateLaserUpgrades(1);
-            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.laserUpgrades]);
-            if (PlayerDataManager.Instance.CurrentData.laserUpgrades == ScrapUpgradeCost.Count)
+            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[upgradeLevel]);
+            if (upgradeLevel == ScrapUpgradeCost.Count)
             {
                 MaxUpgradeReached();
             }

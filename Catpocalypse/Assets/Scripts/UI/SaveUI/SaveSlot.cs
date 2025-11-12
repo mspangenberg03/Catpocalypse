@@ -24,4 +24,19 @@ public class SaveSlot : MonoBehaviour
         timeLabel.text = String.Format("{0}:{1}:{2}", hours, minutes, seconds);
         levelsCompleted.text = String.Format("Current Level: {0}", data.levelsCompleted);
     }
+
+    public void UpdateSaveLabel()
+    {
+        if (!defaultText.text.Equals(""))
+        {
+            defaultText.text = "";
+        }
+        nameLabel.text = PlayerDataManager.Instance.GetName();
+        float time = PlayerDataManager.Instance.GetTimePlayed();
+        int hours = (int)(time - (time % 3600)) / 3600;
+        int minutes = (int)(time - ((time - (hours * 3600)) % 60)) / 60;
+        int seconds = (int)time - (hours * 3600) - (minutes * 60);
+        timeLabel.text = String.Format("{0}:{1}:{2}", hours, minutes, seconds);
+        levelsCompleted.text = String.Format("Current Level: {0}", PlayerDataManager.Instance.GetLevelsCompleted());
+    }
 }

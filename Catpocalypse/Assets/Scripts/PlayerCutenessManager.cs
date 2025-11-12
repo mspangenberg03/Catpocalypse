@@ -87,7 +87,7 @@ public class PlayerCutenessManager : MonoBehaviour
     public void AddCuteness(int amount)
     {
         float adjustedAmount = amount;
-        if(PlayerDataManager.Instance.CurrentData.fortificationUpgrades > 1)
+        if(PlayerDataManager.Instance.GetFortificationUpgrades() > 1)
         {
             adjustedAmount *= PlayerDataManager.Instance.Upgrades.CutenessResistanceUpgrade;
         }

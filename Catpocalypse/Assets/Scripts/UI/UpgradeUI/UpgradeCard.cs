@@ -15,6 +15,8 @@ public abstract class UpgradeCard : MonoBehaviour
     [SerializeField] protected List<int> ScrapUpgradeCost;
     [SerializeField] protected List<string> _FlavorText;
 
+    protected int upgradeLevel = 0;
+
     public static event EventHandler OnUpgrade;
 
     public void Start()
@@ -25,7 +27,7 @@ public abstract class UpgradeCard : MonoBehaviour
     protected void SignalUpgrade()
     {
         OnUpgrade?.Invoke(this, EventArgs.Empty);
-        Debug.Log("Upgraded a tower, scrap should show " + PlayerDataManager.Instance.CurrentData.scrap);
+        Debug.Log("Upgraded a tower, scrap should show " + PlayerDataManager.Instance.GetScrap());
     }
 
     protected abstract void ChangeText();

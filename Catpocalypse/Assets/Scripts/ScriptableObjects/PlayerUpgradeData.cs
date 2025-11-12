@@ -91,7 +91,7 @@ public class PlayerUpgradeData : ScriptableObject
 
     [Header("Reward Upgrades")]
     [SerializeField, Tooltip("How much the reward for distracting cats increases by per upgrade")] private List<float> _rewardIncrease;
-    public float RewardUpgrade { get { return _rewardIncrease[PlayerDataManager.Instance.CurrentData.catRewardUpgrades]; } }
+    public float RewardUpgrade { get { return _rewardIncrease[PlayerDataManager.Instance.GetRewardUpgrade()]; } }
 
     [Header("Fortification Upgrades")]
     [SerializeField, Tooltip("The amount to increase the player's starting health by")] private int _MaxHealthUpgrade;

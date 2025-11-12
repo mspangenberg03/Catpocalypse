@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -47,7 +48,7 @@ public class Tower : MonoBehaviour
     protected List<WayPoint> _WayPointsInRange = new List<WayPoint>();
 
     // The closest waypoint to the Rally Point. Will be null if no WayPoints are within the tower's range.
-    protected WayPoint _ClosestWayPointToRP;
+    [SerializeField] protected WayPoint _ClosestWayPointToRP;
 
     [SerializeField] public TowerData towerStats;
     [SerializeField] public AudioSource _towerSound;
@@ -216,7 +217,7 @@ public class Tower : MonoBehaviour
     /// <param name="target"></param>
     protected virtual void OnTargetWentOutOfRange(GameObject target)
     {
-
+        
     }
 
     /// <summary>
@@ -281,6 +282,11 @@ public class Tower : MonoBehaviour
             // Set the current rally point equal to the default.
             _RallyPoint = _DefaultRallyPoint;
 
+            _ClosestWayPointToRP = wayPoint;
+
+            // Defaults towers to look at the default Rally Point
+            Vector3 rallyPointposition = new Vector3(_DefaultRallyPoint.x, transform.position.y, _DefaultRallyPoint.z);
+            this.transform.LookAt(rallyPointposition);
 
             return true;
         }

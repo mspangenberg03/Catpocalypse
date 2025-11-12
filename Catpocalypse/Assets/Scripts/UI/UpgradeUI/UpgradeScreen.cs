@@ -23,7 +23,7 @@ public class UpgradeScreen : MonoBehaviour
     }
     private void ChangeScrapText()
     {
-        _scrapText.text = PlayerDataManager.Instance.CurrentData.scrap.ToString();
+        _scrapText.text = PlayerDataManager.Instance.GetScrap().ToString();
     }
 
     public void ReturnToMenu()

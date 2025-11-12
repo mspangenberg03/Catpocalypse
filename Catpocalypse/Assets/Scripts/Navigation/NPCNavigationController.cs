@@ -63,7 +63,14 @@ public class NPCNavigationController: MonoBehaviour
                 }
                 else
                 {
-                    _nextWayPoint = null;
+                    if(_nextWayPoint == _goalPoint)
+                    {
+                        _nextWayPoint = null;
+                    } else
+                    {
+                        SetTargetLocation(_goalPoint.transform.position);
+                    }
+                    
                 }
             }
         }
@@ -111,10 +118,27 @@ public class NPCNavigationController: MonoBehaviour
     public void SetTargetLocation(Vector3 location)
     {
         WayPoint target = WaveManager.Instance.WayPointUtils.FindNearestWayPointTo(location);
-        foreach(WayPoint waypoint in WaveManager.Instance.WayPointUtils.GetPath(_nextWayPoint, target))
+        currentPath.Clear();
+        List<WayPoint> waypoints = WaveManager.Instance.WayPointUtils.GetPath(_nextWayPoint, target);
+        foreach(WayPoint waypoint in waypoints)
         {
             currentPath.Enqueue(waypoint);
         }
+    }
+
+    public void SetTargetLocation(WayPoint target)
+    {
+        currentPath.Clear();
+        List<WayPoint> waypoints = WaveManager.Instance.WayPointUtils.GetPath(_nextWayPoint, target);
+        foreach (WayPoint waypoint in waypoints)
+        {
+            currentPath.Enqueue(waypoint);
+        }
+    }
+
+    public void SetTargetLocationToGoal()
+    {
+        SetTargetLocation(_goalPoint);
     }
 
     public WayPoint NextWayPoint { get { return _nextWayPoint; } set { _nextWayPoint = value; } }

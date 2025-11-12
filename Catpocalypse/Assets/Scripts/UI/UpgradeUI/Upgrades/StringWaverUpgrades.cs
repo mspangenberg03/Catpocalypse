@@ -5,21 +5,28 @@ using UnityEngine;
 
 public class StringWaverUpgrades : UpgradeCard
 {
+
+    protected void Start()
+    {
+        base.Start();
+        upgradeLevel = PlayerDataManager.Instance.GetStringUpgrades();
+    }
+
     protected override void ChangeText()
     {
-        _UpgradeTextBox.text = UpgradeText[PlayerDataManager.Instance.CurrentData.stringUpgrades];
-        _UpgradeCostTextBox.text = ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.stringUpgrades].ToString();
-        _LevelTextBox.text = (PlayerDataManager.Instance.CurrentData.stringUpgrades + 1).ToString();
-        _FlavorTextBox.text = _FlavorText[PlayerDataManager.Instance.CurrentData.stringUpgrades];
+        _UpgradeTextBox.text = UpgradeText[upgradeLevel];
+        _UpgradeCostTextBox.text = ScrapUpgradeCost[upgradeLevel].ToString();
+        _LevelTextBox.text = (upgradeLevel + 1).ToString();
+        _FlavorTextBox.text = _FlavorText[upgradeLevel];
     }
     public override void Upgrade()
     {
-        if (PlayerDataManager.Instance.CurrentData.scrap >= ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.stringUpgrades]
-            && PlayerDataManager.Instance.CurrentData.stringUpgrades < ScrapUpgradeCost.Count)
+        if (PlayerDataManager.Instance.GetScrap() >= ScrapUpgradeCost[upgradeLevel]
+            && upgradeLevel < ScrapUpgradeCost.Count)
         {
-            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[PlayerDataManager.Instance.CurrentData.stringUpgrades]);
+            PlayerDataManager.Instance.UpdateScrap(-ScrapUpgradeCost[upgradeLevel]);
             PlayerDataManager.Instance.UpdateStringUpgrades(1);
-            if (PlayerDataManager.Instance.CurrentData.stringUpgrades == ScrapUpgradeCost.Count)
+            if (upgradeLevel == ScrapUpgradeCost.Count)
             {
                 MaxUpgradeReached();
             }

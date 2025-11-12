@@ -44,11 +44,11 @@ public class PlayerInputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerDataManager.Instance.CurrentData._MouseXInvert)
+        if (PlayerDataManager.Instance.GetXInversion())
         {
             _X_Invert = -1;
         }
-        if (PlayerDataManager.Instance.CurrentData._MouseYInvert)
+        if (PlayerDataManager.Instance.GetYInversion())
         {
             _Y_Invert= -1;
         }
@@ -86,7 +86,7 @@ public class PlayerInputManager : MonoBehaviour
             // The robot is present, so update it's user input values appropriately based on whether it is activated or not.
             if (_Robot.IsActive)
             {
-                float mouseSensitivity = PlayerDataManager.Instance.CurrentData._MouseSensitivity;
+                float mouseSensitivity = PlayerDataManager.Instance.GetMouseSensitivity();
                 // The robot is active, so set the PanCamera value to zero to disable movement of the main game camera while piloting the robot.
                 Robot_FireProjectile = _Robot_FireProjectileAction.WasPerformedThisFrame();
                 Vector2 currentCameraMovement = _Robot_MovementAction.ReadValue<Vector2>();

@@ -211,6 +211,11 @@ public class HUD : MonoBehaviour
 
     public static void RevealVictory()
     {
+        Debug.Log("Check my stack trace");
+        if (Instance._DefeatScreen.gameObject.activeInHierarchy)
+        {
+            return;
+        }
         Instance._StartWaveButton.gameObject.SetActive(false);
         Instance.WaveNumberLabel.gameObject.SetActive(false);
         Instance.CatsRemainingLabel.gameObject.SetActive(false);
@@ -221,6 +226,10 @@ public class HUD : MonoBehaviour
 
     public static void RevealDefeat()
     {
+        if (Instance._VictoryScreen.gameObject.activeInHierarchy)
+        {
+            return;
+        }
         Instance._StartWaveButton.gameObject.SetActive(false);
         Instance.WaveNumberLabel.gameObject.SetActive(false);
         Instance.CatsRemainingLabel.gameObject.SetActive(false);
@@ -269,4 +278,5 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI RobotPowerLevelLabel { get { return _RobotPowerLevelLabel; } }
     public Button ToggleRobotButton { get { return _ToggleRobotButton; } }
     public GameObject MessageBar { get { return _MessageBar; } }
+
 }

@@ -61,7 +61,7 @@ public class SaveLoadScreen : MonoBehaviour
         _NameInputField.DeactivateInputField();
         _InputPanel.gameObject.SetActive(false);
         PlayerDataManager.Instance.SaveGame(_CurrentSaveSelected);
-        _SaveFileButtons[_CurrentSaveSelected].GetComponent<SaveSlot>().UpdateSaveLabel(PlayerDataManager.Instance.CurrentData);
+        _SaveFileButtons[_CurrentSaveSelected].GetComponent<SaveSlot>().UpdateSaveLabel();
     }
 
     public void OnSaveFileButton(string saveFile)

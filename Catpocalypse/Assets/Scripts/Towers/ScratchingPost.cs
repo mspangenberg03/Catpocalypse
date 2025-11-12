@@ -47,10 +47,11 @@ public class ScratchingPost : MonoBehaviour
     {
         startingRange = range.radius;
         _Cats = new List<GameObject>();
-        if(PlayerDataManager.Instance.CurrentData.scratchUpgrades > 0)
+        int purchasedUpgrades = PlayerDataManager.Instance.GetScratchUpgrades();
+        if(purchasedUpgrades > 0)
         {
             range.radius *= PlayerDataManager.Instance.Upgrades.ScratchingPostRangeUpgrade;
-            if(PlayerDataManager.Instance.CurrentData.scratchUpgrades > 2)
+            if(purchasedUpgrades > 2)
             {
                 _Durability *= PlayerDataManager.Instance.Upgrades.ScratchingPostDurabilityUpgrade;
             }

@@ -22,11 +22,11 @@ public class Fortifications : MonoBehaviour
     void Start()
     {
         targets = new List<GameObject>();
-        if (PlayerDataManager.Instance.CurrentData.fortificationUpgrades > 1) 
+        if (PlayerDataManager.Instance.GetFortificationUpgrades() > 1) 
         { 
             FortificationTierTwo(); 
         }
-        if(PlayerDataManager.Instance.CurrentData.fortificationUpgrades > 4)
+        if(PlayerDataManager.Instance.GetFortificationUpgrades() > 4)
         {
             
             FortificationTierFive();

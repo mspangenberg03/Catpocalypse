@@ -13,7 +13,7 @@ public class ControlsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MouseSensitivitySlider.value = PlayerDataManager.Instance.CurrentData._MouseSensitivity;
+        MouseSensitivitySlider.value = PlayerDataManager.Instance.GetMouseSensitivity();
 
         MouseSensitivitySlider.onValueChanged.AddListener(OnMouseSensitivityChange);
         InvertXToggle.onValueChanged.AddListener(OnXInvert);
@@ -23,17 +23,17 @@ public class ControlsManager : MonoBehaviour
 
     private void OnMouseSensitivityChange(float value)
     {
-        PlayerDataManager.Instance.CurrentData._MouseSensitivity = value;
+        PlayerDataManager.Instance.UpdateMouseSensitivity(value);
     }
 
     private void OnXInvert(bool value)
     {
-        PlayerDataManager.Instance.CurrentData._MouseXInvert = value;
+        PlayerDataManager.Instance.UpdateXInversion(value);
     }
 
     private void OnYInvert(bool value)
     {
-        PlayerDataManager.Instance.CurrentData._MouseYInvert = value;
+        PlayerDataManager.Instance.UpdateYInversion(value);
     }
 }
 
