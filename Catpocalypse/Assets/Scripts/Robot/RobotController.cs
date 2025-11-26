@@ -83,7 +83,7 @@ public class RobotController : MonoBehaviour
     private List<RobotProjectile> _ProjectilePrefabs;
 
 
-
+    [SerializeField]
     private CinemachineVirtualCamera _RobotVirtualCamera;
     private PlayerInputManager _PlayerInputManager;
     private Rigidbody _Rigidbody;
@@ -115,6 +115,14 @@ public class RobotController : MonoBehaviour
     private float _MaxSpeedAdjustment;
     private float _LaunchAdjustment;
     private float _FireRateAdjustment;
+    public float sensitivity = 3f;
+    public Transform crosshair; 
+    public Transform body;
+    public float rotationSpeed = 5f;
+
+
+
+
 
 
 
@@ -123,7 +131,7 @@ public class RobotController : MonoBehaviour
     // ********************************************************
     // TODO: FIX MOVEMENT SO ROBOT DOESN'T JUST GO THROUGH THINGS!
     // ********************************************************
-     
+
 
     void Awake()
     {
@@ -220,6 +228,35 @@ public class RobotController : MonoBehaviour
 
         // Get user input and move the robot.
         GetUserInput();
+        if (IsActive)
+        {
+
+            //Vector3 targetDir = Input.mousePosition - body.position;
+            //targetDir.y = 0f;
+
+            //if (targetDir.sqrMagnitude > 0.001f)
+            //{
+            //    Quaternion targetRotation = Quaternion.LookRotation(targetDir, Vector3.up);
+            //    body.rotation = Quaternion.Slerp(body.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                
+            //}
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Vector3 targetDir = hit.point - body.position;
+                targetDir.y = 0f; // Flatten to horizontal
+
+                if (targetDir.sqrMagnitude > 0.001f)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(targetDir, Vector3.up);
+                    body.rotation = Quaternion.Slerp(body.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                }
+            }
+
+        }
+
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -408,7 +445,7 @@ public class RobotController : MonoBehaviour
         
         // Create a new projectile and launch it.
         GameObject projectile = Instantiate(prefab, _ProjectileLaunchPoint.position, Quaternion.identity);
-        projectile.GetComponent<Rigidbody>().velocity = transform.forward * (projectile.GetComponent<RobotProjectile>().LaunchSpeed * _LaunchAdjustment);
+        projectile.GetComponent<Rigidbody>().velocity = _ProjectileLaunchPoint.forward * (projectile.GetComponent<RobotProjectile>().LaunchSpeed * _LaunchAdjustment);
     }
 
     /// <summary>
