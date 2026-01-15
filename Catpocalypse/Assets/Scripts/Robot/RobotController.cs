@@ -7,6 +7,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Cinemachine;
 using UnityEngine.SocialPlatforms;
+using static UnityEngine.Rendering.DebugUI;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine.UIElements;
 
 public class RobotController : MonoBehaviour
 {
@@ -120,6 +124,10 @@ public class RobotController : MonoBehaviour
     public Transform body;
     public Transform barrel;
     public float rotationSpeed = 5f;
+    private float horizontalRotation = 0f;
+    private float verticalRotation = 0f;
+    [SerializeField]
+    Transform cameraPoint;
 
 
 
@@ -231,85 +239,24 @@ public class RobotController : MonoBehaviour
         GetUserInput();
         if (IsActive)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                // HORIZONTAL BODY ROTATION
-             
-                Vector3 toHit = hit.point - body.position;
+            //Get mouse movement
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
+            
+            Vector3 cameraPos = Camera.main.transform.position;
+            //Get the rotations
+            horizontalRotation += mouseX * sensitivity;
+            verticalRotation -= mouseY * sensitivity;
+            verticalRotation = Mathf.Clamp(verticalRotation, 45, 120);
 
-                // Flatten the direction to avoid vertical influence on yaw
-                Vector3 flatDir = toHit;
-                flatDir.y = 0f;
+            Quaternion bodyRot = Quaternion.Euler(0f, horizontalRotation, 0f);
+            Quaternion barrelRot = Quaternion.Euler(verticalRotation, 0f, 0f);
+            //Rotate the body and the barrel
+            body.rotation = Quaternion.Slerp(body.rotation,bodyRot,Time.deltaTime * rotationSpeed);
+            barrel.localRotation = Quaternion.Slerp(barrel.localRotation,barrelRot,Time.deltaTime * rotationSpeed);
 
-                if (flatDir.sqrMagnitude > 0.001f)
-                {
-                    Quaternion bodyRotation = Quaternion.LookRotation(flatDir, Vector3.up);
-                    body.rotation = Quaternion.Slerp(
-                        body.rotation,
-                        bodyRotation,
-                        Time.deltaTime * rotationSpeed
-                    );
-                }
-
-                // world direction from barrel to hit
-                Vector3 worldDir = hit.point - barrel.position;
-
-                // Use BODY axes so sideways mouse movement only affects yaw
-                Vector3 forward = body.forward;   // pitch reference direction
-                Vector3 pitchAxis = body.right;   // axis you pitch around
-
-                // Remove sideways component
-                Vector3 projected = Vector3.ProjectOnPlane(worldDir, pitchAxis);
-
-                // compute angle
-                float pitchAngle = Vector3.SignedAngle(forward, projected, pitchAxis);
-
-                // clamp
-                pitchAngle = Mathf.Clamp(pitchAngle, -100f, 100f);
-
-                // apply rotation to the barrel (uses barrel.localRotation)
-                Quaternion pitchRot = Quaternion.Euler(pitchAngle, 0f, 0f);
-                barrel.localRotation = Quaternion.Slerp(
-                    barrel.localRotation,
-                    pitchRot,
-                    Time.deltaTime * rotationSpeed
-                );
-
-            }
+            
         }
-
-
-        //if (IsActive)
-        //{
-
-        //    //Max vertical angle, 45 degrees
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //    if (Physics.Raycast(ray, out RaycastHit hit))
-        //    {
-        //        Vector3 targetDir = hit.point - body.position;
-        //        float yRotation = targetDir.x;
-        //        targetDir.y = 0f; // Flatten to horizontal
-
-        //        if (targetDir.sqrMagnitude > 0.001f)
-        //        {
-        //            Quaternion targetRotation = Quaternion.LookRotation(targetDir, Vector3.up);
-        //            Vector3 euler = targetRotation.eulerAngles;
-        //            // Convert to -180..180 range
-        //            if (euler.x > 180) euler.x -= 360;
-        //            euler.x = Mathf.Clamp(euler.x, -45f, 45f); // limit vertical tilt
-
-        //            targetRotation = Quaternion.Euler(euler);
-        //            Vector3 barrelRot = new Vector3(yRotation, 0, 0);
-        //            barrelRot.x = Mathf.Clamp(barrelRot.x, -45, 45);
-        //            Quaternion rotation = Quaternion.Euler(barrelRot);
-        //            body.rotation = Quaternion.Slerp(body.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        //            barrel.rotation = Quaternion.Slerp(barrel.rotation,rotation,Time.deltaTime * rotationSpeed);
-        //        }
-        //    }
-
-        //}
-
 
     }
     private void OnTriggerEnter(Collider other)
