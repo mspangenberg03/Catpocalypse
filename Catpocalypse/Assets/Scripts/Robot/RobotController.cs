@@ -260,7 +260,7 @@ public class RobotController : MonoBehaviour
             verticalRotation -= mouseY * sensitivity;
 
             // Clamp vertical arm pitch
-            verticalRotation = Mathf.Clamp(verticalRotation, -50f, 90f);
+            verticalRotation = Mathf.Clamp(verticalRotation, -90f, 30f);
 
             Quaternion bodyRot = Quaternion.Euler(0f, horizontalRotation, 0f);
             armJoint.localRotation = Quaternion.Slerp(
