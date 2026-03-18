@@ -12,6 +12,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
+using UnityEditor.Rendering;
 
 public class RobotController : MonoBehaviour
 {
@@ -133,6 +134,10 @@ public class RobotController : MonoBehaviour
     public Transform bottom;        // rotates on Y
     public Transform armJoint;    // rotates on X for aiming
     public Transform mechBody;
+    [SerializeField]
+    private Transform cameraRig;
+  
+
     private float turnVelocity;
 
 
@@ -160,7 +165,8 @@ public class RobotController : MonoBehaviour
 
         _PlayerInputManager = FindObjectOfType<PlayerInputManager>();
         _Rigidbody = GetComponent<Rigidbody>();
-        _RobotVirtualCamera = transform.Find(ROBOT_CAMERA_GAMEOBJECT_NAME).GetComponent<CinemachineVirtualCamera>();
+        _RobotVirtualCamera = transform.Find("CameraRig/CameraPoint/" + ROBOT_CAMERA_GAMEOBJECT_NAME).GetComponent<CinemachineVirtualCamera>();
+
         _WaveManager = FindObjectOfType<WaveManager>();
 
         // Set starting values for potential upgradable values
@@ -214,7 +220,11 @@ public class RobotController : MonoBehaviour
             }
         }
     }
+    void LateUpdate()
+    {
+        crosshair.position = _ProjectileLaunchPoint.position + cameraPoint.forward * 1.5f;
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -252,29 +262,24 @@ public class RobotController : MonoBehaviour
 
         if (IsActive)
         {
-            
+
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");
 
+            // Horizontal camera rotation
             horizontalRotation += mouseX * sensitivity;
             verticalRotation -= mouseY * sensitivity;
 
-            // Clamp vertical arm pitch
-            verticalRotation = Mathf.Clamp(verticalRotation, -90f, 30f);
+            verticalRotation = Mathf.Clamp(verticalRotation, -45f, 10f);
+            cameraRig.rotation = Quaternion.Euler(0f, horizontalRotation, 0f);
 
-            Quaternion bodyRot = Quaternion.Euler(0f, horizontalRotation, 0f);
-            armJoint.localRotation = Quaternion.Slerp(
-                armJoint.localRotation,
-                bodyRot,
-                Time.deltaTime * rotationSpeed
-            );
+            // Vertical camera rotation (pitch)
+            
 
-            Quaternion armRot = Quaternion.Euler(verticalRotation, 0f, 0f);
-            armJoint.localRotation = Quaternion.Slerp(
-                armJoint.localRotation,
-                armRot,
-                Time.deltaTime * rotationSpeed
-            );
+
+            cameraPoint.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+
+            armJoint.rotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0f);
         }
         else
         {
@@ -337,13 +342,22 @@ public class RobotController : MonoBehaviour
 
 
         Vector2 movementInput = PlayerInputManager.Robot_Movement;
-        float inputMagnitude = movementInput.magnitude; 
-                                                        
-        Vector3 moveDir = new Vector3(
-            movementInput.y,  
-            0f,
-            -movementInput.x   
-        );
+        float inputMagnitude = movementInput.magnitude;
+
+        Vector3 camForward = cameraPoint.forward;
+        Vector3 camRight = cameraPoint.right;
+
+        // Flatten so movement stays on the ground
+        camForward.y = 0f;
+        camRight.y = 0f;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        Vector3 moveDir =
+            camForward * movementInput.y +
+            camRight * movementInput.x;
+
         _CurrentMoveVector = moveDir.normalized;
 
 
@@ -360,29 +374,29 @@ public class RobotController : MonoBehaviour
 
 
 
-        // Rotate when moving forward OR strafing (but NOT when moving backward)
-        bool movingForward = movementInput.y > _UserInputThreshold;
-        bool strafing = Mathf.Abs(movementInput.x) > _UserInputThreshold;
-        bool movingBackward = movementInput.y < -_UserInputThreshold;
+        //// Rotate when moving forward OR strafing (but NOT when moving backward)
+        //bool movingForward = movementInput.y > _UserInputThreshold;
+        //bool strafing = Mathf.Abs(movementInput.x) > _UserInputThreshold;
+        //bool movingBackward = movementInput.y < -_UserInputThreshold;
 
-        bool shouldRotate = movingForward || strafing;
+        //bool shouldRotate = movingForward || strafing;
 
-        if (shouldRotate && _CurrentMoveVector.sqrMagnitude > 0.0001f)
-        {
-            Quaternion targetRot = Quaternion.LookRotation(_CurrentMoveVector);
+        //if (shouldRotate && _CurrentMoveVector.sqrMagnitude > 0.0001f)
+        //{
+        //    Quaternion targetRot = Quaternion.LookRotation(_CurrentMoveVector);
 
-            float targetY = targetRot.eulerAngles.y;
-            float currentY = transform.eulerAngles.y;
+        //    float targetY = targetRot.eulerAngles.y;
+        //    float currentY = transform.eulerAngles.y;
 
-            float newY = Mathf.SmoothDampAngle(
-                currentY,
-                targetY,
-                ref _CurrentTurnSpeed,
-                0.15f
-            );
+        //    float newY = Mathf.SmoothDampAngle(
+        //        currentY,
+        //        targetY,
+        //        ref _CurrentTurnSpeed,
+        //        0.15f
+        //    );
 
-            transform.rotation = Quaternion.Euler(0f, newY, 0f);
-        }
+        //    transform.rotation = Quaternion.Euler(0f, newY, 0f);
+        //}
 
         // Multiply the forward direction by current speed to get a velocity.       
         Vector3 velocity = _CurrentMoveVector * Mathf.Abs(_CurrentMovementSpeed);
@@ -424,21 +438,6 @@ public class RobotController : MonoBehaviour
         if (Mathf.Abs(_CurrentMovementSpeed) < 0.1f)
             _CurrentMovementSpeed = 0f;
 
-
-        //if (_CurrentTurnSpeed > 0f)
-        //{
-        //    // The robot is turning right, so we need to add to slow it down.
-        //    _CurrentTurnSpeed = Mathf.Clamp(_CurrentTurnSpeed - (_TurningDecelerationRate * Time.deltaTime), 
-        //                                    0f, 
-        //                                    _MaxTurnSpeed);
-        //}
-        //else
-        //{
-        //    // The robot is turning left, so we need to add to slow it down.
-        //    _CurrentTurnSpeed = Mathf.Clamp(_CurrentTurnSpeed + (_TurningDecelerationRate * Time.deltaTime), 
-        //                                    -_MaxTurnSpeed,
-        //                                    0f);
-        //}
     }
 
     /// <summary>
@@ -547,10 +546,17 @@ public class RobotController : MonoBehaviour
     /// </summary>
     public void ToggleRobotButtonClicked()
     {
+
         if (IsActive)
+        {
             DeactivateRobot();
+        }
+
         else
+        {
             ActivateRobot();
+        }
+           
     }
 
     IEnumerator DistractCatsInRange()
