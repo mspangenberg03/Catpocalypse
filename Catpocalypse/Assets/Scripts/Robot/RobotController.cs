@@ -374,29 +374,6 @@ public class RobotController : MonoBehaviour
 
 
 
-        //// Rotate when moving forward OR strafing (but NOT when moving backward)
-        //bool movingForward = movementInput.y > _UserInputThreshold;
-        //bool strafing = Mathf.Abs(movementInput.x) > _UserInputThreshold;
-        //bool movingBackward = movementInput.y < -_UserInputThreshold;
-
-        //bool shouldRotate = movingForward || strafing;
-
-        //if (shouldRotate && _CurrentMoveVector.sqrMagnitude > 0.0001f)
-        //{
-        //    Quaternion targetRot = Quaternion.LookRotation(_CurrentMoveVector);
-
-        //    float targetY = targetRot.eulerAngles.y;
-        //    float currentY = transform.eulerAngles.y;
-
-        //    float newY = Mathf.SmoothDampAngle(
-        //        currentY,
-        //        targetY,
-        //        ref _CurrentTurnSpeed,
-        //        0.15f
-        //    );
-
-        //    transform.rotation = Quaternion.Euler(0f, newY, 0f);
-        //}
 
         // Multiply the forward direction by current speed to get a velocity.       
         Vector3 velocity = _CurrentMoveVector * Mathf.Abs(_CurrentMovementSpeed);
