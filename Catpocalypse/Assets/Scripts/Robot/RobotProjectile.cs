@@ -47,6 +47,22 @@ public class RobotProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Debug.LogError("Toy collided with cat");
+        if (collision.gameObject.tag == "Cat")
+        {
+            CatBase target = collision.gameObject.GetComponent<CatBase>();
+            Debug.LogError($"target: {target}");
+            if (PlayerDataManager.Instance.GetRobotUpgrades() > 4)
+            {
+                StartCoroutine(Stun(target));
+            }
+            if (target != null)
+                Distract(target);
+
+        }
+    }
+    private void OnTriggerEnter(Collider collision)
+    {
         if (collision.gameObject.tag == "Cat")
         {
             CatBase target = collision.gameObject.GetComponent<CatBase>();
@@ -59,7 +75,6 @@ public class RobotProjectile : MonoBehaviour
 
         }
     }
-
     /// <summary>
     /// This function is called to distract the cat the projectile hit.
     /// </summary>

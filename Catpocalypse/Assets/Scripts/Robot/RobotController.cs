@@ -7,6 +7,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Cinemachine;
 using UnityEngine.SocialPlatforms;
+using static UnityEngine.Rendering.DebugUI;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
+using UnityEditor.Rendering;
 
 public class RobotController : MonoBehaviour
 {
@@ -83,7 +89,7 @@ public class RobotController : MonoBehaviour
     private List<RobotProjectile> _ProjectilePrefabs;
 
 
-
+    [SerializeField]
     private CinemachineVirtualCamera _RobotVirtualCamera;
     private PlayerInputManager _PlayerInputManager;
     private Rigidbody _Rigidbody;
@@ -107,6 +113,7 @@ public class RobotController : MonoBehaviour
 
 
     private float _CurrentMovementSpeed;
+    private Vector3 _CurrentMoveVector;
     private float _CurrentTurnSpeed;
 
     private float _BatteryTimer;
@@ -115,6 +122,29 @@ public class RobotController : MonoBehaviour
     private float _MaxSpeedAdjustment;
     private float _LaunchAdjustment;
     private float _FireRateAdjustment;
+    public float sensitivity = 3f;
+    public Transform crosshair; 
+    public Transform body;
+    public Transform barrel;
+    public float rotationSpeed = 5f;
+    private float horizontalRotation = 0f;
+    private float verticalRotation = 0f;
+    [SerializeField]
+    Transform cameraPoint;
+    public Transform bottom;        // rotates on Y
+    public Transform armJoint;    // rotates on X for aiming
+    public Transform mechBody;
+    [SerializeField]
+    private Transform cameraRig;
+  
+
+    private float turnVelocity;
+
+
+
+
+
+
 
 
 
@@ -123,7 +153,7 @@ public class RobotController : MonoBehaviour
     // ********************************************************
     // TODO: FIX MOVEMENT SO ROBOT DOESN'T JUST GO THROUGH THINGS!
     // ********************************************************
-     
+
 
     void Awake()
     {
@@ -135,7 +165,8 @@ public class RobotController : MonoBehaviour
 
         _PlayerInputManager = FindObjectOfType<PlayerInputManager>();
         _Rigidbody = GetComponent<Rigidbody>();
-        _RobotVirtualCamera = transform.Find(ROBOT_CAMERA_GAMEOBJECT_NAME).GetComponent<CinemachineVirtualCamera>();
+        _RobotVirtualCamera = transform.Find("CameraRig/CameraPoint/" + ROBOT_CAMERA_GAMEOBJECT_NAME).GetComponent<CinemachineVirtualCamera>();
+
         _WaveManager = FindObjectOfType<WaveManager>();
 
         // Set starting values for potential upgradable values
@@ -189,7 +220,11 @@ public class RobotController : MonoBehaviour
             }
         }
     }
+    void LateUpdate()
+    {
+        crosshair.position = _ProjectileLaunchPoint.position + cameraPoint.forward * 1.5f;
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -199,7 +234,11 @@ public class RobotController : MonoBehaviour
             ToggleRobotButtonClicked();
         }
 
-
+        if (Input.GetKey(KeyCode.Escape)) 
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
         // Run update code that should only execute in a certain state.
         if (IsActive)
             ActiveModeUpdate();
@@ -220,6 +259,34 @@ public class RobotController : MonoBehaviour
 
         // Get user input and move the robot.
         GetUserInput();
+
+        if (IsActive)
+        {
+
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
+
+            // Horizontal camera rotation
+            horizontalRotation += mouseX * sensitivity;
+            verticalRotation -= mouseY * sensitivity;
+
+            verticalRotation = Mathf.Clamp(verticalRotation, -45f, 10f);
+            cameraRig.rotation = Quaternion.Euler(0f, horizontalRotation, 0f);
+
+            // Vertical camera rotation (pitch)
+            
+
+
+            cameraPoint.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+
+            armJoint.rotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0f);
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -272,37 +339,45 @@ public class RobotController : MonoBehaviour
 
     private void GetUserInput()
     {
+
+
         Vector2 movementInput = PlayerInputManager.Robot_Movement;
+        float inputMagnitude = movementInput.magnitude;
 
-        // Do we have a non-zero input for forward/back axis?
-        if (movementInput.y < -_UserInputThreshold || movementInput.y > _UserInputThreshold)
+        Vector3 camForward = cameraPoint.forward;
+        Vector3 camRight = cameraPoint.right;
+
+        // Flatten so movement stays on the ground
+        camForward.y = 0f;
+        camRight.y = 0f;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        Vector3 moveDir =
+            camForward * movementInput.y +
+            camRight * movementInput.x;
+
+        _CurrentMoveVector = moveDir.normalized;
+
+
+
+        if (inputMagnitude > _UserInputThreshold)
         {
-            // We have some input, so move the robot.
-            _CurrentMovementSpeed = movementInput.y * (_stats.MaxMovementSpeed * _MaxSpeedAdjustment);
+            _CurrentMovementSpeed = inputMagnitude * (_stats.MaxMovementSpeed * _MaxSpeedAdjustment);
         }
-
-        // Do we have a non-zero input for the left/right axis?
-        if (movementInput.x < -_UserInputThreshold || movementInput.x > _UserInputThreshold)
-        {
-            // We have some input, so turn the robot.
-            _CurrentTurnSpeed = movementInput.x * _MaxTurnSpeed;
-        }
-
-
-        Quaternion q = transform.rotation;
-        Vector3 angles = q.eulerAngles;
-        angles.x = angles.z = 0f;
-
-        if (_InvertSteeringWhenInReverse && _CurrentMovementSpeed < 0f)
-            angles.y -= _CurrentTurnSpeed * Time.deltaTime;
         else
-            angles.y += _CurrentTurnSpeed * Time.deltaTime;
+        {
+            _CurrentMovementSpeed = 0f;
+        }
 
-        q.eulerAngles = angles;
-        transform.rotation = q;
+
+
+
 
         // Multiply the forward direction by current speed to get a velocity.       
-        Vector3 velocity = transform.forward * _CurrentMovementSpeed;
+        Vector3 velocity = _CurrentMoveVector * Mathf.Abs(_CurrentMovementSpeed);
+
         // Add gravity.
         velocity.y = -0.5f;
 
@@ -340,21 +415,6 @@ public class RobotController : MonoBehaviour
         if (Mathf.Abs(_CurrentMovementSpeed) < 0.1f)
             _CurrentMovementSpeed = 0f;
 
-
-        if (_CurrentTurnSpeed > 0f)
-        {
-            // The robot is turning right, so we need to add to slow it down.
-            _CurrentTurnSpeed = Mathf.Clamp(_CurrentTurnSpeed - (_TurningDecelerationRate * Time.deltaTime), 
-                                            0f, 
-                                            _MaxTurnSpeed);
-        }
-        else
-        {
-            // The robot is turning left, so we need to add to slow it down.
-            _CurrentTurnSpeed = Mathf.Clamp(_CurrentTurnSpeed + (_TurningDecelerationRate * Time.deltaTime), 
-                                            -_MaxTurnSpeed,
-                                            0f);
-        }
     }
 
     /// <summary>
@@ -407,7 +467,7 @@ public class RobotController : MonoBehaviour
         
         // Create a new projectile and launch it.
         GameObject projectile = Instantiate(prefab, _ProjectileLaunchPoint.position, Quaternion.identity);
-        projectile.GetComponent<Rigidbody>().velocity = transform.forward * (projectile.GetComponent<RobotProjectile>().LaunchSpeed * _LaunchAdjustment);
+        projectile.GetComponent<Rigidbody>().velocity = _ProjectileLaunchPoint.forward * (projectile.GetComponent<RobotProjectile>().LaunchSpeed * _LaunchAdjustment);
     }
 
     /// <summary>
@@ -420,7 +480,8 @@ public class RobotController : MonoBehaviour
 
         // Activate the robot.
         IsActive = true;
-
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked; // Keeps it centered
         // Deselect any selected towers.
         TowerBase.DeselectAllTowers();
 
@@ -462,10 +523,17 @@ public class RobotController : MonoBehaviour
     /// </summary>
     public void ToggleRobotButtonClicked()
     {
+
         if (IsActive)
+        {
             DeactivateRobot();
+        }
+
         else
+        {
             ActivateRobot();
+        }
+           
     }
 
     IEnumerator DistractCatsInRange()
