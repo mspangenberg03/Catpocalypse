@@ -76231,7 +76231,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.75
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -76240,7 +76240,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.4
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -115416,6 +115416,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1476124819602002183, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -14.503418
+      objectReference: {fileID: 0}
     - target: {fileID: 1508941259778225576, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -116187,6 +116191,10 @@ PrefabInstance:
     - target: {fileID: 5728736996373012663, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754851030631173784, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.5423584
       objectReference: {fileID: 0}
     - target: {fileID: 6066143469533733809, guid: 8c7d489091d914f419f910c916aa192a, type: 3}
       propertyPath: playerMoneyManager
