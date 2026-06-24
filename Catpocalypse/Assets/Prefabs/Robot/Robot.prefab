@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 3242260798142380755}
   - component: {fileID: 8109309447415011553}
   - component: {fileID: 6942450880283201904}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 2779272981945681491}
   - component: {fileID: 9065297716069673015}
   - component: {fileID: 8603154809251423312}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 8252558821616583058}
   - component: {fileID: 312668037643421610}
   - component: {fileID: 4931876762689409745}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
