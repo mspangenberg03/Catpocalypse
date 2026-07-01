@@ -422,6 +422,7 @@ MonoBehaviour:
   upgradeCost: 0
   _cutenessChallengeActive: 0
   fireRate: 3.2
+  _ClosestWayPointToRP: {fileID: 0}
   towerStats: {fileID: 11400000, guid: 03bba1f7ec538254f80b66e0bc98933e, type: 2}
   _towerSound: {fileID: 2128501541235722612}
   maxLevel: 4
@@ -581,7 +582,7 @@ GameObject:
   - component: {fileID: 3389874721568182648}
   - component: {fileID: 6655000906568616380}
   - component: {fileID: 5981557811733809870}
-  m_Layer: 2
+  m_Layer: 15
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
