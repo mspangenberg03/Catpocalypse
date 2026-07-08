@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,17 +13,16 @@ public class StorySlideShowScene : MonoBehaviour
         _slideShowPlayer = FindObjectOfType<SlideShowPlayer>();
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        _slideShowPlayer.OnSlideShowStopped += OnSlideShowStopped;
+        if (_slideShowPlayer != null)
+            _slideShowPlayer.OnSlideShowStopped += OnSlideShowStopped;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        if (_slideShowPlayer != null)
+            _slideShowPlayer.OnSlideShowStopped -= OnSlideShowStopped;
     }
 
     private void OnSlideShowStopped(object sender, SlideShowPlayerEventArgs e)

@@ -15,7 +15,7 @@ public class SlideShowUI : MonoBehaviour
     public event EventHandler OnTriggerSlideChange;
 
 
-    [Tooltip("This sets how frequently we will respond to button/key presses. By default this is set to 1 second, meaning after you press a button this class will not respond to another button/key press until one second has elapsed. This stops the event firing way too many times.")]
+    [Tooltip("This sets how frequently we will respond to button/key presses.")]
     [SerializeField, Min(0.5f)] private float _inputDelay = 1.0f;
 
     [Tooltip("This is the Image UI component that is used to display the current slide image in non-fullscreen modes.")]
@@ -33,6 +33,10 @@ public class SlideShowUI : MonoBehaviour
     [SerializeField] private Button _skipSlideShowButton;
     [SerializeField] private Button _continueButton;
 
+    [Header("Zoom Transition Easing")]
+    [SerializeField] private AnimationCurve _zoomOutCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+    [SerializeField] private AnimationCurve _zoomInCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+
 
     IDisposable _inputListener;
 
@@ -43,7 +47,7 @@ public class SlideShowUI : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_inputListener == null)            
+        if (_inputListener == null)
             _inputListener = InputSystem.onAnyButtonPress.Call(OnAnyButtonPressed);
     }
 
@@ -72,7 +76,7 @@ public class SlideShowUI : MonoBehaviour
         if (IsTransitioning)
         {
             Debug.LogError("SlideShowUI.StartSlideTransition() was called while a slide transition is already in progress!");
-            return;   
+            return;
         }
 
 
@@ -106,6 +110,9 @@ public class SlideShowUI : MonoBehaviour
                 yield return StartCoroutine(DoSlideTransition_CustomFadeOutThenFadeIn(stateInfo));
                 break;
 
+            case Slide.TransitionTypes.ZoomInZoomOut:
+                yield return StartCoroutine(DoSlideTransition_Zoom(stateInfo));
+                break;
 
             default:
                 yield return StartCoroutine(DoSlideTransition_SimpleFadeOutThenFadeIn(duration));
@@ -147,6 +154,100 @@ public class SlideShowUI : MonoBehaviour
         yield return StartCoroutine(DoFade(Slide.FadeType.FadeIn, fadeInTime));
     }
 
+    /// <summary>
+    /// Zoom transition: zoom-out current slide while optionally slightly rotating, swap slide, then zoom-in next slide.
+    /// Uses the current slide's transition duration (split evenly).
+    /// Respects SlideShow.UseUnscaledTime.
+    /// </summary>
+    private IEnumerator DoSlideTransition_Zoom(SlideShowStateInfo stateInfo)
+    {
+        // Guard: make sure we have a slide image rect transform
+        RectTransform rt = _slideImage.GetComponent<RectTransform>();
+        if (rt == null)
+        {
+            // Fallback to simple fade
+            float d = stateInfo.GetCurrentSlideTransitionDuration();
+            yield return StartCoroutine(DoSlideTransition_SimpleFadeOutThenFadeIn(d));
+            yield break;
+        }
+
+        float duration = stateInfo.GetCurrentSlideTransitionDuration();
+        float half = Mathf.Max(0.01f, duration / 2f);
+
+        bool useUnscaled = stateInfo.SlideShow != null && stateInfo.SlideShow.UseUnscaledTime;
+
+        // Capture starting transform state
+        Vector3 originalScale = rt.localScale;
+        Quaternion originalRotation = rt.localRotation;
+        Vector3 originalPos = rt.anchoredPosition3D;
+
+        // Parameters for the visual zoom - conservative defaults.
+        float outScaleFactor = 0.85f;
+        float inScaleFactor = 1.05f;
+
+        Slide nextSlide = stateInfo.NextSlide;
+        if (nextSlide != null)
+        {
+            if (nextSlide.Scale != Vector2.zero)
+            {
+                inScaleFactor = Mathf.Max(0.001f, (nextSlide.Scale.x + nextSlide.Scale.y) * 0.5f);
+            }
+        }
+
+        // OUT: zoom out
+        float startTime = useUnscaled ? Time.unscaledTime : Time.time;
+        float elapsed = 0f;
+        while (elapsed < half)
+        {
+            elapsed = (useUnscaled ? Time.unscaledTime : Time.time) - startTime;
+            float t = Mathf.Clamp01(elapsed / half);
+            float eased = _zoomOutCurve != null ? _zoomOutCurve.Evaluate(t) : (1f - Mathf.Pow(1f - t, 3f));
+
+            rt.localScale = Vector3.Lerp(originalScale, originalScale * outScaleFactor, eased);
+            rt.localRotation = Quaternion.Slerp(originalRotation, originalRotation * Quaternion.Euler(0f, 0f, 6f * eased), eased);
+
+            yield return null;
+        }
+
+        rt.localScale = originalScale * outScaleFactor;
+        rt.localRotation = originalRotation * Quaternion.Euler(0f, 0f, 6f);
+
+        // Trigger the player to change to the next slide.
+        OnTriggerSlideChange?.Invoke(this, EventArgs.Empty);
+
+        // Small frame to ensure UI update
+        yield return null;
+
+        // Incoming
+        Slide displayedSlide = nextSlide ?? stateInfo.CurrentSlide;
+        Vector3 incomingTargetScale = originalScale * (displayedSlide.Scale != Vector2.zero ? (displayedSlide.Scale.x + displayedSlide.Scale.y) * 0.5f : 1f);
+        Quaternion incomingTargetRotation = originalRotation * Quaternion.Euler(0f, 0f, displayedSlide.Rotation);
+
+        rt.localScale = incomingTargetScale * inScaleFactor;
+        rt.localRotation = incomingTargetRotation * Quaternion.Euler(0f, 0f, 12f);
+
+        // IN: zoom in
+        startTime = useUnscaled ? Time.unscaledTime : Time.time;
+        elapsed = 0f;
+        while (elapsed < half)
+        {
+            elapsed = (useUnscaled ? Time.unscaledTime : Time.time) - startTime;
+            float t = Mathf.Clamp01(elapsed / half);
+            float eased = _zoomInCurve != null ? _zoomInCurve.Evaluate(t) : Mathf.Pow(t, 2f);
+
+            rt.localScale = Vector3.Lerp(incomingTargetScale * inScaleFactor, incomingTargetScale, eased);
+            rt.localRotation = Quaternion.Slerp(incomingTargetRotation * Quaternion.Euler(0f, 0f, 12f), incomingTargetRotation, eased);
+
+            yield return null;
+        }
+
+        rt.localScale = incomingTargetScale;
+        rt.localRotation = incomingTargetRotation;
+        rt.anchoredPosition3D = originalPos;
+
+        yield break;
+    }
+
     public IEnumerator DoFade(Slide.FadeType fadeType, float fadeDuration)
     {
         IsTransitioning = true;
@@ -182,13 +283,8 @@ public class SlideShowUI : MonoBehaviour
 
     private void AdjustScreenFaderAlpha(Slide.FadeType fadeType, float slideShowPercentComplete)
     {
-        // Calculate the alpha amount.
-        int alpha = Mathf.Clamp(Mathf.RoundToInt(255f * slideShowPercentComplete),
-                                0, 255);
+        int alpha = Mathf.Clamp(Mathf.RoundToInt(255f * slideShowPercentComplete), 0, 255);
 
-        //Debug.Log($"{(Time.time - fadeStartTime)} / {fadeDuration}    {percentComplete}    {alpha}");
-
-        // Set the alpha value of the screen fader. If we are fading out, set it to (255 - alpha) rather than just alpha.
         Color32 color = _screenFader.color;
         color.a = fadeType == Slide.FadeType.FadeOut ? (byte)alpha : (byte)(255 - alpha);
         _screenFader.color = color;
@@ -222,7 +318,7 @@ public class SlideShowUI : MonoBehaviour
     {
         _slideImageBackground.gameObject.SetActive(state);
         _slideImage.gameObject.SetActive(state);
-        _ButtonsContainer.gameObject.SetActive(state);        
+        _ButtonsContainer.gameObject.SetActive(state);
     }
 
     public void UpdateSlideDisplay(Slide slide)
@@ -237,13 +333,10 @@ public class SlideShowUI : MonoBehaviour
         bool fullScreen = slide.IsFullscreenImage;
         bool preserveAspectRatio = slide.PreserveAspectRatio;
 
-
-        // Configure the image UI component and set the image to it.
         _slideImage.preserveAspect = false;
         
         Vector2 imageSize = Vector2.zero;
 
-        // If the slide is using stretch full screen mode, then get the image size.
         if (slide.ImageDisplayMode == Slide.ImageDisplayModes.StretchFullScreen)
         {
             RectTransform parentRectTrans = _slideImage.transform.parent.GetComponent<RectTransform>();
@@ -251,19 +344,14 @@ public class SlideShowUI : MonoBehaviour
             imageSize.y = parentRectTrans.rect.size.y;
         }
 
-        // If the slide is using custom size mode, then get the custom image size.
         if (slide.IsCustomSizeImage)
         {
             imageSize.x = slide.CustomImageSize.x;
             imageSize.y = slide.CustomImageSize.y;
         }
 
-
-        // Set the screen alignment of the image.
         _slideImageBackground.GetComponent<HorizontalLayoutGroup>().childAlignment = slide.ImageScreenAlignment;
 
-
-        // Set the image UI element to the image's native size if appropriate.
         if (slide.ImageDisplayMode == Slide.ImageDisplayModes.NativeSize)
         {
             _slideImage.SetNativeSize();
@@ -273,11 +361,18 @@ public class SlideShowUI : MonoBehaviour
             _slideImage.GetComponent<RectTransform>().sizeDelta = imageSize;
         }
 
-
-        // Set the preserveAspect property on the UI image component if native size mode is enabled.
         _slideImage.preserveAspect = preserveAspectRatio;
         _slideImage.sprite = slide.Image;
 
+        // Apply per-slide transform overrides (position / scale / rotation)
+        RectTransform rt = _slideImage.GetComponent<RectTransform>();
+        if (rt != null)
+        {
+            rt.anchoredPosition = slide.PositionOffset;
+            float uniformScale = (slide.Scale.x + slide.Scale.y) * 0.5f;
+            rt.localScale = Vector3.one * uniformScale;
+            rt.localRotation = Quaternion.Euler(0f, 0f, slide.Rotation);
+        }
     }
 
     public void ShowContinueButton()
@@ -298,17 +393,12 @@ public class SlideShowUI : MonoBehaviour
     {
         if (_inputTimer >= _inputDelay)
         {
-            // If the user clicked on a button, then ignore this input since the button is already handling it.
-            // Otherwise, run the code in this if statement to handle it.
-            if (!(control.device.displayName == "Mouse" && _mouseIsOverAnyButton))                 
+            if (!(control.device.displayName == "Mouse" && _mouseIsOverAnyButton))
             {
                 _inputTimer = 0f;
-
-                //Debug.Log($"InputTimer: {_inputTimer}    InputDelay: {_inputDelay}    KeyPressed: {control.displayName}");
                 OnNextSlideInput?.Invoke(this, EventArgs.Empty);
             }
         }
-
     }
 
     public void OnNextSlideButtonClicked()
@@ -331,8 +421,5 @@ public class SlideShowUI : MonoBehaviour
         _mouseIsOverAnyButton = false;
     }
 
-
-
     public bool IsTransitioning { get; private set; }
-
 }

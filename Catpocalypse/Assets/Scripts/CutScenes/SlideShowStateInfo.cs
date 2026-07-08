@@ -54,7 +54,7 @@ public class SlideShowStateInfo
 
     public float GetCurrentSlideFadeInTime()
     {
-        return _slideShow.GetSlideFadeOutTime(CurrentSlideIndex);
+        return _slideShow.GetSlideFadeInTime(CurrentSlideIndex);
     }
 
     /// <summary>
@@ -142,7 +142,7 @@ public class SlideShowStateInfo
     {
         get
         {
-            int nextIndex = CurrentSlideIndex++;
+            int nextIndex = CurrentSlideIndex + 1;
 
             return nextIndex <= _slideShow.SlideCount - 1 ? _slideShow.GetSlide(nextIndex)
                                                           : null;

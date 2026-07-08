@@ -43,6 +43,9 @@ public class SlideShow : ScriptableObject
     [SerializeField]
     private List<Slide> _slides;
 
+    [Tooltip("If enabled, slide timing will use unscaled time (Time.unscaledDeltaTime) for increments and time calculations.")]
+    [SerializeField]
+    private bool _useUnscaledTime = false;
 
 
     public enum AdvancementModes
@@ -54,7 +57,13 @@ public class SlideShow : ScriptableObject
 
 
 
-    public void OnEnable()
+    private void OnEnable()
+    {
+        CalculateDuration();
+    }
+
+    // Ensure editor changes update length immediately
+    private void OnValidate()
     {
         CalculateDuration();
     }
@@ -166,22 +175,18 @@ public class SlideShow : ScriptableObject
     {
         float duration = 0f;
 
-
         if (_slides == null || _slides.Count == 0)
-            return;
-
-
-        // Add up the display time for all slides in this slide show.
-        foreach (Slide slide in _slides)
         {
-            duration += slide.DisplayTime;
+            SlideShowLength = 0f;
+            return;
         }
 
+        // Sum each slide's total display time (includes fades/transitions and any per-slide overrides)
+        for (int i = 0; i < _slides.Count; i++)
+        {
+            duration += GetSlideDisplayTime(i);
+        }
 
-        // Take into account the fade in/out times for all slides.
-        duration += (_defaultFadeInTime + _defaultFadeOutTime) * _slides.Count;
-
-        // Update the Duration property.
         SlideShowLength = duration;
     }
 
@@ -204,4 +209,5 @@ public class SlideShow : ScriptableObject
     public string SceneToLoadOnSlideShowComplete { get { return _sceneToLoadOnSlideShowComplete; } }
     public AdvancementModes AdvancementMode { get { return _advancementMode; } }
     public float TransitionDuration { get { return _defaultTransitionDuration; } }
+    public bool UseUnscaledTime { get { return _useUnscaledTime; } }
 }

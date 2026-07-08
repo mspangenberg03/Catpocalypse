@@ -76,9 +76,12 @@ public partial class SlideShowPlayer : MonoBehaviour
 
         _playerInput = GameObject.FindAnyObjectByType<PlayerInput>();
 
-        _slideShowUI.OnNextSlideInput += OnNextSlideInput;
-        _slideShowUI.OnSkipSlideInput += OnSkipSlideShowInput;
-        _slideShowUI.OnTriggerSlideChange += OnTriggerSlideChange;
+        if (_slideShowUI != null)
+        {
+            _slideShowUI.OnNextSlideInput += OnNextSlideInput;
+            _slideShowUI.OnSkipSlideInput += OnSkipSlideShowInput;
+            _slideShowUI.OnTriggerSlideChange += OnTriggerSlideChange;
+        }
 
         InitLookupTable();
     }
@@ -92,9 +95,12 @@ public partial class SlideShowPlayer : MonoBehaviour
 
     private void OnDestroy()
     {
-        _slideShowUI.OnNextSlideInput -= OnNextSlideInput;
-        _slideShowUI.OnSkipSlideInput -= OnSkipSlideShowInput;
-        _slideShowUI.OnTriggerSlideChange -= OnTriggerSlideChange;
+        if (_slideShowUI != null)
+        {
+            _slideShowUI.OnNextSlideInput -= OnNextSlideInput;
+            _slideShowUI.OnSkipSlideInput -= OnSkipSlideShowInput;
+            _slideShowUI.OnTriggerSlideChange -= OnTriggerSlideChange;
+        }
     }
 
     private void OnNextSlideInput(object sender, EventArgs e)
@@ -246,7 +252,7 @@ public partial class SlideShowPlayer : MonoBehaviour
     {
         if (_currentlyPlayingSlideShow != null)
         {
-            if (!(_currentSlideShowStateInfo.State == PlayState.Playing))
+            if (_currentSlideShowStateInfo.State == PlayState.Playing)
             {
                 _currentSlideShowStateInfo.State = PlayState.Paused;
                 FireSlideShowPausedEvent();
@@ -267,30 +273,28 @@ public partial class SlideShowPlayer : MonoBehaviour
     /// </summary>
     public bool Resume()
     {
-        if (_currentlyPlayingSlideShow != null)
+        if (_currentlyPlayingSlideShow == null)
         {
-            if (_currentlyPlayingSlideShow.SlideCount == 0)
-            {
-                Debug.LogError($"SlideShowPlayer.Resume() was called on slide show \"{_currentlyPlayingSlideShow.name}\", but it contains no slides!");
-                return false;
-            }
+            Debug.LogWarning("SlideShowPlayer.Resume() was called while no SlideShow is active.");
+            return false;
+        }
 
-            if (!(_currentSlideShowStateInfo.State != PlayState.Playing))
-            {
-                _currentSlideShowStateInfo.State = PlayState.Playing;
-                FireSlideShowStartedEvent();
+        if (_currentlyPlayingSlideShow.SlideCount == 0)
+        {
+            Debug.LogError($"SlideShowPlayer.Resume() was called on slide show \"{_currentlyPlayingSlideShow.name}\", but it contains no slides!");
+            return false;
+        }
 
-                return true;
-            }
-            else
-            {
-                Debug.LogWarning("SlideShowPlayer.Resume() was called, but the slide show is already playing.");
-                return false;
-            }
+        // Only resume if currently paused
+        if (_currentSlideShowStateInfo.State == PlayState.Paused)
+        {
+            _currentSlideShowStateInfo.State = PlayState.Playing;
+            FireSlideShowStartedEvent();
+            return true;
         }
         else
         {
-            Debug.LogWarning("SlideShowPlayer().Resume() was called while no SlideShow is playing.");
+            Debug.LogWarning("SlideShowPlayer.Resume() was called, but the slide show is not paused.");
             return false;
         }
     }
@@ -361,6 +365,8 @@ public partial class SlideShowPlayer : MonoBehaviour
             }
 
 
+            float delta = _currentlyPlayingSlideShow != null && _currentlyPlayingSlideShow.UseUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+
             if (_currentlyPlayingSlideShow.AdvancementMode != SlideShow.AdvancementModes.WhenAnyKeyPressed &&
                 _currentSlideShowStateInfo.CurrentSlideElapsedTime >= slideDuration)
             {
@@ -389,19 +395,16 @@ public partial class SlideShowPlayer : MonoBehaviour
                 // If we are not paused, but in a transition, then we need to keep incrementing the timers in the state info.
                 if (_slideShowUI.IsTransitioning)
                 {
-                    _currentSlideShowStateInfo.IncrementTimers(Time.deltaTime);
+                    _currentSlideShowStateInfo.IncrementTimers(delta);
                 }
 
                 yield return null;
                 continue;
             }
 
-            _currentSlideShowStateInfo.IncrementTimers(Time.deltaTime);
+            _currentSlideShowStateInfo.IncrementTimers(delta);
 
 
-            //Debug.Log($"{_currentSlideShowStateInfo.ElapsedTime} / {_currentlyPlayingSlideShow.Duration}   {_currentSlideShowStateInfo.CurrentSlideElapsedTime}");
-
-            
             // Check if we should start a slide transition.
             if (!_slideShowUI.IsTransitioning &&
                 ((_currentlyPlayingSlideShow.AdvancementMode != SlideShow.AdvancementModes.WhenSlideDurationExpires && _goToNextSlide) ||
