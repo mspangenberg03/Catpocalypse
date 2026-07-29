@@ -749,7 +749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8910796047254926336}
   - component: {fileID: 7442963630919564100}
-  m_Layer: 3
+  m_Layer: 15
   m_Name: Cat full.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -86,6 +86,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewScratchPost
       objectReference: {fileID: 0}
+    - target: {fileID: 5417693727088522098, guid: 907ac4c2ac69a224eb3dd95821a0cedb, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7222608636942234996, guid: 907ac4c2ac69a224eb3dd95821a0cedb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

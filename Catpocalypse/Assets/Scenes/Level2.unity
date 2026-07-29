@@ -174,6 +174,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big_Rock (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 85f7a3d2fcdbb3f47b690938e35f73aa, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3595,6 +3599,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9994e0db8d4c4d341876fe77aeab4e2e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 9994e0db8d4c4d341876fe77aeab4e2e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4894,7 +4906,7 @@ Terrain:
   m_ScaleInLightmap: 0.0256
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_AllowAutoConnect: 1
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
@@ -6613,6 +6625,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: af2adf125d8e762418233bc11b42870c, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: af2adf125d8e762418233bc11b42870c, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6907,6 +6927,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2c40cb446f0ba704098f86358b714170, type: 3}
       propertyPath: m_Name
       value: Mid_Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2c40cb446f0ba704098f86358b714170, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7335,6 +7359,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2c40cb446f0ba704098f86358b714170, type: 3}
       propertyPath: m_Name
       value: Mid_Rock (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2c40cb446f0ba704098f86358b714170, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10497,6 +10525,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big_Rock
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 85f7a3d2fcdbb3f47b690938e35f73aa, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11343,6 +11375,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree 2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 112bf4082cd6ac94cb06586d37956736, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 112bf4082cd6ac94cb06586d37956736, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11625,6 +11665,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mid_Rock (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2c40cb446f0ba704098f86358b714170, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11837,6 +11881,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2950222c458198d4dbd20b9819d8e559, type: 3}
       propertyPath: m_Name
       value: House 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2950222c458198d4dbd20b9819d8e559, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
