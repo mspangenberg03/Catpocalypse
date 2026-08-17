@@ -15,4 +15,3 @@ MonoBehaviour:
   cats:
   - {fileID: 11400000, guid: 675a0f0ebb4429e41b12596181ab0381, type: 2}
   - {fileID: 11400000, guid: 62a9b48271ebdf84b94ebedff732b940, type: 2}
-  - {fileID: 11400000, guid: 36be4ed75809cd644b53a26533c96d9f, type: 2}

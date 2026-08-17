@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Wave-L4W5
   m_EditorClassIdentifier: 
   cats:
-  - {fileID: 11400000, guid: bc795ea84bcd3e044b8d991634a24282, type: 2}
   - {fileID: 11400000, guid: f1c5b252b3277a146ab03102146ccfc3, type: 2}
   - {fileID: 11400000, guid: d535685594244d3458f6131a04410eee, type: 2}
