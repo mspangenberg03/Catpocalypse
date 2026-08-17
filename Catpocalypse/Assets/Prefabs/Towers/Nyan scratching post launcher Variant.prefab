@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8391222552659086748, guid: a3b5f8a10bee0ae4fa5633929f212ba9, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -5477749408508380018, guid: a3b5f8a10bee0ae4fa5633929f212ba9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -516098083770646512, guid: a3b5f8a10bee0ae4fa5633929f212ba9, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a3b5f8a10bee0ae4fa5633929f212ba9, type: 3}
       propertyPath: m_Name
@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2253642204691711036, guid: a3b5f8a10bee0ae4fa5633929f212ba9, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4083501151425157549, guid: a3b5f8a10bee0ae4fa5633929f212ba9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -223,6 +223,7 @@ MonoBehaviour:
   upgradeCost: 0
   _cutenessChallengeActive: 0
   fireRate: 4
+  _ClosestWayPointToRP: {fileID: 0}
   towerStats: {fileID: 11400000, guid: 51ded07837666dd48a3835e93e6815bf, type: 2}
   _towerSound: {fileID: 5049091989744029407}
   maxLevel: 4

@@ -41,7 +41,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8961359253771211100, guid: 57bb2d4b78e4eb441b4946d591a66bb4, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 57bb2d4b78e4eb441b4946d591a66bb4, type: 3}
       propertyPath: m_LocalScale.x
@@ -211,6 +211,7 @@ MonoBehaviour:
   upgradeCost: 0
   _cutenessChallengeActive: 0
   fireRate: 2
+  _ClosestWayPointToRP: {fileID: 0}
   towerStats: {fileID: 11400000, guid: ab8b9bb313254194c86f0d795f12febf, type: 2}
   _towerSound: {fileID: 8681844146264925404}
   maxLevel: 4
