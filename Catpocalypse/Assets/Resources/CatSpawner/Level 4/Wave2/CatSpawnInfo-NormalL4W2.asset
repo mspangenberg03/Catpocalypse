@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CatSpawnInfo-NormalL4W2
   m_EditorClassIdentifier: 
   CatType: 1
-  NumberToSpawn: 4
+  NumberToSpawn: 3

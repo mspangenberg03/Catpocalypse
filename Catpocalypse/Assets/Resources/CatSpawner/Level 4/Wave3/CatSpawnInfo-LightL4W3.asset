@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CatSpawnInfo-LightL4W3
   m_EditorClassIdentifier: 
   CatType: 0
-  NumberToSpawn: 9
+  NumberToSpawn: 5
