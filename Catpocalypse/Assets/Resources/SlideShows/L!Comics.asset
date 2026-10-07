@@ -34,11 +34,11 @@ MonoBehaviour:
   - _displayTime: 5
     _backgroundColor: {r: 0, g: 0, b: 0, a: 1}
     _image: {fileID: 21300000, guid: e34df851f7edfb54fa6b4504bb405aa4, type: 3}
-    _ImageScreenAlignment: 4
+    _ImageScreenAlignment: 8
     _imageDisplayMode: 1
     _preserveAspectRatio: 1
     _customImageDisplaySize: {x: 100, y: 100}
-    _transitionType: 1
+    _transitionType: 9
     _transitionDurationOverride: -1
     _fadeInTimeOverride: -1
     _fadeOutTimeOverride: -1
